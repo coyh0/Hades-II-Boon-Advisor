@@ -23,9 +23,10 @@ This file is the project roadmap and the source of truth for planned work and va
   - Never guess when profile selection is ambiguous.
   - Keep unsupported weapon/aspect combinations fail-safe with no ranking.
   - Add resolver and runtime integration regression tests.
-- [ ] **10B.2 — Morrigan runtime validation** — NEXT
-  - Confirm the resolver selects the Morrigan profile in game.
-- [ ] **10B.3 — Melinoë regression**
+- [x] **10B.2 — Morrigan runtime validation** — COMPLETE (in-game log + visual ranking)
+  - Confirmed `WeaponDagger + DaggerTripleAspect` resolves to `sister_blades_morrigan_meta` with `Supported=true` and `RankingReady=true` in game.
+  - Confirmed ranking appears after removing the duplicate backup plugin from the active plugins directory.
+- [ ] **10B.3 — Melinoë regression** — NEXT
   - Re-test Intermediate and Starter behavior after resolver changes.
 - [ ] **10B.4 — Unsupported regression**
   - Re-test Artemis and unknown weapon/aspect combinations.
