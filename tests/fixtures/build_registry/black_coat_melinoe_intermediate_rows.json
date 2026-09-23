@@ -1,0 +1,89 @@
+{
+  "schemaVersion": 1,
+  "rows": [
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "keepsake", "slot": "start",
+      "name": "Vivid Sea", "god": "Poseidon", "classification": "priority", "runtimeItemId": "ForcePoseidonBoonKeepsake",
+      "importStatus": "ready", "verificationStatus": "verified"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "boon", "slot": "attack",
+      "name": "Wave Strike", "god": "Poseidon", "classification": "priority", "runtimeItemId": "PoseidonWeaponBoon",
+      "importStatus": "ready", "verificationStatus": "verified"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "boon", "slot": "special",
+      "name": "Vicious Flourish", "god": "Ares", "classification": "priority", "runtimeItemId": "AresSpecialBoon",
+      "importStatus": "ready", "verificationStatus": "verified"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "boon", "slot": "sprint",
+      "name": "Breaker Rush", "god": "Poseidon", "classification": "priority", "runtimeItemId": "PoseidonSprintBoon",
+      "importStatus": "ready", "verificationStatus": "verified"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "arcana", "slot": "core",
+      "name": "The Huntress", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "arcana", "slot": "core",
+      "name": "The Messenger", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "arcana", "slot": "core",
+      "name": "Origination", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
+      "name": "Exhaust Riser", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
+      "name": "Rapid Frame", "priority": 2, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
+      "name": "Launcher Frame", "priority": 3, "classification": "alternative", "condition": "Special branch",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "support", "slot": "priority",
+      "name": "Slippery Slope", "god": "Poseidon", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "support", "slot": "priority",
+      "name": "Grievous Blow", "god": "Ares", "priority": 2, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "familiar", "slot": "priority",
+      "name": "Toula", "priority": 1, "classification": "priority", "condition": "Gale for Strength/high Fear",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    },
+    {
+      "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
+      "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hex", "slot": "priority",
+      "name": "Wolf Howl", "god": "Selene", "priority": 1, "classification": "priority",
+      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+    }
+  ]
+}
