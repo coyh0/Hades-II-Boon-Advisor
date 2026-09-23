@@ -89,7 +89,10 @@ function Read-WeaponAspectCatalog([string]$path) {
 function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$catalog) {
     if ($profile.schemaVersion -ne 1) { Fail 'unsupported schemaVersion' }
     foreach ($field in @('id', 'weapon', 'aspect', 'profileMode', 'selectionKey', 'mechanicsTemplate')) { Assert-String $profile[$field] $field }
-    if ($profile.selectionKey -notmatch '^[a-z][a-z0-9_]*$') { Fail "invalid selectionKey $($profile.selectionKey)" }
+    if ($profile.id -cnotmatch '^[a-z][a-z0-9_]*$') { Fail "invalid profile id $($profile.id)" }
+    if ($profile.id -ceq 'registry') { Fail 'profile id registry is reserved for the generated registry module' }
+    if ($profile.selectionKey -cnotmatch '^[a-z][a-z0-9_]*$') { Fail "invalid selectionKey $($profile.selectionKey)" }
+    if ($profile.selectionKey -ceq 'auto') { Fail 'selectionKey auto is reserved for automatic profile selection' }
     if ($seenIds[$profile.id]) { Fail "duplicate profile id $($profile.id)" }; $seenIds[$profile.id] = $true
     Test-CatalogWeaponAspect $catalog $profile.weapon $profile.aspect
     if ($profile.source -isnot [hashtable]) { Fail 'source must be an object' }

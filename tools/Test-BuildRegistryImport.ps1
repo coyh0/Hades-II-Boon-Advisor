@@ -84,8 +84,10 @@ foreach ($row in $document.rows) {
         Optional-String $row.$field $field
     }
     if ($row.importStatus -in @('excluded', 'documentation_only')) { continue }
+    if ($row.canonicalId -ceq 'registry') { Fail 'canonicalId registry is reserved for the generated registry module' }
     Required-String $row.profileKeyProposal 'profileKeyProposal for active row'
     if ($row.profileKeyProposal -cnotmatch '^[a-z][a-z0-9_]*$') { Fail "invalid profileKeyProposal $($row.profileKeyProposal)" }
+    if ($row.profileKeyProposal -ceq 'auto') { Fail 'profileKeyProposal auto is reserved for automatic profile selection' }
     if (-not $groups.ContainsKey($row.profileKeyProposal)) { $groups[$row.profileKeyProposal] = @() }
     $groups[$row.profileKeyProposal] += ,$row
     if ($row.importStatus -eq 'ready') {

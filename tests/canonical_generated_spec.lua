@@ -45,6 +45,21 @@ check(registry.coat_melinoe_intermediate.selectionKey == "coat_melinoe_intermedi
     "generated Black Coat registry mapping differs")
 check(equal(registry, runtimeRegistry), "generated runtime registry differs")
 check(equal(generatedMorrigan, morrigan), "generated Morrigan semantics differ")
+do
+    for key, descriptor in pairs(registry) do
+        check(type(descriptor) == "table" and descriptor.selectionKey == key,
+            "registry key/selectionKey mismatch for " .. tostring(key))
+        check(type(descriptor.id) == "string" and descriptor.id:match("^[a-z][a-z0-9_]*$"),
+            "registry has invalid canonical id for " .. tostring(key))
+        local expectedModule = "data/builds/" .. descriptor.id .. ".lua"
+        check(descriptor.module == expectedModule, "registry module path mismatch for " .. tostring(key))
+        local generatedProfile = assert(loadfile(output .. separator .. descriptor.id .. ".lua"))()
+        check(type(generatedProfile) == "table" and generatedProfile.id == descriptor.id
+            and generatedProfile.weapon == descriptor.weapon and generatedProfile.aspect == descriptor.aspect
+            and generatedProfile.profileMode == descriptor.profileMode,
+            "registry/generated profile identity mismatch for " .. tostring(key))
+    end
+end
 local snapshot = {
     weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {}, activeArcana = {},
     offers = {

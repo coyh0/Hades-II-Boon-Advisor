@@ -102,8 +102,33 @@ function Assert-Fails([string]$name, [string]$find, [string]$replace) {
 }
 Assert-Fails 'invalid-schema' '"schemaVersion": 1' '"schemaVersion": 2'
 Assert-Fails 'missing-selection-key' '"selectionKey": "starter",' ''
+Assert-Fails 'reserved-auto-selection-key' '"selectionKey": "starter"' '"selectionKey": "auto"'
 Assert-Fails 'duplicate-selection-key' '"selectionKey": "starter"' '"selectionKey": "intermediate"'
 Assert-Fails 'invalid-policy' '"slotPolicy": "open"' '"slotPolicy": "invalid"'
+Assert-Fails 'path-like-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "../escape"'
+Assert-Fails 'invalid-profile-id-syntax' '"id": "sister_blades_melinoe_starter"' '"id": "profile-name"'
+Assert-Fails 'reserved-registry-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "registry"'
+$unsafeProfiles = Join-Path $root 'unsafe-id-generation-profiles'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $unsafeProfiles -Recurse
+$unsafeProfilePath = Join-Path $unsafeProfiles 'sister_blades_melinoe_starter.json'
+[IO.File]::WriteAllText($unsafeProfilePath, ([IO.File]::ReadAllText($unsafeProfilePath)).Replace(
+    '"id": "sister_blades_melinoe_starter"', '"id": "../escape"'))
+$unsafeOutput = Join-Path $root 'unsafe-id-generation-output'
+$unsafeGeneratorExitCode = 0
+$previousErrorActionPreference = $ErrorActionPreference
+try {
+    $ErrorActionPreference = 'Continue'
+    $null = & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator `
+        -CanonicalDirectory $unsafeProfiles -OutputDirectory $unsafeOutput 2>$null
+    $unsafeGeneratorExitCode = $LASTEXITCODE
+}
+finally {
+    $ErrorActionPreference = $previousErrorActionPreference
+}
+if ($unsafeGeneratorExitCode -eq 0 -or (Test-Path -LiteralPath (Join-Path $root 'escape.lua')) -or
+    (Test-Path -LiteralPath (Join-Path $unsafeOutput 'escape.lua'))) {
+    throw 'Unsafe profile id generated or escaped to a Lua filename.'
+}
 Assert-Fails 'duplicate-id' '"id": "sister_blades_melinoe_starter"' '"id": "sister_blades_melinoe_intermediate"'
 Assert-Fails 'contradiction' '"alternatives": []' '"alternatives": ["AphroditeWeaponBoon"]'
 Assert-Fails 'duplicate-slot-id' '["AphroditeWeaponBoon"]' '["AphroditeWeaponBoon", "AphroditeWeaponBoon"]'
