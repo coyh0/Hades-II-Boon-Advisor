@@ -223,6 +223,35 @@ This file is the project roadmap and the source of truth for planned work and va
   - Canonical profile validation, full Lua 5.2 regression suite, standalone mechanics validation, strict mechanics equivalence, deterministic generation, staging, and `git diff --check` all passed.
   - Staging still produces exactly 14 runtime files with matching hashes.
 
+### 11A.2 — Build Registry import contract
+
+- [x] **Add a deterministic Build Registry validation/import-plan layer without coupling spreadsheet transport to runtime generation.**
+  - Added a Windows PowerShell 5.1 validator that consumes local JSON rows plus a separate trusted policy and emits a deterministic validation plan only.
+  - The validator does not access Google Sheets, write canonical/runtime profiles, stage files, deploy to Hades II, or depend on localized display names.
+- [x] **Define explicit import/readiness and verification states.**
+  - `importStatus` supports `ready`, `blocked`, `excluded`, and `documentation_only`.
+  - `verificationStatus` supports `verified`, `unverified`, and `not_applicable`.
+  - These states remain independent; a row's own `verified` claim is insufficient unless the runtime item ID is also present in the separately reviewed trusted policy.
+- [x] **Enforce exact runtime identity and safe mapping rules.**
+  - Runtime item, weapon and aspect IDs use ordinal case-sensitive matching.
+  - Weapon/aspect pairs must exist exactly in the canonical catalog.
+  - External boon slot keys are exact lowercase `attack`, `special`, `cast`, and `sprint`; `gain -> Mana` remains intentionally blocked.
+  - `module` is derived from `canonicalId`; arbitrary external module paths cannot control output.
+  - Human names, labels, `priority`, and free-text `condition` remain metadata only and cannot create runtime logic.
+- [x] **Define strict item-type and group blocking behavior.**
+  - Verified boon rows require an explicit supported classification mapping before they can become import-plan items.
+  - A verified keepsake with `slot=start` can become an `autoSignal` only through explicit trusted policy.
+  - Hammer/support/arcana/familiar/hex rows cannot silently create runtime behavior.
+  - `excluded` and `documentation_only` rows are skipped deterministically; any blocked/unresolved active row blocks the whole group and produces no partial runtime profile/module/items.
+- [x] **Validate UTF-8 and malformed input handling.**
+  - JSON is read as strict UTF-8, including UTF-8 without BOM.
+  - Non-ASCII metadata is preserved in the deterministic plan while remaining non-authoritative.
+  - Malformed enum values, conflicting group identity and non-string `profileMode` fail validation explicitly.
+- [x] **Validate 11A.2 offline.**
+  - Import-contract regression tests cover ready, rejected, skipped, blocked, exact-case IDs, exact lowercase slots, UTF-8 metadata, keepsake policy, unsupported item types, path safety and deterministic repeated output.
+  - Existing canonical profile generation remains byte-identical for Sister Blades; canonical mechanics/equivalence, full Lua 5.2 regression coverage, staging with exactly 14 runtime files, and `git diff --check` all passed.
+  - No runtime Lua/profile, ROADMAP-by-Codex, game deployment, release, tag, or real Build Registry access occurred during implementation.
+
 - [ ] **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
   - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
