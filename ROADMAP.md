@@ -333,9 +333,11 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
 
 ### 11C — Expansion and automation hardening
 
-- [ ] **Repair the 15-file install/update/release inventory.**
-  - Update `tools/BoonAdvisor.Install.Common.ps1` so Black Coat's generated runtime profile is part of the expected inventory.
-  - Update `tests/thunderstore_package_spec.ps1`, which still assumes the old 14-file runtime package.
+- [x] **Repair the 15-file install/update/release inventory.**
+  - `tools/BoonAdvisor.Install.Common.ps1` now includes `black_coat_melinoe_intermediate.lua` in the exact runtime package inventory.
+  - `tests/thunderstore_package_spec.ps1` now validates the exact 15-file runtime inventory.
+  - Thunderstore package, install and update/rollback regression tests all passed; no Thunderstore publish or game deployment occurred.
+  - No active `14-file` / `14 runtime` inventory references remain in `tools/` or `tests/`.
 - [ ] **Extend profile-switcher coverage and documentation to Black Coat.**
   - Remove the stale hardcoded help text that only lists `auto|intermediate|starter|morrigan_meta`.
   - Add Black Coat coverage to `tests/profile_switcher_spec.ps1`.
