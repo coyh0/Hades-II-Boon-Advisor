@@ -78,7 +78,9 @@ This file is the project roadmap and the source of truth for planned work and va
   - Full Lua 5.2, resolver, probe, Phase 2, scoring, UI, canonical validation/generation, staging and `git diff --check` all passed after the final evidence-precedence correction.
 - [x] Bump `0.1.0` to `0.1.1`.
   - Release metadata now targets `0.1.1` in `manifest.json` and `thunderstore.toml`; the changelog preserves the historical `0.1.0` entry and adds a dedicated `0.1.1` section.
-- [ ] Build and verify the manual GitHub ZIP.
+- [x] Build and verify the manual GitHub ZIP.
+  - Deterministic release build produced `Hades-II-Boon-Advisor-v0.1.1.zip` and passed the built-in inventory/hash verification.
+  - SHA-256: `403CCE25845439ECA1883CAA5D3DE5CC190A9813C2FE696D24247A34AEFE930E`.
 - [ ] Build and verify the Thunderstore package.
 - [ ] Create a new immutable `v0.1.1` Git tag.
 - [ ] Publish the GitHub `v0.1.1` release.
