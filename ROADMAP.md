@@ -55,7 +55,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - If runtime evidence is absent or tied between several compatible profiles, fail safely as ambiguous instead of guessing.
   - Keep explicit `starter` / `intermediate` preferences for Melinoë.
   - Morrigan must still auto-resolve because it has a single compatible profile.
-  - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Do not show `PROFIL NON PRIS EN CHARGE` when compatible profiles exist but a choice is required.
+  - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Offline implementation is complete: `ambiguous` now maps to `PROFIL À CHOISIR`, while `unsupported` keeps `PROFIL NON PRIS EN CHARGE`; neither renders rankings. Runtime confirmation is still required.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
   - Auto affinity implementation has passed code review and offline regression tests for the current Melinoë/Morrigan profile set.
   - Runtime validation found an important first-offer case: Melinoë had `GodTraitCount=0`, so owned-Boon affinity alone could not resolve Starter vs Intermediate, even though the live run exposed `ForceAresBoonKeepsake`.
