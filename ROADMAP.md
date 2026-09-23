@@ -160,14 +160,23 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10E — Runtime localization
 
-- [ ] Centralize all player-facing strings.
+- [x] Centralize all player-facing strings.
+  - Player-facing rank, status, reason and fallback text is centralized in `Localization.lua`.
+  - UI reason ordering and deduplication use stable keys; translation occurs only at render time.
 - [x] Detect the game language.
-  - Runtime validation on the development game copy confirmed `rom.game.GetLanguage` is exposed as a function and returns `fr` for the active French game language.
-  - Direct plugin-global `GetLanguage` access was unavailable (`nil`), so production localization should use `rom.game.GetLanguage` with a safe English fallback if the function is missing, errors, or returns an unsupported code.
-- [ ] Support English and French first.
-- [ ] Use English as the fallback language.
-- [ ] Localize rank/status/reason labels and fallback messages.
-- [ ] Never localize internal IDs or make scoring/profile selection depend on display text.
+  - Runtime validation on the development game copy confirmed `rom.game.GetLanguage` is exposed as a function and returns the active game language.
+  - Direct plugin-global `GetLanguage` access was unavailable (`nil`), so runtime localization uses `rom.game.GetLanguage` with a safe English fallback if the function is missing, errors, or returns an unsupported code.
+  - Live validation confirmed switching the game from French to English from the main menu in the same Hades II process is picked up on the next run/diagnosis without restarting the game or reloading the mod.
+- [x] Support English and French first.
+  - Live French and English Boon-offer validation confirmed localized normal rankings, reason labels, evaluated/non-evaluated states and incomplete-analysis messaging.
+- [x] Use English as the fallback language.
+  - Offline localization tests cover missing, invalid and unsupported language results and verify deterministic English fallback.
+  - Missing translation keys render the player-safe `TEXT UNAVAILABLE` sentinel rather than exposing internal localization keys.
+- [x] Localize rank/status/reason labels and fallback messages.
+  - Live FR/EN validation covered `RANG`/`RANK`, `ÉVALUÉ`/`EVALUATED`, `NON ÉVALUÉ`/`NOT EVALUATED`, conflict/utility reason labels, and incomplete-analysis title/subtitle behavior.
+- [x] Never localize internal IDs or make scoring/profile selection depend on display text.
+  - Stable reason codes and weapon/aspect/profile IDs remain unchanged; offline invariance tests confirm identical scores, ranks, `RankingReady` state and selected profile between English and French.
+  - Final targeted development-runtime log audit after FR/EN validation returned no Boon Advisor localization-related ERROR/WARN/traceback/exception/nil-value entries.
 
 ## 10F — Logging and runtime diagnostics hardening
 
