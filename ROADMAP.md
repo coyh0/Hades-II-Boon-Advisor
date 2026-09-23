@@ -150,6 +150,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - Documented as an observed workaround only: on one tested Epic Games installation, the manager kept `ReturnOfModding` inside its profile instead of copying it to `<Hades-II-root>\Ship\ReturnOfModding\`; users are told to compare/copy manually only if the mod does not appear in game.
 - [x] Keep French documentation optional/secondary.
   - Remaining French technical/internal documents are secondary developer material rather than the default public user documentation.
+  - The maintainer is comfortable reviewing public documentation in English directly, so English-first wording does not need to be simplified for maintainer review.
 
 ## 10E — Runtime localization
 
