@@ -105,6 +105,9 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 - [ ] **Show the active build profile discreetly in the in-game UI**, for example:
   - `Profile: Melinoë — Intermediate`
   - `Profile: Morrigan — Meta`
+- [ ] Prefer a low-attention placement in the unused upper-right status area (near the current analysis/status message) so the player can confirm the active build without pulling focus away from the boon choices.
+- [ ] Keep the active-profile indicator visually secondary to ranking/status text: small type, low visual weight, no animation, and no extra input required.
+- [ ] Re-evaluate the exact placement during UI polish if localization or resolution constraints make the upper-right area too crowded.
 - [ ] Keep the active-profile indicator useful for both players and support/debugging without dominating the UI.
 
 ## Confirmed runtime facts
