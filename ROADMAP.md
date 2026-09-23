@@ -138,8 +138,10 @@ This file is the project roadmap and the source of truth for planned work and va
   - Public-facing README, changelog, installation, update, uninstall, and patch-compatibility documentation are now English-first; runtime labels remain unchanged for the separate 10E localization phase.
 - [x] Review and polish the GitHub README.
   - README installation guidance, profile-selection behavior, fail-safe statuses, safety guarantees, AI disclosure, and Epic-manager workaround wording were reviewed and validated.
-- [ ] Review the repository description and release text.
-  - GitHub release `v0.1.2` text is already English and was reviewed. The GitHub repository description is currently unset (`null`) and still needs a maintainer-approved public description before this point can be closed.
+- [x] Review the repository description and release text.
+  - GitHub release `v0.1.2` text is English and reviewed.
+  - GitHub repository description is now: `Build-aware Hades II Boon advisor for supported Sister Blades profiles. Explains and ranks choices without changing gameplay, RNG, offers, or saves.`
+  - Revisit this description in Phase 11 when support expands beyond the current Sister Blades scope.
 - [x] Review `CHANGELOG.md`.
   - Historical 0.1.0/0.1.1/0.1.2 entries were translated to English without changing their technical meaning.
 - [x] Review installation, update and uninstall documentation.
