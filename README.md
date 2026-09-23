@@ -59,6 +59,15 @@ Compatible profiles can also be selected explicitly with:
 Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
 receiving a speculative score.
 
+## AI-assisted development
+
+This project was substantially developed with assistance from OpenAI ChatGPT
+and Codex, including architecture, code generation, code review,
+documentation, and testing support.
+
+Project requirements, design and release decisions, review of generated
+changes, and in-game validation are performed or approved by the maintainer.
+
 ## Project roadmap
 
 Current development status and planned work are tracked in [ROADMAP.md](ROADMAP.md). The roadmap is updated only after maintainer confirmation.
