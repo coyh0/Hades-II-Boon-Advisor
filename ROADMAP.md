@@ -103,7 +103,9 @@ This file is the project roadmap and the source of truth for planned work and va
   - `manifest.json` and `thunderstore.toml` now target `0.1.2`; `CHANGELOG.md` adds a dedicated `0.1.2` compliance entry while preserving `0.1.1` and `0.1.0` history.
 - [x] Re-run relevant release/package validation after the documentation-only compliance change.
   - `tests/staging_spec.ps1` passed with exactly 13 expected staged files and matching hashes; `tests/thunderstore_package_spec.ps1` passed package/dependency/inventory validation; `git diff --check` was clean.
-- [ ] Build and verify the manual GitHub ZIP for `v0.1.2`.
+- [x] Build and verify the manual GitHub ZIP for `v0.1.2`.
+  - Deterministic release build produced `Hades-II-Boon-Advisor-v0.1.2.zip` and passed the built-in inventory/hash verification.
+  - SHA-256: `ECD11118549EC16D94771EF9290CF10BE613448C0EDA05812193BF18AC823382`.
 - [ ] Build and verify the Thunderstore package for `0.1.2`.
 - [ ] Create a new immutable `v0.1.2` Git tag.
 - [ ] Publish the GitHub `v0.1.2` release.
