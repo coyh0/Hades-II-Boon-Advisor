@@ -109,7 +109,8 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Build and verify the Thunderstore package for `0.1.2`.
   - Final package `Coyh0Mods-Hades_II_Boon_Advisor-0.1.2.zip` contains `plugins/ProfileResolver.lua`, the AI disclosure with OpenAI ChatGPT and Codex attribution, and the `BUILD_PROFILE = "auto"` documentation; no developer-only content is included.
   - SHA-256: `9380A802ACDD543C1FB24B0B68AF89AC876BD637E69E183EF11A7AAE3BC49208`.
-- [ ] Create a new immutable `v0.1.2` Git tag.
+- [x] Create a new immutable `v0.1.2` Git tag.
+  - Annotated tag `v0.1.2` is published and resolves to release commit `df707244c43e77a3a5792920caed27df74500054`.
 - [ ] Publish the GitHub `v0.1.2` release.
 - [ ] Publish Thunderstore `0.1.2`.
 
