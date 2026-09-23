@@ -101,7 +101,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - README now states that OpenAI ChatGPT and Codex substantially assisted with architecture, code generation, code review, documentation and testing support, while requirements, design/release decisions, review and in-game validation remain maintainer-controlled.
 - [x] Bump release metadata from `0.1.1` to `0.1.2` and add a `0.1.2` changelog entry.
   - `manifest.json` and `thunderstore.toml` now target `0.1.2`; `CHANGELOG.md` adds a dedicated `0.1.2` compliance entry while preserving `0.1.1` and `0.1.0` history.
-- [ ] Re-run relevant release/package validation after the documentation-only compliance change.
+- [x] Re-run relevant release/package validation after the documentation-only compliance change.
+  - `tests/staging_spec.ps1` passed with exactly 13 expected staged files and matching hashes; `tests/thunderstore_package_spec.ps1` passed package/dependency/inventory validation; `git diff --check` was clean.
 - [ ] Build and verify the manual GitHub ZIP for `v0.1.2`.
 - [ ] Build and verify the Thunderstore package for `0.1.2`.
 - [ ] Create a new immutable `v0.1.2` Git tag.
