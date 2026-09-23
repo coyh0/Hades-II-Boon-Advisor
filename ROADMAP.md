@@ -108,6 +108,13 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
 
 ## Phase 11 — v0.2 expansion and automation
 
+- [ ] **Keep external build-source identifiers private during import automation.**
+  - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
+  - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
+  - Keep local secret/config files untracked and covered by `.gitignore`.
+  - Do not print the real Sheet ID in normal logs, test snapshots, generated JSON/Lua, package contents, release artifacts or public documentation.
+  - Use fake/example IDs in tests and docs.
+  - If CI import is added later, store the identifier/credentials in repository secrets rather than source-controlled files.
 - [ ] Add more supported builds and Aspects.
 - [ ] Define/import additional canonical build data, potentially from the maintainer's build spreadsheet.
 - [ ] Keep the pipeline automated: canonical source → JSON → generated Lua profile → registry → tests.
