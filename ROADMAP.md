@@ -223,6 +223,16 @@ This file is the project roadmap and the source of truth for planned work and va
 - [ ] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
 - [ ] Keep runtime profile resolution generic for future weapons.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
+- [ ] **Improve incomplete-offer handling with safe partial ranking.**
+  - Replace the current all-or-nothing rank suppression when only part of an offer is evaluable.
+  - With 3/3 rank-eligible choices, keep the normal full `1 / 2 / 3` ranking.
+  - With 2/3 rank-eligible choices, rank only those two against each other and mark the unknown choice as `NOT EVALUATED` / hors classement; make the UI explicitly say that the ranking is partial.
+  - With only 1/3 evaluable choices, do not display a numeric rank for that single choice; show evaluated vs non-evaluated state without implying that the known choice is best overall.
+  - With 0/3 evaluable choices, show no ranking.
+  - Introduce an explicit evaluation state such as `full / partial / unknown` plus rank eligibility (or an equivalent model) so scoring knowledge and UI rendering remain separate.
+  - Allow future generic partial evaluation only from verified runtime IDs/semantics (for example a proven slot conflict or supported generic mechanic); never infer a score from localized/display names or free-text build notes.
+  - An unknown choice must never be silently assigned the worst rank.
+  - Preserve English/French localization and add regression coverage for full, partial and unknown mixed offers.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
   - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
