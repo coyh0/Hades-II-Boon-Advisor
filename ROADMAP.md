@@ -45,7 +45,7 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10C — v0.1.1 hotfix release
 
-- [ ] **Remove the legacy implicit Melinoë default profile.**
+- [x] **Remove the legacy implicit Melinoë default profile.**
   - Offline implementation and regression migration are complete: full Lua 5.2 suite, resolver, probe, Phase 2, scoring, UI and diff checks pass.
   - Change the shipped default from `BUILD_PROFILE = "intermediate"` to `BUILD_PROFILE = "auto"`.
   - In `auto`, first filter profiles by the live internal weapon + aspect IDs, then use the current run state to identify the best-matching compatible build profile when several profiles share that weapon/aspect.
@@ -57,7 +57,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - Morrigan must still auto-resolve because it has a single compatible profile.
   - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Runtime-confirmed: `ambiguous` maps to `PROFIL À CHOISIR`, while `unsupported` keeps `PROFIL NON PRIS EN CHARGE`; neither renders rankings.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
-  - Runtime/offline behavior, staging/package defaults and profile-switcher support are complete. Final public configuration documentation is still pending before release; the shipped README currently does not explain the new `auto` default or explicit profile overrides.
+  - Runtime/offline behavior, staging/package defaults, profile-switcher support and public configuration documentation are complete. The README now documents the `auto` default, ambiguity behavior and explicit profile overrides.
   - Auto affinity implementation has passed code review and offline regression tests for the current Melinoë/Morrigan profile set.
   - Runtime validation found an important first-offer case: Melinoë had `GodTraitCount=0`, so owned-Boon affinity alone could not resolve Starter vs Intermediate, even though the live run exposed `ForceAresBoonKeepsake`.
   - v0.1.1 auto detection must therefore support pre-Boon build-intent signals already present in the current run (for example an equipped god keepsake) when they are explicitly mapped/validated for a profile.
@@ -82,10 +82,9 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Build and verify the manual GitHub ZIP.
   - Deterministic release build produced `Hades-II-Boon-Advisor-v0.1.1.zip` and passed the built-in inventory/hash verification.
   - SHA-256: `403CCE25845439ECA1883CAA5D3DE5CC190A9813C2FE696D24247A34AEFE930E`.
-- [x] Build and verify the Thunderstore package.
-  - `tcli 0.2.4` successfully built `Coyh0Mods-Hades_II_Boon_Advisor-0.1.1.zip`.
-  - Verified package inventory contains the expected root metadata plus the 13 runtime plugin files, including `plugins/ProfileResolver.lua`, with no developer-only `tests`, `tools`, `docs`, `data/canonical`, or `dist` content.
-  - SHA-256: `EDCF7311E6D3EF140707D31EA9D956590D0745EE8D292C62A7066C57942B94A9`.
+- [ ] Build and verify the Thunderstore package.
+  - Previous `0.1.1` package build passed inventory validation, but it is now stale because the public README was updated afterward.
+  - Rebuild and re-verify the Thunderstore package before publication; record the new SHA-256.
 - [ ] Create a new immutable `v0.1.1` Git tag.
 - [ ] Publish the GitHub `v0.1.1` release.
 - [ ] Publish Thunderstore `0.1.1`.
