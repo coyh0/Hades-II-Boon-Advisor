@@ -1,31 +1,11 @@
 local UI = {}
 local debugLog = function() end
-local RANK_LABEL = "RANG"
-local reasonLabels = {
-    FILL_EMPTY_PRIMARY_CORE = "Core",
-    FILL_EMPTY_UTILITY_CORE = "Utilitaire",
-    BUILD_CORE_PRIORITY = "Build",
-    BUILD_PREFERRED = "Build",
-    BUILD_DISCOURAGED = "Build",
-    RARITY = "Rareté",
-    RARITY_DELTA = "Rareté",
-    BUILD_STATUS_SYNERGY = "Statut",
-    BLOOD_DROP_ENGINE_SYNERGY = "Synergie",
-    SURVIVAL_SUPPORT = "Survie",
-    MAX_RESOURCE_SUPPORT = "Ressources",
-    HIGH_HEALTH_OFFENSE = "Dégâts",
-    BUILD_SLOT_POLICY_DELTA = "Build",
-    ASPECT_COMPATIBLE = "Aspect",
-    ASPECT_DIRECT_SYNERGY = "Aspect",
-    ASPECT_SETUP_SYNERGY = "Setup",
-    BACKSTAB_SETUP = "Positionnement",
-    ORIGINATION_ENABLE = "Origination",
-    EXISTING_HAMMER_SYNERGY = "Marteau",
-}
-local reasonOrder = { "Conflit", "Core", "Utilitaire", "Build", "Ressources", "Dégâts", "Aspect", "Setup", "Positionnement", "Origination", "Marteau", "Statut", "Synergie", "Survie", "Rareté" }
+local localization = nil
+local language = "en"
+local reasonOrder = { "conflict", "core", "utility", "build", "resources", "damage", "aspect", "setup", "positioning", "origination", "hammer", "status", "synergy", "survival", "rarity" }
 
 local function formatRankLabel(rank)
-    return RANK_LABEL .. " " .. tostring(rank)
+    return localization.get(language, "rank") .. " " .. tostring(rank)
 end
 
 local function formatReasonLabels(reasons)
@@ -35,18 +15,15 @@ local function formatReasonLabels(reasons)
             if reason.code == "RARITY" or reason.code == "RARITY_DELTA" then
                 goto continue
             end
-            local label = reasonLabels[reason.code]
-            if reason.code == "BUILD_SLOT_POLICY_DELTA" and reason.delta < 0 then
-                label = "Conflit"
-            end
-            if label then present[label] = true end
+            local key = localization.reasonKey(reason.code, reason.delta)
+            if key then present[key] = true end
         end
         ::continue::
     end
     local labels = {}
-    for _, label in ipairs(reasonOrder) do
-        if present[label] then
-            labels[#labels + 1] = label
+    for _, key in ipairs(reasonOrder) do
+        if present[key] then
+            labels[#labels + 1] = localization.get(language, key)
             if #labels == 2 then break end
         end
     end
@@ -55,6 +32,14 @@ end
 
 function UI.setLogger(logger)
     debugLog = type(logger) == "function" and logger or function() end
+end
+
+function UI.setLocalization(value)
+    localization = value
+end
+
+function UI.setLanguage(value)
+    language = type(value) == "string" and value or "en"
 end
 
 local function rankState(screen)
@@ -120,13 +105,21 @@ function UI.renderFallback(screen, data, api)
     attach({ Id = component.Id, DestinationId = anchor.Id, OffsetX = 405, OffsetY = -170 })
     local key = "BoonAdvisorFallback"
     if type(screen.Components) == "table" then screen.Components[key] = component end
-    textBox({ Id = component.Id, RawText = data.title, Width = 600,
+    local fallbackKeys = {
+        AMBIGUOUS_PROFILE = "profileAmbiguous", UNSUPPORTED_PROFILE = "profileUnsupported",
+        REPLACEMENT_UNRESOLVED = "replacementUnevaluated",
+        INCOMPLETE_ANALYSIS = "incompleteAnalysis", NO_RELIABLE_PREFERENCE = "noReliablePreference",
+    }
+    local subtitleKeys = {
+        REPLACEMENT_UNRESOLVED = "rankingUnreliable",
+        NO_RELIABLE_PREFERENCE = "equivalentChoices",
+    }
+    textBox({ Id = component.Id, RawText = localization.get(language, fallbackKeys[data.code]), Width = 600,
         Font = "LatoBold", FontSize = 18,
         Justification = "Center", ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
-    local subtitle = data.subtitle
+    local subtitle = subtitleKeys[data.code] and localization.get(language, subtitleKeys[data.code]) or nil
     if data.code == "INCOMPLETE_ANALYSIS" and type(data.incompleteCount) == "number" then
-        subtitle = tostring(data.incompleteCount) .. " choix non évalué"
-            .. (data.incompleteCount == 1 and "" or "s") .. " — classement masqué"
+        subtitle = localization.formatIncompleteCount(language, data.incompleteCount)
     end
     if subtitle then
         textBox({ Id = component.Id, RawText = subtitle, Width = 600,
@@ -160,19 +153,13 @@ function UI.renderPartial(screen, offers, api)
                 attach({ Id = component.Id, DestinationId = button.Id, OffsetX = -145, OffsetY = -105 })
                 components[key] = component
                 local evaluated = offer.evaluated == true
-                textBox({ Id = component.Id, RawText = evaluated and "ÉVALUÉ" or "NON ÉVALUÉ",
+                textBox({ Id = component.Id, RawText = localization.get(language,
+                    evaluated and "evaluated" or "unevaluated"),
                     Font = "LatoBold", FontSize = 18, Justification = "Center",
                     ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
                 local entry = { id = component.Id, key = key, originalIndex = index }
                 table.insert(rankState(screen), entry)
-                local visibleReasons = {}
-                if evaluated and type(offer.reasons) == "table" then
-                    for _, reason in ipairs(offer.reasons) do
-                        local rarity = reason == "Rareté"
-                            or (type(reason) == "table" and (reason.code == "RARITY" or reason.code == "RARITY_DELTA"))
-                        if not rarity then visibleReasons[#visibleReasons + 1] = reason end
-                    end
-                end
+                local visibleReasons = evaluated and formatReasonLabels(offer.reasons) or {}
                 if evaluated and #visibleReasons > 0 then
                     local reasonComponent = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay" })
                     if type(reasonComponent) == "table" and reasonComponent.Id ~= nil then

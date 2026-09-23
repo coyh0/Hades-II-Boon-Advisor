@@ -19,8 +19,10 @@ local GameStateSnapshot = import("GameState.lua")
 local OfferSnapshot = import("OfferSnapshot.lua")
 local ScoringEngine = import("ScoringEngine.lua")
 local UI = import("UI.lua")
+local Localization = import("Localization.lua")
 local ProfileResolver = import("ProfileResolver.lua")
 UI.setLogger(function(message) state.log(message) end)
+UI.setLocalization(Localization)
 
 local function getUIApi()
     local gameGlobals = rom and rom.game
@@ -81,6 +83,7 @@ local function diagnose(screen, lootData)
     state.log("CreateBoonLootButtons detected")
     state.log("Source=" .. lootData.Name)
     local gameGlobals = rom and rom.game
+    UI.setLanguage(Localization.resolveLanguage(gameGlobals))
     local snapshot = GameStateSnapshot.capture({
         CurrentRun = type(gameGlobals) == "table" and gameGlobals.CurrentRun or nil,
         GetEquippedWeapon = type(gameGlobals) == "table" and gameGlobals.GetEquippedWeapon or nil,
@@ -139,9 +142,9 @@ local function diagnose(screen, lootData)
         })
     elseif not profileSupported then
         if selectionReason == "ambiguous" then
-            renderFallback({ code = "AMBIGUOUS_PROFILE", title = "PROFIL À CHOISIR" })
+            renderFallback({ code = "AMBIGUOUS_PROFILE" })
         else
-            renderFallback({ code = "UNSUPPORTED_PROFILE", title = "PROFIL NON PRIS EN CHARGE" })
+            renderFallback({ code = "UNSUPPORTED_PROFILE" })
         end
     else
         local replacement = false
@@ -158,47 +161,17 @@ local function diagnose(screen, lootData)
                 partialOffers[#partialOffers + 1] = {
                     originalIndex = result.originalIndex,
                     evaluated = result.covered == true and result.scoreComplete == true,
-                    reasons = {},
+                    reasons = result.reasons,
                 }
-                local partial = partialOffers[#partialOffers]
-                if partial.evaluated then
-                    local seenLabels = {}
-                    local labelOrder = { "Conflit", "Core", "Utilitaire", "Build", "Aspect", "Positionnement", "Origination", "Marteau", "Statut", "Synergie", "Survie", "Rareté" }
-                    local labelByCode = { FILL_EMPTY_PRIMARY_CORE = "Core",
-                        FILL_EMPTY_UTILITY_CORE = "Utilitaire", ASPECT_COMPATIBLE = "Aspect",
-                        ASPECT_DIRECT_SYNERGY = "Aspect", BACKSTAB_SETUP = "Positionnement",
-                        BUILD_CORE_PRIORITY = "Build", BUILD_PREFERRED = "Build",
-                        RARITY = "Rareté", RARITY_DELTA = "Rareté",
-                        BUILD_STATUS_SYNERGY = "Statut", BLOOD_DROP_ENGINE_SYNERGY = "Synergie",
-                        SURVIVAL_SUPPORT = "Survie", BUILD_SLOT_POLICY_DELTA = "Build",
-                        ORIGINATION_ENABLE = "Origination", EXISTING_HAMMER_SYNERGY = "Marteau" }
-                    for _, reason in ipairs(result.reasons or {}) do
-                        if reason.delta ~= 0 then
-                            local label = labelByCode[reason.code]
-                            if reason.code == "BUILD_SLOT_POLICY_DELTA" and reason.delta < 0 then
-                                label = "Conflit"
-                            end
-                            if label then seenLabels[label] = true end
-                        end
-                    end
-                    for _, label in ipairs(labelOrder) do
-                        if seenLabels[label] then partial.reasons[#partial.reasons + 1] = label end
-                        if #partial.reasons == 2 then break end
-                    end
-                end
             end
         end
         if replacement then
-            renderFallback({ code = "REPLACEMENT_UNRESOLVED", title = "REMPLACEMENT NON ÉVALUÉ",
-                subtitle = "Classement non fiable" })
+            renderFallback({ code = "REPLACEMENT_UNRESOLVED" })
         elseif incomplete > 0 then
             UI.renderPartial(screen, partialOffers, getUIApi())
-            renderFallback({ code = "INCOMPLETE_ANALYSIS", title = "ANALYSE INCOMPLÈTE",
-                subtitle = "Classement global indisponible",
-                incompleteCount = incomplete })
+            renderFallback({ code = "INCOMPLETE_ANALYSIS", incompleteCount = incomplete })
         elseif eligible > 0 then
-            renderFallback({ code = "NO_RELIABLE_PREFERENCE", title = "PAS DE PRÉFÉRENCE FIABLE",
-                subtitle = "Choix équivalents avec les règles actuelles" })
+            renderFallback({ code = "NO_RELIABLE_PREFERENCE" })
         end
     end
 

@@ -1,5 +1,8 @@
 local function check(value, message) assert(value, message) end
 local UI = assert(loadfile("src/UI.lua"))()
+local Localization = assert(loadfile("src/Localization.lua"))()
+UI.setLocalization(Localization)
+UI.setLanguage("fr")
 
 local created, textBoxes, attaches, destroyed = {}, {}, {}, {}
 local nextId = 0
@@ -193,9 +196,8 @@ UI.clearFallback(fallbackScreen, api)
 check(fallbackScreen.BoonAdvisorFallback == nil and screen.Components.BoonAdvisorFallback == nil,
     "fallback cleanup failed")
 local ambiguousScreen = { Components = { PurchaseButton1 = { Id = "purchase1" } } }
-UI.renderFallback(ambiguousScreen, { code = "AMBIGUOUS_PROFILE", title = "PROFIL À CHOISIR",
-    subtitle = "Analyse automatique indéterminée" }, api)
-check(textBoxes[#textBoxes - 1].RawText == "PROFIL À CHOISIR",
+UI.renderFallback(ambiguousScreen, { code = "AMBIGUOUS_PROFILE" }, api)
+check(textBoxes[#textBoxes].RawText == "PROFIL À CHOISIR",
     "ambiguous profile fallback label was not rendered")
 UI.clearFallback(ambiguousScreen, api)
 local pluralFallbackScreen = { Components = { PurchaseButton1 = { Id = "purchase-plural" } } }
@@ -213,13 +215,15 @@ local function partialReasonText(reasons)
     UI.clearRanks(partialReasonScreen, api)
     return added
 end
-local onlyRarity = partialReasonText({ "Rareté" })
+local onlyRarity = partialReasonText({ { code = "RARITY", delta = 1 } })
 check(#onlyRarity == 1 and onlyRarity[1] == "ÉVALUÉ", "only RARITY leaked into partial UI")
 local onlyRarityDelta = partialReasonText({ { code = "RARITY_DELTA", delta = 1 } })
 check(#onlyRarityDelta == 1 and onlyRarityDelta[1] == "ÉVALUÉ", "only RARITY_DELTA leaked into partial UI")
-local rarityAndOne = partialReasonText({ "Rareté", "Core" })
+local rarityAndOne = partialReasonText({ { code = "RARITY", delta = 1 },
+    { code = "FILL_EMPTY_PRIMARY_CORE", delta = 1 } })
 check(#rarityAndOne == 2 and rarityAndOne[2] == "Core", "RARITY hid the normal partial reason")
-local rarityAndTwo = partialReasonText({ "Rareté", "Core", "Build" })
+local rarityAndTwo = partialReasonText({ { code = "RARITY", delta = 1 },
+    { code = "FILL_EMPTY_PRIMARY_CORE", delta = 1 }, { code = "BUILD_PREFERRED", delta = 1 } })
 check(#rarityAndTwo == 2 and rarityAndTwo[2] == "Core · Build", "RARITY changed two normal partial reasons")
 local partialNoReasons = partialReasonText({})
 check(#partialNoReasons == 1 and partialNoReasons[1] == "ÉVALUÉ",
@@ -228,9 +232,13 @@ local partialScreen = { Components = {
     PurchaseButton1 = { Id = "p1" }, PurchaseButton2 = { Id = "p2" }, PurchaseButton3 = { Id = "p3" },
 } }
 UI.renderPartial(partialScreen, {
-    { originalIndex = 1, evaluated = true, reasons = { "Core", "Aspect" } },
+    { originalIndex = 1, evaluated = true, reasons = {
+        { code = "FILL_EMPTY_PRIMARY_CORE", delta = 1 }, { code = "ASPECT_COMPATIBLE", delta = 1 },
+    } },
     { originalIndex = 2, evaluated = true, reasons = {} },
-    { originalIndex = 3, evaluated = false, reasons = { "Core" } },
+    { originalIndex = 3, evaluated = false, reasons = {
+        { code = "FILL_EMPTY_PRIMARY_CORE", delta = 1 },
+    } },
 }, api)
 check(textBoxes[#textBoxes - 3].RawText == "ÉVALUÉ"
     and textBoxes[#textBoxes - 2].RawText == "Core · Aspect"
@@ -267,4 +275,17 @@ for _, message in ipairs(uiErrors) do
 end
 check(sawMissingCreate and sawMissingAttach and sawMissingText,
     "missing native UI APIs were not diagnosed")
+UI.setLanguage("en")
+local englishScreen = { Components = { PurchaseButton1 = { Id = "english" } } }
+UI.renderRanks(englishScreen, { { originalIndex = 1, rank = 1, reasons = {
+    { code = "RARITY", delta = 1 }, { code = "BUILD_PREFERRED", delta = 1 },
+} } }, api)
+check(textBoxes[#textBoxes - 1].RawText == "RANK 1" and textBoxes[#textBoxes].RawText == "Build",
+    "English rank or reason label was not rendered")
+UI.clearRanks(englishScreen, api)
+local englishFallback = { Components = { PurchaseButton1 = { Id = "english-fallback" } } }
+UI.renderFallback(englishFallback, { code = "INCOMPLETE_ANALYSIS", incompleteCount = 2 }, api)
+check(textBoxes[#textBoxes - 1].RawText == "INCOMPLETE ANALYSIS"
+    and textBoxes[#textBoxes].RawText == "2 choices not evaluated — ranking hidden",
+    "English fallback strings were not rendered")
 print("PASS: UI rank mapping, ties, private components, idempotent cleanup")

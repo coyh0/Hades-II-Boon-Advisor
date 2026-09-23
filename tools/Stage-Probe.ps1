@@ -30,6 +30,7 @@ New-Item -ItemType Directory -Path (Join-Path $target 'config') -Force | Out-Nul
 New-Item -ItemType Directory -Path (Join-Path $target 'data\builds') -Force | Out-Null
 Copy-Item -LiteralPath (Join-Path $repo 'src\main.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\Logger.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\Localization.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\GameState.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\OfferSnapshot.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ScoringEngine.lua') -Destination $target

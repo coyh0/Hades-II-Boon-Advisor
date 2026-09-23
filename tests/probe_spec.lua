@@ -8,7 +8,7 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
     local importing, inCallback, autoSingleCalls, infoLookups = false, false, 0, 0
     local uiCreated, uiText, uiDestroyed, uiAttached = {}, {}, {}, {}
     local readyCalls, reloadCalls = 0, 0
-    local game = { CreateBoonLootButtons = native }
+    local game = { CreateBoonLootButtons = native, GetLanguage = function() return "fr" end }
     local env = setmetatable({ private = {} }, { __index = _G })
     local mods = {}
     for key, value in pairs(runtime or {}) do
@@ -70,7 +70,7 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
     BUILD_PROFILE = buildProfile or "auto",
             }
         end
-        if path == "Logger.lua" or path == "GameState.lua" or path == "OfferSnapshot.lua"
+        if path == "Logger.lua" or path == "Localization.lua" or path == "GameState.lua" or path == "OfferSnapshot.lua"
             or path == "ScoringEngine.lua" or path == "UI.lua" or path == "ProfileResolver.lua" then
             path = "src/" .. path
         end
@@ -360,6 +360,31 @@ for _, line in ipairs(rl) do
     end
 end
 check(sawReady and sawRank and sawTie, "ready ranking diagnostics missing or tie not explicit")
+local englishRankScreen = { Source = rankLoot, KeepOpen = true }
+local englishRankGame, _, englishRankStart, _, englishRankPrivate = fixture(function() end, nil, true, {
+    CurrentRun = rankRun,
+    GetEquippedWeapon = function() return "WeaponDagger" end,
+    GetLanguage = function() return "en" end,
+    LootData = { WeaponUpgrade = { TraitIndex = { DaggerRapidAttackTrait = true } } },
+    IsGodTrait = function() return false end,
+}, false, "intermediate")
+englishRankStart(); englishRankGame.CreateBoonLootButtons(englishRankScreen, rankLoot)
+local englishRankState = englishRankPrivate.probeState
+check(englishRankState.lastRankingReady == rankState.lastRankingReady
+    and #englishRankState.lastScores == #rankState.lastScores
+    and #englishRankState.lastRankedScores == #rankState.lastRankedScores,
+    "language changed ranking state")
+for index, result in ipairs(rankState.lastScores) do
+    local translated = englishRankState.lastScores[index]
+    check(translated.itemName == result.itemName and translated.score == result.score
+        and translated.covered == result.covered and translated.scoreComplete == result.scoreComplete,
+        "language changed a score object")
+end
+for index, result in ipairs(rankState.lastRankedScores) do
+    local translated = englishRankState.lastRankedScores[index]
+    check(translated.originalIndex == result.originalIndex and translated.rank == result.rank,
+        "language changed rank ordering")
+end
 print("PASS: runtime ranking gate keeps nil when false and ranks internally when true; no UI")
 
 local testLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
