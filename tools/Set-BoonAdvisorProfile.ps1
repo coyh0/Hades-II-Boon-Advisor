@@ -10,7 +10,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 if (-not $Show -and [string]::IsNullOrWhiteSpace($Profile)) {
-    throw 'Specify -Profile auto|intermediate|starter|morrigan_meta, or use -Show.'
+    throw 'Specify -Profile <selectionKey> (or auto), or use -Show.'
 }
 $target = [IO.Path]::GetFullPath($TargetPath)
 $settingsPath = Join-Path $target 'config\settings.lua'
