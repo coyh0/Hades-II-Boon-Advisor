@@ -157,7 +157,9 @@ This file is the project roadmap and the source of truth for planned work and va
 ## 10E — Runtime localization
 
 - [ ] Centralize all player-facing strings.
-- [ ] Detect the game language.
+- [x] Detect the game language.
+  - Runtime validation on the development game copy confirmed `rom.game.GetLanguage` is exposed as a function and returns `fr` for the active French game language.
+  - Direct plugin-global `GetLanguage` access was unavailable (`nil`), so production localization should use `rom.game.GetLanguage` with a safe English fallback if the function is missing, errors, or returns an unsupported code.
 - [ ] Support English and French first.
 - [ ] Use English as the fallback language.
 - [ ] Localize rank/status/reason labels and fallback messages.
