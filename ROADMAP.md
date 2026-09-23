@@ -4,7 +4,7 @@ _Last updated: 2026-09-23_
 
 This file is the project roadmap and the source of truth for planned work and validation status.
 
-**Maintenance rule:** roadmap status is updated only after explicit maintainer confirmation. Coding assistants must not mark milestones complete or change priorities on their own.
+**Maintenance rule:** ChatGPT updates this roadmap automatically when a milestone has been objectively completed and validated in our workflow, or when the maintainer explicitly requests a roadmap change. Coding agents such as Codex must not self-mark milestones complete or change priorities on their own; their work must first be reviewed and, where relevant, tested.
 
 ## Current focus
 
