@@ -111,7 +111,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - SHA-256: `9380A802ACDD543C1FB24B0B68AF89AC876BD637E69E183EF11A7AAE3BC49208`.
 - [x] Create a new immutable `v0.1.2` Git tag.
   - Annotated tag `v0.1.2` is published and resolves to release commit `df707244c43e77a3a5792920caed27df74500054`.
-- [ ] Publish the GitHub `v0.1.2` release.
+- [x] Publish the GitHub `v0.1.2` release.
+  - GitHub Release `v0.1.2` is published with the verified manual ZIP and `.sha256` assets; the ZIP asset digest matches `ECD11118549EC16D94771EF9290CF10BE613448C0EDA05812193BF18AC823382`.
 - [ ] Publish Thunderstore `0.1.2`.
 
 ## 10D.0 — AI disclosure and project provenance
