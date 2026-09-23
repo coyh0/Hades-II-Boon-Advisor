@@ -1,4 +1,4 @@
-﻿# Changelog
+# Changelog
 
 Tous les changements importants de Hades II Boon Advisor seront documentés ici.
 
