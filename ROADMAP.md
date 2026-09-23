@@ -60,8 +60,9 @@ This file is the project roadmap and the source of truth for planned work and va
   - Auto affinity implementation has passed code review and offline regression tests for the current Melinoë/Morrigan profile set.
   - Runtime validation found an important first-offer case: Melinoë had `GodTraitCount=0`, so owned-Boon affinity alone could not resolve Starter vs Intermediate, even though the live run exposed `ForceAresBoonKeepsake`.
   - v0.1.1 auto detection must therefore support pre-Boon build-intent signals already present in the current run (for example an equipped god keepsake) when they are explicitly mapped/validated for a profile.
+  - Pre-Boon signals are fallback intent evidence, not stronger than decisive owned-Boon evidence: once currently owned Boons identify a profile unambiguously, the owned build state must win over the starting keepsake signal.
   - Current offered Boons must still never participate in profile selection.
-  - If no validated pre-Boon or owned-Boon signal distinguishes candidates, remain safely ambiguous rather than guess.
+  - If owned-Boon evidence is absent/tied, use validated pre-Boon signals; if neither source distinguishes candidates, remain safely ambiguous rather than guess.
   - Runtime revalidation with the shipped `auto` default is still required before this item is complete.
   - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
@@ -143,8 +144,9 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
   - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
-  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) should be used as the first source of profile-affinity signals; future profiles may add explicit activation/signature metadata if needed.
-  - If evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
+  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) is the primary profile-affinity evidence; decisive owned-Boon state must outrank pre-Boon intent signals such as starting keepsakes.
+  - Validated pre-Boon signals are fallback evidence for early-run detection when owned-Boon evidence is absent or tied; future profiles may add explicit activation/signature metadata if needed.
+  - If all available evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
   - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
   - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
 - [ ] Add an in-game profile selector as a future override/fallback for `auto`:
