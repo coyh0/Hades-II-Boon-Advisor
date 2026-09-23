@@ -106,7 +106,9 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Build and verify the manual GitHub ZIP for `v0.1.2`.
   - Deterministic release build produced `Hades-II-Boon-Advisor-v0.1.2.zip` and passed the built-in inventory/hash verification.
   - SHA-256: `ECD11118549EC16D94771EF9290CF10BE613448C0EDA05812193BF18AC823382`.
-- [ ] Build and verify the Thunderstore package for `0.1.2`.
+- [x] Build and verify the Thunderstore package for `0.1.2`.
+  - Final package `Coyh0Mods-Hades_II_Boon_Advisor-0.1.2.zip` contains `plugins/ProfileResolver.lua`, the AI disclosure with OpenAI ChatGPT and Codex attribution, and the `BUILD_PROFILE = "auto"` documentation; no developer-only content is included.
+  - SHA-256: `9380A802ACDD543C1FB24B0B68AF89AC876BD637E69E183EF11A7AAE3BC49208`.
 - [ ] Create a new immutable `v0.1.2` Git tag.
 - [ ] Publish the GitHub `v0.1.2` release.
 - [ ] Publish Thunderstore `0.1.2`.
