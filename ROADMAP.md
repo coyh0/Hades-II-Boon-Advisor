@@ -52,6 +52,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - If several compatible profiles exist and no explicit preference is set, fail safely as ambiguous instead of guessing.
   - Keep explicit `starter` / `intermediate` preferences for Melinoë.
   - Morrigan must still auto-resolve because it has a single compatible profile.
+  - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Do not show `PROFIL NON PRIS EN CHARGE` when compatible profiles exist but a choice is required.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
   - Runtime revalidation with the shipped `auto` default is still required before this item is complete.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
