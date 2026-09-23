@@ -252,6 +252,35 @@ This file is the project roadmap and the source of truth for planned work and va
   - Existing canonical profile generation remains byte-identical for Sister Blades; canonical mechanics/equivalence, full Lua 5.2 regression coverage, staging with exactly 14 runtime files, and `git diff --check` all passed.
   - No runtime Lua/profile, ROADMAP-by-Codex, game deployment, release, tag, or real Build Registry access occurred during implementation.
 
+### 11A.3 — First multi-weapon pilot: Black Coat / Melinoë Intermediate
+
+- [x] **Verify the Black Coat runtime identity from local Hades II game data.**
+  - `WeaponSuit` is the verified Black Coat weapon ID.
+  - `BaseSuitAspect` is the verified Aspect of Melinoë ID for Black Coat.
+  - `ForcePoseidonBoonKeepsake`, `PoseidonWeaponBoon`, `AresSpecialBoon`, and `PoseidonSprintBoon` are the verified runtime trait IDs used by this pilot.
+  - Verification used exact English localization mappings plus matching game-data definitions; no IDs were inferred from names.
+- [x] **Add the first non-Sister-Blades canonical profile.**
+  - Added `black_coat_melinoe_intermediate` for `WeaponSuit + BaseSuitAspect`.
+  - The profile uses `ForcePoseidonBoonKeepsake` as its pre-Boon auto signal.
+  - Attack / Special / Sprint target `PoseidonWeaponBoon`, `AresSpecialBoon`, and `PoseidonSprintBoon`; Cast and Mana remain explicitly open.
+- [x] **Keep Black Coat mechanics conservative until weapon-specific behavior is verified.**
+  - Added `black_coat_melinoe` with generic build-plan weights and generic core-slot inventories only.
+  - No Black Coat-specific aspect, Hammer, Omega, status, Origination, projectile, or free-text-condition scoring was introduced.
+  - `genericCoreAspectCompatibility` remains `false`.
+- [x] **Prove the existing generator, registry and resolver are genuinely multi-weapon.**
+  - The canonical generator emits `data/builds/black_coat_melinoe_intermediate.lua` and a `coat_melinoe_intermediate` registry entry.
+  - Existing Sister Blades generated profiles remain byte-for-byte unchanged.
+  - `ProfileResolver.lua` remains unchanged; `WeaponSuit + BaseSuitAspect` resolves through the existing singleton-candidate path.
+  - Unknown Black Coat aspects and unknown weapons remain unsupported.
+- [x] **Validate the first multi-weapon pilot offline.**
+  - Canonical generation, Lua 5.2 regression coverage, conservative mechanics validation, strict Sister Blades mechanics equivalence, resolver/scoring regressions, Build Registry import-contract tests, staging and whitespace checks all passed.
+  - Staging now contains exactly 15 runtime files; the only newly staged runtime profile is `data/builds/black_coat_melinoe_intermediate.lua`.
+  - No Hades II installation was modified or launched; no deployment, release or tag was created.
+- [ ] **Validate Black Coat in the live game before treating the pilot as release-ready.**
+  - Confirm `WeaponSuit + BaseSuitAspect` resolves to `black_coat_melinoe_intermediate` in a real run.
+  - Confirm first-offer auto resolution from `ForcePoseidonBoonKeepsake` and normal ranking behavior.
+  - Perform the standard targeted runtime log audit after validation.
+
 - [ ] **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
   - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
@@ -268,9 +297,12 @@ This file is the project roadmap and the source of truth for planned work and va
   - Add an explicit import/readiness or verification status so incomplete/unresolved profiles are skipped safely rather than partially imported.
   - Sister Blades profiles may remain excluded from the Build Registry import while the current canonical JSON remains their source of truth.
 - [ ] Keep the pipeline automated: canonical source → JSON → generated Lua profile → registry → tests.
-- [ ] Generalize `Generate-BoonAdvisorProfiles.ps1` beyond the current Sister Blades whitelist.
-- [ ] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
-- [ ] Keep runtime profile resolution generic for future weapons.
+- [x] Generalize `Generate-BoonAdvisorProfiles.ps1` beyond the current Sister Blades whitelist.
+  - Completed in 11A.1 and exercised by the Black Coat pilot in 11A.3.
+- [x] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
+  - Completed in 11A.1; 11A.3 adds the first verified non-Sister-Blades pair, `WeaponSuit + BaseSuitAspect`.
+- [x] Keep runtime profile resolution generic for future weapons.
+  - 11A.3 proves Black Coat resolves through the existing generic singleton-candidate path with no `ProfileResolver.lua` changes.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
 - [ ] **Improve incomplete-offer handling with safe partial ranking.**
   - Replace the current all-or-nothing rank suppression when only part of an offer is evaluable.
@@ -325,12 +357,15 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 | Aspect of Melinoë | `DaggerBackstabAspect` | Confirmed |
 | Aspect of Morrigan | `DaggerTripleAspect` | Confirmed in game |
 | Aspect of Artemis | `DaggerBlockAspect` | Intentionally unsupported in current release scope |
+| Black Coat | `WeaponSuit` | Verified from local game data; offline pilot implemented |
+| Black Coat — Aspect of Melinoë | `BaseSuitAspect` | Verified from local game data; live runtime validation pending |
 
 Current supported profile intent:
 
 - Sister Blades — Melinoë Starter
 - Sister Blades — Melinoë Intermediate
 - Sister Blades — Morrigan Meta / Blood Triad
+- Black Coat — Melinoë Intermediate (offline validated; live runtime validation pending)
 - Other weapon/aspect combinations: unsupported unless explicitly added to the registry and validated.
 
 ## Deferred design decisions
@@ -339,7 +374,7 @@ These are intentionally not part of the current v0.1.1 hotfix:
 
 - A future explicit `recommended` metadata/policy may be added for discovery/documentation, but it must not silently override the user's choice when multiple profiles exist.
 - Lazy-loading/profile caching for a future large profile catalog.
-- Multi-weapon generator generalization.
+- Further multi-weapon profile expansion beyond the first Black Coat pilot.
 - Large UI redesign.
 - Additional runtime languages beyond English/French.
 - Full automation from external build data sources.
