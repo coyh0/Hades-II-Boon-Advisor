@@ -45,7 +45,7 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10C — v0.1.1 hotfix release
 
-- [ ] **Remove the legacy implicit Melinoë default profile.**
+- [x] **Remove the legacy implicit Melinoë default profile.**
   - Offline implementation and regression migration are complete: full Lua 5.2 suite, resolver, probe, Phase 2, scoring, UI and diff checks pass.
   - Change the shipped default from `BUILD_PROFILE = "intermediate"` to `BUILD_PROFILE = "auto"`.
   - In `auto`, first filter profiles by the live internal weapon + aspect IDs, then use the current run state to identify the best-matching compatible build profile when several profiles share that weapon/aspect.
@@ -55,7 +55,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - If runtime evidence is absent or tied between several compatible profiles, fail safely as ambiguous instead of guessing.
   - Keep explicit `starter` / `intermediate` preferences for Melinoë.
   - Morrigan must still auto-resolve because it has a single compatible profile.
-  - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Offline implementation is complete: `ambiguous` now maps to `PROFIL À CHOISIR`, while `unsupported` keeps `PROFIL NON PRIS EN CHARGE`; neither renders rankings. Runtime confirmation is still required.
+  - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Runtime-confirmed: `ambiguous` maps to `PROFIL À CHOISIR`, while `unsupported` keeps `PROFIL NON PRIS EN CHARGE`; neither renders rankings.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
   - Auto affinity implementation has passed code review and offline regression tests for the current Melinoë/Morrigan profile set.
   - Runtime validation found an important first-offer case: Melinoë had `GodTraitCount=0`, so owned-Boon affinity alone could not resolve Starter vs Intermediate, even though the live run exposed `ForceAresBoonKeepsake`.
@@ -67,6 +67,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - Verified offline cases include Ares keepsake-only → Intermediate, Ares keepsake + Ares Attack → Intermediate, Ares keepsake + Aphrodite Attack → Starter, shared Zeus Special + Ares keepsake → Intermediate via fallback, no decisive evidence → ambiguous, Morrigan singleton → Morrigan, and explicit compatible preferences remaining authoritative.
   - Live runtime revalidation confirms the first-offer case now resolves with `BUILD_PROFILE="auto"` from the Ares keepsake signal and renders normal rankings instead of unsupported/ambiguous fallback.
   - Live reroll/Sublime interaction also refreshes rankings correctly under the auto-resolved profile.
+  - Live ambiguous Melinoë validation confirms the player-facing `PROFIL À CHOISIR` fallback appears with no rankings when no compatible profile can be selected decisively.
   - Final runtime/log audit passed clean after live first-offer, reroll and Sublime validation; no targeted Boon Advisor ERROR/WARN/traceback/nil/exception entries were found.
   - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
