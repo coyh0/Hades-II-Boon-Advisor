@@ -92,6 +92,20 @@ This file is the project roadmap and the source of truth for planned work and va
 - [ ] Publish Thunderstore `0.1.1`.
 - [ ] Never move or rewrite the existing `v0.1.0` tag/release.
 
+## 10C.1 — v0.1.2 compliance release
+
+- [x] Keep the existing annotated `v0.1.1` tag immutable and unpublished.
+  - `v0.1.1` remains attached to commit `f86b3a48b929bceb0b948de86df81e1c8f777a73`; do not move or rewrite it.
+  - Do not publish the existing GitHub/Thunderstore `0.1.1` artifacts because their packaged README predates the required AI disclosure.
+- [ ] Add the required AI disclosure/provenance text to the public README.
+- [ ] Bump release metadata from `0.1.1` to `0.1.2` and add a `0.1.2` changelog entry.
+- [ ] Re-run relevant release/package validation after the documentation-only compliance change.
+- [ ] Build and verify the manual GitHub ZIP for `v0.1.2`.
+- [ ] Build and verify the Thunderstore package for `0.1.2`.
+- [ ] Create a new immutable `v0.1.2` Git tag.
+- [ ] Publish the GitHub `v0.1.2` release.
+- [ ] Publish Thunderstore `0.1.2`.
+
 ## 10D.0 — AI disclosure and project provenance
 
 - [x] Re-check Thunderstore's current AI disclosure requirements before the next release.
