@@ -1,39 +1,29 @@
-# Compatibilité avec les patches Hades II
+# Hades II Patch Compatibility
 
-`Test-PatchCompatibility.ps1` a deux modes.
+`Test-PatchCompatibility.ps1` has two modes.
 
 ## Runtime
 
-Install et Update utilisent automatiquement `-Mode Runtime`. Ce mode vérifie
-l'exécutable Hades II, les scripts critiques et les ancres structurelles
-requises par le mod. Il ne requiert ni Python, ni runtime Lua de test, ni
-données canoniques, ni tests du dépôt développeur.
+Install and Update automatically use `-Mode Runtime`. It checks the Hades II executable, critical scripts, and structural anchors required by the mod. It does not require Python, the Lua test runtime, canonical data, or developer-repository tests.
 
-Les résultats sont :
+Results:
 
-- `PASS` : l'installation ou la mise à jour peut continuer.
-- `MANUAL RUNTIME TEST REQUIRED` : l'opération est refusée par prudence ; ce
-  résultat ne prouve pas que le mod est incompatible.
-- `FAIL` : une vérification structurelle connue a échoué ; l'opération est
-  refusée.
+- `PASS`: installation or update may continue.
+- `MANUAL RUNTIME TEST REQUIRED`: the operation is refused conservatively; this does not prove incompatibility.
+- `FAIL`: a known structural check failed; the operation is refused.
 
-La V1 ne fournit aucun contournement `Force`.
+V1 has no `Force` bypass.
 
 ## Full
 
-`Full` est le mode développeur/release et le mode par défaut quand le script
-est exécuté directement sans `-Mode`. Il ajoute à la vérification Runtime la
-validation du projet, les validations canoniques, la génération déterministe
-et les tests Lua 5.2/équivalence actuellement implémentés.
-
-Exemple développeur :
+`Full` is the developer/release mode and the default when the script runs directly without `-Mode`. It adds project validation, canonical validation, deterministic generation, and the implemented Lua 5.2/equivalence tests to the Runtime checks.
 
 ```powershell
 .\tools\Test-PatchCompatibility.ps1 `
     -Mode Full `
-    -GameRoot "D:\Games\Hades2" `
+    -GameRoot "<Hades-II-root>" `
     -PythonPath "C:\Path\To\python.exe" `
-    -LuaDllPath "D:\Games\Hades2\Ship\lua52.dll"
+    -LuaDllPath "<Hades-II-root>\Ship\lua52.dll"
 ```
 
-Les utilisateurs finaux n'ont pas besoin d'exécuter le mode Full.
+End users do not need to run Full mode.

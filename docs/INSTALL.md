@@ -1,31 +1,32 @@
-# Installer Hades II Boon Advisor
+# Install Hades II Boon Advisor
 
-## Recommandé : Thunderstore et r2modman
+## Recommended: Thunderstore and r2modman
 
-Installez **Hades II Boon Advisor** dans r2modman depuis Thunderstore. Le
-gestionnaire installe le mod et ses dépendances déclarées dans le bon dossier
-ReturnOfModding.
+Install **Hades II Boon Advisor** from Thunderstore through r2modman. The manager installs the package and declared dependencies into its own profile.
 
-## Installation manuelle : ZIP minimal
+On one tested Epic Games installation, Thunderstore Mod Manager/r2modman installed the `ReturnOfModding` files inside its profile but did not copy them into the game's actual `ReturnOfModding` directory. If the mod does not appear in game, compare the active profile's `ReturnOfModding` directory with:
 
-1. Fermez Hades II et vérifiez que Hell2Modding et les dépendances déclarées
-   dans `manifest.json` sont déjà installés.
-2. Téléchargez et extrayez `Hades-II-Boon-Advisor-v<VERSION>.zip`.
-3. Copiez le dossier unique `Local-HadesIIBoonAdvisor` dans :
+```text
+<Hades-II-root>\Ship\ReturnOfModding\
+```
+
+and, if necessary, copy the profile's `ReturnOfModding` contents there manually while Hades II is closed. This is an observed workaround, not a universal manager rule.
+
+## Manual install: minimal ZIP
+
+1. Close Hades II. Confirm that Hell2Modding and the dependencies declared in `manifest.json` are already installed.
+2. Download and extract `Hades-II-Boon-Advisor-v<VERSION>.zip`.
+3. Copy the single `Local-HadesIIBoonAdvisor` directory to:
 
 ```text
 <Hades-II-root>\Ship\ReturnOfModding\plugins\
 ```
 
-Aucun PowerShell ni connaissance du dépôt n'est nécessaire. La configuration
-du mod est ensuite dans `config\settings.lua` sous ce dossier.
+This workflow needs neither PowerShell nor a repository checkout. The mod configuration is `config\settings.lua` inside that directory. Its default is `BUILD_PROFILE = "auto"`.
 
-## Avancé : outils PowerShell
+## Advanced: PowerShell tooling
 
-Les outils du dépôt sont destinés aux installations contrôlées, diagnostics et
-mises à jour transactionnelles. Ils ne sont pas le workflow recommandé aux
-joueurs. `GameRoot` est le dossier qui contient `Ship\Hades2.exe` et
-`PackagePath` est un dossier extrait `Local-HadesIIBoonAdvisor`.
+Repository PowerShell tools support controlled installation, diagnostics, and transactional updates. They are intended for advanced users. `GameRoot` is the directory containing `Ship\Hades2.exe`; `PackagePath` is an extracted `Local-HadesIIBoonAdvisor` directory.
 
 ```powershell
 .\tools\Install-BoonAdvisor.ps1 `
@@ -33,7 +34,4 @@ joueurs. `GameRoot` est le dossier qui contient `Ship\Hades2.exe` et
     -PackagePath ".\Local-HadesIIBoonAdvisor"
 ```
 
-Ajoutez `-WhatIf` pour prévisualiser l'opération sans écrire. La vérification
-de compatibilité Runtime doit produire `PASS`; `MANUAL RUNTIME TEST REQUIRED`
-et `FAIL` refusent l'installation. Les outils ne téléchargent ni
-Hell2Modding ni les dépendances.
+Use `-WhatIf` to preview without writing. Runtime compatibility must report `PASS`; `MANUAL RUNTIME TEST REQUIRED` and `FAIL` refuse installation. The tools do not download Hell2Modding or dependencies.

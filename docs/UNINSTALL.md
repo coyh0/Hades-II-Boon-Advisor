@@ -1,25 +1,22 @@
-# Désinstaller Hades II Boon Advisor
+# Uninstall Hades II Boon Advisor
 
-## Recommandé : Thunderstore et r2modman
+## Thunderstore and r2modman
 
-Supprimez **Hades II Boon Advisor** depuis r2modman/Thunderstore.
+Remove **Hades II Boon Advisor** through r2modman/Thunderstore. If you used the observed Epic Games manual-copy workaround, also remove the copied game-folder plugin directory below.
 
-## Désinstallation manuelle
+## Manual uninstall
 
-Fermez Hades II, puis supprimez uniquement :
+Close Hades II, then remove only:
 
 ```text
 <Hades-II-root>\Ship\ReturnOfModding\plugins\Local-HadesIIBoonAdvisor
 ```
 
-Ne retirez pas Hell2Modding ou les dépendances partagées avec d'autres mods.
-Cette opération ne touche ni aux fichiers Hades II hors de ce dossier ni aux
-sauvegardes.
+Do not remove Hell2Modding or dependencies shared with other mods. This does not change Hades II files outside that directory or any save data.
 
-## Avancé : PowerShell
+## Advanced: PowerShell
 
-Les utilisateurs avancés peuvent prévisualiser puis effectuer la même
-suppression contrôlée avec :
+Advanced users can preview and perform the same controlled removal:
 
 ```powershell
 .\tools\Uninstall-BoonAdvisor.ps1 -GameRoot "<Hades-II-root>"

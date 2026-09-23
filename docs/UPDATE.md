@@ -1,26 +1,28 @@
-# Mettre à jour Hades II Boon Advisor
+# Update Hades II Boon Advisor
 
-## Recommandé : Thunderstore et r2modman
+## Thunderstore and r2modman
 
-Mettez le mod à jour depuis r2modman/Thunderstore. Le gestionnaire applique la
-nouvelle version et ses dépendances déclarées.
+Update the package from r2modman/Thunderstore. On one tested Epic Games installation, Thunderstore Mod Manager/r2modman installed the `ReturnOfModding` files inside its profile but did not copy them into the game's actual `ReturnOfModding` directory. If the mod does not appear in game, compare the active profile's `ReturnOfModding` directory with:
 
-## Mise à jour manuelle : ZIP minimal
+```text
+<Hades-II-root>\Ship\ReturnOfModding\
+```
 
-Fermez Hades II, extrayez le nouveau
-`Hades-II-Boon-Advisor-v<VERSION>.zip`, puis remplacez uniquement :
+and, if necessary, copy the profile's `ReturnOfModding` contents there manually while Hades II is closed. This is an observed workaround, not a universal manager rule.
+
+## Manual update: minimal ZIP
+
+Close Hades II, extract the new `Hades-II-Boon-Advisor-v<VERSION>.zip`, then replace only:
 
 ```text
 <Hades-II-root>\Ship\ReturnOfModding\plugins\Local-HadesIIBoonAdvisor
 ```
 
-Une copie manuelle peut réinitialiser votre configuration. Préservez
-`config\settings.lua` vous-même si vous souhaitez conserver vos réglages.
+A manual replacement can reset configuration. Preserve `config\settings.lua` if you want to keep settings such as `BUILD_PROFILE = "auto"` or an explicit profile preference.
 
-## Avancé : mise à jour transactionnelle PowerShell
+## Advanced: transactional PowerShell update
 
-Pour une préservation byte à byte de `config\settings.lua` et un rollback en
-cas d'échec, les utilisateurs avancés peuvent employer l'outil du dépôt :
+Advanced users can preserve `config\settings.lua` byte-for-byte and receive a rollback on failure with:
 
 ```powershell
 .\tools\Update-BoonAdvisor.ps1 `
@@ -28,5 +30,4 @@ cas d'échec, les utilisateurs avancés peuvent employer l'outil du dépôt :
     -PackagePath ".\Local-HadesIIBoonAdvisor"
 ```
 
-Ajoutez `-WhatIf` pour prévisualiser. L'outil valide le package et exige une
-compatibilité Runtime `PASS` avant toute écriture.
+Use `-WhatIf` to preview. The tool validates the package and requires Runtime compatibility `PASS` before writing.

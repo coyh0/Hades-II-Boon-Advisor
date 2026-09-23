@@ -10,8 +10,20 @@ or the player's selection.
 ### Recommended: Thunderstore and r2modman
 
 Install **Hades II Boon Advisor** through Thunderstore with r2modman. The mod
-manager installs the plugin and its declared dependencies in the appropriate
-ReturnOfModding plugin location.
+manager installs the plugin and its declared dependencies into its profile.
+
+On one tested Epic Games installation, Thunderstore Mod Manager/r2modman
+installed the `ReturnOfModding` files inside its profile but did not copy them
+into the game's actual `ReturnOfModding` directory. If the mod does not appear
+in game, compare the active profile's `ReturnOfModding` directory with:
+
+```text
+<Hades-II-root>\Ship\ReturnOfModding\
+```
+
+and, if necessary, copy the profile's `ReturnOfModding` contents there
+manually while Hades II is closed. This is an observed workaround, not a
+universal manager behavior.
 
 
 ### Manual: minimal GitHub ZIP
@@ -49,6 +61,9 @@ the start of a run.
 
 If multiple compatible profiles remain ambiguous, the advisor shows
 **PROFIL À CHOISIR** and does not guess or display rankings.
+
+For a weapon/Aspect with no compatible profile, it shows
+**PROFIL NON PRIS EN CHARGE**.
 
 Compatible profiles can also be selected explicitly with:
 
