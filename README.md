@@ -18,7 +18,7 @@ team namespace and a required 256x256 PNG icon.
 
 ### Manual: minimal GitHub ZIP
 
-Download `Hades-II-Boon-Advisor-v<VERSION>.zip`, ensure Hell2Modding and the
+Download `Hades-II-Boon-Advisor-v<VERSION>.zip` from [GitHub Releases](https://github.com/coyh0/Hades-II-Boon-Advisor-Public/releases), ensure Hell2Modding and the
 declared dependencies are already installed, then extract the archive and copy
 the single `Local-HadesIIBoonAdvisor` folder into:
 
