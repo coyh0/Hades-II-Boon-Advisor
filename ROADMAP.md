@@ -134,14 +134,22 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10D — Public release polish, English-first
 
-- [ ] Make English the default public documentation language.
-- [ ] Review and polish the GitHub README.
+- [x] Make English the default public documentation language.
+  - Public-facing README, changelog, installation, update, uninstall, and patch-compatibility documentation are now English-first; runtime labels remain unchanged for the separate 10E localization phase.
+- [x] Review and polish the GitHub README.
+  - README installation guidance, profile-selection behavior, fail-safe statuses, safety guarantees, AI disclosure, and Epic-manager workaround wording were reviewed and validated.
 - [ ] Review the repository description and release text.
-- [ ] Review `CHANGELOG.md`.
-- [ ] Review installation, update and uninstall documentation.
-- [ ] Review Thunderstore description and README content.
-- [ ] Document Epic/Thunderstore deployment behavior if the current manager deployment limitation persists.
-- [ ] Keep French documentation optional/secondary.
+  - GitHub release `v0.1.2` text is already English and was reviewed. The GitHub repository description is currently unset (`null`) and still needs a maintainer-approved public description before this point can be closed.
+- [x] Review `CHANGELOG.md`.
+  - Historical 0.1.0/0.1.1/0.1.2 entries were translated to English without changing their technical meaning.
+- [x] Review installation, update and uninstall documentation.
+  - `docs/INSTALL.md`, `docs/UPDATE.md`, `docs/UNINSTALL.md`, and patch-compatibility guidance were converted to English and validated with generic public path placeholders.
+- [x] Review Thunderstore description and README content.
+  - `thunderstore.toml` already used an English safety-focused description; the source README used for future Thunderstore packages is now English-first and preserves the AI disclosure and informational-only guarantees.
+- [x] Document Epic/Thunderstore deployment behavior if the current manager deployment limitation persists.
+  - Documented as an observed workaround only: on one tested Epic Games installation, the manager kept `ReturnOfModding` inside its profile instead of copying it to `<Hades-II-root>\Ship\ReturnOfModding\`; users are told to compare/copy manually only if the mod does not appear in game.
+- [x] Keep French documentation optional/secondary.
+  - Remaining French technical/internal documents are secondary developer material rather than the default public user documentation.
 
 ## 10E — Runtime localization
 
