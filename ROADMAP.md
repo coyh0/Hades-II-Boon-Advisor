@@ -342,8 +342,11 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - `tools/Set-BoonAdvisorProfile.ps1` now uses registry-driven selection keys without a stale fixed profile list.
   - `tests/profile_switcher_spec.ps1` now covers `coat_melinoe_intermediate`, `-Show`, settings preservation, and regression against the obsolete fixed list.
   - Targeted profile-switcher regression passed, and no active obsolete `auto|intermediate|starter|morrigan_meta` list remains in `tools/` or `tests/`.
-- [ ] **Strengthen remaining end-to-end registry collision/invariant validation.**
-  - Existing generator/import validation already covers many duplicate IDs, selection keys, output names and module constraints; add only the remaining cross-layer cases rather than duplicating existing checks.
+- [x] **Strengthen remaining end-to-end registry collision/invariant validation.**
+  - Existing duplicate profile, selection-key, output, mechanics/catalog and imported canonical-ID collision checks were audited and retained without redundant variants.
+  - Canonical generation and Build Registry import now reserve synthetic/control identifiers (`auto` selection key and `registry` module ID), and canonical profile IDs use the same safe lowercase format as imported canonical IDs.
+  - Generated-registry tests now verify descriptor keys, canonical IDs, derived module paths and descriptor/profile identity generically for every generated profile.
+  - Build Registry import, profile-switcher and canonical generation/Lua regression suites passed; no runtime gameplay behavior or deployment changed.
 - [ ] **Continue controlled Build Registry import expansion.**
   - Treat each repeated `profileKeyProposal` group as one candidate profile assembled from structured item rows.
   - Reuse structured `itemType=keepsake` + `slot=start` rows as possible pre-Boon signals under explicit policy.
