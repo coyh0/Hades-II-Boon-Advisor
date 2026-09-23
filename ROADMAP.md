@@ -180,16 +180,26 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10F — Logging and runtime diagnostics hardening
 
-This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging problem.
-
-- [ ] Define clear runtime log levels and responsibilities: `ERROR`, `WARN`, `INFO`, `DEBUG`.
-- [ ] Keep real errors and actionable warnings available in normal releases.
-- [ ] Keep verbose diagnostic logging disabled by default with `DEBUG = false`.
-- [ ] Add deduplication / rate limiting for repeated identical errors or warnings so a bad callback cannot flood the log.
-- [ ] Verify that repeated failures cannot produce per-frame log spam or unnecessary disk I/O.
-- [ ] Keep useful support context such as active weapon/aspect/profile and resolution state without exposing unnecessary data.
-- [ ] Add regression coverage for logging behavior where practical.
-- [ ] If 10B.6 detects actual repeated-error spam or a performance-impacting logging loop, move the minimal required fix into v0.1.1 instead of deferring it.
+- [x] Define clear runtime log levels and responsibilities: `ERROR`, `WARN`, `INFO`, `DEBUG`.
+  - `ERROR` and `WARN` remain available with `DEBUG=false`; `INFO` exists but is silent by default; routine diagnostics remain `DEBUG` only.
+- [x] Keep real errors and actionable warnings available in normal releases.
+  - Runtime validation with `DEBUG=false` confirmed a deliberately injected `ERROR` is still written to `LogOutput.log` while the plugin continues loading normally.
+  - Expected unsupported/ambiguous profile states remain DEBUG rather than noisy normal-release warnings.
+- [x] Keep verbose diagnostic logging disabled by default with `DEBUG = false`.
+  - Live validation exercised normal ranking, reroll, incomplete analysis and Sublimation refresh with zero `[BoonAdvisor]` lines emitted on the successful path.
+- [x] Add deduplication / rate limiting for repeated identical errors or warnings so a bad callback cannot flood the log.
+  - Deterministic once-per-session deduplication uses stable `LEVEL:CODE` keys with in-memory suppression counters.
+  - Failed log-sink writes do not consume a dedupe key, so a later occurrence can retry.
+- [x] Verify that repeated failures cannot produce per-frame log spam or unnecessary disk I/O.
+  - No per-frame logging hook exists; repeated user-driven refresh paths are protected by stable-code deduplication.
+  - Live DEV validation injected the same `RUNTIME_TEST_DEDUPE` error twice and produced exactly one log line.
+- [x] Keep useful support context such as active weapon/aspect/profile and resolution state without exposing unnecessary data.
+  - Existing DEBUG diagnostics retain internal weapon/aspect/profile/resolution identifiers; normal ERROR messages use short stable codes and avoid raw stack paths, full `CurrentRun`/save structures, or other unnecessary data.
+- [x] Add regression coverage for logging behavior where practical.
+  - Lua tests cover ERROR/WARN visibility with DEBUG disabled, DEBUG gating, silent INFO, missing/failing sinks, non-string messages, persistent dedupe state, suppression counts, different stable codes, and retry after a failed sink.
+  - Full Lua 5.2 suite, staging validation, Thunderstore structural package validation and `git diff --check` passed.
+- [x] Complete real runtime validation and restore the DEV copy after the temporary fault injection.
+  - Temporary dedupe test code was removed after validation; DEV `main.lua` matches the repository `main.lua` by SHA-256 and contains zero `RUNTIME_TEST_DEDUPE` markers.
 
 ## Phase 11 — v0.2 expansion and automation
 
