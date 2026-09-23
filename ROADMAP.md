@@ -113,7 +113,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - Annotated tag `v0.1.2` is published and resolves to release commit `df707244c43e77a3a5792920caed27df74500054`.
 - [x] Publish the GitHub `v0.1.2` release.
   - GitHub Release `v0.1.2` is published with the verified manual ZIP and `.sha256` assets; the ZIP asset digest matches `ECD11118549EC16D94771EF9290CF10BE613448C0EDA05812193BF18AC823382`.
-- [ ] Publish Thunderstore `0.1.2`.
+- [x] Publish Thunderstore `0.1.2`.
+  - `Coyh0Mods-Hades_II_Boon_Advisor-0.1.2.zip` was successfully uploaded and finalized; Thunderstore reported the package published at `https://thunderstore.io/package/download/Coyh0Mods/Hades_II_Boon_Advisor/0.1.2/`.
 
 ## 10D.0 — AI disclosure and project provenance
 
