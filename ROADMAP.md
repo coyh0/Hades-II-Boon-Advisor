@@ -42,6 +42,14 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10C — v0.1.1 hotfix release
 
+- [ ] **Remove the legacy implicit Melinoë default profile.**
+  - Change the shipped default from `BUILD_PROFILE = "intermediate"` to `BUILD_PROFILE = "auto"`.
+  - In `auto`, select a profile automatically only when exactly one compatible profile exists.
+  - If several compatible profiles exist and no explicit preference is set, fail safely as ambiguous instead of guessing.
+  - Keep explicit `starter` / `intermediate` preferences for Melinoë.
+  - Morrigan must still auto-resolve because it has a single compatible profile.
+  - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
+  - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
 - [ ] Audit the profile-resolver diff.
 - [ ] Run the complete relevant regression suite.
 - [ ] Bump `0.1.0` to `0.1.1`.
@@ -130,7 +138,7 @@ Current supported profile intent:
 
 These are intentionally not part of the current v0.1.1 hotfix:
 
-- A canonical default-profile field for weapon/aspect pairs with multiple builds.
+- A future explicit `recommended` / default-profile policy for weapon/aspect pairs with multiple builds, only if that recommendation is documented and intentional.
 - Lazy-loading/profile caching for a future large profile catalog.
 - Multi-weapon generator generalization.
 - Large UI redesign.
