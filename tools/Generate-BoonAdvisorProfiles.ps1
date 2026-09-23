@@ -2,6 +2,7 @@
 param(
     [string]$CanonicalDirectory,
     [string]$MechanicsDirectory,
+    [string]$CatalogPath,
     [string]$OutputDirectory,
     [switch]$ValidateOnly
 )
@@ -11,6 +12,9 @@ if ([string]::IsNullOrWhiteSpace($CanonicalDirectory)) {
 }
 if ([string]::IsNullOrWhiteSpace($MechanicsDirectory)) {
     $MechanicsDirectory = Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\mechanics'
+}
+if ([string]::IsNullOrWhiteSpace($CatalogPath)) {
+    $CatalogPath = Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\catalog\weapons_aspects.json'
 }
 if (-not $PSBoundParameters.ContainsKey('OutputDirectory')) {
     $OutputDirectory = Join-Path ([IO.Path]::GetTempPath()) ('boon-advisor-generated-' + [Guid]::NewGuid())
@@ -53,12 +57,41 @@ function Assert-StringArray([object]$value, [string]$name) {
         $seen[$item] = $true
     }
 }
-function Validate-Profile([hashtable]$profile, [hashtable]$seenIds) {
+function Test-CatalogWeaponAspect([hashtable]$catalog, [string]$weapon, [string]$aspect) {
+    $aspects = $catalog[$weapon]
+    if ($null -eq $aspects) { Fail "unknown catalog weapon $weapon" }
+    if (-not $aspects[$aspect]) { Fail "unknown catalog aspect $aspect for weapon $weapon" }
+}
+function Read-WeaponAspectCatalog([string]$path) {
+    if (-not (Test-Path -LiteralPath $path -PathType Leaf)) { Fail "weapon/aspect catalog was not found: $path" }
+    $catalog = Read-Json $path
+    if ($catalog.schemaVersion -ne 1) { Fail 'unsupported weapon/aspect catalog schemaVersion' }
+    if ($catalog.weapons -isnot [object[]] -or $catalog.weapons.Count -eq 0) { Fail 'weapon/aspect catalog weapons must be a non-empty array' }
+    $byWeapon = @{}
+    foreach ($weaponEntry in $catalog.weapons) {
+        if ($weaponEntry -isnot [hashtable]) { Fail 'weapon/aspect catalog weapon entry must be an object' }
+        Assert-String $weaponEntry.runtimeWeaponId 'weapon/aspect catalog runtimeWeaponId'
+        if ($byWeapon[$weaponEntry.runtimeWeaponId]) { Fail "duplicate catalog weapon ID $($weaponEntry.runtimeWeaponId)" }
+        if ($weaponEntry.ContainsKey('label')) { Assert-String $weaponEntry.label 'weapon/aspect catalog weapon label' }
+        if ($weaponEntry.aspects -isnot [object[]] -or $weaponEntry.aspects.Count -eq 0) { Fail "catalog aspects must be a non-empty array for weapon $($weaponEntry.runtimeWeaponId)" }
+        $aspects = @{}
+        foreach ($aspectEntry in $weaponEntry.aspects) {
+            if ($aspectEntry -isnot [hashtable]) { Fail 'weapon/aspect catalog aspect entry must be an object' }
+            Assert-String $aspectEntry.runtimeAspectId 'weapon/aspect catalog runtimeAspectId'
+            if ($aspects[$aspectEntry.runtimeAspectId]) { Fail "duplicate catalog aspect ID $($aspectEntry.runtimeAspectId) for weapon $($weaponEntry.runtimeWeaponId)" }
+            if ($aspectEntry.ContainsKey('label')) { Assert-String $aspectEntry.label 'weapon/aspect catalog aspect label' }
+            $aspects[$aspectEntry.runtimeAspectId] = $true
+        }
+        $byWeapon[$weaponEntry.runtimeWeaponId] = $aspects
+    }
+    return $byWeapon
+}
+function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$catalog) {
     if ($profile.schemaVersion -ne 1) { Fail 'unsupported schemaVersion' }
     foreach ($field in @('id', 'weapon', 'aspect', 'profileMode', 'selectionKey', 'mechanicsTemplate')) { Assert-String $profile[$field] $field }
     if ($profile.selectionKey -notmatch '^[a-z][a-z0-9_]*$') { Fail "invalid selectionKey $($profile.selectionKey)" }
     if ($seenIds[$profile.id]) { Fail "duplicate profile id $($profile.id)" }; $seenIds[$profile.id] = $true
-    if ($profile.weapon -ne 'WeaponDagger' -or $profile.aspect -notin @('DaggerBackstabAspect', 'DaggerTripleAspect')) { Fail 'unknown weapon/aspect' }
+    Test-CatalogWeaponAspect $catalog $profile.weapon $profile.aspect
     if ($profile.source -isnot [hashtable]) { Fail 'source must be an object' }
     Assert-String $profile.source.type 'source.type'; Assert-String $profile.source.profile 'source.profile'
     if ($profile.slots -isnot [hashtable]) { Fail 'slots must be an object' }
@@ -99,12 +132,12 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds) {
     }
     Assert-StringArray $profile.constraints 'constraints'
 }
-function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds) {
+function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtable]$catalog) {
     if ($mechanics.schemaVersion -ne 1) { Fail 'unsupported mechanics schemaVersion' }
     foreach ($field in @('id', 'weapon', 'aspect')) { Assert-String $mechanics[$field] "mechanics.$field" }
     if ($seenIds[$mechanics.id]) { Fail "duplicate mechanics template id $($mechanics.id)" }
     $seenIds[$mechanics.id] = $true
-    if ($mechanics.weapon -ne 'WeaponDagger' -or $mechanics.aspect -notin @('DaggerBackstabAspect', 'DaggerTripleAspect')) { Fail 'invalid mechanics weapon/aspect' }
+    Test-CatalogWeaponAspect $catalog $mechanics.weapon $mechanics.aspect
     foreach ($section in @('weights', 'statusMappings', 'knownNonStatusTraits', 'potentialStatusTraits',
         'statusCapabilityTraits', 'bloodDropEngine', 'aspectInteractions', 'hammerRoles', 'rules', 'verifiedIds', 'traitSemantics')) {
         if ($null -eq $mechanics[$section]) { Fail "missing mechanics section $section" }
@@ -139,9 +172,9 @@ function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds) {
             if ($entry.Value.reason -ne 'MAX_RESOURCE_SUPPORT') { Fail "unsupported trait semantic reason $($entry.Value.reason)" }
         } elseif ($entry.Value.kind -eq 'conditional_outgoing_damage') {
             if ($entry.Value.reason -ne 'HIGH_HEALTH_OFFENSE') { Fail "unsupported trait semantic reason $($entry.Value.reason)" }
-            if ($entry.Value.healthThreshold -isnot [double] -and $entry.Value.healthThreshold -isnot [decimal] -and $entry.Value.healthThreshold -isnot [int]) { Fail 'healthThreshold must be numeric' }
+            if ($entry.Value.healthThreshold -isnot [double] -and $entry.Value.healthThreshold -isnot [decimal] -and $entry.Value.healthThreshold -isnot [int] -and $entry.Value.healthThreshold -isnot [long]) { Fail 'healthThreshold must be numeric' }
             if ($entry.Value.healthThreshold -le 0 -or $entry.Value.healthThreshold -gt 1) { Fail 'healthThreshold must be in (0,1]' }
-            if ($entry.Value.thresholdMultiplier -isnot [double] -and $entry.Value.thresholdMultiplier -isnot [decimal] -and $entry.Value.thresholdMultiplier -isnot [int]) { Fail 'thresholdMultiplier must be numeric' }
+            if ($entry.Value.thresholdMultiplier -isnot [double] -and $entry.Value.thresholdMultiplier -isnot [decimal] -and $entry.Value.thresholdMultiplier -isnot [int] -and $entry.Value.thresholdMultiplier -isnot [long]) { Fail 'thresholdMultiplier must be numeric' }
             if ($entry.Value.thresholdMultiplier -lt 1) { Fail 'thresholdMultiplier must be >= 1' }
             if ($entry.Value.excludesIgnoreAllModifiers -isnot [bool]) { Fail 'excludesIgnoreAllModifiers must be boolean' }
         } else { Fail "unsupported trait semantic kind $($entry.Value.kind)" }
@@ -162,9 +195,11 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
         $composed[$field] = $profile[$field]
     }
     if ($profile.ContainsKey('autoSignals')) { $composed.autoSignals = To-IdSet $profile.autoSignals }
-    foreach ($field in @('weights', 'statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
+    foreach ($field in @('statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
         $composed[$field] = $mechanics[$field]
     }
+    # Profile overrides must never mutate the mechanics template reused by another profile.
+    $composed.weights = ConvertTo-HashtableRecursive $mechanics.weights
     $composed.rules = if ($profile.ContainsKey('rules')) { $profile.rules } else { $mechanics.rules }
     if ($profile.ContainsKey('weights')) {
         foreach ($key in $profile.weights.Keys) { $composed.weights[$key] = $profile.weights[$key] }
@@ -182,7 +217,7 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
     return $composed
 }
 function ConvertTo-Lua([object]$value, [int]$indent = 0) {
-    $pad = ' ' * $indent; $next = ' ' * ($indent + 4); $nl = [Environment]::NewLine
+    $pad = ' ' * $indent; $next = ' ' * ($indent + 4); $nl = "`n"
     if ($null -eq $value) { return 'nil' }
     if ($value -is [string]) { return '"' + (Escape-Lua $value) + '"' }
     if ($value -is [bool]) { return $value.ToString().ToLowerInvariant() }
@@ -203,18 +238,19 @@ function ConvertTo-Lua([object]$value, [int]$indent = 0) {
     }
     Fail "unsupported JSON value type $($value.GetType().FullName)"
 }
+$catalog = Read-WeaponAspectCatalog $CatalogPath
 $mechanicsFiles = @(Get-ChildItem -LiteralPath $MechanicsDirectory -Filter '*.json' -File | Sort-Object Name)
 if ($mechanicsFiles.Count -eq 0) { Fail "no mechanics templates in $MechanicsDirectory" }
 $mechanicsIds = @{}; $mechanicsById = @{}
 foreach ($file in $mechanicsFiles) {
-    $mechanics = Read-Json $file.FullName; Validate-Mechanics $mechanics $mechanicsIds
+    $mechanics = Read-Json $file.FullName; Validate-Mechanics $mechanics $mechanicsIds $catalog
     $mechanicsById[$mechanics.id] = $mechanics
 }
 $files = @(Get-ChildItem -LiteralPath $CanonicalDirectory -Filter '*.json' -File | Sort-Object Name)
 if ($files.Count -eq 0) { Fail "no canonical profiles in $CanonicalDirectory" }
 $seenIds = @{}; $seenOutputs = @{}; $seenSelectable = @{}; $profileByKey = @{}; $profiles = @()
 foreach ($file in $files) {
-    $profile = Read-Json $file.FullName; Validate-Profile $profile $seenIds
+    $profile = Read-Json $file.FullName; Validate-Profile $profile $seenIds $catalog
     $mechanics = $mechanicsById[$profile.mechanicsTemplate]
     if ($null -eq $mechanics) { Fail "unknown mechanicsTemplate $($profile.mechanicsTemplate)" }
     if ($profile.weapon -ne $mechanics.weapon -or $profile.aspect -ne $mechanics.aspect) { Fail "profile/template weapon or aspect mismatch for $($profile.id)" }
@@ -226,7 +262,7 @@ foreach ($file in $files) {
 }
 if ($ValidateOnly) { Write-Output "PASS: validated $($profiles.Count) canonical profiles"; exit 0 }
 New-Item -ItemType Directory -Path $OutputDirectory -Force | Out-Null
-$nl = [Environment]::NewLine
+$nl = "`n"
 foreach ($profile in $profiles) {
     $mechanics = $mechanicsById[$profile.mechanicsTemplate]
     $lua = '-- Generated runtime profile from canonical JSON only. Do not edit manually.' + $nl

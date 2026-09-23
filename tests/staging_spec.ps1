@@ -1,12 +1,13 @@
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
 $fixture = Join-Path ([IO.Path]::GetTempPath()) ('hades2-staging-test-' + [Guid]::NewGuid())
-foreach ($dir in @('tools', 'src', 'config', 'data\builds', 'data\canonical\profiles', 'data\canonical\mechanics', 'dist\Local-HadesIIBoonAdvisor\old', 'dist\OtherPlugin')) {
+foreach ($dir in @('tools', 'src', 'config', 'data\builds', 'data\canonical\profiles', 'data\canonical\mechanics', 'data\canonical\catalog', 'dist\Local-HadesIIBoonAdvisor\old', 'dist\OtherPlugin')) {
     New-Item -ItemType Directory -Path (Join-Path $fixture $dir) -Force | Out-Null
 }
 foreach ($file in @('tools\Stage-Probe.ps1', 'tools\Generate-BoonAdvisorProfiles.ps1', 'src\main.lua', 'src\Logger.lua', 'src\Localization.lua', 'src\GameState.lua', 'src\OfferSnapshot.lua', 'src\ScoringEngine.lua', 'src\UI.lua', 'src\ProfileResolver.lua', 'data\builds\registry.lua', 'data\builds\sister_blades_melinoe_intermediate.lua', 'data\builds\sister_blades_melinoe_starter.lua', 'data\builds\sister_blades_morrigan_meta.lua', 'data\canonical\profiles\sister_blades_melinoe_intermediate.json', 'data\canonical\profiles\sister_blades_melinoe_starter.json', 'data\canonical\profiles\sister_blades_morrigan_meta.json', 'data\canonical\mechanics\sister_blades_melinoe.json', 'data\canonical\mechanics\sister_blades_morrigan.json', 'config\settings.lua', 'manifest.json')) {
     Copy-Item -LiteralPath (Join-Path $repo $file) -Destination (Join-Path $fixture $file)
 }
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\catalog\weapons_aspects.json') -Destination (Join-Path $fixture 'data\canonical\catalog\weapons_aspects.json')
 $staged = Join-Path $fixture 'dist\Local-HadesIIBoonAdvisor'
 $generatedReference = Join-Path $fixture 'generated-reference'
 & (Join-Path $fixture 'tools\Generate-BoonAdvisorProfiles.ps1') -OutputDirectory $generatedReference | Out-Null

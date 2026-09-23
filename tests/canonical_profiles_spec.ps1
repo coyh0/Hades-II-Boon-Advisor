@@ -69,6 +69,8 @@ function Assert-Mechanics-Fails([string]$name, [string]$find, [string]$replace) 
 }
 Assert-Mechanics-Fails 'missing-generic-core-aspect-compatibility' '  "genericCoreAspectCompatibility": true,' ''
 Assert-Mechanics-Fails 'invalid-generic-core-aspect-compatibility' '"genericCoreAspectCompatibility": true' '"genericCoreAspectCompatibility": "true"'
+Assert-Mechanics-Fails 'unknown-catalog-mechanics-weapon' '"weapon": "WeaponDagger"' '"weapon": "UnknownWeapon"'
+Assert-Mechanics-Fails 'unknown-catalog-mechanics-aspect' '"aspect": "DaggerBackstabAspect"' '"aspect": "UnknownAspect"'
 Assert-Mechanics-Fails 'malformed-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":true'
 Assert-Mechanics-Fails 'duplicate-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":["ASPECT_SETUP_SYNERGY","ASPECT_SETUP_SYNERGY"]'
 $firstFiles = @(Get-ChildItem -LiteralPath $first -File | Sort-Object Name)
@@ -76,6 +78,11 @@ foreach ($file in $firstFiles) {
     $other = Join-Path $second $file.Name
     if (-not (Test-Path -LiteralPath $other) -or (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $other -Algorithm SHA256).Hash) {
         throw 'generation was not deterministic.'
+    }
+    $checkedIn = Join-Path $repo ('data\builds\' + $file.Name)
+    if (-not (Test-Path -LiteralPath $checkedIn -PathType Leaf) -or
+        (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $checkedIn -Algorithm SHA256).Hash) {
+        throw "Generated Sister Blades output changed: $($file.Name)"
     }
 }
 $env:BOON_CANONICAL_OUTPUT = $first
@@ -102,4 +109,42 @@ Assert-Fails 'contradiction' '"alternatives": []' '"alternatives": ["AphroditeWe
 Assert-Fails 'duplicate-slot-id' '["AphroditeWeaponBoon"]' '["AphroditeWeaponBoon", "AphroditeWeaponBoon"]'
 Assert-Fails 'malformed-role-array' '"core": ["AphroditeWeaponBoon"]' '"core": "AphroditeWeaponBoon"'
 Assert-Fails 'unknown-slot' '"Sprint": {' '"Omega": {'
+Assert-Fails 'unknown-catalog-weapon' '"weapon": "WeaponDagger"' '"weapon": "UnknownWeapon"'
+Assert-Fails 'unknown-catalog-aspect' '"aspect": "DaggerBackstabAspect"' '"aspect": "UnknownAspect"'
+Assert-Fails 'profile-template-mismatch' '"aspect": "DaggerBackstabAspect"' '"aspect": "DaggerTripleAspect"'
+
+function Assert-Catalog-Fails([string]$name, [string]$contents) {
+    $path = Join-Path $root ($name + '.json')
+    [IO.File]::WriteAllText($path, $contents)
+    try {
+        & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CatalogPath $path -ValidateOnly 2>$null | Out-Null
+        if ($LASTEXITCODE -eq 0) { throw "Expected catalog failure: $name" }
+    }
+    catch { if ($_.Exception.Message -like 'Expected catalog failure:*') { throw } }
+}
+Assert-Catalog-Fails 'duplicate-catalog-weapon' @'
+{"schemaVersion":1,"weapons":[{"runtimeWeaponId":"WeaponDagger","aspects":[{"runtimeAspectId":"DaggerBackstabAspect"}]},{"runtimeWeaponId":"WeaponDagger","aspects":[{"runtimeAspectId":"DaggerTripleAspect"}]}]}
+'@
+Assert-Catalog-Fails 'duplicate-catalog-aspect' @'
+{"schemaVersion":1,"weapons":[{"runtimeWeaponId":"WeaponDagger","aspects":[{"runtimeAspectId":"DaggerBackstabAspect"},{"runtimeAspectId":"DaggerBackstabAspect"}]}]}
+'@
+
+$overrideProfiles = Join-Path $root 'override-profiles'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $overrideProfiles -Recurse
+$overridePath = Join-Path $overrideProfiles 'aaa_shared_mechanics_override.json'
+$override = [IO.File]::ReadAllText((Join-Path $overrideProfiles 'sister_blades_melinoe_starter.json'))
+$override = $override.Replace('"id": "sister_blades_melinoe_starter"', '"id": "aaa_shared_mechanics_override"')
+$override = $override.Replace('"selectionKey": "starter"', '"selectionKey": "aaa_shared_mechanics_override"')
+$override = $override.Replace('"mechanicsTemplate": "sister_blades_melinoe",', '"mechanicsTemplate": "sister_blades_melinoe",' + [Environment]::NewLine + '  "weights": { "FILL_EMPTY_PRIMARY_CORE": 999 },')
+[IO.File]::WriteAllText($overridePath, $override)
+$overrideOutput = Join-Path $root 'override-output'
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $overrideProfiles -OutputDirectory $overrideOutput | Out-Null
+if ($LASTEXITCODE -ne 0) { throw 'Shared mechanics override isolation generation failed.' }
+if ((Get-Content -LiteralPath (Join-Path $overrideOutput 'aaa_shared_mechanics_override.lua') -Raw) -notmatch 'FILL_EMPTY_PRIMARY_CORE = 999') {
+    throw 'Profile-specific weight override was not generated.'
+}
+if ((Get-FileHash -LiteralPath (Join-Path $overrideOutput 'sister_blades_melinoe_starter.lua') -Algorithm SHA256).Hash -ne
+    (Get-FileHash -LiteralPath (Join-Path $repo 'data\builds\sister_blades_melinoe_starter.lua') -Algorithm SHA256).Hash) {
+    throw 'Shared mechanics weight override contaminated a later profile.'
+}
 Write-Output 'PASS: canonical validation, deterministic generation, generated Lua validation, and scoring equivalence'

@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "weapons": [
+    {
+      "runtimeWeaponId": "WeaponDagger",
+      "label": "Sister Blades",
+      "aspects": [
+        {
+          "runtimeAspectId": "DaggerBackstabAspect",
+          "label": "Aspect of Melinoë"
+        },
+        {
+          "runtimeAspectId": "DaggerTripleAspect",
+          "label": "Aspect of Morrigan"
+        }
+      ]
+    }
+  ]
+}
