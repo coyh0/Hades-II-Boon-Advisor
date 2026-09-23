@@ -70,7 +70,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - Final runtime/log audit passed clean after live first-offer, reroll and Sublime validation; no targeted Boon Advisor ERROR/WARN/traceback/nil/exception entries were found.
   - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
-- [ ] Audit the profile-resolver diff.
+- [x] Audit the profile-resolver diff.
+  - Final review covered resolver/main integration, canonical `autoSignals`, deterministic generation, staging/package inventory, profile switcher support, probe regressions and fail-safe ambiguity behavior; no blocking defect found.
 - [x] Run the complete relevant regression suite.
   - Full Lua 5.2, resolver, probe, Phase 2, scoring, UI, canonical validation/generation, staging and `git diff --check` all passed after the final evidence-precedence correction.
 - [ ] Bump `0.1.0` to `0.1.1`.
