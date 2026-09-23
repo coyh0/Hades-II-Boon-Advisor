@@ -46,12 +46,14 @@ This file is the project roadmap and the source of truth for planned work and va
 ## 10C — v0.1.1 hotfix release
 
 - [ ] **Remove the legacy implicit Melinoë default profile.**
+  - Offline implementation and regression migration are complete: full Lua 5.2 suite, resolver, probe, Phase 2, scoring, UI and diff checks pass.
   - Change the shipped default from `BUILD_PROFILE = "intermediate"` to `BUILD_PROFILE = "auto"`.
   - In `auto`, select a profile automatically only when exactly one compatible profile exists.
   - If several compatible profiles exist and no explicit preference is set, fail safely as ambiguous instead of guessing.
   - Keep explicit `starter` / `intermediate` preferences for Melinoë.
   - Morrigan must still auto-resolve because it has a single compatible profile.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
+  - Runtime revalidation with the shipped `auto` default is still required before this item is complete.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
 - [ ] Audit the profile-resolver diff.
 - [ ] Run the complete relevant regression suite.
