@@ -93,6 +93,19 @@ This file is the project roadmap and the source of truth for planned work and va
 - [ ] Localize rank/status/reason labels and fallback messages.
 - [ ] Never localize internal IDs or make scoring/profile selection depend on display text.
 
+## 10F — Logging and runtime diagnostics hardening
+
+This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging problem.
+
+- [ ] Define clear runtime log levels and responsibilities: `ERROR`, `WARN`, `INFO`, `DEBUG`.
+- [ ] Keep real errors and actionable warnings available in normal releases.
+- [ ] Keep verbose diagnostic logging disabled by default with `DEBUG = false`.
+- [ ] Add deduplication / rate limiting for repeated identical errors or warnings so a bad callback cannot flood the log.
+- [ ] Verify that repeated failures cannot produce per-frame log spam or unnecessary disk I/O.
+- [ ] Keep useful support context such as active weapon/aspect/profile and resolution state without exposing unnecessary data.
+- [ ] Add regression coverage for logging behavior where practical.
+- [ ] If 10B.6 detects actual repeated-error spam or a performance-impacting logging loop, move the minimal required fix into v0.1.1 instead of deferring it.
+
 ## Phase 11 — v0.2 expansion and automation
 
 - [ ] Add more supported builds and Aspects.
