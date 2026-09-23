@@ -151,6 +151,7 @@ This file is the project roadmap and the source of truth for planned work and va
 - [ ] Publish the English changelog on Thunderstore in the next package version.
   - The live Thunderstore `0.1.2` changelog still renders the French `CHANGELOG.md` that was bundled when `0.1.2` was published.
   - Thunderstore package versions are immutable, so `0.1.2` cannot be edited in place; the already-translated English `CHANGELOG.md` on `main` will appear only after a new package version is built and published.
+  - This is non-blocking for `0.1.2`; carry it as a required release checklist item for the next published version so the Thunderstore changelog switches to English.
 - [x] Document Epic/Thunderstore deployment behavior if the current manager deployment limitation persists.
   - Documented as an observed workaround only: on one tested Epic Games installation, the manager kept `ReturnOfModding` inside its profile instead of copying it to `<Hades-II-root>\Ship\ReturnOfModding\`; users are told to compare/copy manually only if the mod does not appear in game.
 - [x] Keep French documentation optional/secondary.
