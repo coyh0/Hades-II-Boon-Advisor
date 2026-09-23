@@ -58,8 +58,12 @@ This file is the project roadmap and the source of truth for planned work and va
   - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Do not show `PROFIL NON PRIS EN CHARGE` when compatible profiles exist but a choice is required.
   - Update runtime/offline tests, staging/package defaults, profile-switcher behavior and public configuration docs accordingly.
   - Auto affinity implementation has passed code review and offline regression tests for the current Melinoë/Morrigan profile set.
-  - Runtime revalidation with the shipped `auto` default and owned-Boon affinity selection is still required before this item is complete.
-  - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
+  - Runtime validation found an important first-offer case: Melinoë had `GodTraitCount=0`, so owned-Boon affinity alone could not resolve Starter vs Intermediate, even though the live run exposed `ForceAresBoonKeepsake`.
+  - v0.1.1 auto detection must therefore support pre-Boon build-intent signals already present in the current run (for example an equipped god keepsake) when they are explicitly mapped/validated for a profile.
+  - Current offered Boons must still never participate in profile selection.
+  - If no validated pre-Boon or owned-Boon signal distinguishes candidates, remain safely ambiguous rather than guess.
+  - Runtime revalidation with the shipped `auto` default is still required before this item is complete.
+  - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
 - [ ] Audit the profile-resolver diff.
 - [ ] Run the complete relevant regression suite.
