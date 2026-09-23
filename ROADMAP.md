@@ -347,12 +347,21 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - Canonical generation and Build Registry import now reserve synthetic/control identifiers (`auto` selection key and `registry` module ID), and canonical profile IDs use the same safe lowercase format as imported canonical IDs.
   - Generated-registry tests now verify descriptor keys, canonical IDs, derived module paths and descriptor/profile identity generically for every generated profile.
   - Build Registry import, profile-switcher and canonical generation/Lua regression suites passed; no runtime gameplay behavior or deployment changed.
-- [ ] **Continue controlled Build Registry import expansion.**
+- [x] **Continue controlled Build Registry import expansion.**
   - Treat each repeated `profileKeyProposal` group as one candidate profile assembled from structured item rows.
   - Reuse structured `itemType=keepsake` + `slot=start` rows as possible pre-Boon signals under explicit policy.
   - Require verified machine-readable internal IDs before rows can affect runtime behavior.
   - Keep human-readable `condition` text documentation-only unless a separate machine-readable rule is defined.
   - Skip incomplete/unresolved profile groups safely; Sister Blades may remain on their current canonical JSON source of truth.
+  - Black Coat — Melinoë Intermediate is the first real import pilot: a sanitized 14-row fixture preserves 4 verified runtime rows plus 10 documentation-only build rows without exposing the private spreadsheet source.
+  - Its imported projection is regression-tested against the existing canonical profile for profile identity, weapon/aspect, mode, starting keepsake auto-signal, and Attack/Special/Sprint core Boons.
+  - Documentation-only Arcana, Hammers, support, Familiar and Hex rows remain non-runtime and do not block the group.
+- [ ] **Add build-critical Hammer support to the canonical/import/scoring pipeline.**
+  - Hammers are part of the build plan, not optional documentation; their current `documentation_only` state is temporary until runtime IDs and projection semantics are explicitly validated.
+  - Start with Black Coat — Melinoë Intermediate: `Exhaust Riser`, `Rapid Frame`, and `Launcher Frame` are preserved in the import fixture as build-critical source data.
+  - Add verified internal Hammer IDs, canonical Hammer roles/priorities, conservative Build Registry import mapping, scoring integration and regression coverage before broad profile expansion depends on Hammer advice.
+  - Preserve branch-specific intent such as `Launcher Frame` for the Special branch instead of flattening all Hammers into one generic priority.
+  - Validate the resulting Hammer recommendations live in DEV before considering the support complete.
 - [ ] **Add a second validated profile for an existing weapon/aspect pair.**
   - Use it to validate real competition between owned-Boon affinity, pre-Boon auto signals and safe ambiguity.
   - Explicitly prove the Black Coat Poseidon-keepsake signal once singleton selection no longer makes the signal observationally redundant.
@@ -408,6 +417,23 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 - [ ] Re-evaluate the exact placement during UI polish if localization or resolution constraints make the upper-right area too crowded.
 - [ ] Keep the active-profile indicator useful for both players and support/debugging without dominating the UI.
 
+### Later — Build guidance and optimization
+
+These features extend the advisor beyond immediate Boon ranking while remaining informational-only and visually secondary.
+
+- [ ] **Pom priority advisor.**
+  - When a Pom offers upgrades for Boons already owned, use the active build profile to indicate which offered Boon is the better upgrade priority.
+  - Start with existing profile roles/priorities rather than introducing a separate opaque scoring model.
+  - Keep this independent from Boon-offer ranking and never alter the offered choices or gameplay state.
+- [ ] **Discreet Build Setup Health indicator.**
+  - Surface lightweight build-state checks without competing visually with the main ranking UI.
+  - Validate important Arcana setup expectations where they are explicitly defined by the profile.
+  - Model Keepsakes as a run sequence rather than simultaneous requirements: starting Keepsake first, then later expected/recommended Keepsake changes by run phase when such a plan is defined.
+  - Example intent: `Arcana ✓ · Starting Keepsake ✓ · Next Keepsake !`, using low-attention status text rather than warnings or blocking UI.
+  - Missing or intentionally different setup choices remain informational; they must not make a supported profile fail or override player choice.
+- [ ] **Evaluate Hex and Familiar guidance before adding runtime weight.**
+  - Keep Hex and Familiar metadata available in build sources, but only promote them into runtime advice if testing shows they produce useful, actionable build decisions.
+  - Avoid adding scoring/runtime complexity merely because the data exists.
 ## Confirmed runtime facts
 
 | Item | Internal ID | Status |
