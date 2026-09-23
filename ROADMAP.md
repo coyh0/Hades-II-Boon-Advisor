@@ -48,8 +48,11 @@ This file is the project roadmap and the source of truth for planned work and va
 - [ ] **Remove the legacy implicit Melinoë default profile.**
   - Offline implementation and regression migration are complete: full Lua 5.2 suite, resolver, probe, Phase 2, scoring, UI and diff checks pass.
   - Change the shipped default from `BUILD_PROFILE = "intermediate"` to `BUILD_PROFILE = "auto"`.
-  - In `auto`, select a profile automatically only when exactly one compatible profile exists.
-  - If several compatible profiles exist and no explicit preference is set, fail safely as ambiguous instead of guessing.
+  - In `auto`, first filter profiles by the live internal weapon + aspect IDs, then use the current run state to identify the best-matching compatible build profile when several profiles share that weapon/aspect.
+  - Reuse existing profile build data (for example owned core/alternative/preferred slot Boons) as runtime evidence where practical; prefer stronger build-defining evidence over weaker alternatives.
+  - If exactly one compatible profile exists, select it automatically.
+  - If several compatible profiles exist and runtime evidence identifies one profile unambiguously, select it automatically.
+  - If runtime evidence is absent or tied between several compatible profiles, fail safely as ambiguous instead of guessing.
   - Keep explicit `starter` / `intermediate` preferences for Melinoë.
   - Morrigan must still auto-resolve because it has a single compatible profile.
   - Distinguish ambiguous profile selection from unsupported weapon/aspect in the player-facing status. Do not show `PROFIL NON PRIS EN CHARGE` when compatible profiles exist but a choice is required.
@@ -127,9 +130,10 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
-  - `auto` selects automatically only when exactly one compatible profile exists.
-  - If several compatible profiles exist, `auto` must fail safely as ambiguous rather than guess.
-  - An explicit profile selection mechanism is required for same-aspect variants; keep the current profile switcher and plan an in-game selector later.
+  - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
+  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) should be used as the first source of profile-affinity signals; future profiles may add explicit activation/signature metadata if needed.
+  - If evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
+  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants; plan an in-game selector later.
   - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
 - [ ] Strengthen automated validation for duplicate IDs, selection keys, modules and ambiguous profile mappings.
 
