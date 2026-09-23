@@ -276,10 +276,14 @@ This file is the project roadmap and the source of truth for planned work and va
   - Canonical generation, Lua 5.2 regression coverage, conservative mechanics validation, strict Sister Blades mechanics equivalence, resolver/scoring regressions, Build Registry import-contract tests, staging and whitespace checks all passed.
   - Staging now contains exactly 15 runtime files; the only newly staged runtime profile is `data/builds/black_coat_melinoe_intermediate.lua`.
   - No Hades II installation was modified or launched; no deployment, release or tag was created.
-- [ ] **Validate Black Coat in the live game before treating the pilot as release-ready.**
-  - Confirm `WeaponSuit + BaseSuitAspect` resolves to `black_coat_melinoe_intermediate` in a real run.
-  - Confirm first-offer auto resolution from `ForcePoseidonBoonKeepsake` and normal ranking behavior.
-  - Perform the standard targeted runtime log audit after validation.
+- [x] **Validate the Black Coat pilot in the live DEV game.**
+  - Live diagnostics confirm `WeaponSuit + BaseSuitAspect`, `BuildId=black_coat_melinoe_intermediate`, `Supported=true`, and `BUILD_PROFILE="auto"` on a first three-choice Poseidon offer.
+  - The run had `ForcePoseidonBoonKeepsake` equipped and `GodTraitCount=0`. Because this weapon/aspect currently has only one compatible profile, the observed auto-selection validates the singleton path but does **not** independently prove that the keepsake signal caused selection; isolate that signal when another Black Coat profile is introduced.
+  - The initial three evaluated offers produced `RankingReady=true` with observed scores -4 (conflicting Poseidon Special), 10 (open Cast), and 5 (open Mana); UI displayed the corresponding ranks.
+  - Live reroll refreshed the offers under the same Black Coat profile. `PoseidonWeaponBoon` scored 12 at Common and 13 at Rare following Sublime/`TryUpgradeBoon`; the post-upgrade log confirms `UI refresh after TryUpgradeBoon`.
+  - An unknown `RoomRewardBonusBoon` / `DoubleRewardBoon` remained `Covered=false`, `Complete=false`; `RankingReady=false` masked all ranks rather than guessing. The screenshots confirm the two evaluated choices and third non-evaluated choice render safely.
+  - Targeted live log audit found no Boon Advisor ERROR/WARN/traceback/exception; false-positive `Scimiterror` filenames are unrelated.
+  - Restored DEV `DEBUG=false` with `BUILD_PROFILE="auto"`. This is validation of the pilot only; no release, tag, or Epic installation deployment was performed.
 
 - [ ] **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
@@ -358,14 +362,14 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 | Aspect of Morrigan | `DaggerTripleAspect` | Confirmed in game |
 | Aspect of Artemis | `DaggerBlockAspect` | Intentionally unsupported in current release scope |
 | Black Coat | `WeaponSuit` | Verified from local game data; offline pilot implemented |
-| Black Coat — Aspect of Melinoë | `BaseSuitAspect` | Verified from local game data; live runtime validation pending |
+| Black Coat — Aspect of Melinoë | `BaseSuitAspect` | Verified from local game data and live DEV runtime |
 
 Current supported profile intent:
 
 - Sister Blades — Melinoë Starter
 - Sister Blades — Melinoë Intermediate
 - Sister Blades — Morrigan Meta / Blood Triad
-- Black Coat — Melinoë Intermediate (offline validated; live runtime validation pending)
+- Black Coat — Melinoë Intermediate (offline and live DEV validated; not yet released)
 - Other weapon/aspect combinations: unsupported unless explicitly added to the registry and validated.
 
 ## Deferred design decisions
