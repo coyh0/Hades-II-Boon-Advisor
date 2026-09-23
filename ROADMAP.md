@@ -338,9 +338,10 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - `tests/thunderstore_package_spec.ps1` now validates the exact 15-file runtime inventory.
   - Thunderstore package, install and update/rollback regression tests all passed; no Thunderstore publish or game deployment occurred.
   - No active `14-file` / `14 runtime` inventory references remain in `tools/` or `tests/`.
-- [ ] **Extend profile-switcher coverage and documentation to Black Coat.**
-  - Remove the stale hardcoded help text that only lists `auto|intermediate|starter|morrigan_meta`.
-  - Add Black Coat coverage to `tests/profile_switcher_spec.ps1`.
+- [x] **Extend profile-switcher coverage and documentation to Black Coat.**
+  - `tools/Set-BoonAdvisorProfile.ps1` now uses registry-driven selection keys without a stale fixed profile list.
+  - `tests/profile_switcher_spec.ps1` now covers `coat_melinoe_intermediate`, `-Show`, settings preservation, and regression against the obsolete fixed list.
+  - Targeted profile-switcher regression passed, and no active obsolete `auto|intermediate|starter|morrigan_meta` list remains in `tools/` or `tests/`.
 - [ ] **Strengthen remaining end-to-end registry collision/invariant validation.**
   - Existing generator/import validation already covers many duplicate IDs, selection keys, output names and module constraints; add only the remaining cross-layer cases rather than duplicating existing checks.
 - [ ] **Continue controlled Build Registry import expansion.**
