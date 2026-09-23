@@ -88,9 +88,12 @@ This file is the project roadmap and the source of truth for planned work and va
   - SHA-256: `D0ECFE9F773A13C9C50329030B14108E4FE419A710A71E4E0109CE7E8D3A14F9`.
 - [x] Create a new immutable `v0.1.1` Git tag.
   - Annotated tag `v0.1.1` is published and resolves to release commit `f86b3a48b929bceb0b948de86df81e1c8f777a73`.
-- [ ] Publish the GitHub `v0.1.1` release.
-- [ ] Publish Thunderstore `0.1.1`.
-- [ ] Never move or rewrite the existing `v0.1.0` tag/release.
+- [x] Do not publish the GitHub `v0.1.1` release.
+  - Intentionally superseded by the `v0.1.2` compliance release because the `v0.1.1` tagged source/artifacts predate the required AI disclosure. Keep the existing `v0.1.1` tag immutable and leave the GitHub release unpublished.
+- [x] Do not publish Thunderstore `0.1.1`.
+  - Intentionally superseded by Thunderstore `0.1.2` for the same AI-disclosure compliance reason. The verified `0.1.1` package remains historical and must not be published.
+- [x] Never move or rewrite the existing `v0.1.0` tag/release.
+  - `v0.1.0` remains the immutable initial public release baseline.
 
 ## 10C.1 — v0.1.2 compliance release
 
