@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "black_coat_melinoe_intermediate",
+  "weapon": "WeaponSuit",
+  "aspect": "BaseSuitAspect",
+  "profileMode": "intermediate",
+  "selectionKey": "coat_melinoe_intermediate",
+  "source": { "type": "sheet", "profile": "Black Coat / Melinoe / Intermediate" },
+  "mechanicsTemplate": "black_coat_melinoe",
+  "autoSignals": ["ForcePoseidonBoonKeepsake"],
+  "slots": {
+    "Attack": { "core": ["PoseidonWeaponBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Special": { "core": ["AresSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Sprint": { "core": ["PoseidonSprintBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Cast": { "core": [], "alternatives": [], "preferred": [], "slotPolicy": "open" },
+    "Mana": { "core": [], "alternatives": [], "preferred": [], "slotPolicy": "open" }
+  },
+  "constraints": ["DO_NOT_SACRIFICE_CORE_PLAN"]
+}

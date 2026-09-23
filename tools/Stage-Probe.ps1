@@ -39,6 +39,7 @@ Copy-Item -LiteralPath (Join-Path $repo 'src\ProfileResolver.lua') -Destination 
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_melinoe_starter.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_morrigan_meta.lua') -Destination (Join-Path $target 'data\builds')
+Copy-Item -LiteralPath (Join-Path $generated 'black_coat_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'registry.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $repo 'config\settings.lua') -Destination (Join-Path $target 'config')
 Copy-Item -LiteralPath (Join-Path $repo 'manifest.json') -Destination $target

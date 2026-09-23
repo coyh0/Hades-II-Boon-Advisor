@@ -6,6 +6,13 @@ local function check(value, message) assert(value, message) end
 local function owned(...) local t = {}; for i = 1, select("#", ...) do t[i] = { Name = select(i, ...) } end; return t end
 
 local profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerBackstabAspect", "intermediate")
+local coat, coatReason = Resolver.resolve(registry, "WeaponSuit", "BaseSuitAspect", nil, {}, loadedProfiles)
+check(coat and coat.id == "black_coat_melinoe_intermediate" and coatReason == "only_candidate",
+    "Black Coat singleton did not auto-resolve")
+coat, coatReason = Resolver.resolve(registry, "WeaponSuit", "UnknownAspect", nil, {}, loadedProfiles)
+check(coat == nil and coatReason == "unsupported", "Unknown Black Coat aspect was supported")
+coat, coatReason = Resolver.resolve(registry, "UnknownWeapon", "BaseSuitAspect", nil, {}, loadedProfiles)
+check(coat == nil and coatReason == "unsupported", "Unknown weapon was supported")
 check(profile.id == "sister_blades_melinoe_intermediate" and reason == "preferred", "Intermediate was not preferred")
 profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerBackstabAspect", "starter")
 check(profile.id == "sister_blades_melinoe_starter" and reason == "preferred", "Starter was not preferred")

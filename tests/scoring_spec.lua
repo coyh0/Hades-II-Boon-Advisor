@@ -6,6 +6,46 @@ local starterProfile = assert(loadfile("data/builds/sister_blades_melinoe_starte
 local morriganProfile = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
 
 do
+    local coatProfile = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
+    check(ScoringEngine.validateProfile(coatProfile), "Black Coat generated profile invalid")
+    local snapshot = {
+        weapon = "WeaponSuit", aspect = "BaseSuitAspect", godTraits = {}, hammers = {}, activeArcana = {},
+        offers = {
+            { originalIndex = 1, ItemName = "PoseidonWeaponBoon", Rarity = "Common" },
+            { originalIndex = 2, ItemName = "AresSpecialBoon", Rarity = "Common" },
+            { originalIndex = 3, ItemName = "PoseidonSprintBoon", Rarity = "Common" },
+        },
+    }
+    local scores = ScoringEngine.scoreOffers(snapshot, coatProfile)
+    for index, role in ipairs({ "Attack", "Special", "Sprint" }) do
+        check(ScoringEngine.getBuildAlignment(coatProfile, role, snapshot.offers[index].ItemName) == "CORE",
+            "Black Coat target alignment missing for " .. role)
+        check(scores[index].supported and scores[index].covered and scores[index].scoreComplete,
+            "Black Coat target was not fully scored")
+        local hasPriority = false
+        for _, reason in ipairs(scores[index].reasons) do
+            if reason.code == "BUILD_CORE_PRIORITY" then hasPriority = true end
+            check(reason.code ~= "ORIGINATION_ENABLE" and reason.code ~= "EXISTING_HAMMER_SYNERGY"
+                and reason.code ~= "ASPECT_COMPATIBLE" and reason.code ~= "ASPECT_DIRECT_SYNERGY"
+                and reason.code ~= "ASPECT_SETUP_SYNERGY", "unverified Black Coat mechanic scored")
+        end
+        check(hasPriority, "Black Coat core priority missing")
+    end
+    check(scores[1].score == scores[2].score and scores[1].score > scores[3].score,
+        "Black Coat primary/utility scoring did not differentiate")
+    for _, role in ipairs({ "Cast", "Mana" }) do
+        local slot = coatProfile.slots[role]
+        check(slot.slotPolicy == "open" and #slot.core == 0 and #slot.alternatives == 0 and #slot.preferred == 0,
+            "Black Coat unconstrained slot gained a target")
+    end
+    snapshot.aspect = "DaggerBackstabAspect"
+    check(not ScoringEngine.scoreOffers(snapshot, coatProfile)[1].supported, "Black Coat accepted wrong aspect")
+    snapshot.aspect = "BaseSuitAspect"
+    snapshot.weapon = "WeaponDagger"
+    check(not ScoringEngine.scoreOffers(snapshot, coatProfile)[1].supported, "Black Coat accepted wrong weapon")
+end
+
+do
     local poseidonEx = {
         weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
         activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },

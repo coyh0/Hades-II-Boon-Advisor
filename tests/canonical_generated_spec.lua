@@ -14,14 +14,17 @@ local separator = package.config:sub(1, 1)
 local generatedIntermediate = assert(loadfile(output .. separator .. "sister_blades_melinoe_intermediate.lua"))()
 local generatedStarter = assert(loadfile(output .. separator .. "sister_blades_melinoe_starter.lua"))()
 local generatedMorrigan = assert(loadfile(output .. separator .. "sister_blades_morrigan_meta.lua"))()
+local generatedCoat = assert(loadfile(output .. separator .. "black_coat_melinoe_intermediate.lua"))()
 local registry = assert(loadfile(output .. separator .. "registry.lua"))()
 local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
 local starter = assert(loadfile("data/builds/sister_blades_melinoe_starter.lua"))()
 local morrigan = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
+local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
 local runtimeRegistry = assert(loadfile("data/builds/registry.lua"))()
 local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()
 check(equal(generatedIntermediate, intermediate), "generated Intermediate semantics differ")
 check(equal(generatedStarter, starter), "generated Starter semantics differ")
+check(equal(generatedCoat, coat) and ScoringEngine.validateProfile(generatedCoat), "generated Black Coat semantics differ")
 check(ScoringEngine.validateProfile(generatedIntermediate) and ScoringEngine.validateProfile(generatedStarter) and ScoringEngine.validateProfile(generatedMorrigan),
     "generated profiles fail runtime schema validation")
 check(registry.intermediate.selectionKey == "intermediate"
@@ -33,6 +36,13 @@ check(registry.intermediate.selectionKey == "intermediate"
     and registry.morrigan_meta.selectionKey == "morrigan_meta"
     and registry.morrigan_meta.aspect == "DaggerTripleAspect"
     and registry.morrigan_meta.module == "data/builds/sister_blades_morrigan_meta.lua", "generated registry mapping changed")
+check(registry.coat_melinoe_intermediate.selectionKey == "coat_melinoe_intermediate"
+    and registry.coat_melinoe_intermediate.id == "black_coat_melinoe_intermediate"
+    and registry.coat_melinoe_intermediate.profileMode == "intermediate"
+    and registry.coat_melinoe_intermediate.weapon == "WeaponSuit"
+    and registry.coat_melinoe_intermediate.aspect == "BaseSuitAspect"
+    and registry.coat_melinoe_intermediate.module == "data/builds/black_coat_melinoe_intermediate.lua",
+    "generated Black Coat registry mapping differs")
 check(equal(registry, runtimeRegistry), "generated runtime registry differs")
 check(equal(generatedMorrigan, morrigan), "generated Morrigan semantics differ")
 local snapshot = {

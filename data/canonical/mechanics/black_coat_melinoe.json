@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "black_coat_melinoe",
+  "weapon": "WeaponSuit",
+  "aspect": "BaseSuitAspect",
+  "genericCoreAspectCompatibility": false,
+  "traitSemantics": {},
+  "weights": { "BUILD_CORE_PRIORITY": 4, "BUILD_PREFERRED": 2, "BUILD_SLOT_POLICY": 4, "FILL_EMPTY_PRIMARY_CORE": 8, "FILL_EMPTY_UTILITY_CORE": 4 },
+  "statusMappings": {},
+  "knownNonStatusTraits": [],
+  "potentialStatusTraits": [],
+  "statusCapabilityTraits": {},
+  "bloodDropEngine": { "producers": [], "payoffs": [] },
+  "aspectInteractions": {},
+  "hammerRoles": {},
+  "rules": {},
+  "verifiedIds": {
+    "coreAttack": ["AphroditeWeaponBoon", "ApolloWeaponBoon", "DemeterWeaponBoon", "HephaestusWeaponBoon", "HeraWeaponBoon", "HestiaWeaponBoon", "PoseidonWeaponBoon", "ZeusWeaponBoon", "AresWeaponBoon"],
+    "coreSpecial": ["AphroditeSpecialBoon", "ApolloSpecialBoon", "DemeterSpecialBoon", "HephaestusSpecialBoon", "HeraSpecialBoon", "HestiaSpecialBoon", "PoseidonSpecialBoon", "ZeusSpecialBoon", "AresSpecialBoon"],
+    "coreCast": ["AphroditeCastBoon", "ApolloCastBoon", "DemeterCastBoon", "HephaestusCastBoon", "HeraCastBoon", "HestiaCastBoon", "PoseidonCastBoon", "ZeusCastBoon", "AresCastBoon"],
+    "coreSprint": ["AphroditeSprintBoon", "ApolloSprintBoon", "DemeterSprintBoon", "HephaestusSprintBoon", "HeraSprintBoon", "HestiaSprintBoon", "PoseidonSprintBoon", "ZeusSprintBoon", "AresSprintBoon"],
+    "coreMana": ["AphroditeManaBoon", "ApolloManaBoon", "DemeterManaBoon", "HephaestusManaBoon", "HeraManaBoon", "HestiaManaBoon", "PoseidonManaBoon", "ZeusManaBoon", "AresManaBoon"]
+  }
+}
