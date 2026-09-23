@@ -173,13 +173,45 @@ check(last.n == 3 and last[1] and last[2] == 7 and last[3] == nil and #l == befo
 
 local Logger = assert(loadfile("src/Logger.lua"))()
 local loggerCalls = 0
-Logger.new(true, function(message)
+testLogger = Logger.new(true, function(message)
     loggerCalls = loggerCalls + 1
     check(message == "[BoonAdvisor] enabled", "logger prefix changed")
-end)("enabled")
-Logger.new(false, function() loggerCalls = loggerCalls + 1 end)("disabled")
-Logger.new(true, nil)("missing")
+end)
+testLogger.debug("enabled")
+Logger.new(false, function() loggerCalls = loggerCalls + 1 end).debug("disabled")
+Logger.new(true, nil).debug("missing")
 check(loggerCalls == 1, "logger DEBUG true/false behavior changed")
+levelLogs, levelState = {}, {}
+leveled = Logger.new(false, function(message) levelLogs[#levelLogs + 1] = message end, levelState)
+leveled.error("TEST_ERROR", "failure")
+leveled.error("TEST_ERROR", "changed failure")
+leveled.warn("TEST_WARN", "warning")
+leveled.warn("TEST_WARN", "warning again")
+leveled.info("TEST_INFO", "hidden")
+check(#levelLogs == 2 and levelLogs[1]:find("ERROR TEST_ERROR", 1, true)
+    and levelLogs[2]:find("WARN TEST_WARN", 1, true)
+    and levelState.suppressed["ERROR:TEST_ERROR"] == 1
+    and levelState.suppressed["WARN:TEST_WARN"] == 1,
+    "leveled logger visibility or deduplication failed")
+rebuilt = Logger.new(false, function(message) levelLogs[#levelLogs + 1] = message end, levelState)
+rebuilt.error("TEST_ERROR", "third failure")
+check(#levelLogs == 2, "persistent logger state did not deduplicate after reconstruction")
+broken = Logger.new(false, function() error("sink failed") end)
+check(pcall(broken.error, "BROKEN_SINK", "safe") and pcall(broken.warn, "BROKEN_WARN", 42),
+    "broken sink or non-string message escaped")
+failureState = {}
+failingLogger = Logger.new(false, function() error("first sink failure") end, failureState)
+check(pcall(failingLogger.error, "RETRY_ERROR", "first")
+    and failureState.seen["ERROR:RETRY_ERROR"] == nil
+    and failureState.suppressed["ERROR:RETRY_ERROR"] == nil,
+    "failed sink incorrectly consumed the error key")
+levelLogs = {}
+recoverLogger = Logger.new(false, function(message) levelLogs[#levelLogs + 1] = message end, failureState)
+recoverLogger.error("RETRY_ERROR", "second")
+recoverLogger.error("RETRY_ERROR", "third")
+check(#levelLogs == 1 and failureState.seen["ERROR:RETRY_ERROR"] == true
+    and failureState.suppressed["ERROR:RETRY_ERROR"] == 1,
+    "failed sink retry or post-success suppression was incorrect")
 print("PASS: arguments, nil/multiple/zero returns, native errors, diagnostics, filtering, reload guard, yield, logger")
 
 local hotCalls = 0

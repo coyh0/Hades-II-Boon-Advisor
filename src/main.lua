@@ -12,16 +12,20 @@ private.probeState = private.probeState or { installed = false }
 local state = private.probeState
 state.allModsReady = state.allModsReady or false
 local settings = import("config/settings.lua")
-state.log = import("Logger.lua").new(settings.DEBUG, function(message)
+local Logger = import("Logger.lua")
+state.logState = state.logState or {}
+local logger = Logger.new(settings.DEBUG, function(message)
     rom.log.info(message)
-end)
+end, state.logState)
+state.logger = logger
+state.log = logger.debug
 local GameStateSnapshot = import("GameState.lua")
 local OfferSnapshot = import("OfferSnapshot.lua")
 local ScoringEngine = import("ScoringEngine.lua")
 local UI = import("UI.lua")
 local Localization = import("Localization.lua")
 local ProfileResolver = import("ProfileResolver.lua")
-UI.setLogger(function(message) state.log(message) end)
+UI.setLogger({ debug = logger.debug, error = logger.error })
 UI.setLocalization(Localization)
 
 local function getUIApi()
@@ -113,11 +117,11 @@ local function diagnose(screen, lootData)
             .. " count=" .. tostring(#ranks))
         local ok, err = pcall(UI.renderRanks, screen, ranks, getUIApi())
         state.log("UI renderRanks pcall success=" .. tostring(ok))
-        if not ok then state.log("UI ERROR renderRanks: " .. tostring(err)) end
+        if not ok then logger.error("UI_RENDER_RANKS_FAILED", "UI rank rendering failed") end
     end
     local function renderFallback(data)
         local ok, err = pcall(UI.renderFallback, screen, data, getUIApi())
-        if not ok then state.log("UI ERROR renderFallback: " .. tostring(err)) end
+        if not ok then logger.error("UI_RENDER_FALLBACK_FAILED", "UI fallback rendering failed") end
     end
     UI.clearFallback(screen, getUIApi())
     if rankingReady then
@@ -208,7 +212,11 @@ local function diagnose(screen, lootData)
         .. " ProfileMode=" .. tostring(selectedProfile and selectedProfile.profileMode or nil)
         .. " SchemaVersion=" .. tostring(selectedProfile and selectedProfile.schemaVersion or nil)
         .. " Supported=" .. tostring(profileSupported))
-    if not profileValid then state.log("Profile validation failed: " .. tostring(profileValidationError)) end
+    if selectedProfile == nil then
+        state.log("Profile validation failed: no compatible profile")
+    elseif not profileValid then
+        logger.error("PROFILE_VALIDATION_FAILED", "Profile validation failed")
+    end
     if profileSupported then
         local arcana = snapshot.activeArcana.EffectVulnerabilityMetaUpgrade
         state.log("Arcana Origination Active=" .. tostring(type(arcana) == "table")
@@ -275,7 +283,7 @@ local function install()
     if state.installed then return end
     if type(game.CreateBoonLootButtons) ~= "function"
         or type(table.pack) ~= "function" or type(table.unpack) ~= "function" then
-        state.log("Probe unavailable: expected function or Lua 5.2 table API missing")
+        logger.error("PROBE_UNAVAILABLE", "Required native API unavailable")
         return
     end
 
@@ -288,11 +296,11 @@ local function install()
             UI.clearRanks(targetScreen, getUIApi())
             UI.clearFallback(targetScreen, getUIApi())
         end)
-        if not clearOk then state.log("UI ERROR clearRanks: " .. tostring(clearErr)) end
+        if not clearOk then logger.error("UI_CLEAR_RANKS_FAILED", "UI cleanup failed") end
         local diagnostic = state.diagnose
         if type(diagnostic) == "function" then
             local ok = pcall(diagnostic, ...)
-            if not ok then state.log("Diagnostic failed; native result preserved") end
+            if not ok then logger.error("DIAGNOSTIC_FAILED", "Diagnostic failed; native result preserved") end
         end
         return table.unpack(results, 1, results.n)
     end)
@@ -306,7 +314,7 @@ local function install()
                     diagnose(screen, lootData)
                     state.log("UI refresh after TryUpgradeBoon")
                 end)
-                if not ok then state.log("UI ERROR TryUpgradeBoon refresh: " .. tostring(err)) end
+                if not ok then logger.error("TRY_UPGRADE_REFRESH_FAILED", "TryUpgradeBoon refresh failed") end
             end
             return table.unpack(results, 1, results.n)
         end)

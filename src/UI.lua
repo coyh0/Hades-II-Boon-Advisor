@@ -1,5 +1,6 @@
 local UI = {}
 local debugLog = function() end
+local errorLog = function() end
 local localization = nil
 local language = "en"
 local reasonOrder = { "conflict", "core", "utility", "build", "resources", "damage", "aspect", "setup", "positioning", "origination", "hammer", "status", "synergy", "survival", "rarity" }
@@ -31,7 +32,14 @@ local function formatReasonLabels(reasons)
 end
 
 function UI.setLogger(logger)
-    debugLog = type(logger) == "function" and logger or function() end
+    if type(logger) == "function" then
+        debugLog, errorLog = logger, logger
+    elseif type(logger) == "table" then
+        debugLog = type(logger.debug) == "function" and logger.debug or function() end
+        errorLog = type(logger.error) == "function" and logger.error or function() end
+    else
+        debugLog, errorLog = function() end, function() end
+    end
 end
 
 function UI.setLocalization(value)
@@ -71,7 +79,7 @@ function UI.clearRanks(screen, api)
         if type(destroy) == "function" then
             destroy({ Ids = ids })
         else
-            debugLog("UI ERROR missing native API Destroy")
+            errorLog("UI_MISSING_DESTROY", "UI cleanup API Destroy unavailable")
         end
     end
     if #ids > 0 then debugLog("UI cleared count=" .. tostring(#ids)) end
@@ -84,7 +92,7 @@ function UI.clearFallback(screen, api)
     if type(screen.Components) == "table" and entry.key then screen.Components[entry.key] = nil end
     local destroy = type(api) == "table" and api.Destroy or nil
     if type(destroy) == "function" and entry.id ~= nil then destroy({ Ids = { entry.id } })
-    elseif entry.id ~= nil then debugLog("UI ERROR missing native API Destroy") end
+    elseif entry.id ~= nil then errorLog("UI_MISSING_DESTROY", "UI cleanup API Destroy unavailable") end
 end
 
 function UI.renderFallback(screen, data, api)
@@ -94,7 +102,7 @@ function UI.renderFallback(screen, data, api)
     local textBox = type(api) == "table" and api.CreateTextBox or nil
     local attach = type(api) == "table" and api.Attach or nil
     if type(create) ~= "function" or type(textBox) ~= "function" or type(attach) ~= "function" then
-        debugLog("UI ERROR missing native API for fallback")
+        errorLog("UI_MISSING_FALLBACK_API", "UI fallback API unavailable")
         return
     end
     local anchor = type(screen.Components) == "table"
@@ -140,7 +148,7 @@ function UI.renderPartial(screen, offers, api)
     local textBox = type(api) == "table" and api.CreateTextBox or nil
     local attach = type(api) == "table" and api.Attach or nil
     if type(create) ~= "function" or type(textBox) ~= "function" or type(attach) ~= "function" then
-        debugLog("UI ERROR missing native API for partial analysis")
+        errorLog("UI_MISSING_PARTIAL_API", "UI partial-analysis API unavailable")
         return
     end
     for _, offer in ipairs(offers) do
@@ -191,15 +199,15 @@ function UI.renderRanks(screen, rankedScores, api)
         return
     end
     if type(createScreenComponent) ~= "function" then
-        debugLog("UI ERROR missing native API CreateScreenComponent")
+        errorLog("UI_MISSING_CREATE_SCREEN_COMPONENT", "UI CreateScreenComponent unavailable")
         return
     end
     if type(attach) ~= "function" then
-        debugLog("UI ERROR missing native API Attach")
+        errorLog("UI_MISSING_ATTACH", "UI Attach unavailable")
         return
     end
     if type(createTextBox) ~= "function" then
-        debugLog("UI ERROR missing native API CreateTextBox")
+        errorLog("UI_MISSING_CREATE_TEXT_BOX", "UI CreateTextBox unavailable")
         return
     end
     local components = type(screen.Components) == "table" and screen.Components or {}

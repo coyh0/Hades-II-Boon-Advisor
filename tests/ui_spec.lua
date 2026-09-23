@@ -247,7 +247,7 @@ UI.clearRanks(partialScreen, api)
 check(partialScreen.Components.BoonAdvisorRank1 == nil
     and partialScreen.Components.BoonAdvisorRank3 == nil, "partial cleanup left stale components")
 local uiErrors = {}
-UI.setLogger(function(message) uiErrors[#uiErrors + 1] = message end)
+UI.setLogger({ debug = function() end, error = function(code) uiErrors[#uiErrors + 1] = code end })
 local errorScreen = { Components = { PurchaseButton1 = { Id = "native-error" } } }
 local errorApi = { CreateScreenComponent = function() error("create failed") end,
     Attach = Attach, CreateTextBox = CreateTextBox, Destroy = Destroy }
@@ -269,9 +269,9 @@ UI.renderRanks(errorScreen, { { originalIndex = 1, rank = 1 } },
     { CreateScreenComponent = CreateScreenComponent, Attach = Attach, Destroy = Destroy })
 local sawMissingCreate, sawMissingAttach, sawMissingText = false, false, false
 for _, message in ipairs(uiErrors) do
-    if message == "UI ERROR missing native API CreateScreenComponent" then sawMissingCreate = true end
-    if message == "UI ERROR missing native API Attach" then sawMissingAttach = true end
-    if message == "UI ERROR missing native API CreateTextBox" then sawMissingText = true end
+    if message == "UI_MISSING_CREATE_SCREEN_COMPONENT" then sawMissingCreate = true end
+    if message == "UI_MISSING_ATTACH" then sawMissingAttach = true end
+    if message == "UI_MISSING_CREATE_TEXT_BOX" then sawMissingText = true end
 end
 check(sawMissingCreate and sawMissingAttach and sawMissingText,
     "missing native UI APIs were not diagnosed")
