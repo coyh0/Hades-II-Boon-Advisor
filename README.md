@@ -41,6 +41,10 @@ updates and compatibility diagnostics for advanced users. See
 Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
 receiving a speculative score.
 
+## Project roadmap
+
+Current development status and planned work are tracked in [ROADMAP.md](ROADMAP.md). The roadmap is updated only after maintainer confirmation.
+
 ## Release material
 
 The Thunderstore definition is in `thunderstore.toml`. The deterministic
