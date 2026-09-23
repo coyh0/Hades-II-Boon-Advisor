@@ -37,11 +37,11 @@ This file is the project roadmap and the source of truth for planned work and va
   - Confirmed an incomplete offer shows `ANALYSE INCOMPLÈTE` and hides rankings when one choice is not evaluated.
   - Confirmed Sublime changes `Frappe unificatrice` from +50% to Rare +60% while ranks remain consistent.
   - Final runtime-log/error audit remains part of 10B.6.
-- [ ] **10B.6 — Runtime cleanliness** — NEXT
-  - Pre-`auto` runtime audit is clean: no Boon Advisor ERROR/traceback/exception entries were found.
+- [x] **10B.6 — Runtime cleanliness** — COMPLETE
+  - Pre-`auto` runtime audit was clean: no Boon Advisor ERROR/traceback/exception entries were found.
   - The broad Lua error search only matched `Scimiterror` script names (false positives), not actual Lua errors.
-  - Re-run the final smoke/log audit after the v0.1.1 `BUILD_PROFILE = "auto"` correction is implemented and deployed.
-  - Confirm no gameplay/RNG/save mutations.
+  - Final post-`auto` smoke/log audit is clean: targeted ERROR/WARN/traceback/nil/exception search returned no matches after live first-offer, reroll and Sublime validation.
+  - Runtime remains informational-only; no gameplay/RNG/save mutation path was introduced by the resolver/auto-signal changes.
 
 ## 10C — v0.1.1 hotfix release
 
@@ -67,11 +67,12 @@ This file is the project roadmap and the source of truth for planned work and va
   - Verified offline cases include Ares keepsake-only → Intermediate, Ares keepsake + Ares Attack → Intermediate, Ares keepsake + Aphrodite Attack → Starter, shared Zeus Special + Ares keepsake → Intermediate via fallback, no decisive evidence → ambiguous, Morrigan singleton → Morrigan, and explicit compatible preferences remaining authoritative.
   - Live runtime revalidation confirms the first-offer case now resolves with `BUILD_PROFILE="auto"` from the Ares keepsake signal and renders normal rankings instead of unsupported/ambiguous fallback.
   - Live reroll/Sublime interaction also refreshes rankings correctly under the auto-resolved profile.
-  - Final runtime/log audit is still required before this item is complete.
+  - Final runtime/log audit passed clean after live first-offer, reroll and Sublime validation; no targeted Boon Advisor ERROR/WARN/traceback/nil/exception entries were found.
   - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
 - [ ] Audit the profile-resolver diff.
-- [ ] Run the complete relevant regression suite.
+- [x] Run the complete relevant regression suite.
+  - Full Lua 5.2, resolver, probe, Phase 2, scoring, UI, canonical validation/generation, staging and `git diff --check` all passed after the final evidence-precedence correction.
 - [ ] Bump `0.1.0` to `0.1.1`.
 - [ ] Build and verify the manual GitHub ZIP.
 - [ ] Build and verify the Thunderstore package.
