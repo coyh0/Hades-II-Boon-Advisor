@@ -32,9 +32,12 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] **10B.4 — Unsupported regression** — COMPLETE (in-game Artemis + Witch's Staff)
   - Artemis: `WeaponDagger + DaggerBlockAspect`, `Supported=false`, unsupported UI with no ranks.
   - Witch's Staff: `WeaponStaffSwing + BaseStaffAspect`, `Supported=false`, unsupported UI with no ranks.
-- [ ] **10B.5 — Morrigan real-offer validation** — NEXT
-  - Validate ranking, reasons, reroll refresh and Sublime/rarity refresh on real offers.
-- [ ] **10B.6 — Runtime cleanliness**
+- [x] **10B.5 — Morrigan real-offer validation** — COMPLETE (in-game screenshots)
+  - Confirmed ranked Hera offers with displayed reason labels and refreshed rankings after three rerolls.
+  - Confirmed an incomplete offer shows `ANALYSE INCOMPLÈTE` and hides rankings when one choice is not evaluated.
+  - Confirmed Sublime changes `Frappe unificatrice` from +50% to Rare +60% while ranks remain consistent.
+  - Final runtime-log/error audit remains part of 10B.6.
+- [ ] **10B.6 — Runtime cleanliness** — NEXT
   - Confirm clean logs, no Lua errors and no gameplay/RNG/save mutations.
 
 ## 10C — v0.1.1 hotfix release
