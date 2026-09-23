@@ -82,10 +82,10 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Build and verify the manual GitHub ZIP.
   - Deterministic release build produced `Hades-II-Boon-Advisor-v0.1.1.zip` and passed the built-in inventory/hash verification.
   - SHA-256: `403CCE25845439ECA1883CAA5D3DE5CC190A9813C2FE696D24247A34AEFE930E`.
-- [ ] Build and verify the Thunderstore package.
-  - The package passed validation before the final rebase, but the rebase incorporated the upstream public README roadmap section into the release branch.
-  - Because Thunderstore packages `README.md`, the previous `A0A1789275E72431FA788AFE37B6F642A107C6B9A660581F8D9876CB125422B8` artifact is now stale for the final rebased release commit.
-  - Rebuild and re-verify from the rebased branch before publication; record the new SHA-256.
+- [x] Build and verify the Thunderstore package.
+  - Final rebased build produced `Coyh0Mods-Hades_II_Boon_Advisor-0.1.1.zip`.
+  - Verified `plugins/ProfileResolver.lua` is present; packaged README includes the build-profile selection, `BUILD_PROFILE = "auto"`, and project-roadmap sections; no developer-only `tests`, `tools`, `docs`, `data/canonical`, or `dist` content is present.
+  - SHA-256: `D0ECFE9F773A13C9C50329030B14108E4FE419A710A71E4E0109CE7E8D3A14F9`.
 - [ ] Create a new immutable `v0.1.1` Git tag.
 - [ ] Publish the GitHub `v0.1.1` release.
 - [ ] Publish Thunderstore `0.1.1`.
