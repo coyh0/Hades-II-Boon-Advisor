@@ -122,7 +122,12 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
 - [ ] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
 - [ ] Keep runtime profile resolution generic for future weapons.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
-- [ ] Design an explicit policy for multiple profiles that target the same weapon/aspect pair.
+- [x] Define the multiple-profile policy for the same weapon/aspect pair:
+  - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
+  - `auto` selects automatically only when exactly one compatible profile exists.
+  - If several compatible profiles exist, `auto` must fail safely as ambiguous rather than guess.
+  - An explicit profile selection mechanism is required for same-aspect variants; keep the current profile switcher and plan an in-game selector later.
+  - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
 - [ ] Strengthen automated validation for duplicate IDs, selection keys, modules and ambiguous profile mappings.
 
 ## Later — UI polish
@@ -161,7 +166,7 @@ Current supported profile intent:
 
 These are intentionally not part of the current v0.1.1 hotfix:
 
-- A future explicit `recommended` / default-profile policy for weapon/aspect pairs with multiple builds, only if that recommendation is documented and intentional.
+- A future explicit `recommended` metadata/policy may be added for discovery/documentation, but it must not silently override the user's choice when multiple profiles exist.
 - Lazy-loading/profile caching for a future large profile catalog.
 - Multi-weapon generator generalization.
 - Large UI redesign.
