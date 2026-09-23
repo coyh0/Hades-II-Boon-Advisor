@@ -133,8 +133,15 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
   - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
   - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) should be used as the first source of profile-affinity signals; future profiles may add explicit activation/signature metadata if needed.
   - If evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
-  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants; plan an in-game selector later.
+  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
   - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
+- [ ] Add an in-game profile selector as a future override/fallback for `auto`:
+  - Suggested flow: Weapon → Aspect → validated Build/Profile.
+  - Keep `Auto` as the default/recommended operating mode.
+  - Manual selection must only offer profiles compatible with the selected weapon/aspect.
+  - A manual choice must override auto-detection without changing scoring data.
+  - Decide later whether the override persists across runs/sessions or is run-scoped.
+  - Design the selector so future community-contributed profiles appear automatically from the registry rather than from hardcoded menu entries.
 - [ ] Strengthen automated validation for duplicate IDs, selection keys, modules and ambiguous profile mappings.
 
 ## Later — UI polish
@@ -145,9 +152,11 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 - [ ] Improve visual integration with the Hades II style.
 - [ ] Review icons, emphasis and color usage where useful.
 - [ ] Prevent overlap at different resolutions and localized text lengths.
-- [ ] **Show the active build profile discreetly in the in-game UI**, for example:
+- [ ] **Show the active/detected build profile discreetly in the in-game UI**, for example:
   - `Profile: Melinoë — Intermediate`
   - `Profile: Morrigan — Meta`
+  - When `auto` resolves a profile from live run state, show the detected profile so the player can immediately verify what the advisor is using.
+  - If a future manual override is active, distinguish it clearly but discreetly from an auto-detected profile.
 - [ ] Prefer a low-attention placement in the unused upper-right status area (near the current analysis/status message) so the player can confirm the active build without pulling focus away from the boon choices.
 - [ ] Keep the active-profile indicator visually secondary to ranking/status text: small type, low visual weight, no animation, and no extra input required.
 - [ ] Re-evaluate the exact placement during UI polish if localization or resolution constraints make the upper-right area too crowded.
