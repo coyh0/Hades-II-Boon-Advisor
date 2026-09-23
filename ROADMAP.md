@@ -86,7 +86,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - Final rebased build produced `Coyh0Mods-Hades_II_Boon_Advisor-0.1.1.zip`.
   - Verified `plugins/ProfileResolver.lua` is present; packaged README includes the build-profile selection, `BUILD_PROFILE = "auto"`, and project-roadmap sections; no developer-only `tests`, `tools`, `docs`, `data/canonical`, or `dist` content is present.
   - SHA-256: `D0ECFE9F773A13C9C50329030B14108E4FE419A710A71E4E0109CE7E8D3A14F9`.
-- [ ] Create a new immutable `v0.1.1` Git tag.
+- [x] Create a new immutable `v0.1.1` Git tag.
+  - Annotated tag `v0.1.1` is published and resolves to release commit `f86b3a48b929bceb0b948de86df81e1c8f777a73`.
 - [ ] Publish the GitHub `v0.1.1` release.
 - [ ] Publish Thunderstore `0.1.1`.
 - [ ] Never move or rewrite the existing `v0.1.0` tag/release.
