@@ -203,6 +203,26 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## Phase 11 — v0.2 expansion and automation
 
+### 11A.1 — Generator safety and generic weapon/aspect catalog
+
+- [x] **Fix shared mechanics mutation during profile composition.**
+  - Profile-level weight overrides now apply to a deep-copied weights table instead of mutating the shared mechanics template.
+  - Regression coverage proves an override profile generated first cannot contaminate a later profile sharing the same mechanics template.
+- [x] **Introduce a canonical weapon/aspect catalog and replace the Sister Blades whitelist.**
+  - Added `data/canonical/catalog/weapons_aspects.json` with only runtime IDs already verified for supported Sister Blades profiles.
+  - Generator profile and mechanics validation now resolve weapon/aspect support through the catalog instead of hardcoded `WeaponDagger` / aspect checks.
+  - Human-readable labels remain metadata only; runtime matching uses internal IDs exclusively.
+  - `DaggerBlockAspect` remains outside the catalog and therefore unsupported.
+- [x] **Preserve deterministic generation and current runtime behavior.**
+  - Generated Lua output now uses explicit LF line endings for byte-stable generation on Windows.
+  - All current generated Sister Blades outputs remain byte-for-byte identical to the checked-in runtime files.
+  - `ProfileResolver.lua`, runtime Lua, canonical profiles, and generated runtime files were not changed.
+- [x] **Clarify current `aspectMechanics` status.**
+  - Repository review confirms `aspectMechanics` is currently validated canonical/audit metadata only; it is not copied by the generator or consumed by runtime scoring.
+- [x] **Validate 11A.1 offline.**
+  - Canonical profile validation, full Lua 5.2 regression suite, standalone mechanics validation, strict mechanics equivalence, deterministic generation, staging, and `git diff --check` all passed.
+  - Staging still produces exactly 14 runtime files with matching hashes.
+
 - [ ] **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
   - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
