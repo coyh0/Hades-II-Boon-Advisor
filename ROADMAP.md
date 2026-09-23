@@ -97,7 +97,8 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Keep the existing annotated `v0.1.1` tag immutable and unpublished.
   - `v0.1.1` remains attached to commit `f86b3a48b929bceb0b948de86df81e1c8f777a73`; do not move or rewrite it.
   - Do not publish the existing GitHub/Thunderstore `0.1.1` artifacts because their packaged README predates the required AI disclosure.
-- [ ] Add the required AI disclosure/provenance text to the public README.
+- [x] Add the required AI disclosure/provenance text to the public README.
+  - README now states that OpenAI ChatGPT and Codex substantially assisted with architecture, code generation, code review, documentation and testing support, while requirements, design/release decisions, review and in-game validation remain maintainer-controlled.
 - [ ] Bump release metadata from `0.1.1` to `0.1.2` and add a `0.1.2` changelog entry.
 - [ ] Re-run relevant release/package validation after the documentation-only compliance change.
 - [ ] Build and verify the manual GitHub ZIP for `v0.1.2`.
@@ -112,12 +113,12 @@ This file is the project roadmap and the source of truth for planned work and va
   - Current Thunderstore guidance requires README disclosure when an LLM or other AI technology was used to create a mod/package; generated code should identify the AI/agent used.
 - [x] Check whether the Hades II community exposes an applicable AI-generated category at publish time.
   - Current Hades II public categories show Audio, Libraries, Misc, Modpacks, Mods and Tools; no AI-generated category is exposed at this check, so README disclosure remains the applicable release gate.
-- [ ] Add a clear AI disclosure to the Thunderstore-facing README/package information.
-  - BLOCKER before Thunderstore publication: the current v0.1.1 packaged README predates this required disclosure and must not be published unchanged.
-- [ ] Add a matching transparency section to GitHub documentation.
-- [ ] State that ChatGPT/Codex substantially assisted with architecture, code generation, review, documentation and testing support.
-- [ ] State that requirements, decisions, review and in-game validation are performed/approved by the maintainer.
-- [ ] Do not imply that substantially AI-assisted code was written entirely by hand.
+- [x] Add a clear AI disclosure to the Thunderstore-facing README/package information.
+  - Source README disclosure is complete; the v0.1.2 Thunderstore package must be rebuilt so the packaged README contains it.
+- [x] Add a matching transparency section to GitHub documentation.
+- [x] State that ChatGPT/Codex substantially assisted with architecture, code generation, review, documentation and testing support.
+- [x] State that requirements, decisions, review and in-game validation are performed/approved by the maintainer.
+- [x] Do not imply that substantially AI-assisted code was written entirely by hand.
 
 ## 10D — Public release polish, English-first
 
