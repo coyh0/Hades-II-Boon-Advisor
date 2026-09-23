@@ -76,7 +76,8 @@ This file is the project roadmap and the source of truth for planned work and va
   - Final review covered resolver/main integration, canonical `autoSignals`, deterministic generation, staging/package inventory, profile switcher support, probe regressions and fail-safe ambiguity behavior; no blocking defect found.
 - [x] Run the complete relevant regression suite.
   - Full Lua 5.2, resolver, probe, Phase 2, scoring, UI, canonical validation/generation, staging and `git diff --check` all passed after the final evidence-precedence correction.
-- [ ] Bump `0.1.0` to `0.1.1`.
+- [x] Bump `0.1.0` to `0.1.1`.
+  - Release metadata now targets `0.1.1` in `manifest.json` and `thunderstore.toml`; the changelog preserves the historical `0.1.0` entry and adds a dedicated `0.1.1` section.
 - [ ] Build and verify the manual GitHub ZIP.
 - [ ] Build and verify the Thunderstore package.
 - [ ] Create a new immutable `v0.1.1` Git tag.
