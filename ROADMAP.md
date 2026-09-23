@@ -94,9 +94,12 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## 10D.0 — AI disclosure and project provenance
 
-- [ ] Re-check Thunderstore's current AI disclosure requirements before the next release.
-- [ ] Check whether the Hades II community exposes an applicable AI-generated category at publish time.
+- [x] Re-check Thunderstore's current AI disclosure requirements before the next release.
+  - Current Thunderstore guidance requires README disclosure when an LLM or other AI technology was used to create a mod/package; generated code should identify the AI/agent used.
+- [x] Check whether the Hades II community exposes an applicable AI-generated category at publish time.
+  - Current Hades II public categories show Audio, Libraries, Misc, Modpacks, Mods and Tools; no AI-generated category is exposed at this check, so README disclosure remains the applicable release gate.
 - [ ] Add a clear AI disclosure to the Thunderstore-facing README/package information.
+  - BLOCKER before Thunderstore publication: the current v0.1.1 packaged README predates this required disclosure and must not be published unchanged.
 - [ ] Add a matching transparency section to GitHub documentation.
 - [ ] State that ChatGPT/Codex substantially assisted with architecture, code generation, review, documentation and testing support.
 - [ ] State that requirements, decisions, review and in-game validation are performed/approved by the maintainer.
