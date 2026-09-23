@@ -115,12 +115,13 @@ function UI.renderFallback(screen, data, api)
     if type(screen.Components) == "table" then screen.Components[key] = component end
     local fallbackKeys = {
         AMBIGUOUS_PROFILE = "profileAmbiguous", UNSUPPORTED_PROFILE = "profileUnsupported",
+        PARTIAL_RANKING = "partialRanking",
         REPLACEMENT_UNRESOLVED = "replacementUnevaluated",
         INCOMPLETE_ANALYSIS = "incompleteAnalysis", NO_RELIABLE_PREFERENCE = "noReliablePreference",
     }
     local subtitleKeys = {
         REPLACEMENT_UNRESOLVED = "rankingUnreliable",
-        NO_RELIABLE_PREFERENCE = "equivalentChoices",
+        NO_RELIABLE_PREFERENCE = "equivalentChoices", PARTIAL_RANKING = "partialRankingScope",
     }
     textBox({ Id = component.Id, RawText = localization.get(language, fallbackKeys[data.code]), Width = 600,
         Font = "LatoBold", FontSize = 18,
@@ -161,8 +162,10 @@ function UI.renderPartial(screen, offers, api)
                 attach({ Id = component.Id, DestinationId = button.Id, OffsetX = -145, OffsetY = -105 })
                 components[key] = component
                 local evaluated = offer.evaluated == true
-                textBox({ Id = component.Id, RawText = localization.get(language,
-                    evaluated and "evaluated" or "unevaluated"),
+                local label = evaluated and type(offer.rank) == "number" and offer.rankTotal == 2
+                    and (formatRankLabel(offer.rank) .. "/2")
+                    or localization.get(language, evaluated and "evaluated" or "unevaluated")
+                textBox({ Id = component.Id, RawText = label,
                     Font = "LatoBold", FontSize = 18, Justification = "Center",
                     ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
                 local entry = { id = component.Id, key = key, originalIndex = index }

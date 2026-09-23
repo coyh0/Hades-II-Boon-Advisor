@@ -107,10 +107,10 @@ local function diagnose(screen, lootData)
     local profileValid, profileValidationError = false, "no compatible profile"
     if selectedProfile ~= nil then profileValid, profileValidationError = ScoringEngine.validateProfile(selectedProfile) end
     local profileSupported = profileValid and ScoringEngine.isProfileSupported(snapshot, selectedProfile)
-    local rankingContext = ScoringEngine.getRankingContext(scores, profileSupported)
-    local rankingReady = ScoringEngine.isRankingReady(scores, rankingContext)
+    local rankingDecision = ScoringEngine.getRankingDecision(scores, profileSupported)
+    local rankingReady = rankingDecision.mode == "full"
     state.lastRankingReady = rankingReady
-    state.lastRankedScores = rankingReady and ScoringEngine.rank(scores) or nil
+    state.lastRankedScores = rankingReady and ScoringEngine.rank(rankingDecision.rankEligible) or nil
     local function renderUI(ranks)
         UI.clearFallback(screen, getUIApi())
         state.log("UI calling renderRanks mode=" .. (rankingReady and "real" or "synthetic")
@@ -169,7 +169,18 @@ local function diagnose(screen, lootData)
                 }
             end
         end
-        if replacement then
+        if rankingDecision.mode == "partial" then
+            local partialRanks = ScoringEngine.rank(rankingDecision.rankEligible)
+            local ranksByIndex = {}
+            for _, ranked in ipairs(partialRanks) do ranksByIndex[ranked.originalIndex] = ranked.rank end
+            for _, offer in ipairs(partialOffers) do
+                offer.rank = ranksByIndex[offer.originalIndex]
+                if offer.rank then offer.rankTotal = #partialRanks end
+            end
+            UI.renderPartial(screen, partialOffers, getUIApi())
+            renderFallback({ code = "PARTIAL_RANKING" })
+        elseif replacement then
+            UI.renderPartial(screen, partialOffers, getUIApi())
             renderFallback({ code = "REPLACEMENT_UNRESOLVED" })
         elseif incomplete > 0 then
             UI.renderPartial(screen, partialOffers, getUIApi())
@@ -248,6 +259,7 @@ local function diagnose(screen, lootData)
                 .. " AspectInteraction=" .. tostring(interaction))
         end
         state.log("RankingReady=" .. tostring(rankingReady))
+        state.log("RankingMode=" .. rankingDecision.mode)
         for _, result in ipairs(scores) do
             state.log("Score originalIndex=" .. tostring(result.originalIndex)
                 .. " ItemName=" .. tostring(result.itemName) .. " Score=" .. result.score

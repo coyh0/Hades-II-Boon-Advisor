@@ -12,7 +12,7 @@ dll.lua_pcallk.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int, ctypes.c
 dll.lua_tolstring.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_size_t)]
 dll.lua_tolstring.restype = ctypes.c_char_p
 dll.lua_close.argtypes = [ctypes.c_void_p]
-test_files = [b"tests/probe_spec.lua", b"tests/phase2_spec.lua", b"tests/scoring_spec.lua", b"tests/ui_spec.lua", b"tests/localization_spec.lua"]
+test_files = [b"tests/probe_spec.lua", b"tests/phase2_spec.lua", b"tests/scoring_spec.lua", b"tests/partial_ranking_spec.lua", b"tests/ui_spec.lua", b"tests/localization_spec.lua"]
 test_files.extend(path.encode("utf-8") for path in sys.argv[2:])
 for test_file in test_files:
     state = dll.luaL_newstate()

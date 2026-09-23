@@ -594,6 +594,86 @@ ig.TryUpgradeBoon(testLoot, integrationScreen, "oldButton")
 check(integrationTryCalls == 2 and #igDestroyed >= 2, "reroll/sublimation cleanup regressed")
 print("PASS: TryUpgradeBoon successful refresh targets new button; reroll cleanup has no stale UI")
 
+do
+    local loot = { Name = "PoseidonUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "PoseidonWeaponBoon", Rarity = "Common" },
+        { ItemName = "PoseidonManaBoon", Rarity = "Common" },
+        { ItemName = "RoomRewardBonusBoon", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "coat1" }, PurchaseButton2 = { Id = "coat2" },
+        PurchaseButton3 = { Id = "coat3" },
+    } }
+    local game, _, start, _, private, _, _, _, _, created, texts, destroyed, attached = fixture(
+        function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = "BaseSuitAspect" }, Traits = {
+                { Name = "BaseSuitAspect", Slot = "Aspect", IsWeaponEnchantment = true },
+            } } },
+            GetEquippedWeapon = function() return "WeaponSuit" end,
+            LootData = {}, IsGodTrait = function() return false end,
+            TryUpgradeBoon = function(_, target)
+                target.Components.PurchaseButton1 = { Id = "coat1-new" }
+                loot.UpgradeOptions[1].Rarity = "Rare"
+                return { Id = "coat1-new" }
+            end,
+        }, false, "auto")
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    check(private.probeState.lastRankingReady == false
+        and private.probeState.lastRankedScores == nil and #screen.BoonAdvisorRanks == 3
+        and screen.BoonAdvisorFallback ~= nil, "Black Coat partial UI state missing")
+    local function hasText(value)
+        for _, entry in ipairs(texts) do if entry.RawText == value then return true end end
+        return false
+    end
+    check(hasText("RANG 1/2") and hasText("RANG 2/2") and hasText("NON ÉVALUÉ")
+        and hasText("CLASSEMENT PARTIEL"), "Black Coat partial labels missing")
+    local beforeReroll = #created
+    game.CreateBoonLootButtons(screen, loot)
+    check(#destroyed >= 2 and #created > beforeReroll and #screen.BoonAdvisorRanks == 3,
+        "partial reroll left stale annotations")
+    local beforeSublime = #created
+    game.TryUpgradeBoon(loot, screen, "coat1")
+    check(#created > beforeSublime and #screen.BoonAdvisorRanks == 3
+        and private.probeState.lastRankingReady == false, "partial Sublime refresh changed ranking gate")
+    local attachedNew = false
+    for _, entry in ipairs(attached) do
+        if entry.DestinationId == "coat1-new" then attachedNew = true end
+    end
+    check(attachedNew, "partial Sublime refresh did not attach to the new native button")
+end
+print("PASS: Black Coat partial UI, reroll, and Sublime refresh preserve unknown choice")
+
+do
+    local function unsupportedScreen(aspect, expected)
+        local loot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
+            { ItemName = "AresWeaponBoon" }, { ItemName = "AresSpecialBoon" },
+            { ItemName = "AresSprintBoon" },
+        } }
+        local screen = { Source = loot, KeepOpen = true, Components = {
+            PurchaseButton1 = { Id = "unsupported1" }, PurchaseButton2 = { Id = "unsupported2" },
+            PurchaseButton3 = { Id = "unsupported3" },
+        } }
+        local game, _, start, _, private, _, _, _, _, _, text = fixture(function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = aspect }, Traits = {
+                { Name = aspect, Slot = "Aspect", IsWeaponEnchantment = true },
+            } } },
+            GetEquippedWeapon = function() return "WeaponDagger" end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "auto")
+        start(); game.CreateBoonLootButtons(screen, loot)
+        check(private.probeState.lastRankingReady == false
+            and private.probeState.lastRankedScores == nil and #screen.BoonAdvisorRanks == 0,
+            "unresolved profile displayed a partial or full rank")
+        local found = false
+        for _, entry in ipairs(text) do if entry.RawText == expected then found = true end end
+        check(found, "profile fallback changed: " .. expected)
+    end
+    unsupportedScreen("DaggerBackstabAspect", "PROFIL À CHOISIR")
+    unsupportedScreen("DaggerBlockAspect", "PROFIL NON PRIS EN CHARGE")
+end
+print("PASS: ambiguous and unsupported profiles remain unranked with distinct fallbacks")
+
 -- Phase 5J-A: selector defaults safely and exposes the active real profile in DEBUG logs.
 local function hasLog(lines, fragment)
     for _, line in ipairs(lines) do if line:find(fragment, 1, true) then return true end end

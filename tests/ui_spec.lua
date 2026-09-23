@@ -246,6 +246,33 @@ check(textBoxes[#textBoxes - 3].RawText == "ÉVALUÉ"
 UI.clearRanks(partialScreen, api)
 check(partialScreen.Components.BoonAdvisorRank1 == nil
     and partialScreen.Components.BoonAdvisorRank3 == nil, "partial cleanup left stale components")
+local comparedScreen = { Components = {
+    PurchaseButton1 = { Id = "compared1" }, PurchaseButton2 = { Id = "compared2" },
+    PurchaseButton3 = { Id = "compared3" },
+} }
+local comparedBefore = #textBoxes
+UI.renderPartial(comparedScreen, {
+    { originalIndex = 1, evaluated = true, rank = 1, rankTotal = 2, reasons = {} },
+    { originalIndex = 2, evaluated = true, rank = 2, rankTotal = 2, reasons = {} },
+    { originalIndex = 3, evaluated = false, rank = 1, rankTotal = 2, reasons = {} },
+}, api)
+check(textBoxes[comparedBefore + 1].RawText == "RANG 1/2"
+    and textBoxes[comparedBefore + 2].RawText == "RANG 2/2"
+    and textBoxes[comparedBefore + 3].RawText == "NON ÉVALUÉ",
+    "partial ranks implied a rank for the unknown choice")
+UI.renderFallback(comparedScreen, { code = "PARTIAL_RANKING" }, api)
+check(textBoxes[#textBoxes - 1].RawText == "CLASSEMENT PARTIEL"
+    and textBoxes[#textBoxes].RawText == "Rangs limités aux 2 choix évalués",
+    "French partial-ranking scope was not explicit")
+local comparedDestroy = #destroyed
+UI.clearRanks(comparedScreen, api)
+UI.clearFallback(comparedScreen, api)
+check(#destroyed == comparedDestroy + 2 and #comparedScreen.BoonAdvisorRanks == 0
+    and comparedScreen.BoonAdvisorFallback == nil,
+    "partial ranking cleanup left components")
+UI.clearRanks(comparedScreen, api)
+UI.clearFallback(comparedScreen, api)
+check(#destroyed == comparedDestroy + 2, "partial ranking cleanup was not idempotent")
 local uiErrors = {}
 UI.setLogger({ debug = function() end, error = function(code) uiErrors[#uiErrors + 1] = code end })
 local errorScreen = { Components = { PurchaseButton1 = { Id = "native-error" } } }
@@ -288,4 +315,8 @@ UI.renderFallback(englishFallback, { code = "INCOMPLETE_ANALYSIS", incompleteCou
 check(textBoxes[#textBoxes - 1].RawText == "INCOMPLETE ANALYSIS"
     and textBoxes[#textBoxes].RawText == "2 choices not evaluated — ranking hidden",
     "English fallback strings were not rendered")
+UI.renderFallback(englishFallback, { code = "PARTIAL_RANKING" }, api)
+check(textBoxes[#textBoxes - 1].RawText == "PARTIAL RANKING"
+    and textBoxes[#textBoxes].RawText == "Ranks compare 2 evaluated choices only",
+    "English partial-ranking scope was not rendered")
 print("PASS: UI rank mapping, ties, private components, idempotent cleanup")

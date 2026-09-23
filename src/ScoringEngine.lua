@@ -505,6 +505,30 @@ function ScoringEngine.getRankingContext(results, profileSupported)
     }
 end
 
+function ScoringEngine.getRankingDecision(results, profileSupported)
+    local fullContext = ScoringEngine.getRankingContext(results, profileSupported)
+    local eligibleCount, complete = 0, {}
+    for _, result in ipairs(type(results) == "table" and results or {}) do
+        if type(result) == "table" and result.eligible == true then
+            eligibleCount = eligibleCount + 1
+            if result.supported == true and result.covered == true
+                and result.scoreComplete == true and type(result.score) == "number" then
+                complete[#complete + 1] = result
+            end
+        end
+    end
+    if ScoringEngine.isRankingReady(results, fullContext) then
+        return { mode = "full", rankEligible = complete, context = fullContext }
+    end
+    if profileSupported == true and eligibleCount == 3 and #complete == 2 then
+        local partialContext = ScoringEngine.getRankingContext(complete, true)
+        if ScoringEngine.isRankingReady(complete, partialContext) then
+            return { mode = "partial", rankEligible = complete, context = partialContext }
+        end
+    end
+    return { mode = "none", rankEligible = {}, context = fullContext }
+end
+
 function ScoringEngine.scoreOffers(snapshot, profile)
     snapshot = type(snapshot) == "table" and snapshot or {}
     profile = type(profile) == "table" and profile or {}
