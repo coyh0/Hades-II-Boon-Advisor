@@ -1,6 +1,6 @@
 {
   "name": "HadesIIBoonAdvisor",
-  "version_number": "0.1.1",
+  "version_number": "0.1.2",
   "website_url": "https://github.com/coyh0/Hades-II-Boon-Advisor",
   "description": "Explains and ranks supported Hades II Olympian Boon choices without changing gameplay, RNG, offers, or saves.",
   "dependencies": [

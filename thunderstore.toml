@@ -4,7 +4,7 @@ schemaVersion = "0.0.1"
 [package]
 namespace = "Coyh0Mods"
 name = "Hades_II_Boon_Advisor"
-versionNumber = "0.1.1"
+versionNumber = "0.1.2"
 description = "Explains and ranks supported Hades II Olympian Boon choices for Sister Blades builds without changing gameplay, RNG, offers, or saves."
 websiteUrl = "https://github.com/coyh0/Hades-II-Boon-Advisor"
 containsNsfwContent = false

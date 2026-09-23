@@ -2,6 +2,15 @@
 
 Tous les changements importants de Hades II Boon Advisor seront documentés ici.
 
+## [0.1.2] - 2026-09-23
+
+### Changed
+
+- Ajout d'une disclosure publique sur l'utilisation substantielle d'OpenAI ChatGPT et Codex pendant le développement.
+- Clarification du rôle du mainteneur dans les exigences, décisions, revues et validations en jeu.
+- Passage des métadonnées de release de `0.1.1` à `0.1.2`.
+- Aucun changement de logique runtime ou de gameplay par rapport au tag `v0.1.1`.
+
 ## [0.1.1] - 2026-09-23
 
 ### Changed
