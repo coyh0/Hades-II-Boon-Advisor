@@ -8,6 +8,16 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## Current focus
 
+**11C — Expansion and automation hardening**
+
+Published release: `v0.1.2` — Sister Blades only.
+
+Current `main` / future `v0.2`: Black Coat pilot validated offline and live DEV; safe partial ranking validated offline and live DEV.
+
+Next priority: repair release/install tooling for the 15-file runtime inventory, then continue controlled profile expansion.
+
+## Completed Phase 10 work
+
 ### 10B — Runtime validation and automatic profile resolution
 
 - [x] Confirm in-game Sister Blades weapon detection: `WeaponDagger`
@@ -71,7 +81,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - Live ambiguous Melinoë validation confirms the player-facing `PROFIL À CHOISIR` fallback appears with no rankings when no compatible profile can be selected decisively.
   - Live transition validation confirms auto resolution can recover later in the same run: after an initially ambiguous Melinoë start, acquiring a distinguishing Ares Boon causes owned-Boon affinity to resolve the Intermediate profile on subsequent offers. Incomplete-offer masking still works independently when one offered choice is not evaluable.
   - Final runtime/log audit passed clean after live first-offer, reroll and Sublime validation; no targeted Boon Advisor ERROR/WARN/traceback/nil/exception entries were found.
-  - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
+  - Additive affinity weights (`core +3 / alternative +2 / preferred +1 / discouraged -1`) are accepted for owned-Boon matching in the then-current v0.1.1 profile set; revisit weighting/signature metadata in Phase 11 if future community profiles create ambiguous or counter-intuitive matches.
   - Do not introduce a hidden/recommended default until a build is explicitly documented as recommended.
 - [x] Audit the profile-resolver diff.
   - Final review covered resolver/main integration, canonical `autoSignals`, deterministic generation, staging/package inventory, profile switcher support, probe regressions and fail-safe ambiguity behavior; no blocking defect found.
@@ -281,43 +291,66 @@ This file is the project roadmap and the source of truth for planned work and va
   - The run had `ForcePoseidonBoonKeepsake` equipped and `GodTraitCount=0`. Because this weapon/aspect currently has only one compatible profile, the observed auto-selection validates the singleton path but does **not** independently prove that the keepsake signal caused selection; isolate that signal when another Black Coat profile is introduced.
   - The initial three evaluated offers produced `RankingReady=true` with observed scores -4 (conflicting Poseidon Special), 10 (open Cast), and 5 (open Mana); UI displayed the corresponding ranks.
   - Live reroll refreshed the offers under the same Black Coat profile. `PoseidonWeaponBoon` scored 12 at Common and 13 at Rare following Sublime/`TryUpgradeBoon`; the post-upgrade log confirms `UI refresh after TryUpgradeBoon`.
-  - An unknown `RoomRewardBonusBoon` / `DoubleRewardBoon` remained `Covered=false`, `Complete=false`; `RankingReady=false` masked all ranks rather than guessing. The screenshots confirm the two evaluated choices and third non-evaluated choice render safely.
+  - At the 11A.3 validation point, an unknown `RoomRewardBonusBoon` / `DoubleRewardBoon` remained `Covered=false`, `Complete=false`; the then-current all-or-nothing gate masked all ranks rather than guessing. Phase 11B later replaced that behavior with validated safe partial ranking.
   - Targeted live log audit found no Boon Advisor ERROR/WARN/traceback/exception; false-positive `Scimiterror` filenames are unrelated.
   - Restored DEV `DEBUG=false` with `BUILD_PROFILE="auto"`. This is validation of the pilot only; no release, tag, or Epic installation deployment was performed.
 
-- [ ] **Keep external build-source identifiers private during import automation.**
+### Phase 11 invariants
+
+- **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
   - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
   - Keep local secret/config files untracked and covered by `.gitignore`.
   - Do not print the real Sheet ID in normal logs, test snapshots, generated JSON/Lua, package contents, release artifacts or public documentation.
   - Use fake/example IDs in tests and docs.
   - If CI import is added later, store the identifier/credentials in repository secrets rather than source-controlled files.
-- [ ] Add more supported builds and Aspects.
-- [ ] Define/import additional canonical build data from the maintainer's Build Registry spreadsheet.
+- **Keep the pipeline deterministic and automated:** canonical source → JSON → generated Lua profile → registry → tests.
+- **Keep runtime logic informational-only:** never alter gameplay, RNG, offers, damage, saves or player choice.
+- **Use verified internal Hades II IDs for runtime logic:** localized/display names and free-text build notes remain non-authoritative.
+
+### 11B — Safe partial ranking
+
+- [x] **Improve incomplete-offer handling with safe partial ranking.**
+  - 3/3 rank-eligible choices preserve the normal full ranking.
+  - 2/3 rank-eligible choices rank only the two evaluated choices against each other; the unknown choice remains `NOT EVALUATED` / hors classement.
+  - 1/3 and 0/3 evaluable states display no numeric ranking.
+  - `RankingReady` remains the compatibility gate for full ranking; the new decision layer exposes `full / partial / none`.
+  - Partial ranking uses only `supported + eligible + covered + scoreComplete` offers and recomputes differentiating evidence on that subset only.
+  - Equal evaluated choices do not receive artificial `1/2` and `2/2` ranks.
+  - Unknown or incomplete offers never contribute differentiating evidence and are never silently assigned the worst rank.
+  - `RARITY_UNRESOLVED`, `REPLACEMENT_UNRESOLVED`, and `ORIGINATION_UNRESOLVED` remain outside `rankEligible`; when two other choices are complete and distinguishable they may still be compared safely.
+  - English/French partial-ranking labels and scope text are covered by regression tests.
+- [x] **Validate 11B offline.**
+  - Full Lua 5.2 regression suite, staging with exactly 15 runtime files, canonical profile generation, standalone mechanics validation, strict mechanics equivalence, Build Registry import-contract tests and whitespace checks all passed.
+  - Regression coverage includes 3/3, 2/3, 1/3, 0/3, evaluated ties, unknown-only differentiating evidence, unsupported/ambiguous profiles, reroll and Sublime refresh.
+- [x] **Validate 11B in the live DEV game.**
+  - Black Coat / Aspect of Melinoë confirmed normal 3/3 ranking with `RankingReady=true` and `RankingMode=full`.
+  - Multiple real 2/3 offers confirmed `RankingReady=false` with `RankingMode=partial`, `RANG 1/2`, `RANG 2/2`, and the third choice `NON ÉVALUÉ`.
+  - Live reroll cleared and rebuilt the partial annotations correctly.
+  - Live Sublime/`TryUpgradeBoon` refreshed the UI and rescored the upgraded boon while preserving partial mode and excluding the unknown choice.
+  - DEV config was restored to `DEBUG=false`, `UI_TEST_MODE=false`, `BUILD_PROFILE="auto"` after validation.
+  - No Epic/live installation deployment, release or tag was performed.
+
+### 11C — Expansion and automation hardening
+
+- [ ] **Repair the 15-file install/update/release inventory.**
+  - Update `tools/BoonAdvisor.Install.Common.ps1` so Black Coat's generated runtime profile is part of the expected inventory.
+  - Update `tests/thunderstore_package_spec.ps1`, which still assumes the old 14-file runtime package.
+- [ ] **Extend profile-switcher coverage and documentation to Black Coat.**
+  - Remove the stale hardcoded help text that only lists `auto|intermediate|starter|morrigan_meta`.
+  - Add Black Coat coverage to `tests/profile_switcher_spec.ps1`.
+- [ ] **Strengthen remaining end-to-end registry collision/invariant validation.**
+  - Existing generator/import validation already covers many duplicate IDs, selection keys, output names and module constraints; add only the remaining cross-layer cases rather than duplicating existing checks.
+- [ ] **Continue controlled Build Registry import expansion.**
   - Treat each repeated `profileKeyProposal` group as one candidate profile assembled from structured item rows.
-  - Reuse existing structured rows such as `itemType=keepsake` + `slot=start` as potential pre-Boon auto-detection signals instead of duplicating the same information in a second Sheet-only field.
-  - Add/resolve a machine-readable internal item ID for importable rows before they can affect runtime auto-detection; human display names alone are not sufficient.
-  - Keep human-readable `condition` text as documentation unless/until a separate machine-readable condition/rule field is defined; never parse free text into runtime logic implicitly.
-  - Add an explicit import/readiness or verification status so incomplete/unresolved profiles are skipped safely rather than partially imported.
-  - Sister Blades profiles may remain excluded from the Build Registry import while the current canonical JSON remains their source of truth.
-- [ ] Keep the pipeline automated: canonical source → JSON → generated Lua profile → registry → tests.
-- [x] Generalize `Generate-BoonAdvisorProfiles.ps1` beyond the current Sister Blades whitelist.
-  - Completed in 11A.1 and exercised by the Black Coat pilot in 11A.3.
-- [x] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
-  - Completed in 11A.1; 11A.3 adds the first verified non-Sister-Blades pair, `WeaponSuit + BaseSuitAspect`.
-- [x] Keep runtime profile resolution generic for future weapons.
-  - 11A.3 proves Black Coat resolves through the existing generic singleton-candidate path with no `ProfileResolver.lua` changes.
+  - Reuse structured `itemType=keepsake` + `slot=start` rows as possible pre-Boon signals under explicit policy.
+  - Require verified machine-readable internal IDs before rows can affect runtime behavior.
+  - Keep human-readable `condition` text documentation-only unless a separate machine-readable rule is defined.
+  - Skip incomplete/unresolved profile groups safely; Sister Blades may remain on their current canonical JSON source of truth.
+- [ ] **Add a second validated profile for an existing weapon/aspect pair.**
+  - Use it to validate real competition between owned-Boon affinity, pre-Boon auto signals and safe ambiguity.
+  - Explicitly prove the Black Coat Poseidon-keepsake signal once singleton selection no longer makes the signal observationally redundant.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
-- [ ] **Improve incomplete-offer handling with safe partial ranking.**
-  - Replace the current all-or-nothing rank suppression when only part of an offer is evaluable.
-  - With 3/3 rank-eligible choices, keep the normal full `1 / 2 / 3` ranking.
-  - With 2/3 rank-eligible choices, rank only those two against each other and mark the unknown choice as `NOT EVALUATED` / hors classement; make the UI explicitly say that the ranking is partial.
-  - With only 1/3 evaluable choices, do not display a numeric rank for that single choice; show evaluated vs non-evaluated state without implying that the known choice is best overall.
-  - With 0/3 evaluable choices, show no ranking.
-  - Introduce an explicit evaluation state such as `full / partial / unknown` plus rank eligibility (or an equivalent model) so scoring knowledge and UI rendering remain separate.
-  - Allow future generic partial evaluation only from verified runtime IDs/semantics (for example a proven slot conflict or supported generic mechanic); never infer a score from localized/display names or free-text build notes.
-  - An unknown choice must never be silently assigned the worst rank.
-  - Preserve English/French localization and add regression coverage for full, partial and unknown mixed offers.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
   - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
@@ -326,6 +359,24 @@ This file is the project roadmap and the source of truth for planned work and va
   - If all available evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
   - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
   - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
+- [ ] Add more supported builds and Aspects.
+
+### 11D — v0.2 release readiness
+
+- [ ] Modernize `README.md` and repository description for multi-weapon support while clearly distinguishing published `v0.1.2` from future `v0.2`.
+- [ ] Modernize `docs/RUNTIME_TEST.md` from the Phase 1 probe procedure to the current resolver/full/partial/reroll/Sublime/localization validation flow.
+- [ ] Refresh or clearly mark historical sections in `docs/TECHNICAL_ANALYSIS.md` that describe obsolete profile defaults, unsupported generated profiles or old staging inventories.
+- [ ] Expand the release/developer validation gate so Build Registry import and packaging regressions cannot be skipped accidentally.
+- [ ] Prevent building a `0.1.2` artifact from future-v0.2 `main`; bump the version before release artifact creation.
+- [ ] Re-check pinned dependency/runtime versions before release.
+- [ ] Run live regression validation for every profile intended for `v0.2`.
+- [ ] Prepare the Thunderstore changelog in English.
+- [ ] Bump version, rebuild staging/package, verify ZIP and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
+
+
+
+## Later — Profile selection and UI polish
+
 - [ ] Add an in-game profile selector as a future override/fallback for `auto`:
   - Suggested flow: Weapon → Aspect → validated Build/Profile.
   - Keep `Auto` as the default/recommended operating mode.
@@ -333,9 +384,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - A manual choice must override auto-detection without changing scoring data.
   - Decide later whether the override persists across runs/sessions or is run-scoped.
   - Design the selector so future community-contributed profiles appear automatically from the registry rather than from hardcoded menu entries.
-- [ ] Strengthen automated validation for duplicate IDs, selection keys, modules and ambiguous profile mappings.
-
-## Later — UI polish
+### UI polish
 
 Stability and correctness come first. UI redesign happens after runtime/profile selection is proven stable.
 
@@ -361,7 +410,7 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 | Aspect of Melinoë | `DaggerBackstabAspect` | Confirmed |
 | Aspect of Morrigan | `DaggerTripleAspect` | Confirmed in game |
 | Aspect of Artemis | `DaggerBlockAspect` | Intentionally unsupported in current release scope |
-| Black Coat | `WeaponSuit` | Verified from local game data; offline pilot implemented |
+| Black Coat | `WeaponSuit` | Verified from local game data and live DEV runtime |
 | Black Coat — Aspect of Melinoë | `BaseSuitAspect` | Verified from local game data and live DEV runtime |
 
 Current supported profile intent:
@@ -374,7 +423,7 @@ Current supported profile intent:
 
 ## Deferred design decisions
 
-These are intentionally not part of the current v0.1.1 hotfix:
+These are intentionally deferred beyond the current Phase 11 / future `v0.2` work unless promoted into an explicit milestone:
 
 - A future explicit `recommended` metadata/policy may be added for discovery/documentation, but it must not silently override the user's choice when multiple profiles exist.
 - Lazy-loading/profile caching for a future large profile catalog.
