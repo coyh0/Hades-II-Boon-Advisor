@@ -38,6 +38,24 @@ updates and compatibility diagnostics for advanced users. See
 - Sister Blades — Aspect of Melinoë: Starter and Intermediate
 - Sister Blades — Aspect of Morrigan: Meta / Blood Triad
 
+### Build profile selection
+
+`BUILD_PROFILE = "auto"` is the default setting in `config/settings.lua`.
+
+In `auto` mode, the advisor first matches the current weapon and Aspect, then
+uses the current run state to resolve the compatible build profile. Owned Boons
+are the primary evidence; validated pre-Boon signals may be used when needed at
+the start of a run.
+
+If multiple compatible profiles remain ambiguous, the advisor shows
+**PROFIL À CHOISIR** and does not guess or display rankings.
+
+Compatible profiles can also be selected explicitly with:
+
+- `starter`
+- `intermediate`
+- `morrigan_meta`
+
 Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
 receiving a speculative score.
 
