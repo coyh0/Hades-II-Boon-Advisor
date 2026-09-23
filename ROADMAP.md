@@ -128,7 +128,13 @@ This is post-v0.1.1 hardening work unless 10B.6 reveals a real runtime logging p
   - Use fake/example IDs in tests and docs.
   - If CI import is added later, store the identifier/credentials in repository secrets rather than source-controlled files.
 - [ ] Add more supported builds and Aspects.
-- [ ] Define/import additional canonical build data, potentially from the maintainer's build spreadsheet.
+- [ ] Define/import additional canonical build data from the maintainer's Build Registry spreadsheet.
+  - Treat each repeated `profileKeyProposal` group as one candidate profile assembled from structured item rows.
+  - Reuse existing structured rows such as `itemType=keepsake` + `slot=start` as potential pre-Boon auto-detection signals instead of duplicating the same information in a second Sheet-only field.
+  - Add/resolve a machine-readable internal item ID for importable rows before they can affect runtime auto-detection; human display names alone are not sufficient.
+  - Keep human-readable `condition` text as documentation unless/until a separate machine-readable condition/rule field is defined; never parse free text into runtime logic implicitly.
+  - Add an explicit import/readiness or verification status so incomplete/unresolved profiles are skipped safely rather than partially imported.
+  - Sister Blades profiles may remain excluded from the Build Registry import while the current canonical JSON remains their source of truth.
 - [ ] Keep the pipeline automated: canonical source → JSON → generated Lua profile → registry → tests.
 - [ ] Generalize `Generate-BoonAdvisorProfiles.ps1` beyond the current Sister Blades whitelist.
 - [ ] Introduce a generic weapon/aspect catalog rather than hardcoded generator validation.
