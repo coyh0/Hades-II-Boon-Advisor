@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "sister_blades_morrigan_meta",
+  "weapon": "WeaponDagger",
+  "aspect": "DaggerTripleAspect",
+  "profileMode": "meta",
+  "selectionKey": "morrigan_meta",
+  "source": { "type": "sheet", "profile": "Best Builds / Blood Triad / Hera" },
+  "mechanicsTemplate": "sister_blades_morrigan",
+  "rules": { "LightningVulnerabilityBoon": [{ "requiresAllOwned": ["PoseidonCastBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "DamageSharePotencyBoon": [{ "requiresAnyOwned": ["HeraWeaponBoon", "HeraSpecialBoon", "HeraCastBoon", "HeraSprintBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "EchoExpirationBoon": [{ "requiresAnyOwned": ["ZeusWeaponBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }] },
+  "weights": {"BUILD_DISCOURAGED":-2},
+  "slots": {
+    "Attack": { "core": ["HeraWeaponBoon"], "alternatives": ["ApolloWeaponBoon", "HestiaWeaponBoon", "DemeterWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },
+    "Special": { "core": [], "alternatives": [], "preferred": ["ZeusSpecialBoon", "AresSpecialBoon", "HephaestusSpecialBoon"], "discouraged": ["ApolloSpecialBoon", "AphroditeSpecialBoon"], "slotPolicy": "open" },
+    "Cast": { "core": ["PoseidonCastBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Sprint": { "core": [], "alternatives": [], "preferred": ["ApolloSprintBoon"], "slotPolicy": "preferred" },
+    "Mana": { "core": ["HeraManaBoon"], "alternatives": ["ApolloManaBoon"], "preferred": [], "slotPolicy": "reserved" }
+  },
+  "constraints": ["DO_NOT_SACRIFICE_CORE_PLAN", "MORRIGAN_BLOOD_TRIAD_HERA"]
+}

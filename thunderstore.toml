@@ -1,0 +1,57 @@
+[config]
+schemaVersion = "0.0.1"
+
+[package]
+# Replace with the confirmed Thunderstore team before the first publication.
+namespace = "REPLACE_WITH_THUNDERSTORE_TEAM"
+name = "Hades_II_Boon_Advisor"
+versionNumber = "0.1.0"
+description = "Explains and ranks supported Hades II Olympic Boon choices for Sister Blades builds without changing gameplay, RNG, offers, or saves."
+websiteUrl = "https://github.com/coyh0/Hades-II-Boon-Advisor"
+containsNsfwContent = false
+
+[package.dependencies]
+Hell2Modding-Hell2Modding = "1.0.112"
+LuaENVY-ENVY = "1.2.0"
+SGG_Modding-ModUtil = "4.0.1"
+SGG_Modding-ReLoad = "1.0.2"
+SGG_Modding-ENVY = "1.1.0"
+SGG_Modding-DemonDaemon = "1.1.0"
+SGG_Modding-Chalk = "2.1.1"
+SGG_Modding-SJSON = "1.0.0"
+
+[build]
+icon = "./icon.png"
+readme = "./README.md"
+outdir = "./build"
+
+[[build.copy]]
+source = "./CHANGELOG.md"
+target = "./CHANGELOG.md"
+
+[[build.copy]]
+source = "./LICENSE"
+target = "./LICENSE"
+
+[[build.copy]]
+source = "./src"
+target = "./plugins"
+
+[[build.copy]]
+source = "./config"
+target = "./plugins/config"
+
+[[build.copy]]
+source = "./data/builds"
+target = "./plugins/data/builds"
+
+[[build.copy]]
+source = "./manifest.json"
+target = "./plugins/manifest.json"
+
+[publish]
+repository = "https://thunderstore.io"
+communities = [ "hades-ii" ]
+
+[publish.categories]
+hades-ii = [ "mods" ]

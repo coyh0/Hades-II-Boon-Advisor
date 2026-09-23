@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "id": "sister_blades_melinoe_intermediate",
+  "weapon": "WeaponDagger",
+  "aspect": "DaggerBackstabAspect",
+  "profileMode": "intermediate",
+  "selectionKey": "intermediate",
+  "source": { "type": "sheet", "profile": "Intermediate" },
+  "mechanicsTemplate": "sister_blades_melinoe",
+  "slots": {
+    "Attack": { "core": ["AresWeaponBoon"], "alternatives": ["AphroditeWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },
+    "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Cast": { "core": ["DemeterCastBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Sprint": { "core": [], "alternatives": [], "preferred": ["AresSprintBoon"], "slotPolicy": "preferred" }
+  },
+  "constraints": ["DO_NOT_SACRIFICE_CORE_PLAN"]
+}

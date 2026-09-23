@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "id": "sister_blades_melinoe_starter",
+  "weapon": "WeaponDagger",
+  "aspect": "DaggerBackstabAspect",
+  "profileMode": "starter",
+  "selectionKey": "starter",
+  "source": { "type": "sheet", "profile": "Starter" },
+  "mechanicsTemplate": "sister_blades_melinoe",
+  "slots": {
+    "Attack": { "core": ["AphroditeWeaponBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Sprint": { "core": [], "alternatives": [], "preferred": [], "slotPolicy": "open" }
+  },
+  "constraints": ["DO_NOT_SACRIFICE_CORE_PLAN"]
+}

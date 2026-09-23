@@ -1,0 +1,35 @@
+﻿# Fichiers générés
+/dist/
+
+# Python
+__pycache__/
+*.pyc
+
+# Logs et temporaires
+*.log
+*.tmp
+*.temp
+*.bak
+
+# Secrets / configuration locale
+.env
+.env.*
+*.local
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# Binaires externes / fichiers du jeu
+*.dll
+*.exe
+*.pdb
+
+# Archives générées
+*.zip
+*.7z
+*.rar

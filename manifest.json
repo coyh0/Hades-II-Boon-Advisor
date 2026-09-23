@@ -1,0 +1,16 @@
+{
+  "name": "HadesIIBoonAdvisor",
+  "version_number": "0.1.0",
+  "website_url": "",
+  "description": "Local Phase 1 diagnostic probe. No gameplay or advisor UI changes.",
+  "dependencies": [
+    "Hell2Modding-Hell2Modding-1.0.112",
+    "LuaENVY-ENVY-1.2.0",
+    "SGG_Modding-ModUtil-4.0.1",
+    "SGG_Modding-ReLoad-1.0.2",
+    "SGG_Modding-ENVY-1.1.0",
+    "SGG_Modding-DemonDaemon-1.1.0",
+    "SGG_Modding-Chalk-2.1.1",
+    "SGG_Modding-SJSON-1.0.0"
+  ]
+}

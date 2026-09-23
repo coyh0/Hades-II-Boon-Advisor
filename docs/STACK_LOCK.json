@@ -1,0 +1,71 @@
+[
+  {
+    "package": "Hell2Modding-Hell2Modding",
+    "version": "1.0.112",
+    "archiveSHA256": "EF1C8456011648DAD2BE6C70D8ECF4F8896D748ED99450ACBDC5FB95BA5B7F95",
+    "declaredDependencies": []
+  },
+  {
+    "package": "SGG_Modding-ModUtil",
+    "version": "4.0.1",
+    "archiveSHA256": "74F402CD3AC5D6FE62D0B5B88EF49AC3A7C2B20820CE607813B29A0C224059FB",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.22",
+      "SGG_Modding-DemonDaemon-1.0.1",
+      "SGG_Modding-ENVY-1.1.0"
+    ]
+  },
+  {
+    "package": "LuaENVY-ENVY",
+    "version": "1.2.0",
+    "archiveSHA256": "E758E0999F41DECE7455B92BF0D8F92878CA4269AA16456C786D0274948AE94F",
+    "declaredDependencies": []
+  },
+  {
+    "package": "SGG_Modding-ReLoad",
+    "version": "1.0.2",
+    "archiveSHA256": "6C230C4926A8BB099804CCAF6AF3286A176624ECC9D2B9C3C4FAF0E646EBC28E",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.22",
+      "SGG_Modding-ENVY-1.0.0"
+    ]
+  },
+  {
+    "package": "SGG_Modding-ENVY",
+    "version": "1.1.0",
+    "archiveSHA256": "898B1991FCB458ACA182343BC13952810D748422EBF4CB9123492BB5AF19AE09",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.28"
+    ]
+  },
+  {
+    "package": "SGG_Modding-DemonDaemon",
+    "version": "1.1.0",
+    "archiveSHA256": "F22338267890038FB9EBD274E695991EC16F9D2E83604C1D5A48D86B8BF0CDC3",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.26",
+      "SGG_Modding-ENVY-1.0.0",
+      "SGG_Modding-Chalk-2.0.0",
+      "SGG_Modding-ReLoad-1.0.1",
+      "SGG_Modding-SJSON-1.0.0"
+    ]
+  },
+  {
+    "package": "SGG_Modding-Chalk",
+    "version": "2.1.1",
+    "archiveSHA256": "7149F64E4CF60F6C6228E5953D6C329AD7A46504D47FAF69D1056BF064EDBCA9",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.26",
+      "SGG_Modding-ENVY-1.0.0"
+    ]
+  },
+  {
+    "package": "SGG_Modding-SJSON",
+    "version": "1.0.0",
+    "archiveSHA256": "5868DC3F82AB5ED47829E9151D2B2B39CA02A03327817CF4FA34E80640275534",
+    "declaredDependencies": [
+      "Hell2Modding-Hell2Modding-1.0.22",
+      "SGG_Modding-ENVY-1.0.0"
+    ]
+  }
+]
