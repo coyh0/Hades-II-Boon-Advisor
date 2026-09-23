@@ -14,7 +14,7 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] Confirm in-game Aspect of Melinoë detection: `DaggerBackstabAspect`
 - [x] Confirm in-game Aspect of Morrigan detection: `DaggerTripleAspect`
 - [x] Confirm Aspect of Artemis remains an unsupported/fail-safe case
-- [ ] **10B.1 — Automatic profile resolver** — IN PROGRESS
+- [x] **10B.1 — Automatic profile resolver** — COMPLETE (offline tests + code review)
   - Resolve profiles from exact internal `weapon + aspect` IDs.
   - Keep `registry.lua` as the runtime source of truth.
   - Treat `BUILD_PROFILE` as a preference only among compatible profiles.
@@ -23,7 +23,7 @@ This file is the project roadmap and the source of truth for planned work and va
   - Never guess when profile selection is ambiguous.
   - Keep unsupported weapon/aspect combinations fail-safe with no ranking.
   - Add resolver and runtime integration regression tests.
-- [ ] **10B.2 — Morrigan runtime validation**
+- [ ] **10B.2 — Morrigan runtime validation** — NEXT
   - Confirm the resolver selects the Morrigan profile in game.
 - [ ] **10B.3 — Melinoë regression**
   - Re-test Intermediate and Starter behavior after resolver changes.
