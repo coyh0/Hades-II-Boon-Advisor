@@ -67,11 +67,11 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
             return {
                 DEBUG = debugEnabled ~= false,
                 UI_TEST_MODE = uiTestMode == true,
-                BUILD_PROFILE = buildProfile or "intermediate",
+    BUILD_PROFILE = buildProfile or "auto",
             }
         end
         if path == "Logger.lua" or path == "GameState.lua" or path == "OfferSnapshot.lua"
-            or path == "ScoringEngine.lua" or path == "UI.lua" then
+            or path == "ScoringEngine.lua" or path == "UI.lua" or path == "ProfileResolver.lua" then
             path = "src/" .. path
         end
         return assert(loadfile(path, "t", env))()
@@ -128,12 +128,12 @@ local before = #logs
 local result = pack(game.CreateBoonLootButtons(screen, loot, nil, false, nil))
 check(calls == 1 and result.n == 4 and result[1] == "first"
     and result[2] == nil and result[3] == false and result[4] == nil, "return values changed")
-check(#logs == before + 9 and logs[before + 2] == "[BoonAdvisor] Source=AphroditeUpgrade", "missing diagnostic")
+check(#logs == before + 11 and logs[before + 2] == "[BoonAdvisor] Source=AphroditeUpgrade", "missing diagnostic")
 reload(); reload()
 check(installs() == 1, "double wrapper")
 before = #logs
 game.CreateBoonLootButtons(screen, loot, nil, false, nil)
-check(calls == 2 and #logs == before + 9, "reroll/reload duplicated diagnostics")
+check(calls == 2 and #logs == before + 11, "reroll/reload duplicated diagnostics")
 local keys = 0; for _ in pairs(loot) do keys = keys + 1 end
 check(keys == 2 and loot.Name == "AphroditeUpgrade" and loot.GodLoot == true, "mutation")
 
@@ -169,7 +169,7 @@ local co = coroutine.create(function() return g.CreateBoonLootButtons(screen, lo
 local first = pack(coroutine.resume(co))
 check(first[1] and first[2] == "native wait" and #l == before, "diagnostic ran before native completion")
 local last = pack(coroutine.resume(co))
-check(last.n == 3 and last[1] and last[2] == 7 and last[3] == nil and #l == before + 9, "yield/return broken")
+check(last.n == 3 and last[1] and last[2] == 7 and last[3] == nil and #l == before + 11, "yield/return broken")
 
 local Logger = assert(loadfile("src/Logger.lua"))()
 local loggerCalls = 0
@@ -193,14 +193,14 @@ local state = privateState.probeState
 local initialDiagnostic = state.diagnose
 before = #hl
 permanentWrapper(screen, loot)
-check(#hl == before + 9, "initial diagnostic not called")
+check(#hl == before + 11, "initial diagnostic not called")
 local replacementCalls = 0
 state.diagnose = function(s, source)
     check(s == screen and source == loot, "replacement arguments changed")
     replacementCalls = replacementCalls + 1
 end
 result = pack(hg.CreateBoonLootButtons(screen, loot))
-check(replacementCalls == 1 and #hl == before + 9, "replacement diagnostic not used")
+check(replacementCalls == 1 and #hl == before + 11, "replacement diagnostic not used")
 check(result.n == 2 and result[1] == "native" and result[2] == nil, "replacement changed native returns")
 check(hg.CreateBoonLootButtons == permanentWrapper and hookCount() == 1, "wrapper replaced or installed twice")
 hotReload()
@@ -208,7 +208,7 @@ check(state == privateState.probeState and state.diagnose ~= initialDiagnostic,
     "reload did not refresh diagnostic in persistent state")
 before = #hl
 hg.CreateBoonLootButtons(screen, loot)
-check(#hl == before + 9 and replacementCalls == 1, "reloaded diagnostic not used")
+check(#hl == before + 11 and replacementCalls == 1, "reloaded diagnostic not used")
 for _, missing in ipairs({ false, "not callable" }) do
     state.diagnose = missing
     check(pack(permanentWrapper(screen, loot)).n == 2, "non-function diagnostic changed returns")
@@ -253,7 +253,7 @@ check(barrierInstalls() == 1 and bg.CreateBoonLootButtons == barrierWrapper,
 local beforeDiagnosticLookups = select(2, metrics())
 bg.CreateBoonLootButtons(screen, loot)
 local afterDiagnosticLookups = select(2, metrics())
-check(afterDiagnosticLookups == beforeDiagnosticLookups + 9,
+check(afterDiagnosticLookups == beforeDiagnosticLookups + 11,
     "logger did not resolve rom.log.info inside the Lua closure")
 print("PASS: initial all-mods/game gates; hot reload bypasses spent all-mods event; game/probe ready repeated; install not repeated; same wrapper; Path.Wrap=1; closure logger")
 
@@ -288,7 +288,7 @@ local pg, pl, phaseStart, _, phasePrivate = fixture(function() end, nil, true, {
     GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = { WeaponUpgrade = { TraitIndex = { DaggerRapidAttackTrait = true } } },
     IsGodTrait = function(name) return name == "AresWeaponBoon" end,
-})
+}, false, "intermediate")
 phaseStart()
 pg.CreateBoonLootButtons(phaseScreen, phaseLoot)
 local expectedPhaseLogs = {
@@ -338,7 +338,7 @@ local rg, rl, rankStart, _, rankPrivate = fixture(function() end, nil, true, {
     GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = { WeaponUpgrade = { TraitIndex = { DaggerRapidAttackTrait = true } } },
     IsGodTrait = function() return false end,
-})
+}, false, "intermediate")
 rankStart(); rg.CreateBoonLootButtons(rankScreen, rankLoot)
 local rankState = rankPrivate.probeState
 check(rankState.lastRankingReady == true and #rankState.lastRankedScores == 3,
@@ -378,7 +378,7 @@ local tg, tl, testStart, _, testPrivate, _, _, _, _, testCreated, testText, test
         CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerBackstabAspect" }, Traits = {} } },
         GetEquippedWeapon = function() return "WeaponDagger" end,
         LootData = {}, IsGodTrait = function() return false end,
-    }, true)
+    }, true, "intermediate")
 testStart(); tg.CreateBoonLootButtons(testScreen, testLoot)
 check(testPrivate.probeState.lastRankingReady == false
     and testPrivate.probeState.lastRankedScores == nil
@@ -397,7 +397,7 @@ local fg, fl, falseStart, _, falsePrivate, _, _, _, _, falseCreated = fixture(
     function() end, nil, true, {
         CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerBackstabAspect" }, Traits = {} } },
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
-    }, false)
+    }, false, "intermediate")
 falseStart(); fg.CreateBoonLootButtons(testScreen, testLoot)
 check(#falseCreated == 1 and falsePrivate.probeState.lastRankingReady == false,
     "UI_TEST_MODE=false did not render analysis fallback")
@@ -419,7 +419,7 @@ local partialGame, _, partialStart, _, _, _, _, _, _, _, partialText = fixture(
             { Name = "DaggerBackstabAspect", Slot = "Aspect", IsWeaponEnchantment = true },
         } } },
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
-    }, false)
+    }, false, "intermediate")
 partialStart(); partialGame.CreateBoonLootButtons(partialScreen, partialLoot)
 local sawPartialConflict = false
 for _, text in ipairs(partialText) do if text.RawText == "Conflit · Aspect" then sawPartialConflict = true end end
@@ -436,7 +436,7 @@ local rg2, rl2, realStart, _, realPrivate, _, _, _, _, realCreated = fixture(
     function() end, nil, true, {
         CurrentRun = rankRun,
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
-    }, true)
+    }, true, "intermediate")
 realStart(); rg2.CreateBoonLootButtons(realScreen, testLoot)
 check(realPrivate.probeState.lastRankingReady == true and #realCreated == 6,
     "UI_TEST_MODE did not preserve real ready UI")
@@ -461,7 +461,7 @@ local tryGame, tryLogs, tryStart, tryInstalls, tryPrivate, tryLoadMain, _, _, tr
             if tryMode == "error" then error("native TryUpgradeBoon failure") end
             return { Id = "newButton" }, nil, "tail"
         end,
-    }, true)
+    }, true, "intermediate")
 tryStart()
 local tryResult = pack(tryGame.TryUpgradeBoon(testLoot, testScreen, "oldButton"))
 check(tryCalls == 1 and tryResult.n == 3 and tryResult[1].Id == "newButton"
@@ -507,7 +507,7 @@ local ig, il, igStart, _, igPrivate, _, _, _, _, igCreated, igText, igDestroyed,
             testLoot.UpgradeOptions[1].Rarity = "Heroic"
             return { Id = "new1" }
         end,
-    }, true)
+    }, true, "intermediate")
 igStart()
 -- Initial render creates the old annotations; sublimation must replace them exactly once.
 ig.CreateBoonLootButtons(integrationScreen, testLoot)
@@ -547,7 +547,7 @@ local selectorLoot = { Name = "AphroditeUpgrade", GodLoot = true, UpgradeOptions
 } }
 local selectorScreen = { Source = selectorLoot, KeepOpen = true, Components = {} }
 local selectorRun = { Hero = { SlottedTraits = { Aspect = "DaggerBackstabAspect" },
-    Traits = {}, Weapons = {} } }
+    Traits = { { Name = "DaggerBackstabAspect", IsWeaponEnchantment = true } }, Weapons = {} } }
 local starterGame, starterLogs, starterStart = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
@@ -559,18 +559,61 @@ check(hasLog(starterLogs, "BuildId=sister_blades_melinoe_starter ProfileMode=sta
 local defaultGame, defaultLogs, defaultStart = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
-})
+}, false, "intermediate")
 defaultStart()
 defaultGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
 check(hasLog(defaultLogs, "BuildId=sister_blades_melinoe_intermediate ProfileMode=intermediate SchemaVersion=1"),
-    "default build profile did not preserve Intermediate")
+    "explicit Intermediate profile was not preserved")
+local autoMorriganGame, autoMorriganLogs, autoMorriganStart = fixture(function() end, nil, true, {
+    CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerTripleAspect" }, Traits = {
+        { Name = "DaggerTripleAspect", IsWeaponEnchantment = true },
+    }, Weapons = {} } },
+    GetEquippedWeapon = function() return "WeaponDagger" end,
+    LootData = {}, IsGodTrait = function() return false end,
+})
+autoMorriganStart()
+autoMorriganGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(hasLog(autoMorriganLogs, "BuildId=sister_blades_morrigan_meta ProfileMode=meta SchemaVersion=1 Supported=true"),
+    "auto mode did not resolve the singleton Morrigan profile")
+local autoMelinoeGame, autoMelinoeLogs, autoMelinoeStart = fixture(function() end, nil, true, {
+    CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
+    LootData = {}, IsGodTrait = function() return false end,
+})
+autoMelinoeStart()
+autoMelinoeGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(hasLog(autoMelinoeLogs, "Profile resolution=ambiguous")
+    and hasLog(autoMelinoeLogs, "Supported=false")
+    and not hasLog(autoMelinoeLogs, "BuildId=sister_blades_melinoe_intermediate"),
+    "auto Melinoe did not remain ambiguous without a selected BuildId")
 local invalidGame, invalidLogs, invalidStart = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
 }, false, "not-a-profile")
 invalidStart()
 invalidGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
-check(hasLog(invalidLogs, "Unknown BUILD_PROFILE=not-a-profile; using intermediate")
-    and hasLog(invalidLogs, "BuildId=sister_blades_melinoe_intermediate ProfileMode=intermediate SchemaVersion=1"),
-    "invalid profile did not emit explicit safe fallback")
-print("PASS: build profile selector defaults to Intermediate, selects Starter, and warns while safely falling back")
+check(hasLog(invalidLogs, "Profile resolution=ambiguous")
+    and hasLog(invalidLogs, "Supported=false"),
+    "invalid profile did not fail safely on ambiguous compatible profiles")
+local morriganGame, morriganLogs, morriganStart = fixture(function() end, nil, true, {
+    CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerTripleAspect" }, Traits = {
+        { Name = "DaggerTripleAspect", Slot = "Aspect", IsWeaponEnchantment = true },
+    }, Weapons = {} } },
+    GetEquippedWeapon = function() return "WeaponDagger" end,
+    LootData = {}, IsGodTrait = function() return false end,
+}, false, "intermediate")
+morriganStart()
+morriganGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(hasLog(morriganLogs, "BuildId=sister_blades_morrigan_meta ProfileMode=meta SchemaVersion=1 Supported=true"),
+    "Morrigan did not auto-select morrigan_meta")
+local invalidMorriganGame, invalidMorriganLogs, invalidMorriganStart = fixture(function() end, nil, true, {
+    CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerTripleAspect" }, Traits = {
+        { Name = "DaggerTripleAspect", Slot = "Aspect", IsWeaponEnchantment = true },
+    }, Weapons = {} } },
+    GetEquippedWeapon = function() return "WeaponDagger" end,
+    LootData = {}, IsGodTrait = function() return false end,
+}, false, "not-a-profile")
+invalidMorriganStart()
+invalidMorriganGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(hasLog(invalidMorriganLogs, "BuildId=sister_blades_morrigan_meta ProfileMode=meta SchemaVersion=1 Supported=true"),
+    "invalid preference incorrectly rejected the sole Morrigan candidate")
+print("PASS: build profile resolver defaults, exact aspect selection, singleton fallback, and ambiguity safety")

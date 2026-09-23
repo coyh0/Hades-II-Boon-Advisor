@@ -9,6 +9,9 @@ return {
         DemeterCastBoon = "BACKSTAB_SETUP",
         ZeusSpecialBoon = "ASPECT_COMPATIBLE",
     },
+    autoSignals = {
+        ForceAresBoonKeepsake = true,
+    },
     bloodDropEngine = {
         payoffs = {
             DoubleBloodDropBoon = true,

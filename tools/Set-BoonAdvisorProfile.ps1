@@ -10,7 +10,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 if (-not $Show -and [string]::IsNullOrWhiteSpace($Profile)) {
-    throw 'Specify -Profile intermediate|starter, or use -Show.'
+    throw 'Specify -Profile auto|intermediate|starter|morrigan_meta, or use -Show.'
 }
 $target = [IO.Path]::GetFullPath($TargetPath)
 $settingsPath = Join-Path $target 'config\settings.lua'
@@ -21,7 +21,9 @@ if (-not (Test-Path -LiteralPath $registryPath -PathType Leaf)) { throw "Generat
 $registryText = [IO.File]::ReadAllText($registryPath)
 $registryMatches = [regex]::Matches($registryText, 'selectionKey\s*=\s*"([a-z][a-z0-9_]*)"')
 $validProfiles = @($registryMatches | ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique)
-if ($validProfiles.Count -eq 0 -or $validProfiles.Count -ne $registryMatches.Count) {
+$validProfiles += 'auto'
+$validProfiles = @($validProfiles | Sort-Object -Unique)
+if ($validProfiles.Count -eq 0 -or $validProfiles.Count - 1 -ne $registryMatches.Count) {
     throw "Generated profile registry is malformed: $registryPath"
 }
 $text = [IO.File]::ReadAllText($settingsPath)

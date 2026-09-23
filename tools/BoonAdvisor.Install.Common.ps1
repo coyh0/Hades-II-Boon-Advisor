@@ -2,7 +2,7 @@
 
 $script:BoonAdvisorPluginDirectory = 'Local-HadesIIBoonAdvisor'
 $script:BoonAdvisorExpectedFiles = @(
-    'GameState.lua', 'Logger.lua', 'OfferSnapshot.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua', 'manifest.json',
+    'GameState.lua', 'Logger.lua', 'OfferSnapshot.lua', 'ProfileResolver.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua', 'manifest.json',
     'config\settings.lua', 'data\builds\registry.lua', 'data\builds\sister_blades_melinoe_intermediate.lua',
     'data\builds\sister_blades_melinoe_starter.lua', 'data\builds\sister_blades_morrigan_meta.lua'
 ) | Sort-Object

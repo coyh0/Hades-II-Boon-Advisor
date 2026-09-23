@@ -19,6 +19,7 @@ local GameStateSnapshot = import("GameState.lua")
 local OfferSnapshot = import("OfferSnapshot.lua")
 local ScoringEngine = import("ScoringEngine.lua")
 local UI = import("UI.lua")
+local ProfileResolver = import("ProfileResolver.lua")
 UI.setLogger(function(message) state.log(message) end)
 
 local function getUIApi()
@@ -31,14 +32,19 @@ local function getUIApi()
     }
 end
 local buildProfileRegistry = import("data/builds/registry.lua")
-local selectedProfileKey = settings.BUILD_PROFILE or "intermediate"
-local selectedProfile = buildProfileRegistry[selectedProfileKey]
-local profileSelectionWarning = nil
-if selectedProfile == nil then
-    profileSelectionWarning = "Unknown BUILD_PROFILE=" .. tostring(selectedProfileKey) .. "; using intermediate"
-    selectedProfile = buildProfileRegistry.intermediate
+local configuredProfileKey = settings.BUILD_PROFILE
+local preferredProfileKey = configuredProfileKey ~= "auto" and configuredProfileKey or nil
+local loadedProfiles = {}
+for _, descriptor in pairs(buildProfileRegistry) do
+    if type(descriptor) == "table" and type(descriptor.module) == "string"
+        and loadedProfiles[descriptor.module] == nil then
+        loadedProfiles[descriptor.module] = import(descriptor.module)
+    end
 end
-local sisterBladesMelinoe = import(selectedProfile.module)
+local function getLoadedProfile(descriptor)
+    if type(descriptor) ~= "table" then return nil end
+    return loadedProfiles[descriptor.module]
+end
 
 local function joinedKeys(values)
     local keys = {}
@@ -80,14 +86,20 @@ local function diagnose(screen, lootData)
         GetEquippedWeapon = type(gameGlobals) == "table" and gameGlobals.GetEquippedWeapon or nil,
         LootData = type(gameGlobals) == "table" and gameGlobals.LootData or nil,
         IsGodTrait = type(gameGlobals) == "table" and gameGlobals.IsGodTrait or nil,
-        StatusMappings = sisterBladesMelinoe.statusMappings,
     })
+    local selectedDescriptor, selectionReason = ProfileResolver.resolve(
+        buildProfileRegistry, snapshot.weapon, snapshot.aspect, preferredProfileKey,
+        snapshot.traits, loadedProfiles)
+    local selectedProfile = getLoadedProfile(selectedDescriptor)
+    local profileSelectionWarning = selectedProfile == nil
+        and ("Profile resolution=" .. tostring(selectionReason)) or nil
     snapshot.offers = OfferSnapshot.capture(screen, lootData)
     state.lastSnapshot = snapshot
-    local scores = ScoringEngine.scoreOffers(snapshot, sisterBladesMelinoe)
+    local scores = selectedProfile and ScoringEngine.scoreOffers(snapshot, selectedProfile) or {}
     state.lastScores = scores
-    local profileValid, profileValidationError = ScoringEngine.validateProfile(sisterBladesMelinoe)
-    local profileSupported = profileValid and ScoringEngine.isProfileSupported(snapshot, sisterBladesMelinoe)
+    local profileValid, profileValidationError = false, "no compatible profile"
+    if selectedProfile ~= nil then profileValid, profileValidationError = ScoringEngine.validateProfile(selectedProfile) end
+    local profileSupported = profileValid and ScoringEngine.isProfileSupported(snapshot, selectedProfile)
     local rankingContext = ScoringEngine.getRankingContext(scores, profileSupported)
     local rankingReady = ScoringEngine.isRankingReady(scores, rankingContext)
     state.lastRankingReady = rankingReady
@@ -126,7 +138,11 @@ local function diagnose(screen, lootData)
             } },
         })
     elseif not profileSupported then
-        renderFallback({ code = "UNSUPPORTED_PROFILE", title = "PROFIL NON PRIS EN CHARGE" })
+        if selectionReason == "ambiguous" then
+            renderFallback({ code = "AMBIGUOUS_PROFILE", title = "PROFIL À CHOISIR" })
+        else
+            renderFallback({ code = "UNSUPPORTED_PROFILE", title = "PROFIL NON PRIS EN CHARGE" })
+        end
     else
         local replacement = false
         local incomplete = 0
@@ -215,23 +231,23 @@ local function diagnose(screen, lootData)
     end
 
     if profileSelectionWarning ~= nil then state.log(profileSelectionWarning) end
-    state.log("BuildId=" .. tostring(sisterBladesMelinoe.id)
-        .. " ProfileMode=" .. tostring(sisterBladesMelinoe.profileMode)
-        .. " SchemaVersion=" .. tostring(sisterBladesMelinoe.schemaVersion)
+    state.log("BuildId=" .. tostring(selectedProfile and selectedProfile.id or nil)
+        .. " ProfileMode=" .. tostring(selectedProfile and selectedProfile.profileMode or nil)
+        .. " SchemaVersion=" .. tostring(selectedProfile and selectedProfile.schemaVersion or nil)
         .. " Supported=" .. tostring(profileSupported))
     if not profileValid then state.log("Profile validation failed: " .. tostring(profileValidationError)) end
     if profileSupported then
         local arcana = snapshot.activeArcana.EffectVulnerabilityMetaUpgrade
         state.log("Arcana Origination Active=" .. tostring(type(arcana) == "table")
             .. " Rarity=" .. tostring(type(arcana) == "table" and arcana.Rarity or nil))
-        local ownedContext = ScoringEngine.getStatusContext(snapshot, sisterBladesMelinoe)
+        local ownedContext = ScoringEngine.getStatusContext(snapshot, selectedProfile)
         state.log("OwnedStatusFamilies=" .. joinedKeys(ownedContext.ownedStatusFamilies))
         for _, offer in ipairs(snapshot.offers) do
             local origination = ScoringEngine.getOriginationContext(
-                snapshot, sisterBladesMelinoe, offer.ItemName)
-            local core = ScoringEngine.getCoreSlotContext(snapshot, sisterBladesMelinoe, offer)
+                snapshot, selectedProfile, offer.ItemName)
+            local core = ScoringEngine.getCoreSlotContext(snapshot, selectedProfile, offer)
             local interaction = ScoringEngine.getAspectInteraction(
-                sisterBladesMelinoe, offer.ItemName)
+                selectedProfile, offer.ItemName)
             state.log("Context originalIndex=" .. tostring(offer.originalIndex)
                 .. " StatusFamily=" .. tostring(origination.status.offeredStatusFamily)
                 .. " StatusKnowledge=" .. tostring(origination.status.statusKnowledge)

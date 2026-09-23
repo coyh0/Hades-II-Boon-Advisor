@@ -82,7 +82,7 @@ foreach ($forbidden in './tests', './tools', './data/canonical', './dist', './do
 }
 
 $runtimeExpected = @(
-    'GameState.lua', 'Logger.lua', 'OfferSnapshot.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua',
+    'GameState.lua', 'Logger.lua', 'OfferSnapshot.lua', 'ProfileResolver.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua',
     'config/settings.lua',
     'data/builds/registry.lua',
     'data/builds/sister_blades_melinoe_intermediate.lua',

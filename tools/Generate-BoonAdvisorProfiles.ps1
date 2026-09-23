@@ -62,6 +62,7 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds) {
     if ($profile.source -isnot [hashtable]) { Fail 'source must be an object' }
     Assert-String $profile.source.type 'source.type'; Assert-String $profile.source.profile 'source.profile'
     if ($profile.slots -isnot [hashtable]) { Fail 'slots must be an object' }
+    if ($profile.ContainsKey('autoSignals')) { Assert-StringArray $profile.autoSignals 'autoSignals' }
     foreach ($slotName in $profile.slots.Keys) {
         if ($slotName -notin @('Attack', 'Special', 'Cast', 'Sprint', 'Mana')) { Fail "unknown slot name $slotName" }
         $slot = $profile.slots[$slotName]
@@ -160,6 +161,7 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
     foreach ($field in @('schemaVersion', 'id', 'weapon', 'aspect', 'profileMode', 'selectionKey', 'source', 'slots', 'constraints')) {
         $composed[$field] = $profile[$field]
     }
+    if ($profile.ContainsKey('autoSignals')) { $composed.autoSignals = To-IdSet $profile.autoSignals }
     foreach ($field in @('weights', 'statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
         $composed[$field] = $mechanics[$field]
     }

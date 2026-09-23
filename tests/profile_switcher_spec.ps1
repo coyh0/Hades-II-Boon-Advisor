@@ -23,6 +23,9 @@ if ((Get-FileHash -LiteralPath $settings -Algorithm SHA256).Hash -ne $starterHas
 if ([IO.File]::ReadAllText($settings) -notmatch 'BUILD_PROFILE\s*=\s*"intermediate"') { throw 'starter -> intermediate failed.' }
 & $script -Profile morrigan_meta -TargetPath $target | Out-Null
 if ([IO.File]::ReadAllText($settings) -notmatch 'BUILD_PROFILE\s*=\s*"morrigan_meta"') { throw 'dynamic Morrigan profile selection failed.' }
+$auto = Join-Path ([IO.Path]::GetTempPath()) ('profile-switcher-auto-' + [Guid]::NewGuid()); Copy-Item -LiteralPath $target -Destination $auto -Recurse
+& $script -Profile auto -TargetPath $auto | Out-Null
+if ([IO.File]::ReadAllText((Join-Path $auto 'config\settings.lua')) -notmatch 'BUILD_PROFILE\s*=\s*"auto"') { throw 'auto profile selection failed.' }
 $showHash = (Get-FileHash -LiteralPath $settings -Algorithm SHA256).Hash
 & $script -Show -TargetPath $target | Out-Null
 if ((Get-FileHash -LiteralPath $settings -Algorithm SHA256).Hash -ne $showHash) { throw '-Show mutated settings.' }

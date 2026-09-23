@@ -7,6 +7,7 @@
   "selectionKey": "intermediate",
   "source": { "type": "sheet", "profile": "Intermediate" },
   "mechanicsTemplate": "sister_blades_melinoe",
+  "autoSignals": ["ForceAresBoonKeepsake"],
   "slots": {
     "Attack": { "core": ["AresWeaponBoon"], "alternatives": ["AphroditeWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },
     "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },

@@ -192,6 +192,12 @@ check(textBoxes[#textBoxes - 1].Width == 600 and textBoxes[#textBoxes].Width == 
 UI.clearFallback(fallbackScreen, api)
 check(fallbackScreen.BoonAdvisorFallback == nil and screen.Components.BoonAdvisorFallback == nil,
     "fallback cleanup failed")
+local ambiguousScreen = { Components = { PurchaseButton1 = { Id = "purchase1" } } }
+UI.renderFallback(ambiguousScreen, { code = "AMBIGUOUS_PROFILE", title = "PROFIL À CHOISIR",
+    subtitle = "Analyse automatique indéterminée" }, api)
+check(textBoxes[#textBoxes - 1].RawText == "PROFIL À CHOISIR",
+    "ambiguous profile fallback label was not rendered")
+UI.clearFallback(ambiguousScreen, api)
 local pluralFallbackScreen = { Components = { PurchaseButton1 = { Id = "purchase-plural" } } }
 UI.renderFallback(pluralFallbackScreen, { code = "INCOMPLETE_ANALYSIS", title = "ANALYSE INCOMPLÈTE",
     subtitle = "Classement global indisponible", incompleteCount = 2 }, api)
