@@ -26,9 +26,10 @@ This file is the project roadmap and the source of truth for planned work and va
 - [x] **10B.2 — Morrigan runtime validation** — COMPLETE (in-game log + visual ranking)
   - Confirmed `WeaponDagger + DaggerTripleAspect` resolves to `sister_blades_morrigan_meta` with `Supported=true` and `RankingReady=true` in game.
   - Confirmed ranking appears after removing the duplicate backup plugin from the active plugins directory.
-- [ ] **10B.3 — Melinoë regression** — NEXT
-  - Re-test Intermediate and Starter behavior after resolver changes.
-- [ ] **10B.4 — Unsupported regression**
+- [x] **10B.3 — Melinoë regression** — COMPLETE (Intermediate and Starter validated in game)
+  - Confirmed both profiles for `WeaponDagger + DaggerBackstabAspect` with visual rankings.
+  - Live logs confirmed correct BuildId and Supported=true for both; Starter RankingReady=true.
+- [ ] **10B.4 — Unsupported regression** — NEXT
   - Re-test Artemis and unknown weapon/aspect combinations.
 - [ ] **10B.5 — Morrigan real-offer validation**
   - Validate ranking, reasons, reroll refresh and Sublime/rarity refresh on real offers.
