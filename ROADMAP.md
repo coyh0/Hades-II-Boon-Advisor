@@ -158,10 +158,6 @@ Community Curator is independently migrating the private human guides and normal
   - `docs/INSTALL.md`, `docs/UPDATE.md`, `docs/UNINSTALL.md`, and patch-compatibility guidance were converted to English and validated with generic public path placeholders.
 - [x] Review Thunderstore description and README content.
   - `thunderstore.toml` already used an English safety-focused description; the source README used for future Thunderstore packages is now English-first and preserves the AI disclosure and informational-only guarantees.
-- [ ] Publish the English changelog on Thunderstore in the next package version.
-  - The live Thunderstore `0.1.2` changelog still renders the French `CHANGELOG.md` that was bundled when `0.1.2` was published.
-  - Thunderstore package versions are immutable, so `0.1.2` cannot be edited in place; the already-translated English `CHANGELOG.md` on `main` will appear only after a new package version is built and published.
-  - This is non-blocking for `0.1.2`; carry it as a required release checklist item for the next published version so the Thunderstore changelog switches to English.
 - [x] Document Epic/Thunderstore deployment behavior if the current manager deployment limitation persists.
   - Documented as an observed workaround only: on one tested Epic Games installation, the manager kept `ReturnOfModding` inside its profile instead of copying it to `<Hades-II-root>\Ship\ReturnOfModding\`; users are told to compare/copy manually only if the mod does not appear in game.
 - [x] Keep French documentation optional/secondary.
@@ -297,6 +293,9 @@ Community Curator is independently migrating the private human guides and normal
 
 ### Phase 11 invariants
 
+> Historical 15-file statements in completed 11A/11B milestones record the state at those validation points. Current future-v0.2 `main` uses the validated **14-file** runtime after Starter removal.
+
+
 - **Keep external build-source identifiers private during import automation.**
   - Never hardcode or commit the maintainer's Google Sheet ID or full private Sheet URL.
   - Read the Sheet ID from an explicit local parameter, environment variable, connector context or secret store.
@@ -405,47 +404,46 @@ Community Curator is independently migrating the private human guides and normal
   - `DaggerSpecialJumpTrait` preserves `FinalJumpToOwner=true`; no blanket Zeus exclusion proven. No static mutual exclusion was found for `DaggerRapidAttackTrait` / `DaggerAttackFinisherTrait`, but dynamic behavior is not proven.
   - Hephaestus `WeaponUpgradeBoon` (Premium Service) requires one trait from each of three native groups **and** `WorldUpgradeWeaponUpgradeSystem`. Name-to-ID mappings of all human guide entries still need confirmation. Obtain precise native file paths/function excerpts and keep unresolved mechanics separate.
 - [ ] **11C.8 — Fix Ares base-branch scoring and rerun realistic live DEV validation.**
-  - Evaluate `AresWeaponBoon` as a valid Attack independently of Grievous Blow; model downstream Ares/Origination synergies separately and conservatively. Preserve safe replacement/partial-ranking logic and assert no unjustified `BUILD_SLOT_POLICY_DELTA`.
-  - Require native evidence annex, targeted regression tests, full relevant offline suites, new DEV deployment only with maintainer approval and live log/UI verification. No automatic Epic/live deployment.
-- [ ] **11C.9 — Finish Community Curator migration and approve human DATA.**
-  - Curator pilot documented Melinoë Blades, Morrigan and Black Coat Melinoë; approved atomic DATA schema and compact V2 guide design. Full migration of remaining Intermediate and Best Builds is in progress.
-  - Finalize normalized DATA, matching human guides, source-tier checks, visual/formula QA and safe cleanup of pilot/prototype tabs; preserve archives and unrelated tracker tabs. Maintainer reviews conflicting profile routes before Registry changes.
-- [ ] **11C.10 — Design Build Registry v2 only after approved DATA.**
-  - Map atomic guide rows into stable recommendation keys, phase-aware Keepsakes and targets, branch/pivot conditions, provenance and separate recommendation/mechanics verification statuses. Preserve legacy importer safety and exact verified native IDs.
-  - Keep documented `Priority` distinct from runtime score; missing/unknown conditions remain non-executable. Obtain maintainer approval for schema before editing Registry.
-- [ ] **11C.11 — Generate validated canonical profiles and introduce informational `keepsakePlan`.**
-  - Implement phase-aware guidance from vetted Registry records without steering RNG, modifying saves or assuming any Hammer reroll. Develop scoring changes independently from documentary recommendations.
-  - Re-run deterministic canonical/Lua generation, importer, install/update/uninstall and packaging regressions; then complete realistic DEV validation for each planned v0.2 profile.
-- [ ] Generate/expand profile-resolution regression tests automatically where practical.
-- [x] Define the multiple-profile policy for the same weapon/aspect pair:
-  - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
-  - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
-  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) is the primary profile-affinity evidence; decisive owned-Boon state must outrank pre-Boon intent signals such as starting keepsakes.
-  - Validated pre-Boon signals are fallback evidence for early-run detection when owned-Boon evidence is absent or tied; future profiles may add explicit activation/signature metadata if needed.
-  - If all available evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
-  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
-  - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
-- [ ] Add more supported builds and Aspects.
+  - Evaluate `AresWeaponBoon` as a valid Attack independently of Grievous Blow. Keep downstream Rend/Origination synergy conservative until category-combination behavior is proven.
+  - Preserve safe replacement/partial-ranking behavior and assert no unjustified `BUILD_SLOT_POLICY_DELTA`; add direct regression coverage for normal↔Ares replacement cases.
+  - First obtain the native evidence annex (file paths/functions/short excerpts), then run targeted + full relevant offline suites. DEV redeployment requires maintainer approval and final live log/UI verification; never touch Epic/live automatically.
+- [ ] **11C.9 — Finish Community Curator migration, approve DATA, and freeze the intended v0.2 profile set.**
+  - Full migration of remaining Intermediate and Best Builds is in progress using the approved atomic DATA schema and compact V2 human-guide design.
+  - Finish source-tier checks, DATA + formula/visual QA, promotion to final human/Data tabs, and safe cleanup of pilot/prototype tabs while preserving archives and unrelated tracker tabs.
+  - Maintainer reviews unresolved recommendation conflicts and explicitly confirms which profiles are v0.2 runtime targets. Curator DATA may document many builds without implying runtime support.
+- [ ] **11C.10 — Design and approve Build Registry v2 from finalized DATA.**
+  - Map atomic guide rows into stable recommendation keys, phase-aware Keepsakes/targets, branch and pivot conditions, provenance, and distinct recommendation/mechanics verification states.
+  - Keep documentary `Priority` separate from runtime scoring; unknown/missing conditions remain non-executable. Preserve exact verified native IDs and legacy importer safety.
+  - Approve the Registry schema before modifying the private Registry or canonical generation.
+- [ ] **11C.11 — Generate vetted canonical profiles and introduce informational `keepsakePlan`.**
+  - Import only approved Registry records with verified IDs/mechanics. Generate phase-aware Keepsake guidance without changing RNG, offers, saves or player choice.
+  - Add/expand resolver regression generation where practical as part of this work rather than as a separate open-ended task.
+  - Re-run deterministic canonical/Lua generation, importer, scoring/resolver, staging, install/update/uninstall and packaging regressions; then complete realistic DEV validation for each planned v0.2 profile.
+- [x] **Multiple-profile policy for the same weapon/aspect pair is defined.**
+  - `auto` filters by exact weapon + aspect, then uses decisive owned build evidence before validated pre-Boon intent signals. If evidence is absent/tied, fail safely as ambiguous.
+  - Manual explicit profile selection remains an override/fallback for true same-aspect ambiguity. Profile identity remains separate from weapon/aspect identity.
+  - New profiles must not reintroduce offer-based profile selection or hidden defaults.
 
 ### 11D — v0.2 release readiness
 
-`v0.1.2` remains the published Sister Blades-only release. All following work targets a future `v0.2`; no release action is authorized by this roadmap update.
+`v0.1.2` remains the published Sister Blades-only release. 11D is a **release gate only**: implementation/audit work belongs to 11C and is not duplicated here. No release action is authorized until the relevant 11C milestones are complete.
 
-- [ ] Modernize `README.md` and repository description for multi-weapon support while clearly distinguishing published `v0.1.2` from future `v0.2`.
-- [ ] Modernize `docs/RUNTIME_TEST.md` from the Phase 1 probe procedure to the current resolver/full/partial/reroll/Sublime/localization validation flow.
-- [ ] Refresh or clearly mark historical sections in `docs/TECHNICAL_ANALYSIS.md` that describe obsolete profile defaults, unsupported generated profiles or old staging inventories.
-- [ ] Expand the release/developer validation gate so Build Registry import and packaging regressions cannot be skipped accidentally.
-- [ ] Prevent building a `0.1.2` artifact from future-v0.2 `main`; bump the version before release artifact creation.
-- [ ] Re-check pinned dependency/runtime versions before release.
-- [ ] Require every profile intended for v0.2 to pass the permanent Community Audit Gate and its corresponding realistic DEV runtime validation before release.
-- [ ] Complete Ares base-branch scoring fix and confirm Melinoë's correct live ranking; verify remaining Origination category behavior before adding synergy scores.
-- [ ] Finalize and approve the two human DATA/reference tiers and the Registry v2 mapping before regenerating any newly promoted profile.
-- [ ] Confirm the intended v0.2 profile set (Intermediate vs any future Meta route) after Curator review.
-- [ ] Run live regression validation for every profile intended for `v0.2`.
-- [ ] Prepare the Thunderstore changelog in English.
-- [ ] Bump version, rebuild staging/package, verify ZIP and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
-
-
+- [ ] **Modernize public/project documentation for the finalized v0.2 scope.**
+  - Update `README.md` and repository description for multi-weapon support while clearly separating published `v0.1.2` from future `v0.2`.
+  - Modernize `docs/RUNTIME_TEST.md` for the current resolver/full/partial/localization/profile validation flow.
+  - Refresh or mark historical sections in `docs/TECHNICAL_ANALYSIS.md` that describe obsolete defaults, profile inventories or staging counts.
+- [ ] **Harden the release/developer gate.**
+  - Ensure Build Registry import, deterministic generation, staging/package inventory, install/update/uninstall, localization, scoring/resolver and package regressions cannot be skipped accidentally.
+  - Prevent building a `0.1.2` artifact from future-v0.2 `main`; bump version metadata before release artifact creation.
+- [ ] **Run final dependency and profile validation.**
+  - Re-check pinned dependency/runtime versions.
+  - Require every v0.2 profile to have its approved Community Audit/Data provenance, verified native IDs/mechanics where consequential, and realistic DEV runtime validation.
+  - Run final live regression for every profile in the maintainer-approved v0.2 profile set.
+- [ ] **Prepare public release content.**
+  - Ensure the source English `CHANGELOG.md` is the one bundled/published so Thunderstore no longer shows the historical French 0.1.2 changelog.
+  - Review AI disclosure, installation/update notes and supported-profile scope.
+- [ ] **Publish v0.2 only after all release gates pass.**
+  - Bump version, rebuild deterministic staging/packages, verify inventories and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
 
 ## Later — Profile selection and UI polish
 
@@ -460,23 +458,17 @@ Community Curator is independently migrating the private human guides and normal
 
 Stability and correctness come first. UI redesign happens after runtime/profile selection is proven stable.
 
-- [ ] Improve placement and hierarchy while preserving the native Hades II choice screen.
-- [ ] Improve visual integration with the Hades II style.
-- [ ] Review icons, emphasis and color usage where useful.
-- [ ] Prevent overlap at different resolutions and localized text lengths.
-- [ ] **Show the active/detected build profile discreetly in the in-game UI**, for example:
-  - `Profile: Melinoë — Intermediate`
-  - `Profile: Morrigan — Meta`
-  - When `auto` resolves a profile from live run state, show the detected profile so the player can immediately verify what the advisor is using.
-  - If a future manual override is active, distinguish it clearly but discreetly from an auto-detected profile.
-- [ ] Prefer a low-attention placement in the unused upper-right status area (near the current analysis/status message) so the player can confirm the active build without pulling focus away from the boon choices.
-- [ ] Keep the active-profile indicator visually secondary to ranking/status text: small type, low visual weight, no animation, and no extra input required.
-- [ ] Re-evaluate the exact placement during UI polish if localization or resolution constraints make the upper-right area too crowded.
-- [ ] Keep the active-profile indicator useful for both players and support/debugging without dominating the UI.
+- [ ] **Run one consolidated UI polish pass.**
+  - Improve placement, Hades II visual integration, icons/emphasis and hierarchy while preserving the native choice screen.
+  - Validate multiple resolutions and localized text lengths without overlap.
+- [ ] **Show the active/detected build profile discreetly.**
+  - Prefer the unused upper-right status area near analysis/status text; keep it small, low-attention and non-animated.
+  - Show auto-detected profile clearly enough for player/support diagnostics and distinguish any future manual override.
+  - Re-evaluate placement during the polish pass if localization/resolution makes the upper-right area crowded.
 
 ### Later — Build guidance and optimization
 
-Legendary/Duo eligibility and information-only RNG-steering guidance are deferred until after Pom priority and Build Setup Health. First verify game prerequisites and exact internal IDs; model goals, alternative prerequisites, and owned/missing state without changing RNG or offers. Consider later integration into Build Setup Health or scoring only after validation. Never assume `Premium Service` without verification.
+Legendary/Duo eligibility and information-only RNG-steering guidance are deferred until after Pom priority and Build Setup Health. Model goals, alternative prerequisites and owned/missing state without changing RNG or offers. Premium Service's native three-group gate plus `WorldUpgradeWeaponUpgradeSystem` requirement are verified at the mechanics level, but human-name→internal-ID mappings still require exact confirmation before runtime guidance.
 
 These features extend the advisor beyond immediate Boon ranking while remaining informational-only and visually secondary.
 
@@ -517,7 +509,7 @@ These are intentionally deferred beyond the current Phase 11 / future `v0.2` wor
 
 - A future explicit `recommended` metadata/policy may be added for discovery/documentation, but it must not silently override the user's choice when multiple profiles exist.
 - Lazy-loading/profile caching for a future large profile catalog.
-- Further multi-weapon profile expansion beyond the first Black Coat pilot.
+- Post-v0.2 runtime promotion of additional builds/aspects documented by Community Curator; DATA coverage alone never implies runtime support.
 - Large UI redesign.
 - Additional runtime languages beyond English/French.
 - Full automation from external build data sources.
