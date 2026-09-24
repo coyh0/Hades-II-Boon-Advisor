@@ -33,6 +33,58 @@ return {
     },
     hammerRoles = {},
     id = "black_coat_melinoe_intermediate",
+    keepsakePlan = {
+        Final = {
+            {
+                classification = "conditional",
+                conditionText = "If Death Defiances depleted or defensive boon needed",
+                documentaryPriority = 1,
+                recommendationId = "br2_coat_melinoe_intermediate_ba28f813ff6d8a27",
+                traitId = "AthenaEncounterKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If Death Defiances remain and extra safety needed",
+                documentaryPriority = 1,
+                recommendationId = "br2_coat_melinoe_intermediate_98387ade9e9341df",
+                traitId = "ReincarnationKeepsake",
+            },
+        },
+        R2 = {
+            {
+                classification = "conditional",
+                conditionText = "If Ares Special or Grievous Blow missing",
+                documentaryPriority = 1,
+                recommendationId = "br2_coat_melinoe_intermediate_26a4d7fa4e741847",
+                traitId = "ForceAresBoonKeepsake",
+            },
+        },
+        R3 = {
+            {
+                classification = "main",
+                conditionText = "If main boons secured",
+                documentaryPriority = 1,
+                recommendationId = "br2_coat_melinoe_intermediate_a90140fb0ff5c9e0",
+                traitId = "TimedBuffKeepsake",
+            },
+            {
+                classification = "conditional",
+                conditionText = "If key Hammer missing and random upgrade acceptable",
+                documentaryPriority = 2,
+                recommendationId = "br2_coat_melinoe_intermediate_760fb32ab047f5fe",
+                traitId = "TempHammerKeepsake",
+            },
+        },
+        Start = {
+            {
+                classification = "main",
+                conditionText = "Always",
+                documentaryPriority = 1,
+                recommendationId = "br2_coat_melinoe_intermediate_05cf1f64ff35b208",
+                traitId = "ForcePoseidonBoonKeepsake",
+            },
+        },
+    },
     knownNonStatusTraits = {},
     potentialStatusTraits = {},
     profileMode = "intermediate",

@@ -7,6 +7,24 @@
   "selectionKey": "intermediate",
   "source": { "type": "sheet", "profile": "Intermediate" },
   "mechanicsTemplate": "sister_blades_melinoe",
+  "keepsakePlan": {
+    "Start": [
+      { "traitId": "ForceAresBoonKeepsake", "classification": "main", "documentaryPriority": 1, "conditionText": "If owner Ares route selected", "recommendationId": "br2_blades_melinoe_intermediate_6879d93624658ee8" },
+      { "traitId": "ForceZeusBoonKeepsake", "classification": "alternative", "documentaryPriority": 1, "conditionText": "If Zeus-first Mobalytics route selected", "recommendationId": "br2_blades_melinoe_intermediate_ee98ea3a2027845e" }
+    ],
+    "R2": [
+      { "traitId": "ForceZeusBoonKeepsake", "classification": "conditional", "documentaryPriority": 1, "conditionText": "If Heaven Flourish missing after Ares start", "recommendationId": "br2_blades_melinoe_intermediate_79c367872fa86f25" },
+      { "traitId": "ForceAphroditeBoonKeepsake", "classification": "alternative", "documentaryPriority": 2, "conditionText": "If Aphrodite Attack pivot selected", "recommendationId": "br2_blades_melinoe_intermediate_784e30cff6770b94" }
+    ],
+    "R3": [
+      { "traitId": "TempHammerKeepsake", "classification": "conditional", "documentaryPriority": 2, "conditionText": "If key Hammer missing and random upgrade acceptable", "recommendationId": "br2_blades_melinoe_intermediate_536ab88a6673beba" },
+      { "traitId": "TimedBuffKeepsake", "classification": "situational", "documentaryPriority": 2, "conditionText": "If core boons secured and speed desired", "recommendationId": "br2_blades_melinoe_intermediate_996475bb0bcc7090" }
+    ],
+    "Final": [
+      { "traitId": "ReincarnationKeepsake", "classification": "conditional", "documentaryPriority": 1, "conditionText": "If extra Death Defiance needed", "recommendationId": "br2_blades_melinoe_intermediate_66cba86eda75c5fb" },
+      { "traitId": "BossPreDamageKeepsake", "classification": "alternative", "documentaryPriority": 2, "conditionText": "If survival already secure", "recommendationId": "br2_blades_melinoe_intermediate_192669216c0c2294" }
+    ]
+  },
   "hammerPlan": [
     { "traitId": "DaggerDashAttackTripleTrait", "priority": 1, "classification": "priority" },
     { "traitId": "DaggerFinalHitTrait", "priority": 2, "classification": "alternative" },

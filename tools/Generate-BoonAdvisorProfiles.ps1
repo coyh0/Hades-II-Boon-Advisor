@@ -99,6 +99,40 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$
     Assert-String $profile.source.type 'source.type'; Assert-String $profile.source.profile 'source.profile'
     if ($profile.slots -isnot [hashtable]) { Fail 'slots must be an object' }
     if ($profile.ContainsKey('autoSignals')) { Assert-StringArray $profile.autoSignals 'autoSignals' }
+    if ($profile.ContainsKey('keepsakePlan')) {
+        if ($profile.keepsakePlan -isnot [hashtable]) { Fail 'keepsakePlan must be an object' }
+        $requiredPhases = @('Start', 'R2', 'R3', 'Final')
+        foreach ($phase in $requiredPhases) {
+            if (-not $profile.keepsakePlan.ContainsKey($phase)) { Fail "keepsakePlan is missing phase $phase" }
+            $entries = $profile.keepsakePlan[$phase]
+            if ($entries -isnot [object[]]) { Fail "keepsakePlan.$phase must be an array" }
+            $seenKeepsakes = @{}
+            foreach ($entry in $entries) {
+                if ($entry -isnot [hashtable]) { Fail "keepsakePlan.$phase entry must be an object" }
+                foreach ($key in $entry.Keys) {
+                    if ($key -cnotin @('traitId', 'classification', 'documentaryPriority', 'conditionText', 'recommendationId')) {
+                        Fail "unknown keepsakePlan field $key"
+                    }
+                }
+                Assert-String $entry.traitId "keepsakePlan.$phase.traitId"
+                if ($seenKeepsakes[$entry.traitId]) { Fail "keepsakePlan.$phase contains duplicate trait ID $($entry.traitId)" }
+                $seenKeepsakes[$entry.traitId] = $true
+                if ($entry.classification -cnotin @('main', 'alternative', 'conditional', 'situational')) {
+                    Fail "unsupported keepsakePlan classification $($entry.classification)"
+                }
+                $priorityIsNumber = $entry.documentaryPriority -is [int] -or $entry.documentaryPriority -is [long] -or
+                    $entry.documentaryPriority -is [double] -or $entry.documentaryPriority -is [decimal]
+                if (-not $priorityIsNumber -or $entry.documentaryPriority -le 0 -or $entry.documentaryPriority % 1 -ne 0) {
+                    Fail 'keepsakePlan.documentaryPriority must be a positive integer'
+                }
+                Assert-String $entry.conditionText "keepsakePlan.$phase.conditionText"
+                Assert-String $entry.recommendationId "keepsakePlan.$phase.recommendationId"
+            }
+        }
+        foreach ($key in $profile.keepsakePlan.Keys) {
+            if ($key -cnotin $requiredPhases) { Fail "unknown keepsakePlan phase $key" }
+        }
+    }
     if ($profile.ContainsKey('hammerPlan')) {
         if ($profile.hammerPlan -isnot [object[]]) { Fail 'hammerPlan must be an array' }
         $seenHammerIds = @{}
@@ -241,6 +275,7 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
         $composed[$field] = $profile[$field]
     }
     if ($profile.ContainsKey('autoSignals')) { $composed.autoSignals = To-IdSet $profile.autoSignals }
+    if ($profile.ContainsKey('keepsakePlan')) { $composed.keepsakePlan = ConvertTo-HashtableRecursive $profile.keepsakePlan }
     if ($profile.ContainsKey('hammerPlan')) { $composed.hammerPlan = ConvertTo-HashtableRecursive $profile.hammerPlan }
     foreach ($field in @('statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
         $composed[$field] = $mechanics[$field]

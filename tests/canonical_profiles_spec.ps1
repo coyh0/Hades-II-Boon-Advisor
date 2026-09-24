@@ -130,6 +130,108 @@ Assert-Coat-Fails 'duplicate-id' '"id": "black_coat_melinoe_intermediate"' '"id"
 Assert-Coat-Fails 'duplicate-hammer-plan-id' '"SuitAttackSpeedTrait"' '"SuitDashAttackTrait"'
 Assert-Coat-Fails 'invalid-hammer-plan-priority' '"priority": 2' '"priority": 0'
 Assert-Coat-Fails 'invalid-hammer-plan-classification' '"classification": "alternative"' '"classification": "unknown"'
+function Assert-KeepsakePlan([string]$profileName, [hashtable]$expected) {
+    $profile = Get-Content -LiteralPath (Join-Path $repo "data\canonical\profiles\$profileName.json") -Raw | ConvertFrom-Json
+    foreach ($phase in @('Start', 'R2', 'R3', 'Final')) {
+        $actual = @($profile.keepsakePlan.$phase)
+        if ($actual.Count -ne $expected[$phase].Count) { throw "$profileName keepsakePlan.$phase count mismatch." }
+        for ($index = 0; $index -lt $actual.Count; $index++) {
+            $entry = $actual[$index]; $want = $expected[$phase][$index]
+            foreach ($field in @('traitId', 'classification', 'documentaryPriority', 'conditionText', 'recommendationId')) {
+                if ($entry.$field -cne $want[$field]) { throw "$profileName keepsakePlan.$phase entry $index $field mismatch." }
+            }
+        }
+    }
+}
+Assert-KeepsakePlan 'sister_blades_melinoe_intermediate' @{
+    Start = @(
+        @{ traitId = 'ForceAresBoonKeepsake'; classification = 'main'; documentaryPriority = 1; conditionText = 'If owner Ares route selected'; recommendationId = 'br2_blades_melinoe_intermediate_6879d93624658ee8' },
+        @{ traitId = 'ForceZeusBoonKeepsake'; classification = 'alternative'; documentaryPriority = 1; conditionText = 'If Zeus-first Mobalytics route selected'; recommendationId = 'br2_blades_melinoe_intermediate_ee98ea3a2027845e' }
+    ); R2 = @(
+        @{ traitId = 'ForceZeusBoonKeepsake'; classification = 'conditional'; documentaryPriority = 1; conditionText = 'If Heaven Flourish missing after Ares start'; recommendationId = 'br2_blades_melinoe_intermediate_79c367872fa86f25' },
+        @{ traitId = 'ForceAphroditeBoonKeepsake'; classification = 'alternative'; documentaryPriority = 2; conditionText = 'If Aphrodite Attack pivot selected'; recommendationId = 'br2_blades_melinoe_intermediate_784e30cff6770b94' }
+    ); R3 = @(
+        @{ traitId = 'TempHammerKeepsake'; classification = 'conditional'; documentaryPriority = 2; conditionText = 'If key Hammer missing and random upgrade acceptable'; recommendationId = 'br2_blades_melinoe_intermediate_536ab88a6673beba' },
+        @{ traitId = 'TimedBuffKeepsake'; classification = 'situational'; documentaryPriority = 2; conditionText = 'If core boons secured and speed desired'; recommendationId = 'br2_blades_melinoe_intermediate_996475bb0bcc7090' }
+    ); Final = @(
+        @{ traitId = 'ReincarnationKeepsake'; classification = 'conditional'; documentaryPriority = 1; conditionText = 'If extra Death Defiance needed'; recommendationId = 'br2_blades_melinoe_intermediate_66cba86eda75c5fb' },
+        @{ traitId = 'BossPreDamageKeepsake'; classification = 'alternative'; documentaryPriority = 2; conditionText = 'If survival already secure'; recommendationId = 'br2_blades_melinoe_intermediate_192669216c0c2294' }
+    )
+}
+Assert-KeepsakePlan 'sister_blades_morrigan_meta' @{
+    Start = @(
+        @{ traitId = 'ForceHeraBoonKeepsake'; classification = 'main'; documentaryPriority = 1; conditionText = 'If Hera Attack / Born Gain route selected'; recommendationId = 'br2_blades_morrigan_meta_eb0cc1beec69ff2a' },
+        @{ traitId = 'ForceApolloBoonKeepsake'; classification = 'alternative'; documentaryPriority = 1; conditionText = 'If Nova Strike / Lucid Gain route selected'; recommendationId = 'br2_blades_morrigan_meta_0c1ab9d2d5838e52' }
+    ); R2 = @(
+        @{ traitId = 'ForceHeraBoonKeepsake'; classification = 'conditional'; documentaryPriority = 1; conditionText = 'If Born Gain or Hera Attack missing after Apollo start'; recommendationId = 'br2_blades_morrigan_meta_9dc8940e35c783f4' },
+        @{ traitId = 'ForceApolloBoonKeepsake'; classification = 'alternative'; documentaryPriority = 2; conditionText = 'If safe Attack or Lucid Gain still missing'; recommendationId = 'br2_blades_morrigan_meta_045b71a5ec6ae51f' },
+        @{ traitId = 'RandomBlessingKeepsake'; classification = 'situational'; documentaryPriority = 2; conditionText = 'If Attack and Gain already secured'; recommendationId = 'br2_blades_morrigan_meta_ae16c2ee636cfc84' }
+    ); R3 = @(
+        @{ traitId = 'BossPreDamageKeepsake'; classification = 'situational'; documentaryPriority = 2; conditionText = 'If next Guardian needs damage/safety'; recommendationId = 'br2_blades_morrigan_meta_e991eff83952900f' },
+        @{ traitId = 'ReincarnationKeepsake'; classification = 'conditional'; documentaryPriority = 2; conditionText = 'If run survival is threatened'; recommendationId = 'br2_blades_morrigan_meta_468adabe05b33f40' }
+    ); Final = @(
+        @{ traitId = 'BossPreDamageKeepsake'; classification = 'main'; documentaryPriority = 1; conditionText = 'If room survival secure before final Guardian'; recommendationId = 'br2_blades_morrigan_meta_900dcecd675c94ad' },
+        @{ traitId = 'ReincarnationKeepsake'; classification = 'alternative'; documentaryPriority = 1; conditionText = 'If extra Death Defiance needed'; recommendationId = 'br2_blades_morrigan_meta_b9968febb27e3b57' }
+    )
+}
+Assert-KeepsakePlan 'black_coat_melinoe_intermediate' @{
+    Start = @(
+        @{ traitId = 'ForcePoseidonBoonKeepsake'; classification = 'main'; documentaryPriority = 1; conditionText = 'Always'; recommendationId = 'br2_coat_melinoe_intermediate_05cf1f64ff35b208' }
+    ); R2 = @(
+        @{ traitId = 'ForceAresBoonKeepsake'; classification = 'conditional'; documentaryPriority = 1; conditionText = 'If Ares Special or Grievous Blow missing'; recommendationId = 'br2_coat_melinoe_intermediate_26a4d7fa4e741847' }
+    ); R3 = @(
+        @{ traitId = 'TimedBuffKeepsake'; classification = 'main'; documentaryPriority = 1; conditionText = 'If main boons secured'; recommendationId = 'br2_coat_melinoe_intermediate_a90140fb0ff5c9e0' },
+        @{ traitId = 'TempHammerKeepsake'; classification = 'conditional'; documentaryPriority = 2; conditionText = 'If key Hammer missing and random upgrade acceptable'; recommendationId = 'br2_coat_melinoe_intermediate_760fb32ab047f5fe' }
+    ); Final = @(
+        @{ traitId = 'AthenaEncounterKeepsake'; classification = 'conditional'; documentaryPriority = 1; conditionText = 'If Death Defiances depleted or defensive boon needed'; recommendationId = 'br2_coat_melinoe_intermediate_ba28f813ff6d8a27' },
+        @{ traitId = 'ReincarnationKeepsake'; classification = 'alternative'; documentaryPriority = 1; conditionText = 'If Death Defiances remain and extra safety needed'; recommendationId = 'br2_coat_melinoe_intermediate_98387ade9e9341df' }
+    )
+}
+function Assert-KeepsakePlan-Fails([string]$name, [string]$profileName, [string]$missingPhase) {
+    $case = Join-Path $root $name
+    Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $case -Recurse
+    $path = Join-Path $case "$profileName.json"
+    $profile = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+    $profile.keepsakePlan.PSObject.Properties.Remove($missingPhase)
+    [IO.File]::WriteAllText($path, ($profile | ConvertTo-Json -Depth 20))
+    try {
+        & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $case -ValidateOnly 2>$null | Out-Null
+        if ($LASTEXITCODE -eq 0) { throw "Expected failure: $name" }
+    }
+    catch { if ($_.Exception.Message -like 'Expected failure:*') { throw } }
+}
+Assert-KeepsakePlan-Fails 'keepsake-plan-missing-phase' 'black_coat_melinoe_intermediate' 'Final'
+function Assert-KeepsakeEntry-Fails([string]$name, [string]$profileName, [string]$phase, [string]$find, [string]$replace) {
+    $case = Join-Path $root $name
+    Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $case -Recurse
+    $path = Join-Path $case "$profileName.json"
+    $profile = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+    $entry = $profile.keepsakePlan.$phase[0]
+    $entry.$find = $replace
+    [IO.File]::WriteAllText($path, ($profile | ConvertTo-Json -Depth 20))
+    try {
+        & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $case -ValidateOnly 2>$null | Out-Null
+        if ($LASTEXITCODE -eq 0) { throw "Expected failure: $name" }
+    }
+    catch { if ($_.Exception.Message -like 'Expected failure:*') { throw } }
+}
+Assert-KeepsakeEntry-Fails 'keepsake-plan-duplicate-trait' 'black_coat_melinoe_intermediate' 'Final' 'traitId' 'ReincarnationKeepsake'
+Assert-KeepsakeEntry-Fails 'keepsake-plan-invalid-classification' 'black_coat_melinoe_intermediate' 'Final' 'classification' 'unknown'
+Assert-KeepsakeEntry-Fails 'keepsake-plan-invalid-priority' 'black_coat_melinoe_intermediate' 'Final' 'documentaryPriority' 0
+Assert-KeepsakeEntry-Fails 'keepsake-plan-empty-recommendation' 'black_coat_melinoe_intermediate' 'Final' 'recommendationId' ''
+foreach ($profileName in @('sister_blades_morrigan_meta', 'black_coat_melinoe_intermediate')) {
+    $profile = Get-Content -LiteralPath (Join-Path $repo "data\canonical\profiles\$profileName.json") -Raw | ConvertFrom-Json
+    foreach ($phase in @('Start', 'R2', 'R3', 'Final')) {
+        if ($null -eq $profile.keepsakePlan.$phase) { throw "$profileName missing keepsakePlan.$phase" }
+        foreach ($entry in @($profile.keepsakePlan.$phase)) {
+            foreach ($field in @('traitId', 'classification', 'documentaryPriority', 'conditionText', 'recommendationId')) {
+                if ($null -eq $entry.PSObject.Properties[$field]) { throw "$profileName keepsakePlan.$phase missing $field" }
+            }
+        }
+    }
+}
+$coatProfile = Get-Content -LiteralPath (Join-Path $repo 'data\canonical\profiles\black_coat_melinoe_intermediate.json') -Raw | ConvertFrom-Json
+if (@($coatProfile.autoSignals) -join '|' -cne 'ForcePoseidonBoonKeepsake') { throw 'Black Coat Poseidon autoSignal changed.' }
 $unsafeProfiles = Join-Path $root 'unsafe-id-generation-profiles'
 Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $unsafeProfiles -Recurse
 $unsafeProfilePath = Join-Path $unsafeProfiles 'sister_blades_melinoe_intermediate.json'

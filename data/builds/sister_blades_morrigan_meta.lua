@@ -21,6 +21,79 @@ return {
     genericCoreAspectCompatibility = false,
     hammerRoles = {},
     id = "sister_blades_morrigan_meta",
+    keepsakePlan = {
+        Final = {
+            {
+                classification = "main",
+                conditionText = "If room survival secure before final Guardian",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_morrigan_meta_900dcecd675c94ad",
+                traitId = "BossPreDamageKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If extra Death Defiance needed",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_morrigan_meta_b9968febb27e3b57",
+                traitId = "ReincarnationKeepsake",
+            },
+        },
+        R2 = {
+            {
+                classification = "conditional",
+                conditionText = "If Born Gain or Hera Attack missing after Apollo start",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_morrigan_meta_9dc8940e35c783f4",
+                traitId = "ForceHeraBoonKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If safe Attack or Lucid Gain still missing",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_morrigan_meta_045b71a5ec6ae51f",
+                traitId = "ForceApolloBoonKeepsake",
+            },
+            {
+                classification = "situational",
+                conditionText = "If Attack and Gain already secured",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_morrigan_meta_ae16c2ee636cfc84",
+                traitId = "RandomBlessingKeepsake",
+            },
+        },
+        R3 = {
+            {
+                classification = "situational",
+                conditionText = "If next Guardian needs damage/safety",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_morrigan_meta_e991eff83952900f",
+                traitId = "BossPreDamageKeepsake",
+            },
+            {
+                classification = "conditional",
+                conditionText = "If run survival is threatened",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_morrigan_meta_468adabe05b33f40",
+                traitId = "ReincarnationKeepsake",
+            },
+        },
+        Start = {
+            {
+                classification = "main",
+                conditionText = "If Hera Attack / Born Gain route selected",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_morrigan_meta_eb0cc1beec69ff2a",
+                traitId = "ForceHeraBoonKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If Nova Strike / Lucid Gain route selected",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_morrigan_meta_0c1ab9d2d5838e52",
+                traitId = "ForceApolloBoonKeepsake",
+            },
+        },
+    },
     knownNonStatusTraits = {
         AphroditeSpecialBoon = true,
         AphroditeWeaponBoon = true,

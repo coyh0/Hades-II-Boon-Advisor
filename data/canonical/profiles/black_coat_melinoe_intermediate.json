@@ -8,6 +8,22 @@
   "source": { "type": "sheet", "profile": "Black Coat / Melinoe / Intermediate" },
   "mechanicsTemplate": "black_coat_melinoe",
   "autoSignals": ["ForcePoseidonBoonKeepsake"],
+  "keepsakePlan": {
+    "Start": [
+      { "traitId": "ForcePoseidonBoonKeepsake", "classification": "main", "documentaryPriority": 1, "conditionText": "Always", "recommendationId": "br2_coat_melinoe_intermediate_05cf1f64ff35b208" }
+    ],
+    "R2": [
+      { "traitId": "ForceAresBoonKeepsake", "classification": "conditional", "documentaryPriority": 1, "conditionText": "If Ares Special or Grievous Blow missing", "recommendationId": "br2_coat_melinoe_intermediate_26a4d7fa4e741847" }
+    ],
+    "R3": [
+      { "traitId": "TimedBuffKeepsake", "classification": "main", "documentaryPriority": 1, "conditionText": "If main boons secured", "recommendationId": "br2_coat_melinoe_intermediate_a90140fb0ff5c9e0" },
+      { "traitId": "TempHammerKeepsake", "classification": "conditional", "documentaryPriority": 2, "conditionText": "If key Hammer missing and random upgrade acceptable", "recommendationId": "br2_coat_melinoe_intermediate_760fb32ab047f5fe" }
+    ],
+    "Final": [
+      { "traitId": "AthenaEncounterKeepsake", "classification": "conditional", "documentaryPriority": 1, "conditionText": "If Death Defiances depleted or defensive boon needed", "recommendationId": "br2_coat_melinoe_intermediate_ba28f813ff6d8a27" },
+      { "traitId": "ReincarnationKeepsake", "classification": "alternative", "documentaryPriority": 1, "conditionText": "If Death Defiances remain and extra safety needed", "recommendationId": "br2_coat_melinoe_intermediate_98387ade9e9341df" }
+    ]
+  },
   "hammerPlan": [
     { "traitId": "SuitDashAttackTrait", "priority": 1, "classification": "priority" },
     { "traitId": "SuitAttackSpeedTrait", "priority": 2, "classification": "priority" },

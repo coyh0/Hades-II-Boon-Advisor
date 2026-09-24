@@ -66,6 +66,72 @@ return {
         },
     },
     id = "sister_blades_melinoe_intermediate",
+    keepsakePlan = {
+        Final = {
+            {
+                classification = "conditional",
+                conditionText = "If extra Death Defiance needed",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_melinoe_intermediate_66cba86eda75c5fb",
+                traitId = "ReincarnationKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If survival already secure",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_melinoe_intermediate_192669216c0c2294",
+                traitId = "BossPreDamageKeepsake",
+            },
+        },
+        R2 = {
+            {
+                classification = "conditional",
+                conditionText = "If Heaven Flourish missing after Ares start",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_melinoe_intermediate_79c367872fa86f25",
+                traitId = "ForceZeusBoonKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If Aphrodite Attack pivot selected",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_melinoe_intermediate_784e30cff6770b94",
+                traitId = "ForceAphroditeBoonKeepsake",
+            },
+        },
+        R3 = {
+            {
+                classification = "conditional",
+                conditionText = "If key Hammer missing and random upgrade acceptable",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_melinoe_intermediate_536ab88a6673beba",
+                traitId = "TempHammerKeepsake",
+            },
+            {
+                classification = "situational",
+                conditionText = "If core boons secured and speed desired",
+                documentaryPriority = 2,
+                recommendationId = "br2_blades_melinoe_intermediate_996475bb0bcc7090",
+                traitId = "TimedBuffKeepsake",
+            },
+        },
+        Start = {
+            {
+                classification = "main",
+                conditionText = "If owner Ares route selected",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_melinoe_intermediate_6879d93624658ee8",
+                traitId = "ForceAresBoonKeepsake",
+            },
+            {
+                classification = "alternative",
+                conditionText = "If Zeus-first Mobalytics route selected",
+                documentaryPriority = 1,
+                recommendationId = "br2_blades_melinoe_intermediate_ee98ea3a2027845e",
+                traitId = "ForceZeusBoonKeepsake",
+            },
+        },
+    },
     knownNonStatusTraits = {
         AphroditeSpecialBoon = true,
         AphroditeWeaponBoon = true,

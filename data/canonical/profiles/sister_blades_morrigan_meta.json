@@ -6,6 +6,25 @@
   "profileMode": "meta",
   "selectionKey": "morrigan_meta",
   "source": { "type": "sheet", "profile": "Best Builds / Blood Triad / Hera" },
+  "keepsakePlan": {
+    "Start": [
+      { "traitId": "ForceHeraBoonKeepsake", "classification": "main", "documentaryPriority": 1, "conditionText": "If Hera Attack / Born Gain route selected", "recommendationId": "br2_blades_morrigan_meta_eb0cc1beec69ff2a" },
+      { "traitId": "ForceApolloBoonKeepsake", "classification": "alternative", "documentaryPriority": 1, "conditionText": "If Nova Strike / Lucid Gain route selected", "recommendationId": "br2_blades_morrigan_meta_0c1ab9d2d5838e52" }
+    ],
+    "R2": [
+      { "traitId": "ForceHeraBoonKeepsake", "classification": "conditional", "documentaryPriority": 1, "conditionText": "If Born Gain or Hera Attack missing after Apollo start", "recommendationId": "br2_blades_morrigan_meta_9dc8940e35c783f4" },
+      { "traitId": "ForceApolloBoonKeepsake", "classification": "alternative", "documentaryPriority": 2, "conditionText": "If safe Attack or Lucid Gain still missing", "recommendationId": "br2_blades_morrigan_meta_045b71a5ec6ae51f" },
+      { "traitId": "RandomBlessingKeepsake", "classification": "situational", "documentaryPriority": 2, "conditionText": "If Attack and Gain already secured", "recommendationId": "br2_blades_morrigan_meta_ae16c2ee636cfc84" }
+    ],
+    "R3": [
+      { "traitId": "BossPreDamageKeepsake", "classification": "situational", "documentaryPriority": 2, "conditionText": "If next Guardian needs damage/safety", "recommendationId": "br2_blades_morrigan_meta_e991eff83952900f" },
+      { "traitId": "ReincarnationKeepsake", "classification": "conditional", "documentaryPriority": 2, "conditionText": "If run survival is threatened", "recommendationId": "br2_blades_morrigan_meta_468adabe05b33f40" }
+    ],
+    "Final": [
+      { "traitId": "BossPreDamageKeepsake", "classification": "main", "documentaryPriority": 1, "conditionText": "If room survival secure before final Guardian", "recommendationId": "br2_blades_morrigan_meta_900dcecd675c94ad" },
+      { "traitId": "ReincarnationKeepsake", "classification": "alternative", "documentaryPriority": 1, "conditionText": "If extra Death Defiance needed", "recommendationId": "br2_blades_morrigan_meta_b9968febb27e3b57" }
+    ]
+  },
   "mechanicsTemplate": "sister_blades_morrigan",
   "rules": { "LightningVulnerabilityBoon": [{ "requiresAllOwned": ["PoseidonCastBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "DamageSharePotencyBoon": [{ "requiresAnyOwned": ["HeraWeaponBoon", "HeraSpecialBoon", "HeraCastBoon", "HeraSprintBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "EchoExpirationBoon": [{ "requiresAnyOwned": ["ZeusWeaponBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }] },
   "weights": {"BUILD_DISCOURAGED":-2},
