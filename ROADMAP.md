@@ -14,7 +14,7 @@ Published release: `v0.1.2` — Sister Blades only.
 
 Current `main` / future `v0.2`: Black Coat pilot validated offline and live DEV; safe partial ranking validated offline and live DEV.
 
-The 15-file runtime inventory, profile switcher and invariants are complete. 11C.5 Black Coat Hammer support has passed offline and sufficiently realistic live DEV validation. Next: revalidate and integrate the completed Sister Blades community audit through exact runtime-ID verification, canonical data, Hammer plans, tests and realistic live validation. The 2-of-3-evaluable Hammer case remains an optional live observation; Hammer reroll is not a game mechanic and is not a validation criterion.
+The 15-file runtime inventory, profile switcher and invariants are complete. 11C.5 Black Coat Hammer support has passed offline and sufficiently realistic live DEV validation. Community Audit V2 is complete as documentation for the three audited Sister Blades profiles; no audit row is runtime-ready by that fact alone. Next: reconcile the local Sister Blades profiles against V2 and the target game data, then complete the separate Black Coat Community Audit before considering it for v0.2. The 2-of-3-evaluable Hammer case remains an optional live observation; Hammer reroll is not a game mechanic and is not a validation criterion.
 
 ## Completed Phase 10 work
 
@@ -371,13 +371,36 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
   - Audit conclusions to verify against game/runtime data before canonical promotion: Starter/Intermediate default Heaven Flourish / Zeus Special; Attack branches Nova Strike (range), Flutter Strike (high %), Flame Strike (on-hit), Vicious Strike (Wounds/Grievous Blow); Trick Knives priority Hammer, with Wicked Onslaught, Rapid Onslaught and Reaper Knives alternatives; Final Slice situational; Dancing Knives conditional/uncertain, not a universal top pick; Cloud Bangle starting Zeus keepsake. Intermediate Ares Attack + Sword Hilt is conditional/build-specific.
   - Morrigan is a distinct `DaggerTripleAspect` profile: Sworn Strike/Hera or Nova Strike/Apollo Attack branches; Heaven Flourish/Zeus Special primary with Vicious Flourish and Volcanic Flourish alternatives; Born Gain for Ω-heavy, Lucid Gain alternative; Final Slice and Sweeping Ambush priority Hammers, Wicked Onslaught/Rapid Onslaught alternatives; Banshee Brand/Phantom Brand are build-specific Blood Triad amplifiers; The Sorceress is important. Dancing Knives has a strong profile-specific caution, not a universal ban. Origination boosts normal/Ω damage but not the fixed Blood Triad proc directly. Premium Service remains unverified and must not be encoded from memory.
   - No repository, canonical JSON, runtime code or ROADMAP was changed during that separate audit.
-- [ ] **Revalidate and integrate audited Sister Blades profiles.**
-  - Verify the 104 audit rows against the current private Build Registry and exact runtime IDs from trusted game data/source. Keep the Registry private; never publish its ID or URL. Check the three Black Coat Hammer rows' IDs/statuses as a separate consistency check.
-  - Map exact IDs, verified classifications, priorities and any safe condition semantics; preserve free-text conditions as documentation unless an explicit machine-readable rule is independently defined. Keep unresolved/unknown data fail-safe and documentation-only.
-  - Update canonical Starter, Intermediate and Morrigan profiles for the audited branches, after runtime verification. Do not automatically promote community conclusions into scoring.
-  - Adapt `hammerPlan` (offered choices) separately from `hammerRoles` (owned choices), preserving profile-specific branches, priorities and conditions. Verify ProfileResolver affinities, especially keepsake signals and owned-Boon evidence precedence.
-  - Add a second profile for an existing weapon/aspect pair (including Black Coat where suitable) so owned-Boon affinity can compete with `autoSignals` and the Poseidon keepsake contribution can be demonstrated beyond singleton resolution.
-  - Run exact-ID/import validation, canonical generation, deterministic-output checks, Hammer and scoring tests, package/staging checks, and regressions for all existing profiles. Validate each intended profile in realistic DEV play before considering it runtime-ready.
+- [x] **Community Audit V2 — documentary review completed (2026-09-24).**
+  - The audit covers Sister Blades — Melinoë Starter (33 rows), Sister Blades — Melinoë Intermediate (35 rows), and Sister Blades — Morrigan Meta / Blood Triad (36 rows): 104 rows total.
+  - All 104 rows remain documentation_only. Community recommendations do not promote a profile or row to runtime.
+  - Internal IDs and mechanics must still be independently verified against the game files and target runtime before canonicalization.
+  - The audit records both source recommendations and competing recommendations; ordinal source priorities are documentation and never create numeric scoring bonuses by themselves.
+- **Permanent Community Audit Gate — applies to every future build/profile.**
+  - Before a build is considered runtime-ready, complete a multi-source community audit of branches, synergies, resources, conditions, and competing recommendations.
+  - Separate community recommendations from actual game mechanics. Verify internal IDs and mechanics independently against the target game version.
+  - Canonical/runtime scoring work starts only after those checks; then run offline tests and realistic DEV validation before release.
+  - Auditing one profile never validates another profile, even when they share a weapon or aspect.
+- **Provisional v0.2 profile scope.**
+  - Sister Blades — Melinoë Intermediate: runtime target.
+  - Sister Blades — Morrigan Meta / Blood Triad: runtime target.
+  - Black Coat — Melinoë Intermediate: existing technical target, but its own Community Audit remains required before v0.2 release.
+  - Sister Blades — Melinoë Starter: planned runtime removal for v0.2; retain its documentary history. Removal is not implemented.
+- **Melinoë Intermediate Registry data (documentary only; not scoring rules).**
+  - Cloud Bangle: priority 1; Beautiful Mirror: alternative 2; Sword Hilt: conditional 3.
+  - Heaven Flourish / Zeus Special: priority 1.
+  - Nova Strike / Apollo Attack, Flutter Strike / Aphrodite Attack, and Flame Strike / Hestia Attack: alternative 1 each.
+  - Vicious Strike / Ares Attack: conditional 2, Wounds branch.
+  - Trick Knives: Hammer priority 1; Wicked Onslaught, Rapid Onslaught, and Reaper Knives: alternative 2; Final Slice: alternative 3.
+  - Dancing Knives: conditional 3; non-evaluable while its context remains unresolved.
+  - These are current Registry recommendations. They do not define score deltas, prove mechanical conditions, or override the separate game-data/runtime verification gate.
+- [ ] **Reconcile Sister Blades profiles against Community Audit V2 and prepare v0.2 scope.**
+  - Preserve and review the existing local Attack Branches architecture against the V2 recommendations; do not add numeric scoring bonuses from ordinal community priorities.
+  - Remove Starter from the v0.2 runtime while preserving its documentary history. Define explicit handling for installed configurations with BUILD_PROFILE="starter" before migration; do not silently change the selected build.
+  - Update the generated registry, staging and package inventory from 15 to 14 files only as part of the approved runtime-removal patch.
+  - Independently verify Origination/Wounds semantics and possible Hammer exclusions in the target game version. Keep unresolved conditions fail-safe.
+  - Validate each resulting profile separately with offline tests and realistic DEV runtime tests.
+  - Black Coat technical and Hammer validation does not replace its own Community Audit.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
@@ -410,6 +433,7 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
 - [ ] Expand the release/developer validation gate so Build Registry import and packaging regressions cannot be skipped accidentally.
 - [ ] Prevent building a `0.1.2` artifact from future-v0.2 `main`; bump the version before release artifact creation.
 - [ ] Re-check pinned dependency/runtime versions before release.
+- [ ] Require every profile intended for v0.2 to pass the permanent Community Audit Gate and its corresponding realistic DEV runtime validation before release.
 - [ ] Run live regression validation for every profile intended for `v0.2`.
 - [ ] Prepare the Thunderstore changelog in English.
 - [ ] Bump version, rebuild staging/package, verify ZIP and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
