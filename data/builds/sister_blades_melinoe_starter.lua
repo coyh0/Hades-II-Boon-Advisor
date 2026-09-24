@@ -23,6 +23,33 @@ return {
         "DO_NOT_SACRIFICE_CORE_PLAN",
     },
     genericCoreAspectCompatibility = true,
+    hammerPlan = {
+        {
+            classification = "priority",
+            priority = 1,
+            traitId = "DaggerDashAttackTripleTrait",
+        },
+        {
+            classification = "alternative",
+            priority = 2,
+            traitId = "DaggerFinalHitTrait",
+        },
+        {
+            classification = "alternative",
+            priority = 2,
+            traitId = "DaggerRapidAttackTrait",
+        },
+        {
+            classification = "alternative",
+            priority = 2,
+            traitId = "DaggerSpecialReturnTrait",
+        },
+        {
+            classification = "alternative",
+            priority = 3,
+            traitId = "DaggerAttackFinisherTrait",
+        },
+    },
     hammerRoles = {
         Attack = {
             "DaggerBackstabTrait",

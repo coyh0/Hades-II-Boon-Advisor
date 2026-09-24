@@ -19,6 +19,27 @@ local registry = assert(loadfile(output .. separator .. "registry.lua"))()
 local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
 local starter = assert(loadfile("data/builds/sister_blades_melinoe_starter.lua"))()
 local morrigan = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
+local expectedMelinoeHammerPlan = {
+    { traitId = "DaggerDashAttackTripleTrait", priority = 1, classification = "priority" },
+    { traitId = "DaggerFinalHitTrait", priority = 2, classification = "alternative" },
+    { traitId = "DaggerRapidAttackTrait", priority = 2, classification = "alternative" },
+    { traitId = "DaggerSpecialReturnTrait", priority = 2, classification = "alternative" },
+    { traitId = "DaggerAttackFinisherTrait", priority = 3, classification = "alternative" },
+}
+local function assertMelinoeHammerPlan(profile, label)
+    assert(#profile.hammerPlan == #expectedMelinoeHammerPlan, label .. " Hammer plan count mismatch")
+    for index, expected in ipairs(expectedMelinoeHammerPlan) do
+        local actual = profile.hammerPlan[index]
+        assert(actual.traitId == expected.traitId and actual.priority == expected.priority
+            and actual.classification == expected.classification and actual.condition == nil,
+            label .. " Hammer plan mismatch at " .. index)
+    end
+    for _, entry in ipairs(profile.hammerPlan) do
+        assert(entry.traitId ~= "DaggerSpecialJumpTrait", label .. " made Dancing Knives evaluable")
+    end
+end
+assertMelinoeHammerPlan(starter, "Starter")
+assertMelinoeHammerPlan(intermediate, "Intermediate")
 local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
 local runtimeRegistry = assert(loadfile("data/builds/registry.lua"))()
 local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()

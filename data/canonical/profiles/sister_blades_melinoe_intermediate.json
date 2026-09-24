@@ -7,6 +7,13 @@
   "selectionKey": "intermediate",
   "source": { "type": "sheet", "profile": "Intermediate" },
   "mechanicsTemplate": "sister_blades_melinoe",
+  "hammerPlan": [
+    { "traitId": "DaggerDashAttackTripleTrait", "priority": 1, "classification": "priority" },
+    { "traitId": "DaggerFinalHitTrait", "priority": 2, "classification": "alternative" },
+    { "traitId": "DaggerRapidAttackTrait", "priority": 2, "classification": "alternative" },
+    { "traitId": "DaggerSpecialReturnTrait", "priority": 2, "classification": "alternative" },
+    { "traitId": "DaggerAttackFinisherTrait", "priority": 3, "classification": "alternative" }
+  ],
   "autoSignals": ["ForceAresBoonKeepsake"],
   "slots": {
     "Attack": { "core": ["AresWeaponBoon"], "alternatives": ["AphroditeWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },

@@ -47,6 +47,32 @@ check(screen.BoonAdvisorRanks[1].originalIndex == 3
     "private rank ownership lost originalIndex mapping")
 check(screen.Components.BoonAdvisorRank3 ~= nil and screen.Components.PurchaseButton3.Id == "native3",
     "private rank component overwrote or bypassed native component storage")
+local hammerPartialScreen = { Components = {
+    PurchaseButton1 = { Id = "daggerHammer1" }, PurchaseButton2 = { Id = "daggerHammer2" },
+    PurchaseButton3 = { Id = "daggerHammer3" },
+} }
+local hammerTextStart = #textBoxes
+UI.renderPartial(hammerPartialScreen, {
+    { originalIndex = 1, evaluated = true, rank = 1, rankTotal = 2,
+        reasons = {{ code = "HAMMER_BUILD_PRIORITY", delta = -1 }} },
+    { originalIndex = 2, evaluated = true, rank = 2, rankTotal = 2,
+        reasons = {{ code = "HAMMER_BUILD_PRIORITY", delta = -2 }} },
+    { originalIndex = 3, evaluated = false, reasons = {} },
+}, api)
+UI.renderFallback(hammerPartialScreen, { code = "PARTIAL_RANKING" }, api)
+local partialSawBanner, partialSawPlanLabel, partialSawUnknown = false, false, false
+for index = hammerTextStart + 1, #textBoxes do
+    if textBoxes[index].RawText == "CLASSEMENT PARTIEL" then partialSawBanner = true end
+    if textBoxes[index].RawText == "Plan Marteau" then partialSawPlanLabel = true end
+    if textBoxes[index].RawText == "NON ÉVALUÉ" then partialSawUnknown = true end
+end
+check(partialSawBanner and partialSawPlanLabel and partialSawUnknown,
+    "partial Hammer UI omitted its scope, Hammer explanation, or unknown-choice label")
+check(hammerPartialScreen.Components.BoonAdvisorRank1 ~= nil
+    and hammerPartialScreen.Components.BoonAdvisorRank2 ~= nil
+    and hammerPartialScreen.Components.BoonAdvisorRank3 ~= nil,
+    "partial Hammer UI did not annotate all offer cards with their evaluation status")
+UI.clearRanks(hammerPartialScreen, api)
 local buildLabelScreen = { Components = {
     PurchaseButton1 = { Id = "build1" }, PurchaseButton2 = { Id = "build2" },
     PurchaseButton3 = { Id = "build3" },

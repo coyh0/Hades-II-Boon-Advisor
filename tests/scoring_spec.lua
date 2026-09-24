@@ -88,6 +88,63 @@ do
 end
 
 do
+    local expected = {
+        { "DaggerDashAttackTripleTrait", 1, "priority" },
+        { "DaggerFinalHitTrait", 2, "alternative" },
+        { "DaggerRapidAttackTrait", 2, "alternative" },
+        { "DaggerSpecialReturnTrait", 2, "alternative" },
+        { "DaggerAttackFinisherTrait", 3, "alternative" },
+    }
+    for _, profile in ipairs({ starterProfile, productionProfile }) do
+        check(ScoringEngine.validateProfile(profile), "Melinoe generated Hammer profile invalid")
+        check(#profile.hammerPlan == #expected, "Melinoe Hammer plan count mismatch")
+        for index, spec in ipairs(expected) do
+            local entry = profile.hammerPlan[index]
+            check(entry.traitId == spec[1] and entry.priority == spec[2]
+                and entry.classification == spec[3] and entry.condition == nil,
+                "Melinoe Hammer plan entry mismatch at " .. index)
+        end
+        local snapshot = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", offerKind = "hammer",
+            offers = {
+                { originalIndex = 1, ItemName = "DaggerDashAttackTripleTrait", Rarity = "Heroic" },
+                { originalIndex = 2, ItemName = "DaggerFinalHitTrait", Rarity = "Common" },
+                { originalIndex = 3, ItemName = "UnknownDaggerHammerTrait", Rarity = "Epic" },
+            } }
+        local scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(scores[1].score == -1 and scores[2].score == -2 and scores[3].score == 0
+            and scores[1].covered and scores[2].covered and not scores[3].covered
+            and scores[1].scoreComplete and scores[2].scoreComplete and not scores[3].scoreComplete,
+            "Melinoe Hammers did not preserve priorities or the unknown-Hammer fail-safe")
+        for _, result in ipairs(scores) do
+            for _, reason in ipairs(result.reasons) do
+                check(reason.code ~= "RARITY" and reason.code ~= "RARITY_DELTA",
+                    "Hammer scoring applied rarity")
+            end
+        end
+        local decision = ScoringEngine.getRankingDecision(scores, true)
+        check(decision.mode == "partial" and #decision.rankEligible == 2,
+            "two known distinct Hammers plus an unknown did not use partial ranking")
+        local ranked = ScoringEngine.rank(decision.rankEligible)
+        check(#ranked == 2 and ranked[1].rank == 1 and ranked[2].rank == 2,
+            "known Melinoe Hammers did not rank 1/2")
+        snapshot.offers[3].ItemName = "DaggerRapidAttackTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(ScoringEngine.getRankingDecision(scores, true).mode == "full",
+            "three evaluated distinct Hammers did not use full ranking")
+        snapshot.offers[1].ItemName = "DaggerFinalHitTrait"
+        snapshot.offers[2].ItemName = "DaggerRapidAttackTrait"
+        snapshot.offers[3].ItemName = "DaggerSpecialReturnTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(ScoringEngine.getRankingDecision(scores, true).mode == "none",
+            "tied evaluated Hammers produced a numerical ranking")
+        snapshot.offers[3].ItemName = "DaggerSpecialJumpTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(not scores[3].covered and not scores[3].scoreComplete and scores[3].score == 0
+            and ScoringEngine.getRankingDecision(scores, true).mode == "none",
+            "Dancing Knives became evaluable or rankable")
+    end
+end
+do
     local hammerWithoutPlan = {}
     for key, value in pairs(starterProfile) do
         if key ~= "hammerPlan" then hammerWithoutPlan[key] = value end

@@ -186,4 +186,27 @@ if ((Get-FileHash -LiteralPath (Join-Path $overrideOutput 'sister_blades_melinoe
     (Get-FileHash -LiteralPath (Join-Path $repo 'data\builds\sister_blades_melinoe_starter.lua') -Algorithm SHA256).Hash) {
     throw 'Shared mechanics weight override contaminated a later profile.'
 }
+$expectedMelinoeHammerPlan = @(
+    @{ traitId = 'DaggerDashAttackTripleTrait'; priority = 1; classification = 'priority' },
+    @{ traitId = 'DaggerFinalHitTrait'; priority = 2; classification = 'alternative' },
+    @{ traitId = 'DaggerRapidAttackTrait'; priority = 2; classification = 'alternative' },
+    @{ traitId = 'DaggerSpecialReturnTrait'; priority = 2; classification = 'alternative' },
+    @{ traitId = 'DaggerAttackFinisherTrait'; priority = 3; classification = 'alternative' }
+)
+foreach ($profileName in @('sister_blades_melinoe_starter', 'sister_blades_melinoe_intermediate')) {
+    $profile = Get-Content -LiteralPath (Join-Path $repo "data\canonical\profiles\$profileName.json") -Raw | ConvertFrom-Json
+    if (@($profile.hammerPlan).Count -ne $expectedMelinoeHammerPlan.Count) { throw "$profileName Hammer plan count mismatch." }
+    for ($index = 0; $index -lt $expectedMelinoeHammerPlan.Count; $index++) {
+        $actual = $profile.hammerPlan[$index]
+        $expected = $expectedMelinoeHammerPlan[$index]
+        if ($actual.traitId -cne $expected.traitId -or $actual.priority -ne $expected.priority -or
+            $actual.classification -cne $expected.classification -or
+            $null -ne $actual.PSObject.Properties['condition']) {
+            throw "$profileName Hammer plan entry $index mismatch or gained a condition."
+        }
+    }
+    if (@($profile.hammerPlan | Where-Object { $_.traitId -ceq 'DaggerSpecialJumpTrait' }).Count -ne 0) {
+        throw "$profileName unresolved Dancing Knives entered hammerPlan."
+    }
+}
 Write-Output 'PASS: canonical validation, deterministic generation, generated Lua validation, and scoring equivalence'
