@@ -18,10 +18,10 @@ $source = Read-Json $fixture
 $canonical = Read-Json $canonicalPath
 $runtimeRows = @($source.rows | Where-Object { $_.importStatus -eq 'ready' })
 $documentationRows = @($source.rows | Where-Object { $_.importStatus -eq 'documentation_only' })
-if ($source.rows.Count -ne 14 -or $runtimeRows.Count -ne 4 -or $documentationRows.Count -ne 10) {
-    throw 'Pilot fixture must contain exactly 4 ready and 10 documentation-only rows.'
+if ($source.rows.Count -ne 14 -or $runtimeRows.Count -ne 7 -or $documentationRows.Count -ne 7) {
+    throw 'Pilot fixture must contain exactly 7 ready and 7 documentation-only rows.'
 }
-$expectedDocumentationCounts = [ordered]@{ arcana = 3; hammer = 3; support = 2; familiar = 1; hex = 1 }
+$expectedDocumentationCounts = [ordered]@{ arcana = 3; support = 2; familiar = 1; hex = 1 }
 foreach ($type in $expectedDocumentationCounts.Keys) {
     if (@($documentationRows | Where-Object { $_.itemType -ceq $type }).Count -ne $expectedDocumentationCounts[$type]) {
         throw "Unexpected documentation-only $type row count."
@@ -31,11 +31,6 @@ foreach ($row in $documentationRows) {
     if ($row.verificationStatus -cne 'not_applicable' -or $row.PSObject.Properties.Name -contains 'runtimeItemId') {
         throw "Documentation-only row '$($row.name)' must be not_applicable and have no runtimeItemId."
     }
-}
-$expectedHammers = @('Exhaust Riser', 'Rapid Frame', 'Launcher Frame')
-$actualHammers = @($documentationRows | Where-Object { $_.itemType -ceq 'hammer' } | ForEach-Object { $_.name } | Sort-Object)
-if (-not [Linq.Enumerable]::SequenceEqual([string[]]$actualHammers, [string[]]@($expectedHammers | Sort-Object))) {
-    throw 'Documentation-only Hammer inventory changed.'
 }
 
 $plan = & $tool -InputPath $fixture -PolicyPath $policy | ConvertFrom-Json
@@ -49,7 +44,7 @@ Assert-Equal $group.module "data/builds/$($canonical.id).lua" 'module'
 Assert-Equal $group.weapon $canonical.weapon 'weapon'
 Assert-Equal $group.aspect $canonical.aspect 'aspect'
 Assert-Equal $group.profileMode $canonical.profileMode 'profile mode'
-if (@($group.items).Count -ne 4) { throw 'Documentation-only rows entered the runtime projection.' }
+if (@($group.items).Count -ne 7) { throw 'Documentation-only rows entered the runtime projection.' }
 
 $signal = @($group.items | Where-Object { $_.role -ceq 'autoSignal' })
 if ($signal.Count -ne 1 -or @($canonical.autoSignals).Count -ne 1) { throw 'Expected one keepsake autoSignal.' }
@@ -60,6 +55,16 @@ foreach ($slot in @('Attack', 'Special', 'Sprint')) {
     $expected = @($canonical.slots.$slot.core)
     if ($items.Count -ne 1 -or $expected.Count -ne 1) { throw "Expected one $slot core." }
     Assert-Equal $items[0].runtimeItemId $expected[0] "$slot core"
+}
+$hammerItems = @($group.items | Where-Object { $_.role -ceq 'hammer' } | Sort-Object priority)
+if ($hammerItems.Count -ne @($canonical.hammerPlan).Count) { throw 'Hammer projection count differs from canonical hammerPlan.' }
+for ($index = 0; $index -lt $hammerItems.Count; $index++) {
+    $actual = $hammerItems[$index]
+    $expected = $canonical.hammerPlan[$index]
+    Assert-Equal $actual.runtimeItemId $expected.traitId "Hammer[$index] traitId"
+    if ($actual.priority -ne $expected.priority) { throw "Hammer[$index] priority mismatch." }
+    Assert-Equal $actual.classification $expected.classification "Hammer[$index] classification"
+    Assert-Equal $actual.condition $expected.condition "Hammer[$index] condition"
 }
 foreach ($item in $group.items) {
     if (@($runtimeRows | Where-Object { $_.runtimeItemId -ceq $item.runtimeItemId }).Count -ne 1) {

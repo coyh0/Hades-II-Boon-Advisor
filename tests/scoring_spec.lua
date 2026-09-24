@@ -33,6 +33,48 @@ do
     end
     check(scores[1].score == scores[2].score and scores[1].score > scores[3].score,
         "Black Coat primary/utility scoring did not differentiate")
+    local hammerSnapshot = {
+        weapon = "WeaponSuit", aspect = "BaseSuitAspect", offerKind = "hammer",
+        godTraits = {}, hammers = {}, activeArcana = {},
+        offers = {
+            { originalIndex = 1, ItemName = "SuitDashAttackTrait", Rarity = "Heroic" },
+            { originalIndex = 2, ItemName = "SuitAttackSpeedTrait", Rarity = "Heroic" },
+            { originalIndex = 3, ItemName = "SuitSpecialAutoTrait", Rarity = "Heroic" },
+        },
+    }
+    local hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    check(hammerScores[1].score == -1 and hammerScores[1].covered and hammerScores[1].scoreComplete,
+        "Exhaust Riser Hammer priority changed")
+    check(hammerScores[2].score == -2 and hammerScores[2].covered and hammerScores[2].scoreComplete,
+        "Rapid Frame Hammer priority changed")
+    check(hammerScores[3].score == -3 and hammerScores[3].covered and not hammerScores[3].scoreComplete
+        and hammerScores[3].hammerCondition == "Special branch",
+        "conditional Launcher Frame was not kept incomplete")
+    check(hammerScores[1].reasons[1].code == "HAMMER_BUILD_PRIORITY"
+        and hammerScores[1].reasons[1].delta == hammerScores[1].score
+        and #hammerScores[1].reasons == 1,
+        "Hammer score leaked Boon rarity/core/status/aspect rules")
+    local decision = ScoringEngine.getRankingDecision(hammerScores, true)
+    local hammerRanks = ScoringEngine.rank(decision.rankEligible)
+    check(decision.mode == "partial" and #hammerRanks == 2
+        and hammerRanks[1].itemName == "SuitDashAttackTrait" and hammerRanks[1].rank == 1
+        and hammerRanks[2].itemName == "SuitAttackSpeedTrait" and hammerRanks[2].rank == 2,
+        "Black Coat Hammer partial ranking changed")
+    hammerSnapshot.offers[3].ItemName = "UnknownSuitHammerTrait"
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    check(not hammerScores[3].covered and not hammerScores[3].scoreComplete,
+        "unknown Hammer became evaluated")
+    coatProfile.hammerPlan[2].priority = 1
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    hammerRanks = ScoringEngine.rank({ hammerScores[1], hammerScores[2] })
+    check(hammerRanks[1].rank == 1 and hammerRanks[2].rank == 1,
+        "equal Hammer priorities did not tie")
+    coatProfile.hammerPlan[2].priority = 2
+    hammerSnapshot.offerKind = "boon"
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    for _, reason in ipairs(hammerScores[1].reasons) do
+        check(reason.code ~= "HAMMER_BUILD_PRIORITY", "Hammer plan leaked into Boon scoring")
+    end
     for _, role in ipairs({ "Cast", "Mana" }) do
         local slot = coatProfile.slots[role]
         check(slot.slotPolicy == "open" and #slot.core == 0 and #slot.alternatives == 0 and #slot.preferred == 0,
@@ -43,6 +85,29 @@ do
     snapshot.aspect = "BaseSuitAspect"
     snapshot.weapon = "WeaponDagger"
     check(not ScoringEngine.scoreOffers(snapshot, coatProfile)[1].supported, "Black Coat accepted wrong weapon")
+end
+
+do
+    local hammerWithoutPlan = {}
+    for key, value in pairs(starterProfile) do
+        if key ~= "hammerPlan" then hammerWithoutPlan[key] = value end
+    end
+    check(hammerWithoutPlan.hammerPlan == nil, "Sister Blades unexpectedly gained a Hammer plan")
+    local snapshot = {
+        weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", offerKind = "hammer",
+        offers = { { originalIndex = 1, ItemName = "SuitDashAttackTrait" } },
+    }
+    local results = ScoringEngine.scoreOffers(snapshot, hammerWithoutPlan)
+    check(#results == 1 and results[1].supported and results[1].eligible
+        and not results[1].covered and not results[1].scoreComplete and results[1].score == 0,
+        "Hammer offer without hammerPlan was not conservatively unresolved")
+    for _, reason in ipairs(results[1].reasons) do
+        check(reason.code ~= "HAMMER_BUILD_PRIORITY", "Hammer offer without plan gained a Hammer reason")
+    end
+    local decision = ScoringEngine.getRankingDecision(results, true)
+    check(decision.mode == "none" and #decision.rankEligible == 0
+        and #ScoringEngine.rank(decision.rankEligible) == 0,
+        "Hammer offer without hammerPlan produced a numeric rank")
 end
 
 do

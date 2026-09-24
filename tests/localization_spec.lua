@@ -34,6 +34,10 @@ check(Localization.reasonLabel("fr", "BUILD_SLOT_POLICY_DELTA", -4) == "Conflit"
     "Negative slot policy was not French Conflit")
 check(Localization.reasonKey("BUILD_PREFERRED", 2) == Localization.reasonKey("BUILD_CORE_PRIORITY", 4),
     "Equivalent reason codes did not share a stable category")
+check(Localization.reasonKey("HAMMER_BUILD_PRIORITY", -1) == "hammerPriority"
+    and Localization.reasonLabel("en", "HAMMER_BUILD_PRIORITY", -1) == "Hammer plan"
+    and Localization.reasonLabel("fr", "HAMMER_BUILD_PRIORITY", -1) == "Plan Marteau",
+    "Hammer plan reason localization failed")
 local stableCategory = Localization.reasonKey("FILL_EMPTY_UTILITY_CORE", 4)
 check(stableCategory == "utility"
     and Localization.reasonLabel("en", "FILL_EMPTY_UTILITY_CORE", 4) == "Utility"

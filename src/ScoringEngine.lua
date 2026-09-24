@@ -44,6 +44,27 @@ function ScoringEngine.validateProfile(profile)
             end
         end
     end
+    if profile.hammerPlan ~= nil then
+        if type(profile.hammerPlan) ~= "table" then return false, "hammerPlan must be a table" end
+        local seen = {}
+        for _, entry in ipairs(profile.hammerPlan) do
+            if type(entry) ~= "table" then return false, "hammerPlan entry must be a table" end
+            if type(entry.traitId) ~= "string" or entry.traitId == "" then
+                return false, "hammerPlan entry has invalid trait ID"
+            end
+            if seen[entry.traitId] then return false, "hammerPlan repeats " .. entry.traitId end
+            seen[entry.traitId] = true
+            if type(entry.priority) ~= "number" or entry.priority <= 0 or entry.priority % 1 ~= 0 then
+                return false, "hammerPlan entry has invalid priority"
+            end
+            if entry.classification ~= "priority" and entry.classification ~= "alternative" then
+                return false, "hammerPlan entry has invalid classification"
+            end
+            if entry.condition ~= nil and (type(entry.condition) ~= "string" or entry.condition == "") then
+                return false, "hammerPlan entry has invalid condition metadata"
+            end
+        end
+    end
     return true
 end
 local function addReason(result, code, delta, with)
@@ -529,10 +550,51 @@ function ScoringEngine.getRankingDecision(results, profileSupported)
     return { mode = "none", rankEligible = {}, context = fullContext }
 end
 
+local function scoreHammerOffers(snapshot, profile, profileSupported)
+    local plan = {}
+    for _, entry in ipairs(type(profile.hammerPlan) == "table" and profile.hammerPlan or {}) do
+        if type(entry) == "table" and type(entry.traitId) == "string" then plan[entry.traitId] = entry end
+    end
+    local results = {}
+    for _, offer in ipairs(type(snapshot.offers) == "table" and snapshot.offers or {}) do
+        if type(offer) == "table" then
+            local result = {
+                originalIndex = offer.originalIndex, itemName = offer.ItemName,
+                supported = profileSupported, eligible = profileSupported and offer.Blocked ~= true,
+                score = 0, reasons = {}, covered = false, scoreComplete = false,
+            }
+            if offer.Blocked == true then
+                result.supported = false
+                result.eligible = false
+                addReason(result, "BLOCKED", 0)
+            elseif profileSupported then
+                local entry = plan[offer.ItemName]
+                if entry ~= nil then
+                    addReason(result, "HAMMER_BUILD_PRIORITY", -entry.priority)
+                    result.covered = true
+                    result.hammerPriority = entry.priority
+                    result.hammerClassification = entry.classification
+                    if entry.condition ~= nil then
+                        result.hammerCondition = entry.condition
+                        addReason(result, "HAMMER_CONDITION_UNRESOLVED", 0)
+                    else
+                        result.scoreComplete = true
+                    end
+                end
+            end
+            results[#results + 1] = result
+        end
+    end
+    return results
+end
+
 function ScoringEngine.scoreOffers(snapshot, profile)
     snapshot = type(snapshot) == "table" and snapshot or {}
     profile = type(profile) == "table" and profile or {}
     local profileSupported = ScoringEngine.isProfileSupported(snapshot, profile)
+    if snapshot.offerKind == "hammer" then
+        return scoreHammerOffers(snapshot, profile, profileSupported)
+    end
     local owned = ownedGodTraits(snapshot)
     local hammers = ownedHammers(snapshot)
     local results = {}

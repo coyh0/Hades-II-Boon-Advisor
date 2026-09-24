@@ -15,6 +15,7 @@ local strings = {
         conflict = "Conflict", core = "Core", utility = "Utility", build = "Build",
         resources = "Resources", damage = "Damage", aspect = "Aspect", setup = "Setup",
         positioning = "Positioning", origination = "Origination", hammer = "Hammer",
+        hammerPriority = "Hammer plan",
         status = "Status", synergy = "Synergy", survival = "Survival", rarity = "Rarity",
     },
     fr = {
@@ -31,6 +32,7 @@ local strings = {
         conflict = "Conflit", core = "Core", utility = "Utilitaire", build = "Build",
         resources = "Ressources", damage = "Dégâts", aspect = "Aspect", setup = "Setup",
         positioning = "Positionnement", origination = "Origination", hammer = "Marteau",
+        hammerPriority = "Plan Marteau",
         status = "Statut", synergy = "Synergie", survival = "Survie", rarity = "Rareté",
     },
 }
@@ -45,6 +47,7 @@ local reasonKeys = {
     ASPECT_DIRECT_SYNERGY = "aspect", ASPECT_SETUP_SYNERGY = "setup",
     BACKSTAB_SETUP = "positioning", ORIGINATION_ENABLE = "origination",
     EXISTING_HAMMER_SYNERGY = "hammer",
+    HAMMER_BUILD_PRIORITY = "hammerPriority",
 }
 
 function Localization.normalizeLanguage(value)

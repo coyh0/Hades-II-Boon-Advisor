@@ -108,6 +108,20 @@ Assert-Fails 'invalid-policy' '"slotPolicy": "open"' '"slotPolicy": "invalid"'
 Assert-Fails 'path-like-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "../escape"'
 Assert-Fails 'invalid-profile-id-syntax' '"id": "sister_blades_melinoe_starter"' '"id": "profile-name"'
 Assert-Fails 'reserved-registry-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "registry"'
+function Assert-Coat-Fails([string]$name, [string]$find, [string]$replace) {
+    $case = Join-Path $root $name
+    Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $case -Recurse
+    $path = Join-Path $case 'black_coat_melinoe_intermediate.json'
+    [IO.File]::WriteAllText($path, ([IO.File]::ReadAllText($path)).Replace($find, $replace))
+    try {
+        & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $case -ValidateOnly 2>$null | Out-Null
+        if ($LASTEXITCODE -eq 0) { throw "Expected failure: $name" }
+    }
+    catch { if ($_.Exception.Message -like 'Expected failure:*') { throw } }
+}
+Assert-Coat-Fails 'duplicate-hammer-plan-id' '"SuitAttackSpeedTrait"' '"SuitDashAttackTrait"'
+Assert-Coat-Fails 'invalid-hammer-plan-priority' '"priority": 2' '"priority": 0'
+Assert-Coat-Fails 'invalid-hammer-plan-classification' '"classification": "alternative"' '"classification": "unknown"'
 $unsafeProfiles = Join-Path $root 'unsafe-id-generation-profiles'
 Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $unsafeProfiles -Recurse
 $unsafeProfilePath = Join-Path $unsafeProfiles 'sister_blades_melinoe_starter.json'

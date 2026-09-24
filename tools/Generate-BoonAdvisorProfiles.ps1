@@ -99,6 +99,23 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$
     Assert-String $profile.source.type 'source.type'; Assert-String $profile.source.profile 'source.profile'
     if ($profile.slots -isnot [hashtable]) { Fail 'slots must be an object' }
     if ($profile.ContainsKey('autoSignals')) { Assert-StringArray $profile.autoSignals 'autoSignals' }
+    if ($profile.ContainsKey('hammerPlan')) {
+        if ($profile.hammerPlan -isnot [object[]]) { Fail 'hammerPlan must be an array' }
+        $seenHammerIds = @{}
+        foreach ($entry in $profile.hammerPlan) {
+            if ($entry -isnot [hashtable]) { Fail 'hammerPlan entry must be an object' }
+            Assert-String $entry.traitId 'hammerPlan.traitId'
+            if ($seenHammerIds[$entry.traitId]) { Fail "hammerPlan contains duplicate trait ID $($entry.traitId)" }
+            $seenHammerIds[$entry.traitId] = $true
+            $priorityIsNumber = $entry.priority -is [int] -or $entry.priority -is [long] -or
+                $entry.priority -is [double] -or $entry.priority -is [decimal]
+            if (-not $priorityIsNumber -or $entry.priority -le 0 -or $entry.priority % 1 -ne 0) {
+                Fail 'hammerPlan.priority must be a positive integer'
+            }
+            if ($entry.classification -cnotin @('priority', 'alternative')) { Fail "unsupported hammerPlan classification $($entry.classification)" }
+            if ($entry.ContainsKey('condition')) { Assert-String $entry.condition 'hammerPlan.condition' }
+        }
+    }
     foreach ($slotName in $profile.slots.Keys) {
         if ($slotName -notin @('Attack', 'Special', 'Cast', 'Sprint', 'Mana')) { Fail "unknown slot name $slotName" }
         $slot = $profile.slots[$slotName]
@@ -198,6 +215,7 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
         $composed[$field] = $profile[$field]
     }
     if ($profile.ContainsKey('autoSignals')) { $composed.autoSignals = To-IdSet $profile.autoSignals }
+    if ($profile.ContainsKey('hammerPlan')) { $composed.hammerPlan = ConvertTo-HashtableRecursive $profile.hammerPlan }
     foreach ($field in @('statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
         $composed[$field] = $mechanics[$field]
     }

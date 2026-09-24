@@ -140,7 +140,6 @@ check(keys == 2 and loot.Name == "AphroditeUpgrade" and loot.GodLoot == true, "m
 for _, bad in ipairs({
     { Name = "HermesUpgrade", GodLoot = false },
     { Name = "TrialUpgrade", GodLoot = false },
-    { Name = "WeaponUpgrade", GodLoot = false },
     { Name = "StackUpgrade", GodLoot = false, StackOnly = true },
     { Name = "UnknownTestSource", GodLoot = true },
     { Name = "ZeusUpgrade", GodLoot = true, DebugOnly = true },
@@ -643,6 +642,55 @@ do
     check(attachedNew, "partial Sublime refresh did not attach to the new native button")
 end
 print("PASS: Black Coat partial UI, reroll, and Sublime refresh preserve unknown choice")
+
+do
+    local loot = { Name = "WeaponUpgrade", GodLoot = false, DebugOnly = true, UpgradeOptions = {
+        { ItemName = "SuitDashAttackTrait", Rarity = "Common" },
+        { ItemName = "SuitAttackSpeedTrait", Rarity = "Common" },
+        { ItemName = "SuitSpecialAutoTrait", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "hammer1" }, PurchaseButton2 = { Id = "hammer2" },
+        PurchaseButton3 = { Id = "hammer3" },
+    } }
+    local game, _, start, _, private, _, _, _, _, created, texts, destroyed = fixture(
+        function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = "BaseSuitAspect" }, Traits = {
+                { Name = "BaseSuitAspect", Slot = "Aspect", IsWeaponEnchantment = true },
+            } } },
+            GetEquippedWeapon = function() return "WeaponSuit" end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "auto")
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    local snapshot = private.probeState.lastSnapshot
+    local scores = private.probeState.lastScores
+    check(snapshot.offerKind == "hammer" and snapshot.offerSource == "WeaponUpgrade",
+        "WeaponUpgrade source discriminator was not preserved")
+    check(snapshot.offers[1].ItemName == "SuitDashAttackTrait"
+        and snapshot.offers[2].ItemName == "SuitAttackSpeedTrait"
+        and snapshot.offers[3].ItemName == "SuitSpecialAutoTrait",
+        "Hammer Trait IDs were not captured from UpgradeOptions")
+    check(scores[1].score == -1 and scores[1].covered and scores[1].scoreComplete
+        and scores[2].score == -2 and scores[2].covered and scores[2].scoreComplete,
+        "known unconditional Hammers were not evaluated from hammerPlan")
+    check(scores[3].score == -3 and scores[3].covered and not scores[3].scoreComplete,
+        "conditional Hammer was not kept incomplete")
+    check(private.probeState.lastRankingReady == false and private.probeState.lastRankedScores == nil,
+        "partial Hammer comparison changed the full-ranking contract")
+    local function hasText(value)
+        for _, entry in ipairs(texts) do if entry.RawText == value then return true end end
+        return false
+    end
+    check(hasText("RANG 1/2") and hasText("RANG 2/2") and hasText("NON ÉVALUÉ")
+        and hasText("CLASSEMENT PARTIEL") and hasText("Plan Marteau"),
+        "Hammer partial ranking UI was not rendered")
+    local createdBeforeReroll = #created
+    game.CreateBoonLootButtons(screen, loot)
+    check(#destroyed >= 2 and #created > createdBeforeReroll and #screen.BoonAdvisorRanks == 3,
+        "Hammer offer refresh left stale or duplicate Advisor components")
+end
+print("PASS: WeaponUpgrade Hammer offers use the profile hammerPlan and partial UI")
 
 do
     local function unsupportedScreen(aspect, expected)

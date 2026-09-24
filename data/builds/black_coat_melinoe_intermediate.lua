@@ -13,6 +13,24 @@ return {
         "DO_NOT_SACRIFICE_CORE_PLAN",
     },
     genericCoreAspectCompatibility = false,
+    hammerPlan = {
+        {
+            classification = "priority",
+            priority = 1,
+            traitId = "SuitDashAttackTrait",
+        },
+        {
+            classification = "priority",
+            priority = 2,
+            traitId = "SuitAttackSpeedTrait",
+        },
+        {
+            classification = "alternative",
+            condition = "Special branch",
+            priority = 3,
+            traitId = "SuitSpecialAutoTrait",
+        },
+    },
     hammerRoles = {},
     id = "black_coat_melinoe_intermediate",
     knownNonStatusTraits = {},

@@ -1,11 +1,15 @@
 {
   "schemaVersion": 1,
   "boonClassifications": { "priority": "core" },
+  "hammerClassifications": { "priority": "priority", "alternative": "alternative" },
   "verifiedRuntimeItemIds": [
     "ForcePoseidonBoonKeepsake",
     "PoseidonWeaponBoon",
     "AresSpecialBoon",
-    "PoseidonSprintBoon"
+    "PoseidonSprintBoon",
+    "SuitDashAttackTrait",
+    "SuitAttackSpeedTrait",
+    "SuitSpecialAutoTrait"
   ],
   "keepsakeStartAsAutoSignal": true
 }

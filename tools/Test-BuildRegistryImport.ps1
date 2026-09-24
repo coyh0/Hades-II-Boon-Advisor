@@ -38,6 +38,11 @@ if ($policy.schemaVersion -ne 1 -or $policy.boonClassifications -isnot [pscustom
     $policy.verifiedRuntimeItemIds -isnot [array] -or $policy.keepsakeStartAsAutoSignal -isnot [bool]) {
     Fail 'policy requires schemaVersion 1, boonClassifications, verifiedRuntimeItemIds, and keepsakeStartAsAutoSignal'
 }
+$hammerClassifications = [pscustomobject]@{}
+if (Has-Property $policy 'hammerClassifications') {
+    if ($policy.hammerClassifications -isnot [pscustomobject]) { Fail 'hammerClassifications must be an object when present' }
+    $hammerClassifications = $policy.hammerClassifications
+}
 if ($catalog.schemaVersion -ne 1 -or $catalog.weapons -isnot [array]) { Fail 'catalog requires schemaVersion 1 and a weapons array' }
 
 $verifiedItems = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
@@ -48,6 +53,9 @@ foreach ($itemId in $policy.verifiedRuntimeItemIds) {
 $roleNames = @('core', 'alternatives', 'preferred', 'discouraged')
 foreach ($entry in (Properties $policy.boonClassifications)) {
     if ($entry.Value -cnotin $roleNames) { Fail "unsupported policy role for classification $($entry.Name)" }
+}
+foreach ($entry in (Properties $hammerClassifications)) {
+    if ($entry.Value -cnotin @('priority', 'alternative')) { Fail "unsupported Hammer policy classification $($entry.Name)" }
 }
 $catalogPairs = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
 $catalogWeapons = New-Object 'System.Collections.Generic.HashSet[string]' ([StringComparer]::Ordinal)
@@ -153,9 +161,25 @@ foreach ($groupKey in @($groups.Keys | Sort-Object -CaseSensitive)) {
         } elseif ($row.itemType -eq 'keepsake') {
             if ($row.slot -cne 'start' -or -not $policy.keepsakeStartAsAutoSignal) { Add-Reason $reasons 'unsupported_keepsake_mapping' }
             else { $role = 'autoSignal' }
+        } elseif ($row.itemType -eq 'hammer') {
+            $priorityIsNumber = $row.priority -is [int] -or $row.priority -is [long] -or
+                $row.priority -is [double] -or $row.priority -is [decimal]
+            if (-not $priorityIsNumber -or $row.priority -le 0 -or $row.priority % 1 -ne 0) {
+                Fail 'Hammer priority must be a positive integer'
+            }
+            $classification = (Properties $hammerClassifications |
+                Where-Object { $_.Name -ceq $row.classification } | Select-Object -First 1)
+            if ($null -eq $classification) { Add-Reason $reasons 'unsupported_hammer_classification' }
+            else { $role = 'hammer'; $hammerClassification = [string]$classification.Value }
         } else { Add-Reason $reasons 'unsupported_runtime_item_type' }
         if ($role -and $row.runtimeItemId) {
-            $items += [ordered]@{ runtimeItemId = $row.runtimeItemId; slot = $slot; role = $role; name = $row.name }
+            $item = [ordered]@{ runtimeItemId = $row.runtimeItemId; slot = $slot; role = $role; name = $row.name }
+            if ($role -eq 'hammer') {
+                $item.priority = $row.priority
+                $item.classification = $hammerClassification
+                if ($row.condition) { $item.condition = $row.condition }
+            }
+            $items += $item
         }
     }
     $orderedItems = @($items | Sort-Object { [string]$_.slot }, { [string]$_.role }, { [string]$_.runtimeItemId })

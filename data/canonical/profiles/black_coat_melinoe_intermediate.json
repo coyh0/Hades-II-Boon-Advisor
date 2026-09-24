@@ -8,6 +8,11 @@
   "source": { "type": "sheet", "profile": "Black Coat / Melinoe / Intermediate" },
   "mechanicsTemplate": "black_coat_melinoe",
   "autoSignals": ["ForcePoseidonBoonKeepsake"],
+  "hammerPlan": [
+    { "traitId": "SuitDashAttackTrait", "priority": 1, "classification": "priority" },
+    { "traitId": "SuitAttackSpeedTrait", "priority": 2, "classification": "priority" },
+    { "traitId": "SuitSpecialAutoTrait", "priority": 3, "classification": "alternative", "condition": "Special branch" }
+  ],
   "slots": {
     "Attack": { "core": ["PoseidonWeaponBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
     "Special": { "core": ["AresSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },

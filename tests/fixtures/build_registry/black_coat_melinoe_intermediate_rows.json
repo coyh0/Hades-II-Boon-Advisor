@@ -46,20 +46,20 @@
     {
       "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
       "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
-      "name": "Exhaust Riser", "priority": 1, "classification": "priority",
-      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+      "name": "Exhaust Riser", "priority": 1, "classification": "priority", "runtimeItemId": "SuitDashAttackTrait",
+      "importStatus": "ready", "verificationStatus": "verified"
     },
     {
       "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
       "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
-      "name": "Rapid Frame", "priority": 2, "classification": "priority",
-      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+      "name": "Rapid Frame", "priority": 2, "classification": "priority", "runtimeItemId": "SuitAttackSpeedTrait",
+      "importStatus": "ready", "verificationStatus": "verified"
     },
     {
       "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",
       "runtimeWeaponId": "WeaponSuit", "runtimeAspectId": "BaseSuitAspect", "itemType": "hammer", "slot": "priority",
-      "name": "Launcher Frame", "priority": 3, "classification": "alternative", "condition": "Special branch",
-      "importStatus": "documentation_only", "verificationStatus": "not_applicable"
+      "name": "Launcher Frame", "priority": 3, "classification": "alternative", "condition": "Special branch", "runtimeItemId": "SuitSpecialAutoTrait",
+      "importStatus": "ready", "verificationStatus": "verified"
     },
     {
       "profileKeyProposal": "coat_melinoe_intermediate", "canonicalId": "black_coat_melinoe_intermediate", "profileMode": "intermediate",

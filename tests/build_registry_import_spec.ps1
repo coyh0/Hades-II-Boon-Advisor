@@ -43,7 +43,9 @@ function Assert-Blocked([object[]]$rows, [string]$reason, [string]$name) {
         $null -ne $result.groups[0].module) { throw "Expected blocked group without runtime output: $name" }
 }
 
-$policy = [ordered]@{ schemaVersion = 1; boonClassifications = [ordered]@{ core = 'core' }; verifiedRuntimeItemIds = @('AresWeaponBoon', 'ForceAresBoonKeepsake'); keepsakeStartAsAutoSignal = $true }
+$policy = [ordered]@{ schemaVersion = 1; boonClassifications = [ordered]@{ core = 'core' };
+    hammerClassifications = [ordered]@{ priority = 'priority'; alternative = 'alternative' };
+    verifiedRuntimeItemIds = @('AresWeaponBoon', 'ForceAresBoonKeepsake', 'SuitDashAttackTrait'); keepsakeStartAsAutoSignal = $true }
 Write-Json $policyPath $policy
 $base = New-Row
 $valid = Run-Case @($base) $true 'valid ready boon'
@@ -54,6 +56,25 @@ if ($valid.groups.Count -ne 1 -or $valid.groups[0].status -ne 'ready' -or
 $firstBytes = [IO.File]::ReadAllBytes($outputPath)
 $null = Run-Case @($base) $true 'deterministic repeat'
 if (-not [Linq.Enumerable]::SequenceEqual([byte[]]$firstBytes, [byte[]][IO.File]::ReadAllBytes($outputPath))) { throw 'Import result was not deterministic.' }
+
+# Legacy schema-1 policies predate Hammer projections and remain valid for Boons.
+$legacyPolicy = [ordered]@{}
+foreach ($entry in $policy.GetEnumerator()) { $legacyPolicy[$entry.Key] = $entry.Value }
+$legacyPolicy.Remove('hammerClassifications')
+Write-Json $policyPath $legacyPolicy
+$legacyBoon = Run-Case @($base) $true 'legacy schema-1 policy imports Boon'
+if ($legacyBoon.groups[0].status -ne 'ready' -or $legacyBoon.groups[0].items[0].role -ne 'core') {
+    throw 'Legacy schema-1 policy no longer imports a valid Boon.'
+}
+$legacyHammer = Clone-Row $base; $legacyHammer.itemType = 'hammer'; $legacyHammer.slot = 'priority'
+$legacyHammer.classification = 'priority'; $legacyHammer.runtimeItemId = 'SuitDashAttackTrait'
+$legacyHammer | Add-Member -NotePropertyName priority -NotePropertyValue 1
+$legacyHammerResult = Run-Case @($legacyHammer) $true 'legacy schema-1 Hammer remains blocked'
+if ($legacyHammerResult.groups[0].status -ne 'blocked' -or
+    $legacyHammerResult.groups[0].reasons -notcontains 'unsupported_hammer_classification') {
+    throw 'Legacy schema-1 policy gained implicit Hammer classification trust.'
+}
+Write-Json $policyPath $policy
 
 $row = Clone-Row $base; $row.importStatus = 'invalid'
 $null = Run-Case @($row) $false 'invalid importStatus'
@@ -115,8 +136,30 @@ if ($result.groups[0].status -ne 'ready' -or $result.groups[0].items[0].role -ne
 $policy.keepsakeStartAsAutoSignal = $false; Write-Json $policyPath $policy
 Assert-Blocked @($row) 'unsupported_keepsake_mapping' 'keepsake needs explicit policy'
 $policy.keepsakeStartAsAutoSignal = $true; Write-Json $policyPath $policy
-$row = Clone-Row $base; $row.itemType = 'hammer'
-Assert-Blocked @($row) 'unsupported_runtime_item_type' 'hammer requires mechanics'
+$row = Clone-Row $base; $row.itemType = 'hammer'; $row.slot = 'priority'; $row.classification = 'priority'
+$row.runtimeItemId = 'SuitDashAttackTrait'; $row | Add-Member -NotePropertyName priority -NotePropertyValue 1
+$result = Run-Case @($row) $true 'verified Hammer projection'
+$hammer = $result.groups[0].items[0]
+if ($result.groups[0].status -ne 'ready' -or $hammer.role -ne 'hammer' -or
+    $hammer.priority -ne 1 -or $hammer.classification -cne 'priority') {
+    throw 'Verified Hammer projection failed.'
+}
+$row.condition = 'Free text metadata only'
+$result = Run-Case @($row) $true 'Hammer condition metadata preserved'
+$hammer = $result.groups[0].items[0]
+if ($hammer.condition -cne 'Free text metadata only' -or
+    $hammer.PSObject.Properties.Name -contains 'runtimeCondition') {
+    throw 'Hammer condition text gained runtime semantics.'
+}
+$row = Clone-Row $row; $row.runtimeItemId = ''
+Assert-Blocked @($row) 'missing_runtime_item_id' 'Hammer missing runtime ID'
+$row = Clone-Row $base; $row.itemType = 'hammer'; $row.slot = 'priority'; $row.classification = 'priority'
+$row.runtimeItemId = 'UnknownHammerTrait'; $row | Add-Member -NotePropertyName priority -NotePropertyValue 1
+Assert-Blocked @($row) 'runtime_item_id_not_in_verified_policy' 'unverified Hammer ID'
+$row = Clone-Row $row; $row.runtimeItemId = 'SuitDashAttackTrait'; $row.priority = 0
+$null = Run-Case @($row) $false 'invalid Hammer priority'
+$row = Clone-Row $row; $row.priority = 1; $row.classification = 'untrusted'
+Assert-Blocked @($row) 'unsupported_hammer_classification' 'untrusted Hammer classification'
 $row = Clone-Row $base; $row.itemType = 'support'
 Assert-Blocked @($row) 'unsupported_runtime_item_type' 'support requires rules'
 foreach ($type in @('arcana', 'familiar', 'hex')) {

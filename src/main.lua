@@ -82,8 +82,16 @@ local supportedSources = {
 local function diagnose(screen, lootData)
     if type(screen) ~= "table" or type(lootData) ~= "table" then return end
     if screen.Source ~= lootData or screen.KeepOpen ~= true then return end
-    if not supportedSources[lootData.Name] or lootData.GodLoot ~= true then return end
-    if lootData.DebugOnly or lootData.StackOnly or lootData.TransformingTraits then return end
+    local offerKind = nil
+    if supportedSources[lootData.Name] then
+        if lootData.GodLoot ~= true then return end
+        if lootData.DebugOnly or lootData.StackOnly or lootData.TransformingTraits then return end
+        offerKind = "boon"
+    elseif lootData.Name == "WeaponUpgrade" then
+        offerKind = "hammer"
+    else
+        return
+    end
     state.log("CreateBoonLootButtons detected")
     state.log("Source=" .. lootData.Name)
     local gameGlobals = rom and rom.game
@@ -101,6 +109,8 @@ local function diagnose(screen, lootData)
     local profileSelectionWarning = selectedProfile == nil
         and ("Profile resolution=" .. tostring(selectionReason)) or nil
     snapshot.offers = OfferSnapshot.capture(screen, lootData)
+    snapshot.offerKind = offerKind
+    snapshot.offerSource = lootData.Name
     state.lastSnapshot = snapshot
     local scores = selectedProfile and ScoringEngine.scoreOffers(snapshot, selectedProfile) or {}
     state.lastScores = scores
