@@ -389,9 +389,6 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
   - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
 - [ ] Add more supported builds and Aspects.
 
-- [ ] **Add a second validated profile for an existing weapon/aspect pair.**
-  - Use it to validate real competition between owned-Boon affinity, pre-Boon auto signals and safe ambiguity.
-  - Explicitly prove the Black Coat Poseidon-keepsake signal once singleton selection no longer makes the signal observationally redundant.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
