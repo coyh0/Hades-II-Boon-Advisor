@@ -416,10 +416,11 @@ Community Curator has completed the private Sheet migration and reported success
   - [ ] Approve the final DATA recommendations (separate from the completed visual approval). Source rows do not become validated runtime profiles automatically.
   - [ ] During Registry mapping, resolve stable identity differences (e.g., human `blades_melinoe_intermediate` versus existing Registry/canonical `sister_blades_melinoe_intermediate`) through explicit mapping, never by guessing or silent renaming.
   - [x] Added a compact clickable index/jump links for the six vertically stacked guide cards per human tab, preserving the approved V2 card design. Native Google Sheets links navigate without filtering or hiding adjacent cards.
-- [ ] **11C.10 — Design and approve Build Registry v2 from finalized DATA.**
-  - Map atomic guide rows into stable recommendation keys, phase-aware Keepsakes/targets, branch and pivot conditions, provenance, and distinct recommendation/mechanics verification states.
-  - Keep documentary `Priority` separate from runtime scoring; unknown/missing conditions remain non-executable. Preserve exact verified native IDs and legacy importer safety.
-  - Approve the Registry schema before modifying the private Registry or canonical generation.
+- [x] **11C.10 — Design and approve Build Registry v2 from finalized DATA.**
+  - Approved a separate 49-column Registry v2 schema with stable recommendation IDs, profile identity/scope, phase-aware Keepsake metadata, provenance, independent recommendation/native-mechanics/native-ID verification states, and explicit runtime block reasons.
+  - Migrated all **378** DATA recommendations documentarily into `Build Registry v2`: 118 rows for the three v0.2-scope profiles and 260 deferred rows. All rows remain `documentation_only`; no new runtime execution was enabled.
+  - Connector QA confirmed exact 1:1 source coverage against both DATA tabs, zero missing DATA rows, zero duplicate recommendation IDs/fingerprints, and no field mismatches in mapped source content. The legacy 21-column `Build Registry` remains untouched and was duplicated to `Archive — Build Registry v1 2026-09-24` before further Registry work.
+  - Documentary `Priority` remains separate from runtime scoring; free-text/unknown conditions remain non-executable. The v2 schema must project explicitly into the legacy V1 import contract until a separately approved importer upgrade exists.
 - [ ] **11C.11 — Generate vetted canonical profiles and introduce informational `keepsakePlan`.**
   - Import only approved Registry records with verified IDs/mechanics. Generate phase-aware Keepsake guidance without changing RNG, offers, saves or player choice.
   - Add/expand resolver regression generation where practical as part of this work rather than as a separate open-ended task.
