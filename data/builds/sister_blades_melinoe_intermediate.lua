@@ -131,11 +131,7 @@ return {
                     traitId = "HestiaWeaponBoon",
                 },
                 {
-                    classification = "conditional",
-                    condition = {
-                        code = "WOUNDS_ACCESS",
-                        state = "unresolved",
-                    },
+                    classification = "alternative",
                     priority = 2,
                     traitId = "AresWeaponBoon",
                 },

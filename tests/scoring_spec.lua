@@ -1591,10 +1591,10 @@ check(activeScores[1].score == 12 and activeScores[1].covered and activeScores[1
 check(activeScores[2].score == 16 and activeScores[2].covered and activeScores[2].scoreComplete
     and activeScores[2].reasons[3].code == "BUILD_CORE_PRIORITY", "Zeus Special core plan changed")
 check(ScoringEngine.getBuildAlignment(productionProfile, "Attack", "AresWeaponBoon") == "ALTERNATIVE",
-    "conditional Attack branch was treated as non-target")
-check(activeScores[3].score == 12 and activeScores[3].covered and not activeScores[3].scoreComplete
-    and activeScores[3].reasons[3].code == "ATTACK_BRANCH_UNRESOLVED",
-    "unresolved Wounds branch was ranked as complete")
+    "Ares Attack branch was treated as non-target")
+check(activeScores[3].score == 12 and activeScores[3].covered and activeScores[3].scoreComplete
+    and #activeScores[3].reasons == 2,
+    "native Ares Attack was incomplete or gained an uncalibrated bonus")
 for index, role in ipairs({ "Cast", "Sprint", "Mana" }) do
     local context = ScoringEngine.getCoreSlotContext(activePlan, productionProfile, activePlan.offers[index + 3])
     check(productionProfile.slots[role] == nil and context.alignment == "NO_PLAN"
@@ -1609,9 +1609,11 @@ replacement.godTraits = {{ Name = "AresWeaponBoon", Slot = "Melee" }}
 replacement.offers = {{ originalIndex = 1, ItemName = "AphroditeWeaponBoon",
     TraitToReplace = "AresWeaponBoon" }}
 local replacementResult = ScoringEngine.scoreOffers(replacement, productionProfile)[1]
-check(not replacementResult.scoreComplete
-    and replacementResult.reasons[1].code == "REPLACEMENT_UNRESOLVED",
-    "replacement of unresolved Wounds branch was treated as complete")
+check(replacementResult.covered and replacementResult.scoreComplete
+    and replacementResult.score == 0
+    and replacementResult.reasons[1].code == "CORE_REPLACEMENT_DELTA"
+    and replacementResult.reasons[1].delta == 0,
+    "valid Ares Attack replacement was not evaluated")
 for _, result in ipairs(activeScores) do
     local sum = 0
     for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
@@ -1620,4 +1622,4 @@ end
 local before = deepCopy(productionProfile)
 ScoringEngine.scoreOffers(activePlan, productionProfile)
 check(deepEqual(productionProfile, before), "Intermediate profile was mutated")
-print("PASS: active Intermediate plan, neutral Cast/Sprint/Mana, unresolved Wounds replacement, and no mutation")
+print("PASS: active Intermediate plan, neutral Cast/Sprint/Mana, native Ares replacement, and no mutation")

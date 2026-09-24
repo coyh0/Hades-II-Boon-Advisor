@@ -156,7 +156,7 @@ Assert-Fails 'duplicate-slot-id' '"traitId": "ApolloWeaponBoon"' '"traitId": "Ap
 Assert-Fails 'malformed-role-array' '"core": []' '"core": "AphroditeWeaponBoon"'
 Assert-Fails 'invalid-branch-priority' '"traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 1' '"traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 0'
 Assert-Fails 'invalid-branch-classification' '"traitId": "ApolloWeaponBoon", "classification": "alternative"' '"traitId": "ApolloWeaponBoon", "classification": "unknown"'
-Assert-Fails 'unknown-branch-condition' '"code": "WOUNDS_ACCESS"' '"code": "UNKNOWN"'
+Assert-Fails 'unknown-branch-condition' '"traitId": "AresWeaponBoon", "classification": "alternative", "priority": 2' '"traitId": "AresWeaponBoon", "classification": "conditional", "priority": 2, "condition": { "state": "unresolved", "code": "UNKNOWN" }'
 Assert-Fails 'unverified-branch-id' '"traitId": "ApolloWeaponBoon"' '"traitId": "UnverifiedAttackBoon"'
 Assert-Fails 'unknown-slot' '"Special": {' '"Omega": {'
 Assert-Fails 'unknown-catalog-weapon' '"weapon": "WeaponDagger"' '"weapon": "UnknownWeapon"'

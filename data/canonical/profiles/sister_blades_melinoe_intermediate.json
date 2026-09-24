@@ -19,7 +19,7 @@
       { "traitId": "AphroditeWeaponBoon", "classification": "alternative", "priority": 1 },
       { "traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 1 },
       { "traitId": "HestiaWeaponBoon", "classification": "alternative", "priority": 1 },
-      { "traitId": "AresWeaponBoon", "classification": "conditional", "priority": 2, "condition": { "state": "unresolved", "code": "WOUNDS_ACCESS" } }
+      { "traitId": "AresWeaponBoon", "classification": "alternative", "priority": 2 }
     ] },
     "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" }
   },
