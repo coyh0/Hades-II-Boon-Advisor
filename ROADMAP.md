@@ -1,6 +1,6 @@
 # Hades II Boon Advisor — Roadmap
 
-_Last updated: 2026-09-23_
+_Last updated: 2026-09-24_
 
 This file is the project roadmap and the source of truth for planned work and validation status.
 
@@ -14,7 +14,7 @@ Published release: `v0.1.2` — Sister Blades only.
 
 Current `main` / future `v0.2`: Black Coat pilot validated offline and live DEV; safe partial ranking validated offline and live DEV.
 
-Next priority: repair release/install tooling for the 15-file runtime inventory, then continue controlled profile expansion.
+The 15-file runtime inventory, profile switcher and invariants are complete. 11C.5 Black Coat Hammer support has passed offline and sufficiently realistic live DEV validation. Next: revalidate and integrate the completed Sister Blades community audit through exact runtime-ID verification, canonical data, Hammer plans, tests and realistic live validation. The 2-of-3-evaluable Hammer case remains an optional live observation; Hammer reroll is not a game mechanic and is not a validation criterion.
 
 ## Completed Phase 10 work
 
@@ -196,7 +196,7 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - Runtime validation with `DEBUG=false` confirmed a deliberately injected `ERROR` is still written to `LogOutput.log` while the plugin continues loading normally.
   - Expected unsupported/ambiguous profile states remain DEBUG rather than noisy normal-release warnings.
 - [x] Keep verbose diagnostic logging disabled by default with `DEBUG = false`.
-  - Live validation exercised normal ranking, reroll, incomplete analysis and Sublimation refresh with zero `[BoonAdvisor]` lines emitted on the successful path.
+  - Live validation exercised normal ranking, standard Boon reroll, incomplete analysis and Sublimation refresh with zero `[BoonAdvisor]` lines emitted on the successful path.
 - [x] Add deduplication / rate limiting for repeated identical errors or warnings so a bad callback cannot flood the log.
   - Deterministic once-per-session deduplication uses stable `LEVEL:CODE` keys with in-memory suppression counters.
   - Failed log-sink writes do not consume a dedupe key, so a later occurrence can retry.
@@ -322,11 +322,11 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - English/French partial-ranking labels and scope text are covered by regression tests.
 - [x] **Validate 11B offline.**
   - Full Lua 5.2 regression suite, staging with exactly 15 runtime files, canonical profile generation, standalone mechanics validation, strict mechanics equivalence, Build Registry import-contract tests and whitespace checks all passed.
-  - Regression coverage includes 3/3, 2/3, 1/3, 0/3, evaluated ties, unknown-only differentiating evidence, unsupported/ambiguous profiles, reroll and Sublime refresh.
+  - Regression coverage includes 3/3, 2/3, 1/3, 0/3, evaluated ties, unknown-only differentiating evidence, unsupported/ambiguous profiles, standard Boon reroll and Sublime refresh. Hammer rerolls are impossible in the game and are not a runtime criterion.
 - [x] **Validate 11B in the live DEV game.**
   - Black Coat / Aspect of Melinoë confirmed normal 3/3 ranking with `RankingReady=true` and `RankingMode=full`.
   - Multiple real 2/3 offers confirmed `RankingReady=false` with `RankingMode=partial`, `RANG 1/2`, `RANG 2/2`, and the third choice `NON ÉVALUÉ`.
-  - Live reroll cleared and rebuilt the partial annotations correctly.
+  - Live standard Boon reroll cleared and rebuilt the partial annotations correctly.
   - Live Sublime/`TryUpgradeBoon` refreshed the UI and rescored the upgraded boon while preserving partial mode and excluding the unknown choice.
   - DEV config was restored to `DEBUG=false`, `UI_TEST_MODE=false`, `BUILD_PROFILE="auto"` after validation.
   - No Epic/live installation deployment, release or tag was performed.
@@ -356,12 +356,39 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
   - Black Coat — Melinoë Intermediate is the first real import pilot: a sanitized 14-row fixture preserves 4 verified runtime rows plus 10 documentation-only build rows without exposing the private spreadsheet source.
   - Its imported projection is regression-tested against the existing canonical profile for profile identity, weapon/aspect, mode, starting keepsake auto-signal, and Attack/Special/Sprint core Boons.
   - Documentation-only Arcana, Hammers, support, Familiar and Hex rows remain non-runtime and do not block the group.
-- [ ] **Add build-critical Hammer support to the canonical/import/scoring pipeline.**
-  - Hammers are part of the build plan, not optional documentation; their current `documentation_only` state is temporary until runtime IDs and projection semantics are explicitly validated.
-  - Start with Black Coat — Melinoë Intermediate: `Exhaust Riser`, `Rapid Frame`, and `Launcher Frame` are preserved in the import fixture as build-critical source data.
-  - Add verified internal Hammer IDs, canonical Hammer roles/priorities, conservative Build Registry import mapping, scoring integration and regression coverage before broad profile expansion depends on Hammer advice.
-  - Preserve branch-specific intent such as `Launcher Frame` for the Special branch instead of flattening all Hammers into one generic priority.
-  - Validate the resulting Hammer recommendations live in DEV before considering the support complete.
+- [x] **11C.5 — Add build-critical Hammer support to the canonical/import/scoring pipeline.**
+  - `hammerPlan` is distinct from `hammerRoles`: the former describes offered Hammer priorities and conditions; the latter describes Hammers already owned.
+  - Black Coat offers are identified by the exact `WeaponUpgrade` source. `Exhaust Riser` / `SuitDashAttackTrait` has priority 1; `Rapid Frame` / `SuitAttackSpeedTrait` priority 2; `Launcher Frame` / `SuitSpecialAutoTrait` priority 3 as a Special-branch alternative with a free-text condition.
+  - Scoring is ordinal through `HAMMER_BUILD_PRIORITY`; rarity provides no bonus. Conditions are not executed: unresolved conditions produce `HAMMER_CONDITION_UNRESOLVED` and `Complete=false`, never a guessed branch.
+  - Unknown Hammers remain unevaluated. Full/partial/none ranking applies only to fully evaluated choices, preserving safe partial ranking behavior.
+  - Registry import requires exact verified `runtimeItemId`, `ready` / `verified` states and a conforming classification/priority. Condition text is retained as documentation and is not executable.
+  - Offline implementation/review passed, including simulated 2/3 evaluation and condition cases. Live DEV validation on 2026-09-24 covered two Hammer screens: one fully evaluable choice each, unknown alternatives left unevaluated, expected `RankingMode=none`; the subsequent owned-Hammer state confirmed the selected Rapid Frame and Exhaust Riser. The log had no `[BoonAdvisor] ERROR/WARN` entries.
+  - The 2/3 evaluable case was not encountered live and remains optional, non-blocking observation. The game does not allow Hammer rerolls; no such test or criterion is required. UI cleanup/refresh after selection is not claimed as log-proven.
+  - No release, tag, push or Epic/live deployment is implied by this validation.
+- [x] **Complete Sister Blades community build audit in the private Build Registry (documentation only).**
+  - Audit contains 104 rows: Melinoë Starter 33 (rows 221–253), Melinoë Intermediate 35 (254–288), Morrigan Meta 36 (289–324).
+  - 103 rows have `not_applicable` IDs; only Morrigan Vicious Flourish → `AresSpecialBoon` has a verified ID, and it remains `documentation_only` until canonical/module readiness. No row is runtime-ready by virtue of the audit alone.
+  - Audit conclusions to verify against game/runtime data before canonical promotion: Starter/Intermediate default Heaven Flourish / Zeus Special; Attack branches Nova Strike (range), Flutter Strike (high %), Flame Strike (on-hit), Vicious Strike (Wounds/Grievous Blow); Trick Knives priority Hammer, with Wicked Onslaught, Rapid Onslaught and Reaper Knives alternatives; Final Slice situational; Dancing Knives conditional/uncertain, not a universal top pick; Cloud Bangle starting Zeus keepsake. Intermediate Ares Attack + Sword Hilt is conditional/build-specific.
+  - Morrigan is a distinct `DaggerTripleAspect` profile: Sworn Strike/Hera or Nova Strike/Apollo Attack branches; Heaven Flourish/Zeus Special primary with Vicious Flourish and Volcanic Flourish alternatives; Born Gain for Ω-heavy, Lucid Gain alternative; Final Slice and Sweeping Ambush priority Hammers, Wicked Onslaught/Rapid Onslaught alternatives; Banshee Brand/Phantom Brand are build-specific Blood Triad amplifiers; The Sorceress is important. Dancing Knives has a strong profile-specific caution, not a universal ban. Origination boosts normal/Ω damage but not the fixed Blood Triad proc directly. Premium Service remains unverified and must not be encoded from memory.
+  - No repository, canonical JSON, runtime code or ROADMAP was changed during that separate audit.
+- [ ] **Revalidate and integrate audited Sister Blades profiles.**
+  - Verify the 104 audit rows against the current private Build Registry and exact runtime IDs from trusted game data/source. Keep the Registry private; never publish its ID or URL. Check the three Black Coat Hammer rows' IDs/statuses as a separate consistency check.
+  - Map exact IDs, verified classifications, priorities and any safe condition semantics; preserve free-text conditions as documentation unless an explicit machine-readable rule is independently defined. Keep unresolved/unknown data fail-safe and documentation-only.
+  - Update canonical Starter, Intermediate and Morrigan profiles for the audited branches, after runtime verification. Do not automatically promote community conclusions into scoring.
+  - Adapt `hammerPlan` (offered choices) separately from `hammerRoles` (owned choices), preserving profile-specific branches, priorities and conditions. Verify ProfileResolver affinities, especially keepsake signals and owned-Boon evidence precedence.
+  - Add a second profile for an existing weapon/aspect pair (including Black Coat where suitable) so owned-Boon affinity can compete with `autoSignals` and the Poseidon keepsake contribution can be demonstrated beyond singleton resolution.
+  - Run exact-ID/import validation, canonical generation, deterministic-output checks, Hammer and scoring tests, package/staging checks, and regressions for all existing profiles. Validate each intended profile in realistic DEV play before considering it runtime-ready.
+- [ ] Generate/expand profile-resolution regression tests automatically where practical.
+- [x] Define the multiple-profile policy for the same weapon/aspect pair:
+  - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
+  - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
+  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) is the primary profile-affinity evidence; decisive owned-Boon state must outrank pre-Boon intent signals such as starting keepsakes.
+  - Validated pre-Boon signals are fallback evidence for early-run detection when owned-Boon evidence is absent or tied; future profiles may add explicit activation/signature metadata if needed.
+  - If all available evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
+  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
+  - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
+- [ ] Add more supported builds and Aspects.
+
 - [ ] **Add a second validated profile for an existing weapon/aspect pair.**
   - Use it to validate real competition between owned-Boon affinity, pre-Boon auto signals and safe ambiguity.
   - Explicitly prove the Black Coat Poseidon-keepsake signal once singleton selection no longer makes the signal observationally redundant.
@@ -377,6 +404,8 @@ Next priority: repair release/install tooling for the 15-file runtime inventory,
 - [ ] Add more supported builds and Aspects.
 
 ### 11D — v0.2 release readiness
+
+`v0.1.2` remains the published Sister Blades-only release. All following work targets a future `v0.2`; no release action is authorized by this roadmap update.
 
 - [ ] Modernize `README.md` and repository description for multi-weapon support while clearly distinguishing published `v0.1.2` from future `v0.2`.
 - [ ] Modernize `docs/RUNTIME_TEST.md` from the Phase 1 probe procedure to the current resolver/full/partial/reroll/Sublime/localization validation flow.
@@ -418,6 +447,8 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
 - [ ] Keep the active-profile indicator useful for both players and support/debugging without dominating the UI.
 
 ### Later — Build guidance and optimization
+
+Legendary/Duo eligibility and information-only RNG-steering guidance are deferred until after Pom priority and Build Setup Health. First verify game prerequisites and exact internal IDs; model goals, alternative prerequisites, and owned/missing state without changing RNG or offers. Consider later integration into Build Setup Health or scoring only after validation. Never assume `Premium Service` without verification.
 
 These features extend the advisor beyond immediate Boon ranking while remaining informational-only and visually secondary.
 
