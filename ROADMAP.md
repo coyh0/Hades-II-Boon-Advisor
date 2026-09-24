@@ -430,7 +430,7 @@ Community Curator completed the private Sheet migration and the maintainer appro
   - Documentary `Priority` remains separate from runtime scoring; free-text/unknown conditions remain non-executable. The v2 schema must project explicitly into the legacy V1 import contract until a separately approved importer upgrade exists.
 - [ ] **Optional, non-blocking provenance follow-up:** verify up to 34 currently `unknown` historical source publication dates only if authoritative page/archive evidence exists; otherwise leave `unknown`. This research is outside the completed 11C.9 documentary approval and is not a runtime import prerequisite.
 - [ ] **11C.11 — Generate vetted canonical profiles and introduce informational `keepsakePlan`.**
-  - [ ] Audit the 118 documentary records scoped to the three maintainer-approved v0.2 profiles; identify individual native IDs, verified mechanics, unresolved claims, and safely projectable records. Do not promote the other 260 records.
+  - [ ] Audit the 118 documentary records scoped to the three maintainer-approved v0.2 profiles; identify individual native IDs, verified mechanics, unresolved claims, and safely projectable records. Do not promote the other 260 records. Technical verification and realistic DEV testing of any recommendation actually projected into v0.2 remain required; defer optional owner-by-owner re-review of the nine future builds until their inclusion is proposed.
   - [ ] Define and review an explicit Registry v2→V1 projection and phase-aware `keepsakePlan` mapping; leave unknowns documentary-only and preserve existing gameplay/scoring semantics until separately approved.
   - Import only approved Registry records with verified IDs/mechanics. Generate phase-aware Keepsake guidance without changing RNG, offers, saves or player choice.
   - Add/expand resolver regression generation where practical as part of this work rather than as a separate open-ended task.
@@ -460,6 +460,14 @@ Community Curator completed the private Sheet migration and the maintainer appro
   - Review AI disclosure, installation/update notes and supported-profile scope.
 - [ ] **Publish v0.2 only after all release gates pass.**
   - Bump version, rebuild deterministic staging/packages, verify inventories and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
+
+## Later — Expand runtime with additional builds (after v0.2)
+
+The nine deferred profiles and their 260 documentary Registry v2 rows remain `documentation_only` until a later, separately scoped release. Do not require a full personal recommendation-by-recommendation review of those future profiles during 11C.11 or block v0.2 on their unresolved entries.
+
+- [ ] **Select the next build-expansion scope with the maintainer.** Prefer accessible non-hidden aspects; only consider hidden aspects once unlocked and independently verified in DEV.
+- [ ] **Review each proposed new build when it is actually scheduled for runtime inclusion:** confirm the maintainer still agrees with its guide recommendations, resolve or explicitly exclude incomplete/contested entries (including Persephone Special and Nyx Sprint where applicable), and check current native IDs and consequential mechanics. Reassess deferred Morrigan Special comparisons only if they are to become executable; do not presume approval from documentary sign-off.
+- [ ] **Promote only individually approved, verified records:** perform explicit Registry v2→V1 projection (or separately approve a new importer), add focused tests, run offline suites and realistic per-profile DEV validation. Keep unrelated and unresolved DATA documentary-only; require a separate release gate before publishing.
 
 ## Later — Profile selection and UI polish
 
