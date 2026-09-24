@@ -8,13 +8,13 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## Current focus
 
-**11C — Expansion and automation hardening**
+**11C — Native-mechanics reconciliation, Community Curator migration, and Registry v2 planning**
 
-Published release: `v0.1.2` — Sister Blades only.
+Published release: `v0.1.2` — Sister Blades only. Future-`v0.2` `main` has three active runtime profiles: Sister Blades Melinoë Intermediate, Sister Blades Morrigan Meta, and Black Coat Melinoë Intermediate. Starter was removed in commit `3201282380574f8adbb1920b1a3bf40c4cc045e2`; installed `BUILD_PROFILE="starter"` now warns once and uses session-only auto fallback. Runtime inventory is **14 files**. Offline suites and transactional DEV-only deployment/hash verification passed; the new Melinoë runtime scoring has **not** passed final live validation.
 
-Current `main` / future `v0.2`: Black Coat pilot validated offline and live DEV; safe partial ranking validated offline and live DEV.
+The first live Melinoë Ares offer displayed Vicious Strike as unevaluated. The subsequent read-only native audit of DEV executable file version `139606` confirms `AresWeaponBoon` is a valid Attack applying `AresStatus` independently of Grievous Blow. A targeted scoring/runtime correction is needed; native evidence paths/snippets and the exact Origination-category combination behavior must be checked before implementing additional synergy rules.
 
-The 15-file runtime inventory, profile switcher and invariants are complete. 11C.5 Black Coat Hammer support has passed offline and sufficiently realistic live DEV validation. Community Audit V2 is complete as documentation for the three audited Sister Blades profiles; no audit row is runtime-ready by that fact alone. Next: reconcile the local Sister Blades profiles against V2 and the target game data, then complete the separate Black Coat Community Audit before considering it for v0.2. The 2-of-3-evaluable Hammer case remains an optional live observation; Hammer reroll is not a game mechanic and is not a validation criterion.
+Community Curator is independently migrating the private human guides and normalized DATA, using the approved compact V2 guide design. **Do not edit Build Registry, canonical profiles or code on the basis of unfinished DATA.** Registry v2, `keepsakePlan`, and any broader profile promotion follow Curator QA and maintainer review. Historical 15-file, Starter and pre-audit statements below describe past milestones, not the current runtime. The 2-of-3-evaluable Hammer case remains an optional live observation; Hammer rerolls are not a game mechanic.
 
 ## Completed Phase 10 work
 
@@ -333,11 +333,12 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
 
 ### 11C — Expansion and automation hardening
 
-- [x] **Repair the 15-file install/update/release inventory.**
+- [x] **Repair the historical 15-file install/update/release inventory (superseded by the 14-file v0.2 runtime).**
   - `tools/BoonAdvisor.Install.Common.ps1` now includes `black_coat_melinoe_intermediate.lua` in the exact runtime package inventory.
   - `tests/thunderstore_package_spec.ps1` now validates the exact 15-file runtime inventory.
   - Thunderstore package, install and update/rollback regression tests all passed; no Thunderstore publish or game deployment occurred.
   - No active `14-file` / `14 runtime` inventory references remain in `tools/` or `tests/`.
+  - Historical completion record: the later approved Starter removal reduced the current runtime and staging inventory to 14 files; do not restore 15-file assertions.
 - [x] **Extend profile-switcher coverage and documentation to Black Coat.**
   - `tools/Set-BoonAdvisorProfile.ps1` now uses registry-driven selection keys without a stale fixed profile list.
   - `tests/profile_switcher_spec.ps1` now covers `coat_melinoe_intermediate`, `-Show`, settings preservation, and regression against the obsolete fixed list.
@@ -377,41 +378,44 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
   - Internal IDs and mechanics must still be independently verified against the game files and target runtime before canonicalization.
   - The audit records both source recommendations and competing recommendations; ordinal source priorities are documentation and never create numeric scoring bonuses by themselves.
 - **Permanent Community Audit Gate — applies to every future build/profile.**
-  - Before a build is considered runtime-ready, complete a multi-source community audit of branches, synergies, resources, conditions, and competing recommendations.
-  - Separate community recommendations from actual game mechanics. Verify internal IDs and mechanics independently against the target game version.
-  - Canonical/runtime scoring work starts only after those checks; then run offline tests and realistic DEV validation before release.
-  - Auditing one profile never validates another profile, even when they share a weapon or aspect.
-- **Provisional v0.2 profile scope.**
-  - Sister Blades — Melinoë Intermediate: runtime target.
-  - Sister Blades — Morrigan Meta / Blood Triad: runtime target.
-  - Black Coat — Melinoë Intermediate: existing technical target, but its own Community Audit remains required before v0.2 release.
-  - Sister Blades — Melinoë Starter: planned runtime removal for v0.2; retain its documentary history. Removal is not implemented.
-- **Melinoë Intermediate Registry data (documentary only; not scoring rules).**
-  - Cloud Bangle: priority 1; Beautiful Mirror: alternative 2; Sword Hilt: conditional 3.
-  - Heaven Flourish / Zeus Special: priority 1.
-  - Nova Strike / Apollo Attack, Flutter Strike / Aphrodite Attack, and Flame Strike / Hestia Attack: alternative 1 each.
-  - Vicious Strike / Ares Attack: conditional 2, Wounds branch.
-  - Trick Knives: Hammer priority 1; Wicked Onslaught, Rapid Onslaught, and Reaper Knives: alternative 2; Final Slice: alternative 3.
-  - Dancing Knives: conditional 3; non-evaluable while its context remains unresolved.
-  - These are current Registry recommendations. They do not define score deltas, prove mechanical conditions, or override the separate game-data/runtime verification gate.
-- [ ] **Reconcile Sister Blades profiles against Community Audit V2 and prepare v0.2 scope.**
-  - Preserve and review the existing local Attack Branches architecture against the V2 recommendations; do not add numeric scoring bonuses from ordinal community priorities.
-  - Remove Starter from the v0.2 runtime while preserving its documentary history. Define explicit handling for installed configurations with BUILD_PROFILE="starter" before migration; do not silently change the selected build.
-  - Update the generated registry, staging and package inventory from 15 to 14 files only as part of the approved runtime-removal patch.
-  - Independently verify Origination/Wounds semantics and possible Hammer exclusions in the target game version. Keep unresolved conditions fail-safe.
-  - Validate each resulting profile separately with offline tests and realistic DEV runtime tests.
-  - Black Coat technical and Hammer validation does not replace its own Community Audit.
-- [ ] Generate/expand profile-resolution regression tests automatically where practical.
-- [x] Define the multiple-profile policy for the same weapon/aspect pair:
-  - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
-  - `auto` first filters by weapon + aspect, then uses the current run state/build evidence to select the matching profile when that evidence is decisive.
-  - Existing build structure (owned core/alternative/preferred Boons and occupied core slots) is the primary profile-affinity evidence; decisive owned-Boon state must outrank pre-Boon intent signals such as starting keepsakes.
-  - Validated pre-Boon signals are fallback evidence for early-run detection when owned-Boon evidence is absent or tied; future profiles may add explicit activation/signature metadata if needed.
-  - If all available evidence is absent or tied, `auto` must fail safely as ambiguous rather than guess.
-  - Keep an explicit profile selection mechanism as an override/fallback for truly ambiguous same-aspect variants.
-  - Profile identity must remain distinct from weapon/aspect identity so future creative/community builds can coexist.
-- [ ] Add more supported builds and Aspects.
-
+  - Intermediate/reference tier: use Mobalytics as the principal source; independently verify any mechanically consequential claim. Do not call single-source guidance a community consensus.
+  - Meta/Best Builds tier: use Lee Reamsnyder + Mobalytics + NeonHades2, with Reddit only for substantive conflicts, bugs or unclear interactions. Mark unresolved recommendations rather than inventing a ranking.
+  - Separate documented guide advice, maintainer-specific route choices, and actual game mechanics. Independently verify native IDs, prerequisites and consequential mechanics against the target game version before promoting rows to runtime.
+  - Auditing one profile never validates another, including the separate Black Coat Melinoë community review. Run offline tests and realistic DEV runtime validation for every released profile.
+- **Provisional v0.2 profile scope (currently present on main; release still gated).**
+  - Sister Blades — Melinoë Intermediate: active runtime profile; native Ares correction and renewed live offer validation pending.
+  - Sister Blades — Morrigan Meta / Blood Triad: active runtime profile; final cross-check against normalized Best Builds and live regression pending.
+  - Black Coat — Melinoë Intermediate: active runtime/technically DEV-validated; separate community pilot exists, final audit approval and release-level validation pending.
+  - Sister Blades — Melinoë Starter: removed from future-v0.2 runtime and generated registry; retain the historical documentary records. Published v0.1.2 behavior is unchanged.
+  - Do not add an additional Melinoë Meta profile or rename Intermediate until the maintainer reviews the final Curator DATA and approves the intended profile set.
+- **Historical Community Audit V2 Melinoë Intermediate Registry snapshot (documentary only, not runtime scoring).**
+  - Cloud Bangle: priority 1; Beautiful Mirror: alternative 2; Sword Hilt: conditional 3. Heaven Flourish / Zeus Special: priority 1.
+  - Nova Strike / Apollo, Flutter Strike / Aphrodite, Flame Strike / Hestia: Attack alternatives 1. Vicious Strike / Ares: conditional Attack 2 in this historical Registry snapshot.
+  - Trick Knives: Hammer priority 1; Wicked Onslaught, Rapid Onslaught, Reaper Knives: alternatives 2; Final Slice: alternative 3; Dancing Knives: conditional 3.
+  - Curator pilot DATA separately preserves the maintainer's Sword Hilt → Ares route as a labeled owner preference and the Zeus-first Mobalytics route as an alternative. This editorial change is not yet imported into Build Registry. Neither source priorities nor classification automatically create numeric scoring bonuses.
+- [x] **11C.6 — Reconcile Sister Blades v0.2 runtime offline and deploy to DEV (commit `3201282`).**
+  - Removed Starter from generated registry/runtime while retaining history. Existing `BUILD_PROFILE="starter"` emits a deduplicated warning, preserves on-disk settings and falls back to session-only auto; singleton regression covers Melinoë, Morrigan and Black Coat.
+  - Preserved Attack Branches architecture and the five existing Sister Blades Hammer choices. Ares conditional uncertainty is fail-safe: no premature slot-policy delta, `conflictResolved=false`, `scoreComplete=false`; all regression, canonical generation, import, package inventory and staging tests passed with **14 runtime files**.
+  - Pushed implementation commit `3201282380574f8adbb1920b1a3bf40c4cc045e2`; DEV-only transactional update passed compatibility and 14-file source/staging/DEV hash comparison. Epic/live installation was not touched. The initial child-process `ShouldProcess` error wrote nothing; direct retry succeeded.
+  - First live Melinoë screenshot showed an Ares offer marked unevaluated; it validates conservative fail-safe rendering, **not** final profile/scoring correctness. Final live log/profile/ranking regression remains open.
+- [x] **11C.7 — Read-only native mechanics audit completed; evidence annex outstanding.**
+  - DEV executable file/product version `139606`; static inspection only. `AresWeaponBoon` and `AresSpecialBoon` apply `AresStatus` (Rend; shared vulnerability category `Curse`); `AresStatusDoubleDamageBoon` (Grievous Blow) is a payoff requiring an existing Ares status, not a prerequisite for Attack validity.
+  - `EffectVulnerabilityMetaUpgrade` checks `MinRequiredVulnerabilityEffects=2` against `victim.VulnerabilityEffects`. The inspected logic does not directly require two different Olympians; confirm exact category combination/deduplication before coding new Origination inference.
+  - Morrigan `CheckFinisher` requires Attack, Special and Ex/Ω markers on the same target; `WomboStrike` base damage 111 has `IgnoreAllModifiers=true`. `DaggerTripleBuffTrait` buffs the finisher; `DaggerTripleRepeatWomboTrait` specifies 0.33 repetition chance.
+  - `DaggerSpecialJumpTrait` preserves `FinalJumpToOwner=true`; no blanket Zeus exclusion proven. No static mutual exclusion was found for `DaggerRapidAttackTrait` / `DaggerAttackFinisherTrait`, but dynamic behavior is not proven.
+  - Hephaestus `WeaponUpgradeBoon` (Premium Service) requires one trait from each of three native groups **and** `WorldUpgradeWeaponUpgradeSystem`. Name-to-ID mappings of all human guide entries still need confirmation. Obtain precise native file paths/function excerpts and keep unresolved mechanics separate.
+- [ ] **11C.8 — Fix Ares base-branch scoring and rerun realistic live DEV validation.**
+  - Evaluate `AresWeaponBoon` as a valid Attack independently of Grievous Blow; model downstream Ares/Origination synergies separately and conservatively. Preserve safe replacement/partial-ranking logic and assert no unjustified `BUILD_SLOT_POLICY_DELTA`.
+  - Require native evidence annex, targeted regression tests, full relevant offline suites, new DEV deployment only with maintainer approval and live log/UI verification. No automatic Epic/live deployment.
+- [ ] **11C.9 — Finish Community Curator migration and approve human DATA.**
+  - Curator pilot documented Melinoë Blades, Morrigan and Black Coat Melinoë; approved atomic DATA schema and compact V2 guide design. Full migration of remaining Intermediate and Best Builds is in progress.
+  - Finalize normalized DATA, matching human guides, source-tier checks, visual/formula QA and safe cleanup of pilot/prototype tabs; preserve archives and unrelated tracker tabs. Maintainer reviews conflicting profile routes before Registry changes.
+- [ ] **11C.10 — Design Build Registry v2 only after approved DATA.**
+  - Map atomic guide rows into stable recommendation keys, phase-aware Keepsakes and targets, branch/pivot conditions, provenance and separate recommendation/mechanics verification statuses. Preserve legacy importer safety and exact verified native IDs.
+  - Keep documented `Priority` distinct from runtime score; missing/unknown conditions remain non-executable. Obtain maintainer approval for schema before editing Registry.
+- [ ] **11C.11 — Generate validated canonical profiles and introduce informational `keepsakePlan`.**
+  - Implement phase-aware guidance from vetted Registry records without steering RNG, modifying saves or assuming any Hammer reroll. Develop scoring changes independently from documentary recommendations.
+  - Re-run deterministic canonical/Lua generation, importer, install/update/uninstall and packaging regressions; then complete realistic DEV validation for each planned v0.2 profile.
 - [ ] Generate/expand profile-resolution regression tests automatically where practical.
 - [x] Define the multiple-profile policy for the same weapon/aspect pair:
   - The runtime may contain several community/maintainer-approved profiles for the same weapon + aspect.
@@ -434,6 +438,9 @@ The 15-file runtime inventory, profile switcher and invariants are complete. 11C
 - [ ] Prevent building a `0.1.2` artifact from future-v0.2 `main`; bump the version before release artifact creation.
 - [ ] Re-check pinned dependency/runtime versions before release.
 - [ ] Require every profile intended for v0.2 to pass the permanent Community Audit Gate and its corresponding realistic DEV runtime validation before release.
+- [ ] Complete Ares base-branch scoring fix and confirm Melinoë's correct live ranking; verify remaining Origination category behavior before adding synergy scores.
+- [ ] Finalize and approve the two human DATA/reference tiers and the Registry v2 mapping before regenerating any newly promoted profile.
+- [ ] Confirm the intended v0.2 profile set (Intermediate vs any future Meta route) after Curator review.
 - [ ] Run live regression validation for every profile intended for `v0.2`.
 - [ ] Prepare the Thunderstore changelog in English.
 - [ ] Bump version, rebuild staging/package, verify ZIP and SHA-256, create an immutable tag, publish GitHub release, then publish Thunderstore.
@@ -497,13 +504,12 @@ These features extend the advisor beyond immediate Boon ranking while remaining 
 | Black Coat | `WeaponSuit` | Verified from local game data and live DEV runtime |
 | Black Coat — Aspect of Melinoë | `BaseSuitAspect` | Verified from local game data and live DEV runtime |
 
-Current supported profile intent:
+Current profile state (published versus development):
 
-- Sister Blades — Melinoë Starter
-- Sister Blades — Melinoë Intermediate
-- Sister Blades — Morrigan Meta / Blood Triad
-- Black Coat — Melinoë Intermediate (offline and live DEV validated; not yet released)
-- Other weapon/aspect combinations: unsupported unless explicitly added to the registry and validated.
+- Published `v0.1.2` remains Sister Blades-only and preserves historical Starter/Intermediate support.
+- Future-`v0.2` `main`: Sister Blades — Melinoë Intermediate, Sister Blades — Morrigan Meta / Blood Triad, Black Coat — Melinoë Intermediate; exact **14-file** DEV inventory. Melinoë Starter is removed on `main`, not retroactively from the published release.
+- Sister Blades Ares scoring correction and final live DEV verification are pending; all prospective release profiles must pass their independent Community Audit Gate and realistic DEV test.
+- Other weapon/aspect combinations remain unsupported unless explicitly added to the generated registry and validated.
 
 ## Deferred design decisions
 
