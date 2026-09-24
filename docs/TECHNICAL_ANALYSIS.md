@@ -533,9 +533,13 @@ active negative policy remains visible within the two-label limit. A known
 policy transition does not make an unresolved mechanical replacement
 complete; `REPLACEMENT_UNRESOLVED` still blocks global ranking.
 
-## Second Real Build Profile (Phase 5J-A)
+## Second Real Build Profile (historical Phase 5J-A)
 
-`data/builds/sister_blades_melinoe_starter.lua` is a separate, validated
+This section records the v0.1.x Starter experiment. Starter is retired from
+active v0.2 canonical generation, runtime staging, and profile selection; its
+historical data remains in Git and the private documentary Build Registry.
+
+The historical `data/builds/sister_blades_melinoe_starter.lua` was a separate, validated
 Sheet-sourced profile, with identity `sister_blades_melinoe_starter`,
 `profileMode = "starter"`, `WeaponDagger`, and `DaggerBackstabAspect`. Its
 recorded Starter plan is intentionally narrow: `AphroditeWeaponBoon` is the
@@ -543,36 +547,33 @@ reserved Attack Core, `ZeusSpecialBoon` is the reserved Special Core, Sprint
 is open and flexible, and Cast is omitted entirely (`NO_PLAN`). No missing
 slot is inferred from the Intermediate plan.
 
-The selector is `BUILD_PROFILE` in `config/settings.lua`; its default is
-`"intermediate"` to preserve the existing deployed behavior. `"starter"`
-selects only the new profile. An invalid selector safely falls back to
-Intermediate and emits a DEBUG `BoonAdvisor` warning naming the invalid
-value; profile logs include `BuildId`, `ProfileMode`, and `SchemaVersion`.
+At that stage the selector was `BUILD_PROFILE` in `config/settings.lua`, and
+`"starter"` selected this experimental profile. The current default is
+`"auto"`; a retired or unknown explicit selection emits one WARN and uses
+auto for the session without rewriting settings.lua. Profile DEBUG logs
+include `BuildId`, `ProfileMode`, and `SchemaVersion`.
 
 The scoring engine remains profile-generic: it receives a selected profile
-as data and has no branch on profile identity. Both real profiles carry the
-same audited mechanical mappings, weights, and rules; only their declared
-slot plans differ. The staging artifact contains both profile files.
+as data and has no branch on profile identity. At that stage both profiles carried the
+same audited mechanical mappings, weights, and rules. The active v0.2 staging
+artifact contains Intermediate only for DaggerBackstabAspect.
 
 ## Profile Selection (Phase 5J-B)
 
 The development helper `tools\Set-BoonAdvisorProfile.ps1` updates only
-`config\settings.lua` in the selected plugin directory. The allowed values
-are validated as `intermediate` and `starter`:
+`config\settings.lua` in the selected plugin directory. Available values now come from the generated registry, plus `auto`.
+Starter is rejected for a new selection:
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\tools\Set-BoonAdvisorProfile.ps1 -Profile starter
-powershell -ExecutionPolicy Bypass -File .\tools\Set-BoonAdvisorProfile.ps1 -Profile intermediate
-powershell -ExecutionPolicy Bypass -File .\tools\Set-BoonAdvisorProfile.ps1 -Show
+powershell -ExecutionPolicy Bypass -File .\tools\Set-BoonAdvisorProfile.ps1 -Profile intermediate -TargetPath <plugin-root>
+powershell -ExecutionPolicy Bypass -File .\tools\Set-BoonAdvisorProfile.ps1 -Show -TargetPath <plugin-root>
 ```
 
-The default target is
-`<development-game-root>\Ship\ReturnOfModding\plugins\Local-HadesIIBoonAdvisor`;
-`-TargetPath` can select another plugin directory. The helper validates the
-target, settings file, and exactly one `BUILD_PROFILE` assignment before
-writing only that value. `-Show` is read-only, repeated selection is
-idempotent, and the Hades II installation path is refused. If Hades II is
-running, the helper does not terminate it and warns that a restart is needed.
+The required `-TargetPath` names the plugin directory to inspect or update.
+The helper validates the target, settings file, generated registry, and exactly
+one `BUILD_PROFILE` assignment before writing only that value. `-Show` is
+read-only, and repeated selection is idempotent. If Hades II is running, the
+helper warns that a restart is needed.
 After a successful change, restart Hades II for the selected profile to be
 loaded. The helper is development tooling and is not included in runtime
 staging.
@@ -638,9 +639,10 @@ aspect, Hammer, rules, and verified IDs. Profile JSON owns only profile
 identity, Sheet provenance, plan slots, policies, and constraints.
 
 Generation validates mechanics before profiles, checks the profile template
-reference and identity match, and emits a temporary static registry.lua. The
-registry maps the explicit selectable keys intermediate and starter to static
-build ID, mode, weapon, aspect, and generated module file. Duplicate
+reference and identity match, and emits a temporary static registry.lua. At Phase 5K-C, the
+registry mapped intermediate and starter to static build ID, mode, weapon,
+aspect, and generated module file. The active v0.2 registry instead contains
+intermediate, morrigan_meta, and coat_melinoe_intermediate. Duplicate
 selectable keys, IDs, and output names are rejected. ProfileMode is retained
 as the temporary key because the two present values are unique; a later
 multi-build design should introduce a dedicated selectionKey before two
@@ -667,6 +669,10 @@ registry is still temporary and main.lua continues to use its existing
 hand-written registration. 5K-C is the future runtime migration phase.
 
 ## Generated Runtime Profiles and Static Registry (Phase 5K-C)
+
+The next paragraphs record the historical Phase 5K-C implementation. The
+active v0.2 profile set and staging inventory are specified at the end of
+this analysis.
 
 Canonical profile JSON now owns a dedicated `selectionKey`, distinct from
 `profileMode`. The generator validates that every selection key is non-empty,
@@ -731,8 +737,8 @@ damage (Sweeping Ambush). Those Hammer facts are recorded in canonical aspect
 mechanics only: no `hammerRoles` or scoring reason is inferred without a
 separate supported scoring relationship. Generic status knowledge is copied
 because it describes game traits rather than the Melinoë aspect; Origination
-can affect contributing hits, never `WomboStrike` itself. The runtime registry
-still contains only `intermediate` and `starter`, so it cannot select Morrigan.
+can affect contributing hits, never `WomboStrike` itself. At that historical phase the runtime registry contained only `intermediate`
+and `starter`; the active registry now includes Morrigan.
 
 ## Origination Status Knowledge Completion (Phase 6E.2)
 
@@ -992,3 +998,28 @@ public interfaces no longer expose Python or Lua paths. This keeps release
 packages independent of repository-only assets while preserving the existing
 PASS-only mutation policy and the separate Full validation command for
 developers.
+
+### Sister Blades Melinoë Intermediate (Community Audit V2 reconciliation)
+
+The active Intermediate profile has four exclusive, audited Attack branches:
+`AphroditeWeaponBoon`, `ApolloWeaponBoon`, and `HestiaWeaponBoon` are
+alternative priority 1; `AresWeaponBoon` is conditional priority 2 with
+`WOUNDS_ACCESS` unresolved. Priority is ordinal/documentary and adds no
+numeric score. Ares can be recognized but is score-incomplete and cannot be
+ranked until the condition has a verified native predicate. Replacements to,
+from, or within that unresolved branch remain incomplete. No Wounds predicate
+is inferred from Curse, AresStatus, or SharedVulnerabilityCategory.
+
+`ZeusSpecialBoon` remains the Special core. Cast, Sprint, and Mana have no
+profile slot plan (`NO_PLAN`); this absence does not create a `NON_TARGET`
+policy penalty. The five verified nonconditional Sister Blades Hammers remain
+in `hammerPlan`; `DaggerSpecialJumpTrait` (Dancing Knives) stays outside the
+evaluable plan. No Hammer exclusion or reroll behavior is inferred.
+
+Only Intermediate remains compatible with `WeaponDagger` and
+`DaggerBackstabAspect` in the active registry, so auto resolves it as
+`only_candidate` without using current offers or treating Cloud Bangle or
+Sword Hilt as exclusive evidence. An installed `BUILD_PROFILE = "starter"` is
+not rewritten: the mod emits one WARN and uses auto for that session. The
+profile switcher does not offer Starter. Morrigan and Black Coat mechanics
+are unchanged; Black Coat still requires its separate Community Audit.

@@ -87,7 +87,6 @@ $runtimeExpected = @(
     'data/builds/black_coat_melinoe_intermediate.lua',
     'data/builds/registry.lua',
     'data/builds/sister_blades_melinoe_intermediate.lua',
-    'data/builds/sister_blades_melinoe_starter.lua',
     'data/builds/sister_blades_morrigan_meta.lua',
     'manifest.json'
 ) | Sort-Object
@@ -96,7 +95,7 @@ foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repo 'src') -File) { $r
 foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repo 'config') -Recurse -File) { $runtimeActual += ('config/' + $file.FullName.Substring((Join-Path $repo 'config').Length + 1).Replace('\', '/')) }
 foreach ($file in Get-ChildItem -LiteralPath (Join-Path $repo 'data\builds') -Recurse -File) { $runtimeActual += ('data/builds/' + $file.FullName.Substring((Join-Path $repo 'data\builds').Length + 1).Replace('\', '/')) }
 $runtimeActual += 'manifest.json'
-Assert-True (-not (Compare-Object $runtimeExpected ($runtimeActual | Sort-Object))) 'Thunderstore plugin runtime inventory is not the exact 15-file inventory.'
+Assert-True (-not (Compare-Object $runtimeExpected ($runtimeActual | Sort-Object))) 'Thunderstore plugin runtime inventory is not the exact 14-file inventory.'
 
 foreach ($required in 'README.md', 'LICENSE', 'CHANGELOG.md') {
     Assert-True (Test-Path -LiteralPath (Join-Path $repo $required) -PathType Leaf) "Thunderstore-required file is missing: $required"

@@ -39,7 +39,16 @@ local function getUIApi()
 end
 local buildProfileRegistry = import("data/builds/registry.lua")
 local configuredProfileKey = settings.BUILD_PROFILE
-local preferredProfileKey = configuredProfileKey ~= "auto" and configuredProfileKey or nil
+local preferredProfileKey = nil
+if type(configuredProfileKey) == "string" and configuredProfileKey ~= "auto" then
+    if buildProfileRegistry[configuredProfileKey] then
+        preferredProfileKey = configuredProfileKey
+    else
+        logger.warn("CONFIGURED_PROFILE_UNAVAILABLE",
+            "Configured BUILD_PROFILE=" .. configuredProfileKey
+            .. " is unavailable; using auto for this session. settings.lua was not changed.")
+    end
+end
 local loadedProfiles = {}
 for _, descriptor in pairs(buildProfileRegistry) do
     if type(descriptor) == "table" and type(descriptor.module) == "string"

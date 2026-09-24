@@ -126,6 +126,32 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$
             Assert-StringArray $slot[$role] "$slotName.$role"
             foreach ($id in $slot[$role]) { if ($all[$id]) { Fail "contradictory role assignment for $id in $slotName" }; $all[$id] = $true }
         }
+        if ($slot.ContainsKey('branches')) {
+            if ($slotName -cne 'Attack' -or $slot.branches -isnot [object[]] -or $slot.branches.Count -eq 0) {
+                Fail 'branches must be a non-empty Attack array'
+            }
+            foreach ($branch in $slot.branches) {
+                if ($branch -isnot [hashtable]) { Fail 'Attack.branches entry must be an object' }
+                foreach ($key in $branch.Keys) {
+                    if ($key -cnotin @('traitId', 'classification', 'priority', 'condition')) {
+                        Fail "unknown Attack branch field $key"
+                    }
+                }
+                Assert-String $branch.traitId 'Attack.branches.traitId'
+                if ($all[$branch.traitId]) { Fail "contradictory or duplicate Attack branch $($branch.traitId)" }
+                $all[$branch.traitId] = $true
+                if ($branch.classification -cnotin @('alternative', 'conditional')) { Fail 'unknown Attack branch classification' }
+                $number = $branch.priority -is [int] -or $branch.priority -is [long] -or $branch.priority -is [double] -or $branch.priority -is [decimal]
+                if (-not $number -or $branch.priority -le 0 -or $branch.priority % 1 -ne 0) { Fail 'Attack branch priority must be a positive integer' }
+                if ($branch.ContainsKey('condition')) {
+                    $condition = $branch.condition
+                    if ($branch.classification -cne 'conditional' -or $condition -isnot [hashtable] -or
+                        $condition.Count -ne 2 -or $condition.state -cne 'unresolved' -or $condition.code -cne 'WOUNDS_ACCESS') {
+                        Fail 'unknown Attack branch condition'
+                    }
+                } elseif ($branch.classification -ceq 'conditional') { Fail 'conditional Attack branch requires a condition' }
+            }
+        }
     }
     if ($profile.ContainsKey('rules')) {
         if ($profile.rules -isnot [hashtable]) { Fail 'rules must be an object' }
@@ -275,6 +301,14 @@ foreach ($file in $files) {
     $mechanics = $mechanicsById[$profile.mechanicsTemplate]
     if ($null -eq $mechanics) { Fail "unknown mechanicsTemplate $($profile.mechanicsTemplate)" }
     if ($profile.weapon -ne $mechanics.weapon -or $profile.aspect -ne $mechanics.aspect) { Fail "profile/template weapon or aspect mismatch for $($profile.id)" }
+    $attack = $profile.slots.Attack
+    if ($attack -is [hashtable] -and $attack.ContainsKey('branches')) {
+        foreach ($branch in $attack.branches) {
+            if ($branch.traitId -cnotin $mechanics.verifiedIds.coreAttack) {
+                Fail "unverified Attack branch trait ID $($branch.traitId)"
+            }
+        }
+    }
     $outputName = $profile.id + '.lua'
     if ($seenOutputs[$outputName]) { Fail "duplicate generated output name $outputName" }; $seenOutputs[$outputName] = $true
     if ($seenSelectable[$profile.selectionKey]) { Fail "duplicate selectable profile key $($profile.selectionKey)" }

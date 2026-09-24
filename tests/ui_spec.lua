@@ -299,6 +299,12 @@ check(#destroyed == comparedDestroy + 2 and #comparedScreen.BoonAdvisorRanks == 
 UI.clearRanks(comparedScreen, api)
 UI.clearFallback(comparedScreen, api)
 check(#destroyed == comparedDestroy + 2, "partial ranking cleanup was not idempotent")
+local unresolvedAttackScreen = { Components = { PurchaseButton1 = { Id = "wounds-unknown" } } }
+UI.renderPartial(unresolvedAttackScreen, { { originalIndex = 1, evaluated = false,
+    reasons = { { code = "ATTACK_BRANCH_UNRESOLVED", delta = 0 } } } }, api)
+check(textBoxes[#textBoxes].RawText == "NON ÉVALUÉ",
+    "unresolved Wounds branch displayed a ranked or evaluated label")
+UI.clearRanks(unresolvedAttackScreen, api)
 local uiErrors = {}
 UI.setLogger({ debug = function() end, error = function(code) uiErrors[#uiErrors + 1] = code end })
 local errorScreen = { Components = { PurchaseButton1 = { Id = "native-error" } } }

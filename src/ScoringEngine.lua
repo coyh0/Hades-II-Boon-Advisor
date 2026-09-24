@@ -43,6 +43,36 @@ function ScoringEngine.validateProfile(profile)
                 seen[traitName] = true
             end
         end
+        if definition.branches ~= nil then
+            if role ~= "Attack" or type(definition.branches) ~= "table" or #definition.branches == 0 then
+                return false, "branches must be a non-empty Attack array"
+            end
+            for _, branch in ipairs(definition.branches) do
+                if type(branch) ~= "table" or type(branch.traitId) ~= "string" or branch.traitId == ""
+                    or seen[branch.traitId] then return false, "duplicate or invalid Attack branch" end
+                for key in pairs(branch) do
+                    if key ~= "traitId" and key ~= "classification" and key ~= "priority"
+                        and key ~= "condition" then return false, "unknown Attack branch field" end
+                end
+                seen[branch.traitId] = true
+                if branch.classification ~= "alternative" and branch.classification ~= "conditional" then
+                    return false, "unknown Attack branch classification"
+                end
+                if type(branch.priority) ~= "number" or branch.priority <= 0
+                    or branch.priority % 1 ~= 0 then return false, "invalid Attack branch priority" end
+                if branch.classification == "conditional" then
+                    if type(branch.condition) ~= "table" or branch.condition.state ~= "unresolved"
+                        or branch.condition.code ~= "WOUNDS_ACCESS" then
+                        return false, "unknown Attack branch condition"
+                    end
+                    for key in pairs(branch.condition) do
+                        if key ~= "state" and key ~= "code" then
+                            return false, "unknown Attack branch condition field"
+                        end
+                    end
+                elseif branch.condition ~= nil then return false, "unexpected Attack branch condition" end
+            end
+        end
     end
     if profile.hammerPlan ~= nil then
         if type(profile.hammerPlan) ~= "table" then return false, "hammerPlan must be a table" end
@@ -212,7 +242,23 @@ function ScoringEngine.getBuildAlignment(profile, role, itemName)
     if contains(slot.core) then return "CORE" end
     if contains(slot.alternatives) then return "ALTERNATIVE" end
     if contains(slot.preferred) then return "PREFERRED" end
+    if role == "Attack" then
+        for _, branch in ipairs(type(slot.branches) == "table" and slot.branches or {}) do
+            if branch.traitId == itemName then return "ALTERNATIVE" end
+        end
+    end
     return "NON_TARGET"
+end
+
+local function unresolvedAttackBranch(profile, traitName)
+    local slots = profileSlots(profile)
+    local attack = slots and slots.Attack
+    for _, branch in ipairs(type(attack) == "table" and type(attack.branches) == "table"
+        and attack.branches or {}) do
+        if branch.traitId == traitName and type(branch.condition) == "table"
+            and branch.condition.state == "unresolved" then return true end
+    end
+    return false
 end
 
 function ScoringEngine.isProfileSupported(snapshot, profile)
@@ -342,6 +388,7 @@ function ScoringEngine.getCoreSlotContext(snapshot, profile, offer)
         conflictIntroduced = false,
         conflictResolved = false,
         coreSacrificed = false,
+        conditionUnresolved = false,
     }
     if data == nil then return result end
     local definition = profileSlots(profile) and profile.slots[data.role] or nil
@@ -349,11 +396,14 @@ function ScoringEngine.getCoreSlotContext(snapshot, profile, offer)
     result.alignment = ScoringEngine.getBuildAlignment(profile, data.role, offer.ItemName)
     result.currentSlotTrait = result.replacesCoreSlot and offer.TraitToReplace
         or currentSlotTrait(snapshot, data.slot)
+    result.conditionUnresolved = unresolvedAttackBranch(profile, result.currentSlotTrait)
+        or unresolvedAttackBranch(profile, offer.ItemName)
     result.slotStateBefore = slotState(profile, data.role, result.currentSlotTrait)
     result.slotStateAfter = result.alignment
     result.slotConflict = result.slotPolicy == "reserved" and result.alignment == "NON_TARGET"
     result.conflictIntroduced = result.slotConflict and result.slotStateBefore ~= "NON_TARGET"
-    result.conflictResolved = result.slotStateBefore == "NON_TARGET"
+    result.conflictResolved = not result.conditionUnresolved
+        and result.slotStateBefore == "NON_TARGET"
         and (result.alignment == "CORE" or result.alignment == "ALTERNATIVE")
     result.coreSacrificed = result.replacesCoreSlot
         and result.slotStateBefore == "CORE" and result.slotStateAfter == "NON_TARGET"
@@ -420,6 +470,7 @@ end
 function ScoringEngine.evaluateCoreReplacement(snapshot, profile, offer)
     local oldName = type(offer) == "table" and offer.TraitToReplace or nil
     local newName = type(offer) == "table" and offer.ItemName or nil
+    if unresolvedAttackBranch(profile, oldName) or unresolvedAttackBranch(profile, newName) then return nil end
     local newSnapshot = replacementSnapshot(snapshot, oldName, newName)
     local newData = coreTraitContext(newSnapshot, profile, newName)
     local oldData = coreTraitContext(snapshot, profile, oldName)
@@ -660,7 +711,7 @@ function ScoringEngine.scoreOffers(snapshot, profile)
                     end
                 end
 
-                local policyDelta = slotPolicyDelta(profile, core)
+                local policyDelta = core.conditionUnresolved and 0 or slotPolicyDelta(profile, core)
                 if policyDelta ~= 0 then
                     addReason(result, "BUILD_SLOT_POLICY_DELTA", policyDelta)
                 end
@@ -695,6 +746,9 @@ function ScoringEngine.scoreOffers(snapshot, profile)
                         result.covered = true
                     end
                 end
+
+                local attackBranchUnresolved = unresolvedAttackBranch(profile, offer.ItemName)
+                if attackBranchUnresolved then addReason(result, "ATTACK_BRANCH_UNRESOLVED", 0) end
 
                 if not core.replacesCoreSlot and origination.offerEnablesOrigination == true then
                     local delta = weight(profile, "ORIGINATION_ENABLE")
@@ -784,6 +838,7 @@ function ScoringEngine.scoreOffers(snapshot, profile)
 
                 result.scoreComplete = result.covered
                     and not originationUnresolved
+                    and not attackBranchUnresolved
                     and (not core.replacesCoreSlot or replacement ~= nil)
                 if result.scoreComplete then
                     local rarityResolved = rarityDelta(result, offer.Rarity, offer.OldRarity,

@@ -2,7 +2,6 @@ local function check(value, message) assert(value, message) end
 local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()
 local OfferSnapshot = assert(loadfile("src/OfferSnapshot.lua"))()
 local productionProfile = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
-local starterProfile = assert(loadfile("data/builds/sister_blades_melinoe_starter.lua"))()
 local morriganProfile = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
 
 do
@@ -95,7 +94,7 @@ do
         { "DaggerSpecialReturnTrait", 2, "alternative" },
         { "DaggerAttackFinisherTrait", 3, "alternative" },
     }
-    for _, profile in ipairs({ starterProfile, productionProfile }) do
+    for _, profile in ipairs({ productionProfile }) do
         check(ScoringEngine.validateProfile(profile), "Melinoe generated Hammer profile invalid")
         check(#profile.hammerPlan == #expected, "Melinoe Hammer plan count mismatch")
         for index, spec in ipairs(expected) do
@@ -146,7 +145,7 @@ do
 end
 do
     local hammerWithoutPlan = {}
-    for key, value in pairs(starterProfile) do
+    for key, value in pairs(productionProfile) do
         if key ~= "hammerPlan" then hammerWithoutPlan[key] = value end
     end
     check(hammerWithoutPlan.hammerPlan == nil, "Sister Blades unexpectedly gained a Hammer plan")
@@ -193,8 +192,7 @@ do
             label .. " status-only representation changed")
     end
     check(morriganProfile.knownNonStatusTraits.PoseidonExCastBoon
-        and productionProfile.knownNonStatusTraits.PoseidonExCastBoon
-        and starterProfile.knownNonStatusTraits.PoseidonExCastBoon,
+        and productionProfile.knownNonStatusTraits.PoseidonExCastBoon,
         "Poseidon Ex Cast known-non-status data missing")
     local function countSet(set)
         local count = 0
@@ -202,12 +200,10 @@ do
         return count
     end
     check(countSet(morriganProfile.knownNonStatusTraits) == 38
-        and countSet(productionProfile.knownNonStatusTraits) == 38
-        and countSet(starterProfile.knownNonStatusTraits) == 38,
+        and countSet(productionProfile.knownNonStatusTraits) == 38,
         "known-non-status counts changed")
     assertPoseidonEx(morriganProfile, "Morrigan Poseidon Ex Cast")
     assertPoseidonEx(productionProfile, "Melinoe Poseidon Ex Cast")
-    assertPoseidonEx(starterProfile, "Starter Poseidon Ex Cast")
 end
 
 do
@@ -228,7 +224,6 @@ do
         check(total == result.score, "HealthRewardBonusBoon score is not reason sum")
     end
     check(productionProfile.traitSemantics.HealthRewardBonusBoon.kind == "max_resource_support"
-        and starterProfile.traitSemantics.HealthRewardBonusBoon.kind == "max_resource_support"
         and morriganProfile.traitSemantics.HealthRewardBonusBoon.kind == "max_resource_support",
         "shared HealthRewardBonusBoon semantic missing")
     local unknown = ScoringEngine.scoreOffers({
@@ -335,10 +330,6 @@ do
 end
 
 check(ScoringEngine.validateProfile(productionProfile), "schemaVersion=1 production profile rejected")
-check(ScoringEngine.validateProfile(starterProfile), "schemaVersion=1 Starter profile rejected")
-check(starterProfile.id == "sister_blades_melinoe_starter" and starterProfile.profileMode == "starter"
-    and starterProfile.source.type == "sheet" and starterProfile.source.profile == "Starter",
-    "Starter identity/source changed")
 
 local effectiveSnapshot = OfferSnapshot.capture({ UpgradeButtons = {
     [1] = { Data = { Name = "AresWeaponBoon", Rarity = "Common" } },
@@ -460,7 +451,6 @@ for _, traitName in ipairs(auditedNonStatus) do
     check(not seenAudited[traitName], "audited known-non-status list contains a duplicate")
     seenAudited[traitName] = true
     check(productionProfile.knownNonStatusTraits[traitName]
-        and starterProfile.knownNonStatusTraits[traitName]
         and morriganProfile.knownNonStatusTraits[traitName],
         "audited known-non-status trait missing from a mechanics template: " .. traitName)
 end
@@ -468,22 +458,19 @@ check(#auditedNonStatus == 19, "audited known-non-status inventory changed")
 local morriganCoreKnownNonStatus = { "ZeusCastBoon", "ZeusManaBoon", "ZeusSprintBoon" }
 for _, traitName in ipairs(morriganCoreKnownNonStatus) do
     check(productionProfile.knownNonStatusTraits[traitName]
-        and starterProfile.knownNonStatusTraits[traitName]
         and morriganProfile.knownNonStatusTraits[traitName],
         "Morrigan core known-non-status trait missing from a mechanics template: " .. traitName)
 end
 check(morriganProfile.knownNonStatusTraits.PoseidonSpecialBoon
-    and productionProfile.knownNonStatusTraits.PoseidonSpecialBoon
-    and starterProfile.knownNonStatusTraits.PoseidonSpecialBoon,
+    and productionProfile.knownNonStatusTraits.PoseidonSpecialBoon,
     "Poseidon Special known-non-status data missing")
 for traitName in pairs(productionProfile.knownNonStatusTraits) do
-    check(starterProfile.knownNonStatusTraits[traitName]
+    check(productionProfile.knownNonStatusTraits[traitName]
         and morriganProfile.knownNonStatusTraits[traitName],
         "shared known-non-status mechanics diverged: " .. traitName)
 end
 for traitName in pairs(morriganProfile.knownNonStatusTraits) do
-    check(productionProfile.knownNonStatusTraits[traitName]
-        and starterProfile.knownNonStatusTraits[traitName],
+    check(productionProfile.knownNonStatusTraits[traitName],
         "shared known-non-status mechanics diverged: " .. traitName)
 end
 
@@ -835,9 +822,9 @@ check(reservedAlternative.alignment == "ALTERNATIVE" and not reservedAlternative
     "reserved alternative was marked as a slot conflict")
 local preferredNonTarget = ScoringEngine.getCoreSlotContext({ godTraits = {}, slottedTraits = {} },
     productionProfile, { ItemName = "PoseidonSprintBoon" })
-check(preferredNonTarget.alignment == "NON_TARGET" and preferredNonTarget.slotPolicy == "preferred"
+check(preferredNonTarget.alignment == "NO_PLAN" and preferredNonTarget.slotPolicy == nil
     and not preferredNonTarget.slotConflict,
-    "preferred non-target was marked as a slot conflict")
+    "unplanned Sprint acquired a slot conflict")
 local noSlot = ScoringEngine.getCoreSlotContext({ godTraits = {} }, productionProfile,
     { ItemName = "LowHealthLifestealBoon" })
 check(noSlot.coreRole == nil and not noSlot.slotConflict, "support boon acquired a slot conflict")
@@ -970,6 +957,20 @@ check(deepEqual(contextSnapshot, contextBefore) and deepEqual(productionProfile,
     "context helpers mutated snapshot or profile")
 print("PASS: Arcana/status context; known/unknown families; Origination; core slots; aspect categories; no mutation")
 
+-- Preserve the generic legacy core/alternative scoring regressions with an
+-- explicit synthetic plan; the migrated real Attack branches are tested below.
+MIGRATED_PROFILE_FOR_TEST = productionProfile
+productionProfile = deepCopy(productionProfile)
+productionProfile.slots.Attack = {
+    core = { "AresWeaponBoon" }, alternatives = { "AphroditeWeaponBoon" },
+    preferred = {}, slotPolicy = "reserved",
+}
+productionProfile.slots.Cast = {
+    core = { "DemeterCastBoon" }, alternatives = {}, preferred = {}, slotPolicy = "reserved",
+}
+productionProfile.slots.Sprint = {
+    core = {}, alternatives = {}, preferred = { "AresSprintBoon" }, slotPolicy = "preferred",
+}
 local matrixSnapshot = {
     weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
     godTraits = {}, hammers = {}, activeArcana = {},
@@ -1120,7 +1121,7 @@ for _, result in ipairs(matrix) do
     check(result.score == sum, "production score contains an invisible delta")
 end
 check(deepEqual(matrixSnapshot, matrixBefore), "production scoring mutated its snapshot")
-print("PASS: production matrix; core slots; Aspect; Origination; Hammer once; replacement unresolved; status-only uncovered; score=sum")
+print("PASS: synthetic legacy core-plan matrix; Aspect; Origination; Hammer once; replacement unresolved; status-only uncovered; score=sum")
 
 local ready = {
     { score = 4, eligible = true, covered = true, scoreComplete = true },
@@ -1414,12 +1415,17 @@ check(nonTargetToCoreContext.slotStateBefore == "NON_TARGET"
 local profileBeforePlan = deepCopy(productionProfile)
 ScoringEngine.scoreOffers(plan, productionProfile)
 check(deepEqual(profileBeforePlan, productionProfile), "build plan scoring mutated profile")
+productionProfile = MIGRATED_PROFILE_FOR_TEST
+MIGRATED_PROFILE_FOR_TEST = nil
+local rarityPlanProfile = deepCopy(productionProfile)
+rarityPlanProfile.slots.Cast = { core = { "DemeterCastBoon" }, alternatives = {},
+    preferred = {}, slotPolicy = "reserved" }
 local rarityBase = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
     godTraits = {}, hammers = {}, activeArcana = {}, offers = {} }
 local function rarityScore(name, rarity)
     local snapshot = deepCopy(rarityBase)
     snapshot.offers = {{ originalIndex = 1, ItemName = name, Rarity = rarity }}
-    return ScoringEngine.scoreOffers(snapshot, productionProfile)[1]
+    return ScoringEngine.scoreOffers(snapshot, rarityPlanProfile)[1]
 end
 local common = rarityScore("AresSpecialBoon", "Common")
 local rare = rarityScore("AresSpecialBoon", "Rare")
@@ -1569,9 +1575,9 @@ for _, rarity in ipairs({ "Common", "Rare", "Epic", "Heroic" }) do
 end
 print("PASS: rankingReady requires support, 2 eligible, full gameplay coverage, active rule, distinct scores")
 
--- Phase 5J-A: both real sheet profiles share mechanics but retain distinct plans.
-local starterPlan = deepCopy(planBase)
-starterPlan.offers = {
+-- Active Intermediate plan: Attack branches, Zeus Special, neutral Cast/Sprint/Mana.
+local activePlan = deepCopy(planBase)
+activePlan.offers = {
     { originalIndex = 1, ItemName = "AphroditeWeaponBoon" },
     { originalIndex = 2, ItemName = "ZeusSpecialBoon" },
     { originalIndex = 3, ItemName = "AresWeaponBoon" },
@@ -1579,47 +1585,39 @@ starterPlan.offers = {
     { originalIndex = 5, ItemName = "AresSprintBoon" },
     { originalIndex = 6, ItemName = "AresManaBoon" },
 }
-local starterScores = ScoringEngine.scoreOffers(starterPlan, starterProfile)
-local intermediateScores = ScoringEngine.scoreOffers(starterPlan, productionProfile)
-check(starterScores[1].score == 16 and starterScores[1].covered and starterScores[1].scoreComplete
-    and starterScores[1].reasons[3].code == "BUILD_CORE_PRIORITY",
-    "Starter Aphrodite Attack core plan was not applied")
-check(starterScores[2].score == 16 and starterScores[2].covered and starterScores[2].scoreComplete
-    and starterScores[2].reasons[3].code == "BUILD_CORE_PRIORITY",
-    "Starter Zeus Special core plan was not applied")
-check(ScoringEngine.getBuildAlignment(starterProfile, "Attack", "AresWeaponBoon") == "NON_TARGET"
-    and ScoringEngine.getBuildAlignment(productionProfile, "Attack", "AresWeaponBoon") == "CORE",
-    "same Attack offer did not differ by real profile plan")
-check(starterScores[3].score == 0 and starterScores[3].covered and starterScores[3].scoreComplete,
-    "Starter known Attack non-target was not resolved at zero")
-local starterCast = ScoringEngine.getCoreSlotContext(starterPlan, starterProfile, starterPlan.offers[4])
-check(starterCast.alignment == "NO_PLAN" and starterScores[4].score == 8,
-    "omitted Starter Cast did not preserve no-plan behavior")
-local starterSprint = ScoringEngine.getCoreSlotContext(starterPlan, starterProfile, starterPlan.offers[5])
-check(starterSprint.alignment == "NON_TARGET" and starterSprint.slotPolicy == "open"
-    and not starterSprint.slotConflict and starterScores[5].score == 4
-    and starterScores[5].reasons[1].code == "FILL_EMPTY_UTILITY_CORE"
-    and starterScores[5].covered and starterScores[5].scoreComplete,
-    "flexible Starter Sprint was treated as a reserved conflict")
-check(starterScores[6].score == intermediateScores[6].score and starterScores[6].covered
-    and intermediateScores[6].covered,
-    "shared no-plan Mana mechanics changed across profiles")
-local starterReplacement = deepCopy(planBase)
-starterReplacement.godTraits = {{ Name = "AresWeaponBoon", Slot = "Melee" }}
-starterReplacement.offers = {{ originalIndex = 1, ItemName = "AphroditeWeaponBoon",
-    TraitToReplace = "AresWeaponBoon" }}
-local starterReplacementResult = ScoringEngine.scoreOffers(starterReplacement, starterProfile)[1]
-check(starterReplacementResult.covered and starterReplacementResult.scoreComplete
-    and starterReplacementResult.score == 8,
-    "Starter non-target to Core replacement transition was not resolved")
-for _, resultsForProfile in ipairs({ starterScores, intermediateScores, { starterReplacementResult } }) do
-    for _, result in ipairs(resultsForProfile) do
-        local sum = 0
-        for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
-        check(result.score == sum, "real profile score differs from reason sum")
-    end
+local activeScores = ScoringEngine.scoreOffers(activePlan, productionProfile)
+check(activeScores[1].score == 12 and activeScores[1].covered and activeScores[1].scoreComplete
+    and #activeScores[1].reasons == 2, "Attack priority added an uncalibrated bonus")
+check(activeScores[2].score == 16 and activeScores[2].covered and activeScores[2].scoreComplete
+    and activeScores[2].reasons[3].code == "BUILD_CORE_PRIORITY", "Zeus Special core plan changed")
+check(ScoringEngine.getBuildAlignment(productionProfile, "Attack", "AresWeaponBoon") == "ALTERNATIVE",
+    "conditional Attack branch was treated as non-target")
+check(activeScores[3].score == 12 and activeScores[3].covered and not activeScores[3].scoreComplete
+    and activeScores[3].reasons[3].code == "ATTACK_BRANCH_UNRESOLVED",
+    "unresolved Wounds branch was ranked as complete")
+for index, role in ipairs({ "Cast", "Sprint", "Mana" }) do
+    local context = ScoringEngine.getCoreSlotContext(activePlan, productionProfile, activePlan.offers[index + 3])
+    check(productionProfile.slots[role] == nil and context.alignment == "NO_PLAN"
+        and context.slotPolicy == nil and not context.slotConflict,
+        role .. " gained an unsupported runtime plan or conflict")
+    check(activeScores[index + 3].covered and activeScores[index + 3].scoreComplete
+        and activeScores[index + 3].score == (role == "Cast" and 8 or 4),
+        role .. " lost neutral empty-slot scoring")
 end
-local starterBefore = deepCopy(starterProfile)
-ScoringEngine.scoreOffers(starterPlan, starterProfile)
-check(deepEqual(starterProfile, starterBefore), "Starter profile was mutated")
-print("PASS: real Starter and Intermediate profiles validate; plan alignment, open Sprint, no-plan Cast, replacement, shared mechanics, and no mutation")
+local replacement = deepCopy(planBase)
+replacement.godTraits = {{ Name = "AresWeaponBoon", Slot = "Melee" }}
+replacement.offers = {{ originalIndex = 1, ItemName = "AphroditeWeaponBoon",
+    TraitToReplace = "AresWeaponBoon" }}
+local replacementResult = ScoringEngine.scoreOffers(replacement, productionProfile)[1]
+check(not replacementResult.scoreComplete
+    and replacementResult.reasons[1].code == "REPLACEMENT_UNRESOLVED",
+    "replacement of unresolved Wounds branch was treated as complete")
+for _, result in ipairs(activeScores) do
+    local sum = 0
+    for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
+    check(result.score == sum, "real profile score differs from reason sum")
+end
+local before = deepCopy(productionProfile)
+ScoringEngine.scoreOffers(activePlan, productionProfile)
+check(deepEqual(productionProfile, before), "Intermediate profile was mutated")
+print("PASS: active Intermediate plan, neutral Cast/Sprint/Mana, unresolved Wounds replacement, and no mutation")

@@ -12,12 +12,10 @@ end
 local output = assert(os.getenv("BOON_CANONICAL_OUTPUT"), "missing canonical output path")
 local separator = package.config:sub(1, 1)
 local generatedIntermediate = assert(loadfile(output .. separator .. "sister_blades_melinoe_intermediate.lua"))()
-local generatedStarter = assert(loadfile(output .. separator .. "sister_blades_melinoe_starter.lua"))()
 local generatedMorrigan = assert(loadfile(output .. separator .. "sister_blades_morrigan_meta.lua"))()
 local generatedCoat = assert(loadfile(output .. separator .. "black_coat_melinoe_intermediate.lua"))()
 local registry = assert(loadfile(output .. separator .. "registry.lua"))()
 local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
-local starter = assert(loadfile("data/builds/sister_blades_melinoe_starter.lua"))()
 local morrigan = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
 local expectedMelinoeHammerPlan = {
     { traitId = "DaggerDashAttackTripleTrait", priority = 1, classification = "priority" },
@@ -38,22 +36,18 @@ local function assertMelinoeHammerPlan(profile, label)
         assert(entry.traitId ~= "DaggerSpecialJumpTrait", label .. " made Dancing Knives evaluable")
     end
 end
-assertMelinoeHammerPlan(starter, "Starter")
 assertMelinoeHammerPlan(intermediate, "Intermediate")
 local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
 local runtimeRegistry = assert(loadfile("data/builds/registry.lua"))()
 local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()
 check(equal(generatedIntermediate, intermediate), "generated Intermediate semantics differ")
-check(equal(generatedStarter, starter), "generated Starter semantics differ")
 check(equal(generatedCoat, coat) and ScoringEngine.validateProfile(generatedCoat), "generated Black Coat semantics differ")
-check(ScoringEngine.validateProfile(generatedIntermediate) and ScoringEngine.validateProfile(generatedStarter) and ScoringEngine.validateProfile(generatedMorrigan),
+check(ScoringEngine.validateProfile(generatedIntermediate) and ScoringEngine.validateProfile(generatedMorrigan),
     "generated profiles fail runtime schema validation")
 check(registry.intermediate.selectionKey == "intermediate"
     and registry.intermediate.id == "sister_blades_melinoe_intermediate"
     and registry.intermediate.module == "data/builds/sister_blades_melinoe_intermediate.lua"
-    and registry.starter.selectionKey == "starter"
-    and registry.starter.id == "sister_blades_melinoe_starter"
-    and registry.starter.module == "data/builds/sister_blades_melinoe_starter.lua"
+    and registry.starter == nil
     and registry.morrigan_meta.selectionKey == "morrigan_meta"
     and registry.morrigan_meta.aspect == "DaggerTripleAspect"
     and registry.morrigan_meta.module == "data/builds/sister_blades_morrigan_meta.lua", "generated registry mapping changed")
@@ -99,8 +93,6 @@ local function sameScores(left, right)
 end
 check(sameScores(ScoringEngine.scoreOffers(snapshot, generatedIntermediate), ScoringEngine.scoreOffers(snapshot, intermediate)),
     "generated Intermediate scoring differs")
-check(sameScores(ScoringEngine.scoreOffers(snapshot, generatedStarter), ScoringEngine.scoreOffers(snapshot, starter)),
-    "generated Starter scoring differs")
 generatedIntermediate.weights.BUILD_CORE_PRIORITY = 999
-check(generatedStarter.weights.BUILD_CORE_PRIORITY ~= 999, "generated profiles share mutable mechanics tables")
+check(generatedMorrigan.weights.BUILD_CORE_PRIORITY ~= 999, "generated profiles share mutable mechanics tables")
 print("PASS: canonical generated profiles load, validate, and match profile semantics/scoring")

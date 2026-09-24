@@ -9,9 +9,6 @@ return {
         DemeterCastBoon = "BACKSTAB_SETUP",
         ZeusSpecialBoon = "ASPECT_COMPATIBLE",
     },
-    autoSignals = {
-        ForceAresBoonKeepsake = true,
-    },
     bloodDropEngine = {
         payoffs = {
             DoubleBloodDropBoon = true,
@@ -116,20 +113,34 @@ return {
     selectionKey = "intermediate",
     slots = {
         Attack = {
-            alternatives = {
-                "AphroditeWeaponBoon",
-            },
-            core = {
-                "AresWeaponBoon",
-            },
-            preferred = {},
-            slotPolicy = "reserved",
-        },
-        Cast = {
             alternatives = {},
-            core = {
-                "DemeterCastBoon",
+            branches = {
+                {
+                    classification = "alternative",
+                    priority = 1,
+                    traitId = "AphroditeWeaponBoon",
+                },
+                {
+                    classification = "alternative",
+                    priority = 1,
+                    traitId = "ApolloWeaponBoon",
+                },
+                {
+                    classification = "alternative",
+                    priority = 1,
+                    traitId = "HestiaWeaponBoon",
+                },
+                {
+                    classification = "conditional",
+                    condition = {
+                        code = "WOUNDS_ACCESS",
+                        state = "unresolved",
+                    },
+                    priority = 2,
+                    traitId = "AresWeaponBoon",
+                },
             },
+            core = {},
             preferred = {},
             slotPolicy = "reserved",
         },
@@ -140,14 +151,6 @@ return {
             },
             preferred = {},
             slotPolicy = "reserved",
-        },
-        Sprint = {
-            alternatives = {},
-            core = {},
-            preferred = {
-                "AresSprintBoon",
-            },
-            slotPolicy = "preferred",
         },
     },
     source = {

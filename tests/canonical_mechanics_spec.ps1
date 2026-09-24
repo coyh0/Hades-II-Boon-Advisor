@@ -77,7 +77,7 @@ if ($morrigan.aspectInteractions.WeaponUpgradeBoon -ne 'ASPECT_DIRECT_SYNERGY' -
 foreach ($id in @('WeaponDagger','DaggerTripleAspect','WomboStrike','ComboAttackIndicator','ComboSpecialIndicator','ComboExIndicator','WeaponUpgradeBoon','DaggerTripleBuffTrait','DaggerTripleRepeatWomboTrait','DaggerTripleHomingSpecialTrait','DaggerBlinkAoETrait')) {
     if (-not (@($morrigan.verifiedIds.bloodTriad + $morrigan.verifiedIds.morriganHammers) -contains $id)) { throw "Missing Morrigan verified ID: $id" }
 }
-foreach ($profilePath in @('data\builds\sister_blades_melinoe_intermediate.lua','data\builds\sister_blades_melinoe_starter.lua')) {
+foreach ($profilePath in @('data\builds\sister_blades_melinoe_intermediate.lua')) {
     if (-not (Test-Path (Join-Path $repo $profilePath))) { throw "Missing runtime reference: $profilePath" }
 }
 Write-Output 'PASS: Sister Blades and conservative Black Coat canonical mechanics templates validated'

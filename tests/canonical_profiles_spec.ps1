@@ -60,7 +60,9 @@ function Assert-Mechanics-Fails([string]$name, [string]$find, [string]$replace) 
     $case = Join-Path $root $name
     Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\mechanics') -Destination $case -Recurse
     $path = Join-Path $case 'sister_blades_melinoe.json'
-    [IO.File]::WriteAllText($path, ([IO.File]::ReadAllText($path)).Replace($find, $replace))
+    $original = [IO.File]::ReadAllText($path)
+    if (-not $original.Contains($find)) { throw "Missing fixture pattern for $name" }
+    [IO.File]::WriteAllText($path, $original.Replace($find, $replace))
     try {
         & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -MechanicsDirectory $case -ValidateOnly 2>$null | Out-Null
         if ($LASTEXITCODE -eq 0) { throw "Expected mechanics failure: $name" }
@@ -74,6 +76,7 @@ Assert-Mechanics-Fails 'unknown-catalog-mechanics-aspect' '"aspect": "DaggerBack
 Assert-Mechanics-Fails 'malformed-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":true'
 Assert-Mechanics-Fails 'duplicate-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":["ASPECT_SETUP_SYNERGY","ASPECT_SETUP_SYNERGY"]'
 $firstFiles = @(Get-ChildItem -LiteralPath $first -File | Sort-Object Name)
+if ($firstFiles.Count -ne 4) { throw 'Generated output must contain three profiles and one registry.' }
 foreach ($file in $firstFiles) {
     $other = Join-Path $second $file.Name
     if (-not (Test-Path -LiteralPath $other) -or (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $other -Algorithm SHA256).Hash) {
@@ -92,8 +95,10 @@ Remove-Item Env:BOON_CANONICAL_OUTPUT
 function Assert-Fails([string]$name, [string]$find, [string]$replace) {
     $case = Join-Path $root $name
     Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $case -Recurse
-    $path = Join-Path $case 'sister_blades_melinoe_starter.json'
-    [IO.File]::WriteAllText($path, ([IO.File]::ReadAllText($path)).Replace($find, $replace))
+    $path = Join-Path $case 'sister_blades_melinoe_intermediate.json'
+    $original = [IO.File]::ReadAllText($path)
+    if (-not $original.Contains($find)) { throw "Missing fixture pattern for $name" }
+    [IO.File]::WriteAllText($path, $original.Replace($find, $replace))
     try {
         & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $case -ValidateOnly 2>$null | Out-Null
         if ($LASTEXITCODE -eq 0) { throw "Expected failure: $name" }
@@ -101,32 +106,35 @@ function Assert-Fails([string]$name, [string]$find, [string]$replace) {
     catch { if ($_.Exception.Message -like 'Expected failure:*') { throw } }
 }
 Assert-Fails 'invalid-schema' '"schemaVersion": 1' '"schemaVersion": 2'
-Assert-Fails 'missing-selection-key' '"selectionKey": "starter",' ''
-Assert-Fails 'reserved-auto-selection-key' '"selectionKey": "starter"' '"selectionKey": "auto"'
-Assert-Fails 'duplicate-selection-key' '"selectionKey": "starter"' '"selectionKey": "intermediate"'
-Assert-Fails 'invalid-policy' '"slotPolicy": "open"' '"slotPolicy": "invalid"'
-Assert-Fails 'path-like-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "../escape"'
-Assert-Fails 'invalid-profile-id-syntax' '"id": "sister_blades_melinoe_starter"' '"id": "profile-name"'
-Assert-Fails 'reserved-registry-profile-id' '"id": "sister_blades_melinoe_starter"' '"id": "registry"'
+Assert-Fails 'missing-selection-key' '"selectionKey": "intermediate",' ''
+Assert-Fails 'reserved-auto-selection-key' '"selectionKey": "intermediate"' '"selectionKey": "auto"'
+Assert-Fails 'invalid-policy' '"slotPolicy": "reserved"' '"slotPolicy": "invalid"'
+Assert-Fails 'path-like-profile-id' '"id": "sister_blades_melinoe_intermediate"' '"id": "../escape"'
+Assert-Fails 'invalid-profile-id-syntax' '"id": "sister_blades_melinoe_intermediate"' '"id": "profile-name"'
+Assert-Fails 'reserved-registry-profile-id' '"id": "sister_blades_melinoe_intermediate"' '"id": "registry"'
 function Assert-Coat-Fails([string]$name, [string]$find, [string]$replace) {
     $case = Join-Path $root $name
     Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $case -Recurse
     $path = Join-Path $case 'black_coat_melinoe_intermediate.json'
-    [IO.File]::WriteAllText($path, ([IO.File]::ReadAllText($path)).Replace($find, $replace))
+    $original = [IO.File]::ReadAllText($path)
+    if (-not $original.Contains($find)) { throw "Missing fixture pattern for $name" }
+    [IO.File]::WriteAllText($path, $original.Replace($find, $replace))
     try {
         & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $case -ValidateOnly 2>$null | Out-Null
         if ($LASTEXITCODE -eq 0) { throw "Expected failure: $name" }
     }
     catch { if ($_.Exception.Message -like 'Expected failure:*') { throw } }
 }
+Assert-Coat-Fails 'duplicate-selection-key' '"selectionKey": "coat_melinoe_intermediate"' '"selectionKey": "intermediate"'
+Assert-Coat-Fails 'duplicate-id' '"id": "black_coat_melinoe_intermediate"' '"id": "sister_blades_melinoe_intermediate"'
 Assert-Coat-Fails 'duplicate-hammer-plan-id' '"SuitAttackSpeedTrait"' '"SuitDashAttackTrait"'
 Assert-Coat-Fails 'invalid-hammer-plan-priority' '"priority": 2' '"priority": 0'
 Assert-Coat-Fails 'invalid-hammer-plan-classification' '"classification": "alternative"' '"classification": "unknown"'
 $unsafeProfiles = Join-Path $root 'unsafe-id-generation-profiles'
 Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $unsafeProfiles -Recurse
-$unsafeProfilePath = Join-Path $unsafeProfiles 'sister_blades_melinoe_starter.json'
+$unsafeProfilePath = Join-Path $unsafeProfiles 'sister_blades_melinoe_intermediate.json'
 [IO.File]::WriteAllText($unsafeProfilePath, ([IO.File]::ReadAllText($unsafeProfilePath)).Replace(
-    '"id": "sister_blades_melinoe_starter"', '"id": "../escape"'))
+    '"id": "sister_blades_melinoe_intermediate"', '"id": "../escape"'))
 $unsafeOutput = Join-Path $root 'unsafe-id-generation-output'
 $unsafeGeneratorExitCode = 0
 $previousErrorActionPreference = $ErrorActionPreference
@@ -143,11 +151,14 @@ if ($unsafeGeneratorExitCode -eq 0 -or (Test-Path -LiteralPath (Join-Path $root 
     (Test-Path -LiteralPath (Join-Path $unsafeOutput 'escape.lua'))) {
     throw 'Unsafe profile id generated or escaped to a Lua filename.'
 }
-Assert-Fails 'duplicate-id' '"id": "sister_blades_melinoe_starter"' '"id": "sister_blades_melinoe_intermediate"'
 Assert-Fails 'contradiction' '"alternatives": []' '"alternatives": ["AphroditeWeaponBoon"]'
-Assert-Fails 'duplicate-slot-id' '["AphroditeWeaponBoon"]' '["AphroditeWeaponBoon", "AphroditeWeaponBoon"]'
-Assert-Fails 'malformed-role-array' '"core": ["AphroditeWeaponBoon"]' '"core": "AphroditeWeaponBoon"'
-Assert-Fails 'unknown-slot' '"Sprint": {' '"Omega": {'
+Assert-Fails 'duplicate-slot-id' '"traitId": "ApolloWeaponBoon"' '"traitId": "AphroditeWeaponBoon"'
+Assert-Fails 'malformed-role-array' '"core": []' '"core": "AphroditeWeaponBoon"'
+Assert-Fails 'invalid-branch-priority' '"traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 1' '"traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 0'
+Assert-Fails 'invalid-branch-classification' '"traitId": "ApolloWeaponBoon", "classification": "alternative"' '"traitId": "ApolloWeaponBoon", "classification": "unknown"'
+Assert-Fails 'unknown-branch-condition' '"code": "WOUNDS_ACCESS"' '"code": "UNKNOWN"'
+Assert-Fails 'unverified-branch-id' '"traitId": "ApolloWeaponBoon"' '"traitId": "UnverifiedAttackBoon"'
+Assert-Fails 'unknown-slot' '"Special": {' '"Omega": {'
 Assert-Fails 'unknown-catalog-weapon' '"weapon": "WeaponDagger"' '"weapon": "UnknownWeapon"'
 Assert-Fails 'unknown-catalog-aspect' '"aspect": "DaggerBackstabAspect"' '"aspect": "UnknownAspect"'
 Assert-Fails 'profile-template-mismatch' '"aspect": "DaggerBackstabAspect"' '"aspect": "DaggerTripleAspect"'
@@ -171,9 +182,9 @@ Assert-Catalog-Fails 'duplicate-catalog-aspect' @'
 $overrideProfiles = Join-Path $root 'override-profiles'
 Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $overrideProfiles -Recurse
 $overridePath = Join-Path $overrideProfiles 'aaa_shared_mechanics_override.json'
-$override = [IO.File]::ReadAllText((Join-Path $overrideProfiles 'sister_blades_melinoe_starter.json'))
-$override = $override.Replace('"id": "sister_blades_melinoe_starter"', '"id": "aaa_shared_mechanics_override"')
-$override = $override.Replace('"selectionKey": "starter"', '"selectionKey": "aaa_shared_mechanics_override"')
+$override = [IO.File]::ReadAllText((Join-Path $overrideProfiles 'sister_blades_melinoe_intermediate.json'))
+$override = $override.Replace('"id": "sister_blades_melinoe_intermediate"', '"id": "aaa_shared_mechanics_override"')
+$override = $override.Replace('"selectionKey": "intermediate"', '"selectionKey": "aaa_shared_mechanics_override"')
 $override = $override.Replace('"mechanicsTemplate": "sister_blades_melinoe",', '"mechanicsTemplate": "sister_blades_melinoe",' + [Environment]::NewLine + '  "weights": { "FILL_EMPTY_PRIMARY_CORE": 999 },')
 [IO.File]::WriteAllText($overridePath, $override)
 $overrideOutput = Join-Path $root 'override-output'
@@ -182,8 +193,8 @@ if ($LASTEXITCODE -ne 0) { throw 'Shared mechanics override isolation generation
 if ((Get-Content -LiteralPath (Join-Path $overrideOutput 'aaa_shared_mechanics_override.lua') -Raw) -notmatch 'FILL_EMPTY_PRIMARY_CORE = 999') {
     throw 'Profile-specific weight override was not generated.'
 }
-if ((Get-FileHash -LiteralPath (Join-Path $overrideOutput 'sister_blades_melinoe_starter.lua') -Algorithm SHA256).Hash -ne
-    (Get-FileHash -LiteralPath (Join-Path $repo 'data\builds\sister_blades_melinoe_starter.lua') -Algorithm SHA256).Hash) {
+if ((Get-FileHash -LiteralPath (Join-Path $overrideOutput 'sister_blades_melinoe_intermediate.lua') -Algorithm SHA256).Hash -ne
+    (Get-FileHash -LiteralPath (Join-Path $repo 'data\builds\sister_blades_melinoe_intermediate.lua') -Algorithm SHA256).Hash) {
     throw 'Shared mechanics weight override contaminated a later profile.'
 }
 $expectedMelinoeHammerPlan = @(
@@ -193,7 +204,7 @@ $expectedMelinoeHammerPlan = @(
     @{ traitId = 'DaggerSpecialReturnTrait'; priority = 2; classification = 'alternative' },
     @{ traitId = 'DaggerAttackFinisherTrait'; priority = 3; classification = 'alternative' }
 )
-foreach ($profileName in @('sister_blades_melinoe_starter', 'sister_blades_melinoe_intermediate')) {
+foreach ($profileName in @('sister_blades_melinoe_intermediate')) {
     $profile = Get-Content -LiteralPath (Join-Path $repo "data\canonical\profiles\$profileName.json") -Raw | ConvertFrom-Json
     if (@($profile.hammerPlan).Count -ne $expectedMelinoeHammerPlan.Count) { throw "$profileName Hammer plan count mismatch." }
     for ($index = 0; $index -lt $expectedMelinoeHammerPlan.Count; $index++) {

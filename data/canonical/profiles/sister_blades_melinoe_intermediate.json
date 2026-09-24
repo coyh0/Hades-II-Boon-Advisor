@@ -14,12 +14,14 @@
     { "traitId": "DaggerSpecialReturnTrait", "priority": 2, "classification": "alternative" },
     { "traitId": "DaggerAttackFinisherTrait", "priority": 3, "classification": "alternative" }
   ],
-  "autoSignals": ["ForceAresBoonKeepsake"],
   "slots": {
-    "Attack": { "core": ["AresWeaponBoon"], "alternatives": ["AphroditeWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },
-    "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
-    "Cast": { "core": ["DemeterCastBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
-    "Sprint": { "core": [], "alternatives": [], "preferred": ["AresSprintBoon"], "slotPolicy": "preferred" }
+    "Attack": { "core": [], "alternatives": [], "preferred": [], "slotPolicy": "reserved", "branches": [
+      { "traitId": "AphroditeWeaponBoon", "classification": "alternative", "priority": 1 },
+      { "traitId": "ApolloWeaponBoon", "classification": "alternative", "priority": 1 },
+      { "traitId": "HestiaWeaponBoon", "classification": "alternative", "priority": 1 },
+      { "traitId": "AresWeaponBoon", "classification": "conditional", "priority": 2, "condition": { "state": "unresolved", "code": "WOUNDS_ACCESS" } }
+    ] },
+    "Special": { "core": ["ZeusSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" }
   },
   "constraints": ["DO_NOT_SACRIFICE_CORE_PLAN"]
 }

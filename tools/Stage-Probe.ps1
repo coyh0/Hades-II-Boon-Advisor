@@ -37,7 +37,6 @@ Copy-Item -LiteralPath (Join-Path $repo 'src\ScoringEngine.lua') -Destination $t
 Copy-Item -LiteralPath (Join-Path $repo 'src\UI.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ProfileResolver.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
-Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_melinoe_starter.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_morrigan_meta.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'black_coat_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'registry.lua') -Destination (Join-Path $target 'data\builds')

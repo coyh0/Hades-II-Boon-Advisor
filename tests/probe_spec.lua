@@ -1,7 +1,7 @@
 -- Run from the repository root. Framework doubles do not validate integration.
 local function check(value, message) assert(value, message) end
 local function pack(...) return table.pack(...) end
-local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildProfile)
+local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildProfile, registryOverride)
     local logs, installs, modCallbacks, gameCallbacks = {}, 0, {}, {}
     local reloadLoaded, allModsLoaded, gameLoaded = false, false, false
     local allModsRegistrations = 0
@@ -63,6 +63,7 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
     game.Attach = function(data) uiAttached[#uiAttached + 1] = data end
     game.Destroy = function(data) uiDestroyed[#uiDestroyed + 1] = data end
     env.import = function(path)
+        if path == "data/builds/registry.lua" and registryOverride then return registryOverride end
         if path == "config/settings.lua" then
             return {
                 DEBUG = debugEnabled ~= false,
@@ -333,8 +334,8 @@ local expectedPhaseLogs = {
     "[BoonAdvisor] Offer[2] originalIndex=2 ItemName=HestiaSprintBoon Type=Trait Rarity=Epic Blocked=true StackNum=2",
     "[BoonAdvisor] Arcana Origination Active=true Rarity=Rare",
     "[BoonAdvisor] OwnedStatusFamilies=Curse",
-    "[BoonAdvisor] Context originalIndex=1 StatusFamily=Burn StatusKnowledge=mapped OriginationEnable=true CoreRole=Attack Alignment=NON_TARGET SlotPolicy=reserved SlotConflict=true CurrentSlotTrait=AresWeaponBoon SlotStateBefore=CORE SlotStateAfter=NON_TARGET ConflictIntroduced=true ConflictResolved=false CoreSacrificed=false FillsEmpty=false Replaces=false AspectInteraction=ASPECT_COMPATIBLE",
-    "[BoonAdvisor] Context originalIndex=2 StatusFamily=nil StatusKnowledge=known_non_status OriginationEnable=false CoreRole=Sprint Alignment=NON_TARGET SlotPolicy=preferred SlotConflict=false CurrentSlotTrait=nil SlotStateBefore=EMPTY SlotStateAfter=NON_TARGET ConflictIntroduced=false ConflictResolved=false CoreSacrificed=false FillsEmpty=true Replaces=false AspectInteraction=nil",
+    "[BoonAdvisor] Context originalIndex=1 StatusFamily=Burn StatusKnowledge=mapped OriginationEnable=true CoreRole=Attack Alignment=ALTERNATIVE SlotPolicy=reserved SlotConflict=false CurrentSlotTrait=AresWeaponBoon SlotStateBefore=ALTERNATIVE SlotStateAfter=ALTERNATIVE ConflictIntroduced=false ConflictResolved=false CoreSacrificed=false FillsEmpty=false Replaces=false AspectInteraction=ASPECT_COMPATIBLE",
+    "[BoonAdvisor] Context originalIndex=2 StatusFamily=nil StatusKnowledge=known_non_status OriginationEnable=false CoreRole=Sprint Alignment=NO_PLAN SlotPolicy=nil SlotConflict=false CurrentSlotTrait=nil SlotStateBefore=EMPTY SlotStateAfter=NO_PLAN ConflictIntroduced=false ConflictResolved=false CoreSacrificed=false FillsEmpty=true Replaces=false AspectInteraction=nil",
 }
 for _, expected in ipairs(expectedPhaseLogs) do
     local found = false
@@ -352,7 +353,7 @@ check(phasePrivate.probeState.lastRankingReady == false
 print("PASS: plugin globals absent; dynamic rom.game snapshot uses internal IDs; Sister Blades weapon/aspect; hammer/god/offer counts; blocked offer")
 
 local rankLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
-    { ItemName = "AresWeaponBoon" },
+    { ItemName = "AphroditeWeaponBoon", Rarity = "Heroic" },
     { ItemName = "ZeusSpecialBoon" },
     { ItemName = "DemeterCastBoon" },
 } }
@@ -374,23 +375,22 @@ rankStart(); rg.CreateBoonLootButtons(rankScreen, rankLoot)
 local rankState = rankPrivate.probeState
 check(rankState.lastRankingReady == true and #rankState.lastRankedScores == 3,
     "ready runtime screen did not expose internal ranking")
-check(rankState.lastRankedScores[1].itemName == "AresWeaponBoon"
-    and rankState.lastRankedScores[1].score == 20
+check(rankState.lastRankedScores[1].itemName == "AphroditeWeaponBoon"
+    and rankState.lastRankedScores[1].score == 19
     and rankState.lastRankedScores[2].originalIndex == 2
     and rankState.lastRankedScores[3].originalIndex == 3,
     "runtime ranking order or tie-break wrong")
 local sawReady, sawRank, sawTie = false, false, false
 for _, line in ipairs(rl) do
     if line == "[BoonAdvisor] RankingReady=true" then sawReady = true end
-    if line == "[BoonAdvisor] Rank=1 originalIndex=1 ItemName=AresWeaponBoon Score=20 Tied=false" then
+    if line == "[BoonAdvisor] Rank=1 originalIndex=1 ItemName=AphroditeWeaponBoon Score=19 Tied=false" then
         sawRank = true
     end
-    if line == "[BoonAdvisor] Rank=2 originalIndex=2 ItemName=ZeusSpecialBoon Score=16 Tied=true"
-        or line == "[BoonAdvisor] Rank=2 originalIndex=3 ItemName=DemeterCastBoon Score=16 Tied=true" then
+    if line == "[BoonAdvisor] Rank=2 originalIndex=2 ItemName=ZeusSpecialBoon Score=16 Tied=false" then
         sawTie = true
     end
 end
-check(sawReady and sawRank and sawTie, "ready ranking diagnostics missing or tie not explicit")
+check(sawReady and sawRank and sawTie, "ready ranking diagnostics missing")
 local englishRankScreen = { Source = rankLoot, KeepOpen = true }
 local englishRankGame, _, englishRankStart, _, englishRankPrivate = fixture(function() end, nil, true, {
     CurrentRun = rankRun,
@@ -419,7 +419,7 @@ end
 print("PASS: runtime ranking gate keeps nil when false and ranks internally when true; no UI")
 
 local testLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
-    { ItemName = "AresWeaponBoon" }, { ItemName = "AresSpecialBoon" }, { ItemName = "AresSprintBoon" },
+    { ItemName = "AphroditeWeaponBoon" }, { ItemName = "AresSpecialBoon" }, { ItemName = "AresSprintBoon" },
 } }
 local testScreen = {
     Source = testLoot, KeepOpen = true,
@@ -693,7 +693,7 @@ end
 print("PASS: WeaponUpgrade Hammer offers use the profile hammerPlan and partial UI")
 
 do
-    local function unsupportedScreen(aspect, expected)
+    local function unsupportedScreen(aspect, expected, registryOverride)
         local loot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
             { ItemName = "AresWeaponBoon" }, { ItemName = "AresSpecialBoon" },
             { ItemName = "AresSprintBoon" },
@@ -708,7 +708,7 @@ do
             } } },
             GetEquippedWeapon = function() return "WeaponDagger" end,
             LootData = {}, IsGodTrait = function() return false end,
-        }, false, "auto")
+        }, false, "auto", registryOverride)
         start(); game.CreateBoonLootButtons(screen, loot)
         check(private.probeState.lastRankingReady == false
             and private.probeState.lastRankedScores == nil and #screen.BoonAdvisorRanks == 0,
@@ -717,7 +717,12 @@ do
         for _, entry in ipairs(text) do if entry.RawText == expected then found = true end end
         check(found, "profile fallback changed: " .. expected)
     end
-    unsupportedScreen("DaggerBackstabAspect", "PROFIL À CHOISIR")
+    local ambiguousRegistry = assert(loadfile("data/builds/registry.lua"))()
+    ambiguousRegistry.synthetic_tie = {
+        weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
+        module = "data/builds/sister_blades_melinoe_intermediate.lua",
+    }
+    unsupportedScreen("DaggerBackstabAspect", "PROFIL À CHOISIR", ambiguousRegistry)
     unsupportedScreen("DaggerBlockAspect", "PROFIL NON PRIS EN CHARGE")
 end
 print("PASS: ambiguous and unsupported profiles remain unranked with distinct fallbacks")
@@ -733,14 +738,43 @@ local selectorLoot = { Name = "AphroditeUpgrade", GodLoot = true, UpgradeOptions
 local selectorScreen = { Source = selectorLoot, KeepOpen = true, Components = {} }
 local selectorRun = { Hero = { SlottedTraits = { Aspect = "DaggerBackstabAspect" },
     Traits = { { Name = "DaggerBackstabAspect", IsWeaponEnchantment = true } }, Weapons = {} } }
-local starterGame, starterLogs, starterStart = fixture(function() end, nil, true, {
+do
+local legacyGame, legacyLogs, legacyStart, _, legacyPrivate, legacyReload = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
 }, false, "starter")
-starterStart()
-starterGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
-check(hasLog(starterLogs, "BuildId=sister_blades_melinoe_starter ProfileMode=starter SchemaVersion=1"),
-    "configured Starter profile was not selected or logged")
+legacyStart()
+legacyGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(hasLog(legacyLogs, "WARN CONFIGURED_PROFILE_UNAVAILABLE: Configured BUILD_PROFILE=starter is unavailable; using auto for this session. settings.lua was not changed.")
+    and hasLog(legacyLogs, "BuildId=sister_blades_melinoe_intermediate ProfileMode=intermediate SchemaVersion=1 Supported=true"),
+    "retired Starter setting did not warn and resolve via auto")
+local function legacyWarnCount()
+    local count = 0
+    for _, line in ipairs(legacyLogs) do
+        if line:find("WARN CONFIGURED_PROFILE_UNAVAILABLE:", 1, true) then count = count + 1 end
+    end
+    return count
+end
+check(legacyWarnCount() == 1, "retired Starter setting warning count changed")
+legacyReload()
+legacyGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+check(legacyWarnCount() == 1 and legacyPrivate.probeState.logState.suppressed["WARN:CONFIGURED_PROFILE_UNAVAILABLE"] == 1,
+    "retired Starter setting warned twice after hot reload")
+end
+do
+    local quietGame, quietLogs, quietStart, _, quietPrivate, quietReload = fixture(function() end, nil, false, {
+        CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
+        LootData = {}, IsGodTrait = function() return false end,
+    }, false, "starter")
+    quietStart()
+    quietGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+    check(#quietLogs == 1 and quietLogs[1]:find("WARN CONFIGURED_PROFILE_UNAVAILABLE:", 1, true)
+        and quietPrivate.probeState.lastScores[1].supported,
+        "retired Starter warning was hidden by DEBUG=false or stopped scoring")
+    quietReload()
+    quietGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
+    check(#quietLogs == 1, "retired Starter warning repeated in normal-release mode")
+end
 local defaultGame, defaultLogs, defaultStart = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
@@ -766,19 +800,17 @@ local autoMelinoeGame, autoMelinoeLogs, autoMelinoeStart = fixture(function() en
 })
 autoMelinoeStart()
 autoMelinoeGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
-check(hasLog(autoMelinoeLogs, "Profile resolution=ambiguous")
-    and hasLog(autoMelinoeLogs, "Supported=false")
-    and not hasLog(autoMelinoeLogs, "BuildId=sister_blades_melinoe_intermediate"),
-    "auto Melinoe did not remain ambiguous without a selected BuildId")
+check(hasLog(autoMelinoeLogs, "BuildId=sister_blades_melinoe_intermediate ProfileMode=intermediate SchemaVersion=1 Supported=true"),
+    "auto Melinoe did not resolve the sole Intermediate profile")
 local invalidGame, invalidLogs, invalidStart = fixture(function() end, nil, true, {
     CurrentRun = selectorRun, GetEquippedWeapon = function() return "WeaponDagger" end,
     LootData = {}, IsGodTrait = function() return false end,
 }, false, "not-a-profile")
 invalidStart()
 invalidGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
-check(hasLog(invalidLogs, "Profile resolution=ambiguous")
-    and hasLog(invalidLogs, "Supported=false"),
-    "invalid profile did not fail safely on ambiguous compatible profiles")
+check(hasLog(invalidLogs, "WARN CONFIGURED_PROFILE_UNAVAILABLE")
+    and hasLog(invalidLogs, "BuildId=sister_blades_melinoe_intermediate ProfileMode=intermediate SchemaVersion=1 Supported=true"),
+    "invalid preference did not warn and fall back to sole compatible profile")
 local morriganGame, morriganLogs, morriganStart = fixture(function() end, nil, true, {
     CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerTripleAspect" }, Traits = {
         { Name = "DaggerTripleAspect", Slot = "Aspect", IsWeaponEnchantment = true },
@@ -801,4 +833,30 @@ invalidMorriganStart()
 invalidMorriganGame.CreateBoonLootButtons(selectorScreen, selectorLoot)
 check(hasLog(invalidMorriganLogs, "BuildId=sister_blades_morrigan_meta ProfileMode=meta SchemaVersion=1 Supported=true"),
     "invalid preference incorrectly rejected the sole Morrigan candidate")
+local function checkRetiredStarter(aspect, weapon, expected)
+    local legacy = { fixture(function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = aspect }, Traits = {
+                { Name = aspect, Slot = "Aspect", IsWeaponEnchantment = true },
+            }, Weapons = {} } },
+            GetEquippedWeapon = function() return weapon end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "starter") }
+    legacy[3]()
+    legacy[1].CreateBoonLootButtons(selectorScreen, selectorLoot)
+    check(hasLog(legacy[2], "WARN CONFIGURED_PROFILE_UNAVAILABLE: Configured BUILD_PROFILE=starter")
+        and hasLog(legacy[2], "BuildId=" .. expected)
+        and hasLog(legacy[2], "Supported=true")
+        and legacy[5].probeState.logState.suppressed["WARN:CONFIGURED_PROFILE_UNAVAILABLE"] == nil,
+        "retired Starter setting did not fall back to the compatible profile with one warning")
+    legacy[6]()
+    legacy[1].CreateBoonLootButtons(selectorScreen, selectorLoot)
+    local warningCount = 0
+    for _, line in ipairs(legacy[2]) do
+        if line:find("WARN CONFIGURED_PROFILE_UNAVAILABLE:", 1, true) then warningCount = warningCount + 1 end
+    end
+    check(warningCount == 1 and legacy[5].probeState.logState.suppressed["WARN:CONFIGURED_PROFILE_UNAVAILABLE"] == 1,
+        "retired Starter warning was not deduplicated")
+end
+checkRetiredStarter("DaggerTripleAspect", "WeaponDagger", "sister_blades_morrigan_meta")
+checkRetiredStarter("BaseSuitAspect", "WeaponSuit", "black_coat_melinoe_intermediate")
 print("PASS: build profile resolver defaults, exact aspect selection, singleton fallback, and ambiguity safety")

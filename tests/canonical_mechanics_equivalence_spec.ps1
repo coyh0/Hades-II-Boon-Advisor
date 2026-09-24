@@ -62,9 +62,8 @@ local function compare(expected, actual, path)
     for key, value in pairs(actual) do if expected[key] == nil then fail(path .. "." .. tostring(key), "EXTRA", nil, value) end end
 end
 local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
-local starter = assert(loadfile("data/builds/sister_blades_melinoe_starter.lua"))()
-for _, section in ipairs(sections) do compare(canonical[section], intermediate[section], section); compare(intermediate[section], starter[section], "IntermediateVsStarter." .. section) end
-print("PASS: strict recursive canonical/runtime and Intermediate/Starter mechanics equivalence")
+for _, section in ipairs(sections) do compare(canonical[section], intermediate[section], section) end
+print("PASS: strict recursive canonical/runtime Intermediate mechanics equivalence")
 "@
 $temp = Join-Path ([IO.Path]::GetTempPath()) ('mechanics-equivalence-' + [Guid]::NewGuid() + '.lua')
 [IO.File]::WriteAllText($temp, $lua)
