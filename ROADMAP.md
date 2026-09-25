@@ -518,6 +518,7 @@ Stability and correctness come first. UI redesign happens after runtime/profile 
   - Prefer the unused upper-right status area near analysis/status text; keep it small, low-attention and non-animated.
   - Show auto-detected profile clearly enough for player/support diagnostics and distinguish any future manual override.
   - Re-evaluate placement during the polish pass if localization/resolution makes the upper-right area crowded.
+  - **Maintainer UI concept (2026-09-25; later, not v0.2):** prefer one discreet compact rectangle/tile using small color-coded icons or status chips, not a large panel. Show detected/selected build name and priority Attack / Special / Cast (optional Mana/Sprint when relevant), distinguish acquired from missing without implying an unverified recommendation is executable, and reuse the already-committed informational `keepsakePlan` for the current/next phase. Add Legendary/Duo prerequisite path and owned/missing progress only in the later information-only build-guidance milestone after native IDs and prerequisites are independently validated (including Premium Service's three-group gate and forge unlock). Stay out of the native choice/rank UI, permit compact/expanded density if necessary, localize FR/EN and account for HUD/small-resolution overlap; do not alter RNG, scoring or profile selection. Current v0.2 remains **no new build-guidance UI**.
 
 ### Later — Build guidance and optimization
 
