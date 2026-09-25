@@ -2,6 +2,37 @@
 
 All notable changes to Hades II Boon Advisor are documented here.
 
+## [0.2.0] - 2026-09-25
+
+### Added
+
+- Added validated Intermediate Sister Blades Melinoë, Morrigan Meta and Black Coat Melinoë profiles.
+- Added explainable Hammer recommendations for the approved v0.2 showcase.
+- Added safe full, partial and none ranking states when offered choices are not fully covered.
+- Added metadata-only four-phase Keepsake plans for the three active profiles.
+- Added canonical profile generation, Registry projection checks and strict mechanics equivalence tests.
+- Added transactional install, update, rollback, uninstall and package validation tooling.
+- Added human-controlled DEV validation evidence and release-grade offline regression coverage.
+
+### Changed
+
+- Expanded automatic profile resolution across weapon, Aspect and owned-run evidence, with safe ambiguity and unsupported fallbacks.
+- Added explainable slot conflicts, replacement handling, aspect interactions, Hammer priorities and conservative status/Origination coverage.
+- Added French and English labels for ranking states, incomplete analysis, conflicts, build reasons and discouraged recommendations.
+- Reconciled the 118-row v0.2 Registry audit against canonical profiles and verified runtime identifiers; documentary conditions remain non-executable.
+- Updated public documentation and runtime testing guidance to distinguish published v0.1.2 behavior from the unreleased v0.2 candidate.
+
+### Fixed
+
+- Corrected base Ares Attack evaluation so it does not depend on Grievous Blow or an unproven Wounds branch.
+- Preserved unknown choices as unevaluated instead of assigning speculative ranks or scores.
+- Fixed negative build recommendations being shown with the same positive label as core/build reasons.
+
+### Notes
+
+- The compact build-status interface, Duos, Hermes and Poms guidance remain future work.
+- This candidate does not change gameplay, RNG, offers, damage, saves or player choice.
+
 ## [0.1.2] - 2026-09-23
 
 ### Changed

@@ -84,6 +84,22 @@ Compatible profiles can also be selected explicitly with:
 The historical `starter` profile belongs to the published v0.1.2 line and is
 not part of the future-v0.2 runtime set.
 
+### Community sources and validation
+
+The v0.2 Build Registry was assembled from community build guidance, with
+[Mobalytics](https://mobalytics.gg/hades-2/community-builds) used for the
+intermediate routes and [Lee Reamsnyder](https://www.leereamsnyder.com/) plus
+[NeonHades2](https://hades2.guide.neonspace.dev/) used for the meta/Blood Triad
+review. Reddit was consulted only for substantive conflicts or unclear
+interactions. These are documentary references; the project claims no
+affiliation or endorsement and republishes no source text, tables, images or
+layout. Recommendations were kept separate from executable rules, then
+matched against native Hades II text, scripts and runtime identifiers. The
+active profile mappings and the approved v0.2 showcase were reviewed and
+validated by the maintainer through controlled DEV gameplay, screenshots and
+DEBUG logs. Documentary conditions and rows that could not be mechanically
+verified remain non-executable or deferred.
+
 Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
 receiving a speculative score.
 
