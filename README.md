@@ -47,8 +47,18 @@ updates and compatibility diagnostics for advanced users. See
 
 ## Supported builds
 
-- Sister Blades — Aspect of Melinoë: Starter and Intermediate
+Published `v0.1.2` supports Sister Blades — Aspect of Melinoë: Starter.
+
+The `main` branch contains the unreleased `v0.2` candidate with these three
+profiles:
+
+- Sister Blades — Aspect of Melinoë: Intermediate
 - Sister Blades — Aspect of Morrigan: Meta / Blood Triad
+- Black Coat — Aspect of Melinoë: Intermediate
+
+The v0.2 candidate has passed offline gates and representative human-controlled
+DEV validation. It is not a published release yet. Compact build-status UI,
+Duos, Hermes and Poms guidance remain future work.
 
 ### Build profile selection
 
@@ -67,9 +77,12 @@ For a weapon/Aspect with no compatible profile, it shows
 
 Compatible profiles can also be selected explicitly with:
 
-- `starter`
 - `intermediate`
 - `morrigan_meta`
+- `coat_intermediate`
+
+The historical `starter` profile belongs to the published v0.1.2 line and is
+not part of the future-v0.2 runtime set.
 
 Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
 receiving a speculative score.

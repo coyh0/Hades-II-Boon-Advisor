@@ -1,6 +1,15 @@
-# Premier test runtime — Phase 1 uniquement
+# Validation runtime et procédure d'installation
 
-Statut : **NON EXÉCUTÉ**. Sonde préparée et testée hors jeu. Aucune DLL ni aucun plugin installé dans le jeu par cette étape. Ne pas lancer sous le compte principal tant que les sauvegardes ne sont pas isolées.
+Statut : **validation DEV représentative effectuée sous contrôle humain** pour
+les trois profils v0.2. Les captures et le journal DEBUG ont confirmé les
+profils, identifiants, scores et replis full/partial/none observés. La
+validation a utilisé le profil Windows principal `Profile1` avec les
+sauvegardes cloud activées, contexte accepté par le mainteneur ; elle ne doit
+pas être décrite comme un test isolé.
+
+La procédure d'isolation ci-dessous reste la méthode recommandée pour un
+nouveau test reproductible. Elle décrit des contrôles de sécurité et ne
+constitue pas une étape restante de la validation v0.2 déjà effectuée.
 
 ## 1. Préconditions de sauvegarde
 
