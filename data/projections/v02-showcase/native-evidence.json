@@ -1,0 +1,38 @@
+{
+  "gameVersion": "139606",
+  "verifiedOn": "2026-09-25",
+  "files": [
+    {
+      "path": "Game/Text/en/TraitText.en.sjson",
+      "sha256": "75ef411d23f54d0caaf94e9b58b4f80768ec0ca23d394833dc9296d4b00b4712"
+    },
+    {
+      "path": "Scripts/TraitData_Dagger.lua",
+      "sha256": "b2f9c526e9a5ff8708b0170507afe956f875ebc38bcc65efb5c1b42409db974b"
+    },
+    {
+      "path": "Scripts/TraitData_Suit.lua",
+      "sha256": "359644ad5f5d3bedd96eb5ef555f4728bc1cca88907ecef2170cf2e8727c7278"
+    },
+    {
+      "path": "Scripts/TraitData_Hestia.lua",
+      "sha256": "bdbfe186af7aaeb317bc228428991f545777bbba411db3e53aa50127147614b9"
+    },
+    {
+      "path": "Scripts/TraitData_Zeus.lua",
+      "sha256": "6263e982e1d6ba03f8cb83d3b15c87a6a342dbc868d7c203e345ce5d59d1faed"
+    },
+    {
+      "path": "Scripts/WeaponSets.lua",
+      "sha256": "f468f32d062adb5e1091a9be1845bf4ff013d870d90c3ee81277ef4466cb4e83"
+    },
+    {
+      "path": "Scripts/WeaponLogic.lua",
+      "sha256": "63921ed2c03e169b461b793a553524af1804385c54f783e9a4bfb6ebedfbe6f7"
+    },
+    {
+      "path": "Scripts/LootData.lua",
+      "sha256": "64d50a847e193c2f6602493acb956820c7b3ee44de8d074043e03c25320000a2"
+    }
+  ]
+}

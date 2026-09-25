@@ -1,0 +1,1007 @@
+{
+  "showcaseCommit": "4a647f607023602a34b1d705a15a39cfbb3bc19d",
+  "encodingChecks": [
+    {
+      "path": "ROADMAP.md",
+      "bytes": 24060,
+      "sha256": "b60d498c7ec9968254d5698ceddd6688220e0c0779ef569943a5a5cedba7697d",
+      "validUtf8": false,
+      "nulBytes": 4
+    },
+    {
+      "path": "tests/canonical_profiles_spec.ps1",
+      "bytes": 24222,
+      "sha256": "c439f2875edd373428af3331d8a5c74898280011147f3c3617cdf83c57011bf1",
+      "validUtf8": false,
+      "nulBytes": 9
+    },
+    {
+      "path": "tests/scoring_spec.lua",
+      "bytes": 24061,
+      "sha256": "56a84c8c88f83e1ba40ff2ecf118633269fc2f2f2a62e5fbf68e9fa9077777b3",
+      "validUtf8": false,
+      "nulBytes": 5
+    }
+  ],
+  "showcaseScoringTestLoadError": "[string \"assert(loadfile(\"C:/Users/jejsa/Documents/Cha...\"]:1: ...I-Clean-Export/dist/audit/4a647f6/tests/scoring_spec.lua:1: syntax error near char(170)",
+  "scenario": "Single Common offer, empty slots, no owned traits/hammers/Arcana; not live evidence or a ranking test",
+  "results": {
+    "main": [
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_5c03796eb43c2e95",
+        "nativeId": "AresWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_426d805788abd215",
+        "nativeId": "ApolloWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c5f84eb0e4c9ce5f",
+        "nativeId": "AphroditeWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_6ab27648a113db90",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_506c9ace94618317",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "16",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_ab38abf147cfb76f",
+        "nativeId": "DemeterCastBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BACKSTAB_SETUP"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_b3ba705388227cc9",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_eb3b2236b0ba7172",
+        "nativeId": "FocusLightningBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_ea72d669fcf32ed6",
+        "nativeId": "ApolloBlindBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_fab8131c43237e3c",
+        "nativeId": "DaggerDashAttackTripleTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c76c171494a9a129",
+        "nativeId": "DaggerFinalHitTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_941f79a254978500",
+        "nativeId": "DaggerRapidAttackTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c580b5ed463e9516",
+        "nativeId": "DaggerSpecialReturnTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_3f3497792adebd71",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_aa6e590b199c5c7d",
+        "nativeId": "DaggerSpecialJumpTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9142ac9935222910",
+        "nativeId": "PoseidonWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_78929f2a975027d2",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_ef44fbef3991267d",
+        "nativeId": "ZeusWeaponBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_f6e4bbecf35b7003",
+        "nativeId": "AresSpecialBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_fe392a2e958c7784",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_a5ed6dd080ecb3ec",
+        "nativeId": "ZeusCastBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9f08350287734786",
+        "nativeId": "PoseidonSprintBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_4f2e53243db1745f",
+        "nativeId": "PoseidonStatusBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_b1390c5e69fbf38a",
+        "nativeId": "AmplifyConeBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_1afc2cc4fff9534e",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9e4e73a3d2cd6f63",
+        "nativeId": "LowHealthLifestealBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_feda3749ef5bbda6",
+        "nativeId": "DoubleSplashBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_f99d8b331e9f72f0",
+        "nativeId": "FocusLightningBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9342110b825f0d85",
+        "nativeId": "SuitDashAttackTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9e33b1fe4ddc59d9",
+        "nativeId": "SuitAttackSpeedTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_73b72972290fdb62",
+        "nativeId": "SuitSpecialAutoTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "false",
+        "reasons": "HAMMER_BUILD_PRIORITY,HAMMER_CONDITION_UNRESOLVED"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_093a7c1192f7eb29",
+        "nativeId": "SuitAttackSizeTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b107498fc99032fc",
+        "nativeId": "HeraWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e29c3e35a3317923",
+        "nativeId": "ApolloWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_277cb5640ff0299d",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_95624b0f394da167",
+        "nativeId": "DemeterWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_90bd4f5788114fb6",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_08cb8eea702f036a",
+        "nativeId": "AresSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_c34454443085c8b0",
+        "nativeId": "HephaestusSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_5dbd522654011926",
+        "nativeId": "ApolloSpecialBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_DISCOURAGED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b946a27468275be9",
+        "nativeId": "AphroditeSpecialBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_DISCOURAGED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_555da60ead7b4ac5",
+        "nativeId": "PoseidonCastBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_bcc5e04ce0796798",
+        "nativeId": "ApolloSprintBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b143ebb45347b063",
+        "nativeId": "HeraManaBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_6989346f7dd8cda7",
+        "nativeId": "ApolloManaBoon",
+        "score": "4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_addfc88e7d98eb3a",
+        "nativeId": "PoseidonSplashSprintBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e96fef44b25e9493",
+        "nativeId": "WeaponUpgradeBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "ASPECT_DIRECT_SYNERGY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e9ab32dc733a86a8",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_0e7999238013ae66",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_7ab53d6b60e37a91",
+        "nativeId": "DaggerBlinkAoETrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_d36d5b6541dd0721",
+        "nativeId": "DaggerFinalHitTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_110a9212c7f19a00",
+        "nativeId": "DaggerRapidAttackTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_7d4d68a453cd5cb6",
+        "nativeId": "DaggerTripleRepeatWomboTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_dbc147e065e62721",
+        "nativeId": "DaggerTripleBuffTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_0e761b115bb9c6e1",
+        "nativeId": "DaggerSpecialJumpTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      }
+    ],
+    "showcase": [
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_5c03796eb43c2e95",
+        "nativeId": "AresWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_426d805788abd215",
+        "nativeId": "ApolloWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c5f84eb0e4c9ce5f",
+        "nativeId": "AphroditeWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_6ab27648a113db90",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_506c9ace94618317",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "16",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,ASPECT_COMPATIBLE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_ab38abf147cfb76f",
+        "nativeId": "DemeterCastBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BACKSTAB_SETUP"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_b3ba705388227cc9",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_eb3b2236b0ba7172",
+        "nativeId": "FocusLightningBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_ea72d669fcf32ed6",
+        "nativeId": "ApolloBlindBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_fab8131c43237e3c",
+        "nativeId": "DaggerDashAttackTripleTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c76c171494a9a129",
+        "nativeId": "DaggerFinalHitTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_941f79a254978500",
+        "nativeId": "DaggerRapidAttackTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_c580b5ed463e9516",
+        "nativeId": "DaggerSpecialReturnTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_3f3497792adebd71",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_melinoe_intermediate_aa6e590b199c5c7d",
+        "nativeId": "DaggerSpecialJumpTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9142ac9935222910",
+        "nativeId": "PoseidonWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_78929f2a975027d2",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_ef44fbef3991267d",
+        "nativeId": "ZeusWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_f6e4bbecf35b7003",
+        "nativeId": "AresSpecialBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_fe392a2e958c7784",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_a5ed6dd080ecb3ec",
+        "nativeId": "ZeusCastBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9f08350287734786",
+        "nativeId": "PoseidonSprintBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_4f2e53243db1745f",
+        "nativeId": "PoseidonStatusBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_b1390c5e69fbf38a",
+        "nativeId": "AmplifyConeBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_1afc2cc4fff9534e",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9e4e73a3d2cd6f63",
+        "nativeId": "LowHealthLifestealBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_feda3749ef5bbda6",
+        "nativeId": "DoubleSplashBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_f99d8b331e9f72f0",
+        "nativeId": "FocusLightningBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9342110b825f0d85",
+        "nativeId": "SuitDashAttackTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_9e33b1fe4ddc59d9",
+        "nativeId": "SuitAttackSpeedTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_73b72972290fdb62",
+        "nativeId": "SuitSpecialAutoTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "false",
+        "reasons": "HAMMER_BUILD_PRIORITY,HAMMER_CONDITION_UNRESOLVED"
+      },
+      {
+        "recommendationId": "br2_coat_melinoe_intermediate_093a7c1192f7eb29",
+        "nativeId": "SuitAttackSizeTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b107498fc99032fc",
+        "nativeId": "HeraWeaponBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e29c3e35a3317923",
+        "nativeId": "ApolloWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_277cb5640ff0299d",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_95624b0f394da167",
+        "nativeId": "DemeterWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_90bd4f5788114fb6",
+        "nativeId": "ZeusSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_08cb8eea702f036a",
+        "nativeId": "AresSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_c34454443085c8b0",
+        "nativeId": "HephaestusSpecialBoon",
+        "score": "10",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_5dbd522654011926",
+        "nativeId": "ApolloSpecialBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_DISCOURAGED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b946a27468275be9",
+        "nativeId": "AphroditeSpecialBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_DISCOURAGED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_555da60ead7b4ac5",
+        "nativeId": "PoseidonCastBoon",
+        "score": "12",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_bcc5e04ce0796798",
+        "nativeId": "ApolloSprintBoon",
+        "score": "6",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_PREFERRED"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_b143ebb45347b063",
+        "nativeId": "HeraManaBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE,BUILD_CORE_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_6989346f7dd8cda7",
+        "nativeId": "ApolloManaBoon",
+        "score": "4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_UTILITY_CORE"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_addfc88e7d98eb3a",
+        "nativeId": "PoseidonSplashSprintBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e96fef44b25e9493",
+        "nativeId": "WeaponUpgradeBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "ASPECT_DIRECT_SYNERGY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_e9ab32dc733a86a8",
+        "nativeId": "AresStatusDoubleDamageBoon",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_0e7999238013ae66",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_7ab53d6b60e37a91",
+        "nativeId": "DaggerBlinkAoETrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_d36d5b6541dd0721",
+        "nativeId": "DaggerFinalHitTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_110a9212c7f19a00",
+        "nativeId": "DaggerRapidAttackTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_7d4d68a453cd5cb6",
+        "nativeId": "DaggerTripleRepeatWomboTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_dbc147e065e62721",
+        "nativeId": "DaggerTripleBuffTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      },
+      {
+        "recommendationId": "br2_blades_morrigan_meta_0e761b115bb9c6e1",
+        "nativeId": "DaggerSpecialJumpTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      }
+    ]
+  },
+  "deltas": [
+    {
+      "main": {
+        "recommendationId": "br2_coat_melinoe_intermediate_78929f2a975027d2",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      "showcase": {
+        "recommendationId": "br2_coat_melinoe_intermediate_78929f2a975027d2",
+        "nativeId": "HestiaWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      }
+    },
+    {
+      "main": {
+        "recommendationId": "br2_coat_melinoe_intermediate_ef44fbef3991267d",
+        "nativeId": "ZeusWeaponBoon",
+        "score": "-4",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "BUILD_SLOT_POLICY_DELTA"
+      },
+      "showcase": {
+        "recommendationId": "br2_coat_melinoe_intermediate_ef44fbef3991267d",
+        "nativeId": "ZeusWeaponBoon",
+        "score": "8",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "FILL_EMPTY_PRIMARY_CORE"
+      }
+    },
+    {
+      "main": {
+        "recommendationId": "br2_coat_melinoe_intermediate_093a7c1192f7eb29",
+        "nativeId": "SuitAttackSizeTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      "showcase": {
+        "recommendationId": "br2_coat_melinoe_intermediate_093a7c1192f7eb29",
+        "nativeId": "SuitAttackSizeTrait",
+        "score": "-3",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      }
+    },
+    {
+      "main": {
+        "recommendationId": "br2_blades_morrigan_meta_0e7999238013ae66",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      "showcase": {
+        "recommendationId": "br2_blades_morrigan_meta_0e7999238013ae66",
+        "nativeId": "DaggerAttackFinisherTrait",
+        "score": "-2",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      }
+    },
+    {
+      "main": {
+        "recommendationId": "br2_blades_morrigan_meta_dbc147e065e62721",
+        "nativeId": "DaggerTripleBuffTrait",
+        "score": "0",
+        "covered": "false",
+        "complete": "false",
+        "reasons": ""
+      },
+      "showcase": {
+        "recommendationId": "br2_blades_morrigan_meta_dbc147e065e62721",
+        "nativeId": "DaggerTripleBuffTrait",
+        "score": "-1",
+        "covered": "true",
+        "complete": "true",
+        "reasons": "HAMMER_BUILD_PRIORITY"
+      }
+    }
+  ],
+  "isolatedShowcaseScenarios": "PASS"
+}

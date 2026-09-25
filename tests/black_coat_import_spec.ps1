@@ -57,10 +57,13 @@ foreach ($slot in @('Attack', 'Special', 'Sprint')) {
     Assert-Equal $items[0].runtimeItemId $expected[0] "$slot core"
 }
 $hammerItems = @($group.items | Where-Object { $_.role -ceq 'hammer' } | Sort-Object priority)
-if ($hammerItems.Count -ne @($canonical.hammerPlan).Count) { throw 'Hammer projection count differs from canonical hammerPlan.' }
+# The historical pilot is a subset; later additions are checked by v02_projection_spec.ps1.
+if ($hammerItems.Count -ne 3) { throw 'Historical pilot Hammer count changed.' }
 for ($index = 0; $index -lt $hammerItems.Count; $index++) {
     $actual = $hammerItems[$index]
-    $expected = $canonical.hammerPlan[$index]
+    $matches = @($canonical.hammerPlan | Where-Object { $_.traitId -ceq $actual.runtimeItemId })
+    if ($matches.Count -ne 1) { throw 'Pilot Hammer missing or duplicated in canonical.' }
+    $expected = $matches[0]
     Assert-Equal $actual.runtimeItemId $expected.traitId "Hammer[$index] traitId"
     if ($actual.priority -ne $expected.priority) { throw "Hammer[$index] priority mismatch." }
     Assert-Equal $actual.classification $expected.classification "Hammer[$index] classification"

@@ -1,1 +1,1625 @@
-YªçŠx-®éÜj×¢ëiºÚ+Š§j[h‘éÜ¢éíßŽ¶Ý:-jZ.¶›­–)Þ³VÆö6ÂgVæ7F–öâ6†V6²‡fÇVRÂÖW76vR’76W'B‡fÇVRÂÖW76vR’Væ@¦Æö6Â66÷&–ætVæv–æRÒ76W'B†ÆöFf–ÆR‚'7&2õ66÷&–ætVæv–æRæÇV"’’‚¦Æö6ÂöffW%6æ6†÷BÒ76W'B†ÆöFf–ÆR‚'7&2ôöffW%6æ6†÷BæÇV"’’‚¦Æö6Â&öGV7F–öå&öf–ÆRÒ76W'B†ÆöFf–ÆR‚&FFö'V–ÆG2÷6—7FW%ö&ÆFW5öÖVÆ–æöUö–çFW&ÖVF–FRæÇV"’’‚¦Æö6ÂÖ÷'&–vå&öf–ÆRÒ76W'B†ÆöFf–ÆR‚&FFö'V–ÆG2÷6—7FW%ö&ÆFW5öÖ÷'&–våöÖWFæÇV"’’‚ ¦Fð¢Æö6Â6öE&öf–ÆRÒ76W'B†ÆöFf–ÆR‚&FFö'V–ÆG2ö&Æ6µö6öEöÖVÆ–æöUö–çFW&ÖVF–FRæÇV"’’‚¢6†V6²…66÷&–ætVæv–æRçfÆ–FFU&öf–ÆR†6öE&öf–ÆR’Â$&Æ6²6öBvVæW&FVB&öf–ÆR–çfÆ–B"¢Æö6Â6æ6†÷BÒ°¢vVöâÒ%vVöå7V—B"Â7V7BÒ$&6U7V—D7V7B"ÂvöEG&—G2Ò·ÒÂ†ÖÖW'2Ò·ÒÂ7F—fT&6æÒ·ÒÀ¢öffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%÷6V–FöåvVöä&ööâ"Â&&—G’Ò$6öÖÖöâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ$&W57V6–Ä&ööâ"Â&&—G’Ò$6öÖÖöâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ%÷6V–Föå7&–çD&ööâ"Â&&—G’Ò$6öÖÖöâ"ÒÀ¢ÒÀ¢Ð¢Æö6Â66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ6öE&öf–ÆR¢f÷"–æFW‚Â&öÆR–â——'2‡²$GF6²"Â%7V6–Â"Â%7&–çB"Ò’Fð¢6†V6²…66÷&–ætVæv–æRævWD'V–ÆDÆ–væÖVçB†6öE&öf–ÆRÂ&öÆRÂ6æ6†÷BæöffW'5¶–æFW…Òä—FVÔæÖR’ÓÒ$4õ$R"À¢$&Æ6²6öBF&vWBÆ–væÖVçBÖ—76–ærf÷""ââ&öÆR¢6†V6²‡66÷&W5¶–æFW…Òç7W÷'FVBæB66÷&W5¶–æFW…Òæ6÷fW&VBæB66÷&W5¶–æFW…Òç66÷&T6ö×ÆWFRÀ¢$&Æ6²6öBF&vWBv2æ÷BgVÆÇ’66÷&VB"¢Æö6Â†5&–÷&—G’ÒfÇ6P¢f÷"òÂ&V6öâ–â——'2‡66÷&W5¶–æFW…Òç&V6öç2’Fð¢–b&V6öâæ6öFRÓÒ$%T”ÄEô4õ$Uõ$”õ$•E’"F†Vâ†5&–÷&—G’ÒG'VRVæ@¢6†V6²‡&V6öâæ6öFRãÒ$õ$”t”äD”ôåôTä$ÄR"æB&V6öâæ6öFRãÒ$U„•5D”äuô„ÔÔU%õ5”äU$u’ ¢æB&V6öâæ6öFRãÒ$5T5Eô4ôÕD”$ÄR"æB&V6öâæ6öFRãÒ$5T5EôD•$T5Eõ5”äU$u’ ¢æB&V6öâæ6öFRãÒ$5T5Eõ4UEUõ5”äU$u’"Â'VçfW&–f–VB&Æ6²6öBÖV6†æ–266÷&VB"¢Væ@¢6†V6²††5&–÷&—G’Â$&Æ6²6öB6÷&R&–÷&—G’Ö—76–ær"¢Væ@¢6†V6²‡66÷&W5³Òç66÷&RÓÒ66÷&W5³%Òç66÷&RæB66÷&W5³Òç66÷&Râ66÷&W5³5Òç66÷&RÀ¢$&Æ6²6öB&–Ö'’÷WF–Æ—G’66÷&–ærF–Bæ÷BF–ffW&VçF–FR"¢Æö6ÂGF6´ÇFW&æF—fW2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡°¢vVöâÒ%vVöå7V—B"Â7V7BÒ$&6U7V—D7V7B"ÂvöEG&—G2Ò·ÒÂ†ÖÖW'2Ò·ÒÂ7F—fT&6æÒ·ÒÀ¢öffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%÷6V–FöåvVöä&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ$†W7F–vVöä&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ%¦WW5vVöä&ööâ"ÒÀ¢ÒÀ¢ÒÂ6öE&öf–ÆR¢6†V6²…66÷&–ætVæv–æRævWD'V–ÆDÆ–væÖVçB†6öE&öf–ÆRÂ$GF6²"Â$†W7F–vVöä&ööâ"’ÓÒ$ÅDU$äD•dR ¢æB66÷&–ætVæv–æRævWD'V–ÆDÆ–væÖVçB†6öE&öf–ÆRÂ$GF6²"Â%¦WW5vVöä&ööâ"’ÓÒ$ÅDU$äD•dR ¢æBGF6´ÇFW&æF—fW5³Òç66÷&RâGF6´ÇFW&æF—fW5³%Òç66÷&P¢æBGF6´ÇFW&æF—fW5³Òç66÷&RâGF6´ÇFW&æF—fW5³5Òç66÷&P¢æBGF6´ÇFW&æF—fW5³%Òç66÷&RÓÒGF6´ÇFW&æF—fW5³5Òç66÷&P¢æBGF6´ÇFW&æF—fW5³%Òæ6÷fW&VBæBGF6´ÇFW&æF—fW5³5Òæ6÷fW&V@¢æBGF6´ÇFW&æF—fW5³%Òç66÷&T6ö×ÆWFRæBGF6´ÇFW&æF—fW5³5Òç66÷&T6ö×ÆWFRÀ¢$&Æ6²6öBGF6²ÇFW&æF—fW2F–Bæ÷B&VÖ–â&VÆ÷r÷6V–Föâ6÷&R"¢Æö6Â†ÖÖW%6æ6†÷BÒ°¢vVöâÒ%vVöå7V—B"Â7V7BÒ$&6U7V—D7V7B"ÂöffW$¶–æBÒ&†ÖÖW""À¢vöEG&—G2Ò·ÒÂ†ÖÖW'2Ò·ÒÂ7F—fT&6æÒ·ÒÀ¢öffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%7V—DF6„GF6µG&—B"Â&&—G’Ò$†W&ö–2"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ%7V—DGF6µ7VVEG&—B"Â&&—G’Ò$†W&ö–2"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ%7V—E7V6–ÄWFõG&—B"Â&&—G’Ò$†W&ö–2"ÒÀ¢ÒÀ¢Ð¢Æö6Â†ÖÖW%66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2††ÖÖW%6æ6†÷BÂ6öE&öf–ÆR¢6†V6²††ÖÖW%66÷&W5³Òç66÷&RÓÒÓæB†ÖÖW%66÷&W5³Òæ6÷fW&VBæB†ÖÖW%66÷&W5³Òç66÷&T6ö×ÆWFRÀ¢$W††W7B&—6W"†ÖÖW"&–÷&—G’6†ævVB"¢6†V6²††ÖÖW%66÷&W5³%Òç66÷&RÓÒÓ"æB†ÖÖW%66÷&W5³%Òæ6÷fW&VBæB†ÖÖW%66÷&W5³%Òç66÷&T6ö×ÆWFRÀ¢%&–Bg&ÖR†ÖÖW"&–÷&—G’6†ævVB"¢6†V6²††ÖÖW%66÷&W5³5Òç66÷&RÓÒÓ2æB†ÖÖW%66÷&W5³5Òæ6÷fW&VBæBæ÷B†ÖÖW%66÷&W5³5Òç66÷&T6ö×ÆWFP¢æB†ÖÖW%66÷&W5³5Òæ†ÖÖW$6öæF—F–öâÓÒ%7V6–Â'&æ6‚"À¢&6öæF—F–öæÂÆVæ6†W"g&ÖRv2æ÷B¶WB–æ6ö×ÆWFR"¢Æö6Â&VW%6æ6†÷BÒ°¢vVöâÒ%vVöå7V—B"Â7V7BÒ$&6U7V—D7V7B"ÂöffW$¶–æBÒ&†ÖÖW""À¢vöEG&—G2Ò·ÒÂ†ÖÖW'2Ò·ÒÂ7F—fT&6æÒ·ÒÂöffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%7V—DF6„GF6µG&—B"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ%7V—DGF6µ6—¦UG&—B"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ%Væ¶æ÷vå7V—D†ÖÖW%G&—B"ÒÀ¢ÒÀ¢Ð¢Æö6Â&VW%66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡&VW%6æ6†÷BÂ6öE&öf–ÆR¢Æö6Â&VW$FV6—6–öâÒ66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ‡&VW%66÷&W2ÂG'VR¢Æö6Â&VW%&æ·2Ò66÷&–ætVæv–æRç&æ²‡&VW$FV6—6–öâç&æ´VÆ–v–&ÆR¢6†V6²‡&VW%66÷&W5³Òç66÷&RÓÒÓæB&VW%66÷&W5³%Òç66÷&RÓÒÓ0¢æB&VW%66÷&W5³Òç66÷&T6ö×ÆWFRæB&VW%66÷&W5³%Òç66÷&T6ö×ÆWFP¢æBæ÷B&VW%66÷&W5³5Òæ6÷fW&VBæB&VW$FV6—6–öâæÖöFRÓÒ''F–Â ¢æB7&VW%&æ·2ÓÒ"æB&VW%&æ·5³Òæ—FVÔæÖRÓÒ%7V—DF6„GF6µG&—B ¢æB&VW%&æ·5³%Òæ—FVÔæÖRÓÒ%7V—DGF6µ6—¦UG&—B"À¢$&Æ6²6öB&VW"g&ÖRWf–FVæ6R&ö¦V7F–öâ÷"6öç6W'fF—fR'F–Â&æ²6†ævVB"¢6†V6²††ÖÖW%66÷&W5³Òç&V6öç5³Òæ6öFRÓÒ$„ÔÔU%ô%T”ÄEõ$”õ$•E’ ¢æB†ÖÖW%66÷&W5³Òç&V6öç5³ÒæFVÇFÓÒ†ÖÖW%66÷&W5³Òç66÷&P¢æB6†ÖÖW%66÷&W5³Òç&V6öç2ÓÒÀ¢$†ÖÖW"66÷&RÆV¶VB&ööâ&&—G’ö6÷&R÷7FGW2ö7V7B'VÆW2"¢Æö6ÂFV6—6–öâÒ66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ††ÖÖW%66÷&W2ÂG'VR¢Æö6Â†ÖÖW%&æ·2Ò66÷&–ætVæv–æRç&æ²†FV6—6–öâç&æ´VÆ–v–&ÆR¢6†V6²†FV6—6–öâæÖöFRÓÒ''F–Â"æB6†ÖÖW%&æ·2ÓÒ ¢æB†ÖÖW%&æ·5³Òæ—FVÔæÖRÓÒ%7V—DF6„GF6µG&—B"æB†ÖÖW%&æ·5³Òç&æ²ÓÒ¢æB†ÖÖW%&æ·5³%Òæ—FVÔæÖRÓÒ%7V—DGF6µ7VVEG&—B"æB†ÖÖW%&æ·5³%Òç&æ²ÓÒ"À¢$&Æ6²6öB†ÖÖW"'F–Â&æ¶–ær6†ævVB"¢†ÖÖW%6æ6†÷BæöffW'5³5Òä—FVÔæÖRÒ%Væ¶æ÷vå7V—D†ÖÖW%G&—B ¢†ÖÖW%66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2††ÖÖW%6æ6†÷BÂ6öE&öf–ÆR¢6†V6²†æ÷B†ÖÖW%66÷&W5³5Òæ6÷fW&VBæBæ÷B†ÖÖW%66÷&W5³5Òç66÷&T6ö×ÆWFRÀ¢'Væ¶æ÷vâ†ÖÖW"&V6ÖRWfÇVFVB"¢6öE&öf–ÆRæ†ÖÖW%Æå³%Òç&–÷&—G’Ò¢†ÖÖW%66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2††ÖÖW%6æ6†÷BÂ6öE&öf–ÆR¢†ÖÖW%&æ·2Ò66÷&–ætVæv–æRç&æ²‡²†ÖÖW%66÷&W5³ÒÂ†ÖÖW%66÷&W5³%ÒÒ¢6†V6²††ÖÖW%&æ·5³Òç&æ²ÓÒæB†ÖÖW%&æ·5³%Òç&æ²ÓÒÀ¢&WVÂ†ÖÖW"&–÷&—F–W2F–Bæ÷BF–R"¢6öE&öf–ÆRæ†ÖÖW%Æå³%Òç&–÷&—G’Ò ¢†ÖÖW%6æ6†÷BæöffW$¶–æBÒ&&ööâ ¢†ÖÖW%66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2††ÖÖW%6æ6†÷BÂ6öE&öf–ÆR¢f÷"òÂ&V6öâ–â——'2††ÖÖW%66÷&W5³Òç&V6öç2’Fð¢6†V6²‡&V6öâæ6öFRãÒ$„ÔÔU%ô%T”ÄEõ$”õ$•E’"Â$†ÖÖW"ÆâÆV¶VB–çFò&ööâ66÷&–ær"¢Væ@¢f÷"òÂ&öÆR–â——'2‡²$67B"Â$Öæ"Ò’Fð¢Æö6Â6Æ÷BÒ6öE&öf–ÆRç6Æ÷G5·&öÆUÐ¢6†V6²‡6Æ÷Bç6Æ÷EöÆ–7’ÓÒ&÷Vâ"æB76Æ÷Bæ6÷&RÓÒæB76Æ÷BæÇFW&æF—fW2ÓÒæB76Æ÷Bç&VfW'&VBÓÒÀ¢$&Æ6²6öBVæ6öç7G&–æVB6Æ÷Bv–æVBF&vWB"¢Væ@¢6æ6†÷Bæ7V7BÒ$FvvW$&6·7F$7V7B ¢6†V6²†æ÷B66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ6öE&öf–ÆR•³Òç7W÷'FVBÂ$&Æ6²6öB66WFVBw&öær7V7B"¢6æ6†÷Bæ7V7BÒ$&6U7V—D7V7B ¢6æ6†÷BçvVöâÒ%vVöäFvvW" ¢6†V6²†æ÷B66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ6öE&öf–ÆR•³Òç7W÷'FVBÂ$&Æ6²6öB66WFVBw&öærvVöâ"¦Væ@ ¦Fð¢Æö6ÂW‡V7FVBÒ°¢²$FvvW$F6„GF6µG&—ÆUG&—B"ÂÂ'&–÷&—G’"ÒÀ¢²$FvvW$f–æÄ†—EG&—B"Â"Â&ÇFW&æF—fR"ÒÀ¢²$FvvW%&–DGF6µG&—B"Â"Â&ÇFW&æF—fR"ÒÀ¢²$FvvW%7V6–Å&WGW&åG&—B"Â"Â&ÇFW&æF—fR"ÒÀ¢²$FvvW$GF6´f–æ—6†W%G&—B"Â2Â&ÇFW&æF—fR"ÒÀ¢Ð¢f÷"òÂ&öf–ÆR–â——'2‡²&öGV7F–öå&öf–ÆRÒ’Fð¢6†V6²…66÷&–ætVæv–æRçfÆ–FFU&öf–ÆR‡&öf–ÆR’Â$ÖVÆ–æöRvVæW&FVB†ÖÖW"&öf–ÆR–çfÆ–B"¢6†V6²‚7&öf–ÆRæ†ÖÖW%ÆâÓÒ6W‡V7FVBÂ$ÖVÆ–æöR†ÖÖW"Æâ6÷VçBÖ—6ÖF6‚"¢f÷"–æFW‚Â7V2–â——'2†W‡V7FVB’Fð¢Æö6ÂVçG'’Ò&öf–ÆRæ†ÖÖW%Æå¶–æFW…Ð¢6†V6²†VçG'’çG&—D–BÓÒ7V5³ÒæBVçG'’ç&–÷&—G’ÓÒ7V5³%Ð¢æBVçG'’æ6Æ76–f–6F–öâÓÒ7V5³5ÒæBVçG'’æ6öæF—F–öâÓÒæ–ÂÀ¢$ÖVÆ–æöR†ÖÖW"ÆâVçG'’Ö—6ÖF6‚B"ââ–æFW‚¢Væ@¢Æö6Â6æ6†÷BÒ²vVöâÒ%vVöäFvvW""Â7V7BÒ$FvvW$&6·7F$7V7B"ÂöffW$¶–æBÒ&†ÖÖW""À¢öffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$FvvW$F6„GF6µG&—ÆUG&—B"Â&&—G’Ò$†W&ö–2"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ$FvvW$f–æÄ†—EG&—B"Â&&—G’Ò$6öÖÖöâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ%Væ¶æ÷väFvvW$†ÖÖW%G&—B"Â&&—G’Ò$W–2"ÒÀ¢ÒÐ¢Æö6Â66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ&öf–ÆR¢6†V6²‡66÷&W5³Òç66÷&RÓÒÓæB66÷&W5³%Òç66÷&RÓÒÓ"æB66÷&W5³5Òç66÷&RÓÒ ¢æB66÷&W5³Òæ6÷fW&VBæB66÷&W5³%Òæ6÷fW&VBæBæ÷B66÷&W5³5Òæ6÷fW&V@¢æB66÷&W5³Òç66÷&T6ö×ÆWFRæB66÷&W5³%Òç66÷&T6ö×ÆWFRæBæ÷B66÷&W5³5Òç66÷&T6ö×ÆWFRÀ¢$ÖVÆ–æöR†ÖÖW'2F–Bæ÷B&W6W'fR&–÷&—F–W2÷"F†RVæ¶æ÷vâÔ†ÖÖW"f–Â×6fR"¢f÷"òÂ&W7VÇB–â——'2‡66÷&W2’Fð¢f÷"òÂ&V6öâ–â——'2‡&W7VÇBç&V6öç2’Fð¢6†V6²‡&V6öâæ6öFRãÒ%$$•E’"æB&V6öâæ6öFRãÒ%$$•E•ôDTÅD"À¢$†ÖÖW"66÷&–ærÆ–VB&&—G’"¢Væ@¢Væ@¢Æö6ÂFV6—6–öâÒ66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ‡66÷&W2ÂG'VR¢6†V6²†FV6—6–öâæÖöFRÓÒ''F–Â"æB6FV6—6–öâç&æ´VÆ–v–&ÆRÓÒ"À¢'Gvò¶æ÷vâF—7F–æ7B†ÖÖW'2ÇW2âVæ¶æ÷vâF–Bæ÷BW6R'F–Â&æ¶–ær"¢Æö6Â&æ¶VBÒ66÷&–ætVæv–æRç&æ²†FV6—6–öâç&æ´VÆ–v–&ÆR¢6†V6²‚7&æ¶VBÓÒ"æB&æ¶VE³Òç&æ²ÓÒæB&æ¶VE³%Òç&æ²ÓÒ"À¢&¶æ÷vâÖVÆ–æöR†ÖÖW'2F–Bæ÷B&æ²ó""¢6æ6†÷BæöffW'5³5Òä—FVÔæÖRÒ$FvvW%&–DGF6µG&—B ¢66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ&öf–ÆR¢6†V6²…66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ‡66÷&W2ÂG'VR’æÖöFRÓÒ&gVÆÂ"À¢'F‡&VRWfÇVFVBF—7F–æ7B†ÖÖW'2F–Bæ÷BW6RgVÆÂ&æ¶–ær"¢6æ6†÷BæöffW'5³Òä—FVÔæÖRÒ$FvvW$f–æÄ†—EG&—B ¢6æ6†÷BæöffW'5³%Òä—FVÔæÖRÒ$FvvW%&–DGF6µG&—B ¢6æ6†÷BæöffW'5³5Òä—FVÔæÖRÒ$FvvW%7V6–Å&WGW&åG&—B ¢66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ&öf–ÆR¢6†V6²…66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ‡66÷&W2ÂG'VR’æÖöFRÓÒ&æöæR"À¢'F–VBWfÇVFVB†ÖÖW'2&öGV6VBçVÖW&–6Â&æ¶–ær"¢6æ6†÷BæöffW'5³5Òä—FVÔæÖRÒ$FvvW%7V6–Ä§V×G&—B ¢66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ&öf–ÆR¢6†V6²†æ÷B66÷&W5³5Òæ6÷fW&VBæBæ÷B66÷&W5³5Òç66÷&T6ö×ÆWFRæB66÷&W5³5Òç66÷&RÓÒ ¢æB66÷&–ætVæv–æRævWE&æ¶–ætFV6—6–öâ‡66÷&W2ÂG'VR’æÖöFRÓÒ&æöæR"À¢$Fæ6–ær¶æ—fW2&V6ÖRWfÇV&ÆR÷"&æ¶&ÆR"¢Væ@¦Væ@¦Fð¢Æö6Â†ÖÖW%v—F†÷WEÆâÒ·Ð¢f÷"¶W’ÂfÇVR–â—'2‡&öGV7F–öå&öf–ÆR’Fð¢–b¶W’ãÒ&†ÖÖW%Æâ"F†Vâ†ÖÖW%v—F†÷WEÆå¶¶W•ÒÒfÇVRVæ@¢Væ@¢6†V6²††ÖÖW%v—F†÷WEÆâæ†ÖÖW%ÆâÓÒæ–ÂÂ%6—7FW"&ÆFW2VæW‡V7FVFÇ’v–æVB†ÖÖW"Æâ"¢Æö6Â6æ6†÷BÒ°¢vVöâÒ%vVöäFvvW""Â7V7BÒ$FvvW$&6·7F$7V7B"ÂöffW$¶–æBÒ&†ÖÖW""À¢öffW'2Ò²²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%7V—DF6„GF6µG&—B"ÒÒÀ¢Ð¢Æö6Â&W7VÇG2Ò66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ†ÖÖW%v—F†÷WEÆâ¢6†V6²‚7&W7VÇG2ÓÒæB&W7VÇG5³Òç7W÷'FVBæB&W7VÇG5³ÒæVÆ–v–&ÆP¢æBæ÷B&W7VÇG5³Òæ6÷fW&VBæBæ÷B&W7VÇG5³Òç66÷&T6ö×ÆWFRæB&W7VÇG5³Òç66÷&RÓÒÀ¢$†ÖÖW"öffW"v—F†÷WB†ÖÖW%Æâv2æ÷B6öç6W'fF—fVÇ’Vç&W6öÇfVB"¢f÷"òÂ&V6öâ–â——'2‡&W7VÇG5³Òç&V6öç2’Fð¢6†V6²‡&V6öâæ6öFRãÒ$„ÔÔU%ô%T”ÄEõ$”õ$•E’"Â$†ÖÖW"öffW"v—F†÷WBÆâv–æVB†ÖÖW"&V6öâ"¢VæMºëmí¢G§²ÚîÆ­yÖW467D&ööâ"Â$†W&ö–2"¦6†V6²†æöåF&vWE&&—G’æ6÷fW&VBæBæöåF&vWE&&—G’ç66÷&T6ö×ÆWFRæBæöåF&vWE&&—G’ç66÷&RÓÒÓ¢æBæöåF&vWE&&—G’ç&V6öç5³%Òæ6öFRÓÒ%$$•E’"Â$äôåõD$tUB†W&ö–2&&—G’v2æ÷BÆ–VB"¦Æö6Â&WÆ6VÖVçE&&—G’ÒFVW6÷’‡&&—G”&6R§&WÆ6VÖVçE&&—G’ævöEG&—G2Ò·²æÖRÒ$&W57V6–Ä&ööâ"Â6Æ÷BÒ%6V6öæF'’"×Ð§&WÆ6VÖVçE&&—G’æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%¦WW57V6–Ä&ööâ"À¢G&—EFõ&WÆ6RÒ$&W57V6–Ä&ööâ"ÂöÆE&&—G’Ò$W–2"Â&&—G’Ò$†W&ö–2"×Ð¦Æö6Â&WÆ6VÖVçE&&—G•66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2‡&WÆ6VÖVçE&&—G’Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²‡&WÆ6VÖVçE&&—G•66÷&Rç66÷&RÓÒ’æB&WÆ6VÖVçE&&—G•66÷&Rç66÷&T6ö×ÆWFP¢æB&WÆ6VÖVçE&&—G•66÷&Rç&V6öç5³5Òæ6öFRÓÒ%$$•E•ôDTÅD ¢æB&WÆ6VÖVçE&&—G•66÷&Rç&V6öç5³5ÒæFVÇFÓÒÀ¢$W–2Fò†W&ö–2&WÆ6VÖVçB&&—G’FVÇFw&öær"¦Æö6ÂÖ—76–ætöÆE&&—G’ÒFVW6÷’‡&WÆ6VÖVçE&&—G’¦Ö—76–ætöÆE&&—G’æöffW'5³ÒäöÆE&&—G’Òæ–À¦Æö6ÂÖ—76–ætöÆE&W7VÇBÒ66÷&–ætVæv–æRç66÷&TöffW'2†Ö—76–ætöÆE&&—G’Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†æ÷BÖ—76–ætöÆE&W7VÇBç66÷&T6ö×ÆWFRæBÖ—76–ætöÆE&W7VÇBç&V6öç5²6Ö—76–ætöÆE&W7VÇBç&V6öç5Òæ6öFRÓÒ%$$•E•õTå$U4ôÅdTB"À¢&Ö—76–æröÆE&&—G’v2æ÷B6öç6W'fF—fVÇ’Vç&W6öÇfVB"¦Æö6ÂæôF÷V&ÆU&&—G’Ò ¦f÷"òÂ&V6öâ–â——'2‡&WÆ6VÖVçE&&—G•66÷&Rç&V6öç2’Fð¢–b&V6öâæ6öFRÓÒ%$$•E’"F†VâæôF÷V&ÆU&&—G’ÒæôF÷V&ÆU&&—G’²Væ@¦Væ@¦6†V6²†æôF÷V&ÆU&&—G’ÓÒÂ'&WÆ6VÖVçB&V6V—fVB'6öÇWFR$$•E’æB$$•E•ôDTÅD"¦Æö6Â7FGW57–æW&w’ÒFVW6÷’‡&&—G”&6R§7FGW57–æW&w’ævöEG&—G2Ò·²æÖRÒ$&W5vVöä&ööâ"×Ð§7FGW57–æW&w’æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$&W57FGW4F÷V&ÆTFÖvT&ööâ"Â&&—G’Ò$W–2"×Ð¦Æö6Â7FGW57–æW&w•66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2‡7FGW57–æW&w’Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²‡7FGW57–æW&w•66÷&Rç66÷&RÓÒbæB7FGW57–æW&w•66÷&Ræ6÷fW&VBæB7FGW57–æW&w•66÷&Rç66÷&T6ö×ÆWFP¢æB7FGW57–æW&w•66÷&Rç&V6öç5³Òæ6öFRÓÒ$%T”ÄEõ5DEU5õ5”äU$u’ ¢æB7FGW57–æW&w•66÷&Rç&V6öç5³%Òæ6öFRÓÒ%$$•E’"À¢$7W'6R6&–Æ—G’7–æW&w’v2æ÷B66÷&VB"¦Fð¦Æö6ÂÆ–v‡Fæ–æt&6RÒ²vVöâÒ%vVöäFvvW""Â7V7BÒ$FvvW%G&—ÆT7V7B"À¢vöEG&—G2Ò·ÒÂ†ÖÖW'2Ò·ÒÂ7F—fT&6æÒ·ÒÂöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$Æ–v‡Fæ–æugVÆæW&&–Æ—G”&ööâ"×ÒÐ¦Æö6ÂgVæ7F–öâÆ–v‡Fæ–æu66÷&R‡G&—G2Â&öf–ÆR¢Æö6Â6æ6†÷BÒFVW6÷’†Æ–v‡Fæ–æt&6R¢6æ6†÷BævöEG&—G2ÒG&—G0¢&WGW&â66÷&–ætVæv–æRç66÷&TöffW'2‡6æ6†÷BÂ&öf–ÆR•³Ð¦Væ@¦f÷"òÂG&—G2–â——'2‡²·ÒÂ·²æÖRÒ%÷6V–Föä67D&ööâ"×ÒÂ·²æÖRÒ%¦WW57V6–Ä&ööâ"×ÒÒ’Fð¢Æö6Â66÷&RÒÆ–v‡Fæ–æu66÷&R‡G&—G2ÂÖ÷'&–vå&öf–ÆR¢Æö6Â6öçFW‡BÒ66÷&–ætVæv–æRævWD÷&–v–æF–öä6öçFW‡B‡°¢7F—fT&6æÒ·ÒÂvöEG&—G2ÒG&—G2À¢ÒÂÖ÷'&–vå&öf–ÆRÂ$Æ–v‡Fæ–æugVÆæW&&–Æ—G”&ööâ"¢6†V6²‡66÷&Rç66÷&RÓÒæBæ÷B66÷&Ræ6÷fW&VBæBæ÷B66÷&Rç66÷&T6ö×ÆWFP¢æB6öçFW‡Bç7FGW2ç7FGW4¶æ÷vÆVFvRÓÒ&¶æ÷våöæöå÷7FGW2 ¢æB6öçFW‡BæöffW$Væ&ÆW4÷&–v–æF–öâÓÒfÇ6P¢æB766÷&Rç&V6öç2ÓÒÀ¢$Æ–v‡Fæ–ærGVò–æ6÷'&V7FÇ’6÷fW&VBv—F†÷WB&÷F‚÷væVB&W&WV—6—FW2"¦Væ@¦Æö6ÂÆ–v‡Fæ–æt&÷F‚ÒÆ–v‡Fæ–æu66÷&R‡²²æÖRÒ%¦WW57V6–Ä&ööâ"ÒÂ²æÖRÒ%÷6V–Föä67D&ööâ"ÒÒÂÖ÷'&–vå&öf–ÆR¦6†V6²†Æ–v‡Fæ–æt&÷F‚ç66÷&RÓÒBæBÆ–v‡Fæ–æt&÷F‚æ6÷fW&VBæBÆ–v‡Fæ–æt&÷F‚ç66÷&T6ö×ÆWFP¢æB6Æ–v‡Fæ–æt&÷F‚ç&V6öç2ÓÒæBÆ–v‡Fæ–æt&÷F‚ç&V6öç5³Òæ6öFRÓÒ$%T”ÄEõ5DEU5õ5”äU$u’ ¢æBÆ–v‡Fæ–æt&÷F‚ç&V6öç5³ÒæFVÇFÓÒBÀ¢$Æ–v‡Fæ–ærGVò÷væVBÖ'V–ÆB7–æW&w’v2æ÷B66÷&VBW†7FÇ’"¦Æö6ÂÖVÆ–æöTÆ–v‡Fæ–æu6æ6†÷BÒFVW6÷’†Æ–v‡Fæ–æt&6R¦ÖVÆ–æöTÆ–v‡Fæ–æu6æ6†÷Bæ7V7BÒ$FvvW$&6·7F$7V7B ¦ÖVÆ–æöTÆ–v‡Fæ–æu6æ6†÷BævöEG&—G2Ò²²æÖRÒ%÷6V–Föä67D&ööâ"ÒÂ²æÖRÒ%¦WW57V6–Ä&ööâ"ÒÐ¦Æö6ÂÖVÆ–æöTÆ–v‡Fæ–ærÒ66÷&–ætVæv–æRç66÷&TöffW'2†ÖVÆ–æöTÆ–v‡Fæ–æu6æ6†÷BÂ&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†ÖVÆ–æöTÆ–v‡Fæ–ærç66÷&RÓÒæBæ÷BÖVÆ–æöTÆ–v‡Fæ–æræ6÷fW&VBæBæ÷BÖVÆ–æöTÆ–v‡Fæ–ærç66÷&T6ö×ÆWFRÀ¢$Æ–v‡Fæ–ærGVòÆV¶VBÖ÷'&–vâÖöæÇ’'VÆR–çFòÖVÆ–æöR"¦Væ@¦Æö6Âæõ7FGW57–æW&w’ÒFVW6÷’‡&&—G”&6R¦æõ7FGW57–æW&w’æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$&W57FGW4F÷V&ÆTFÖvT&ööâ"Â&&—G’Ò$W–2"×Ð¦Æö6Âæõ7FGW57–æW&w•66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2†æõ7FGW57–æW&w’Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†æõ7FGW57–æW&w•66÷&Rç66÷&RÓÒæBæ÷Bæõ7FGW57–æW&w•66÷&Ræ6÷fW&V@¢æBæ÷Bæõ7FGW57–æW&w•66÷&Rç66÷&T6ö×ÆWFRæB6æõ7FGW57–æW&w•66÷&Rç&V6öç2ÓÒÀ¢$7W'6R6&–Æ—G’v2–çfVçFVBv—F†÷WB&öGV6W""¦Æö6Â&ÆööDG&÷7–æW&w’ÒFVW6÷’‡&&—G”&6R¦&ÆööDG&÷7–æW&w’ævöEG&—G2Ò·²æÖRÒ$&W4Öæ&ööâ"×Ð¦&ÆööDG&÷7–æW&w’æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$F÷V&ÆT&ÆööDG&÷&ööâ"Â&&—G’Ò$6öÖÖöâ"×Ð¦Æö6Â&ÆööDG&÷66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2†&ÆööDG&÷7–æW&w’Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†&ÆööDG&÷66÷&Rç66÷&RÓÒBæB&ÆööDG&÷66÷&Ræ6÷fW&VBæB&ÆööDG&÷66÷&Rç66÷&T6ö×ÆWFP¢æB&ÆööDG&÷66÷&Rç&V6öç5³Òæ6öFRÓÒ$$ÄôôEôE$õôTät”äUõ5”äU$u’"À¢$&ÆööDG&÷&öGV6W"÷–öfb7–æW&w’v2æ÷B66÷&VB"¦Æö6Â&WfVævT&ÆööDG&÷ÒFVW6÷’‡&&—G”&6R§&WfVævT&ÆööDG&÷ævöEG&—G2Ò·²æÖRÒ$&ÆööDG&÷&WfVævT&ööâ"×Ð§&WfVævT&ÆööDG&÷æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ%&VæD&ÆööDG&÷&ööâ"Â&&—G’Ò$6öÖÖöâ"×Ð¦Æö6Â&WfVævT&ÆööDG&÷66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2‡&WfVævT&ÆööDG&÷Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²‡&WfVævT&ÆööDG&÷66÷&Rç66÷&RÓÒBæB&WfVævT&ÆööDG&÷66÷&Ræ6÷fW&V@¢æB&WfVævT&ÆööDG&÷66÷&Rç66÷&T6ö×ÆWFRÀ¢$&ÆööDG&÷&WfVævR&öGV6W"F–Bæ÷BVæ&ÆR&VæB–öfb7–æW&w’"¦Æö6Â–çfW'6T&ÆööDG&÷ÒFVW6÷’‡&&—G”&6R¦–çfW'6T&ÆööDG&÷ævöEG&—G2Ò·²æÖRÒ$F÷V&ÆT&ÆööDG&÷&ööâ"×Ð¦–çfW'6T&ÆööDG&÷æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$&W4Öæ&ööâ"Â&&—G’Ò$6öÖÖöâ"×Ð¦Æö6Â–çfW'6T&ÆööDG&÷66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2†–çfW'6T&ÆööDG&÷Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†–çfW'6T&ÆööDG&÷66÷&Rç66÷&RÓÒBæB–çfW'6T&ÆööDG&÷66÷&Ræ6÷fW&V@¢æB6–çfW'6T&ÆööDG&÷66÷&Rç&V6öç2ÓÒ¢æB–çfW'6T&ÆööDG&÷66÷&Rç&V6öç5³Òæ6öFRÓÒ$d”ÄÅôTÕE•õUD”Ä•E•ô4õ$R"À¢'Vç7W÷'FVB&ÆööDG&÷&öGV6W"÷–öfb7–ÖÖWG'’v2–çG&öGV6VB"¦Æö6Â–çfW'6U&WfVævRÒFVW6÷’‡&&—G”&6R¦–çfW'6U&WfVævRævöEG&—G2Ò·²æÖRÒ%&VæD&ÆööDG&÷&ööâ"×Ð¦–çfW'6U&WfVævRæöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$&ÆööDG&÷&WfVævT&ööâ"Â&&—G’Ò$6öÖÖöâ"×Ð¦Æö6Â–çfW'6U&WfVævU66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2†–çfW'6U&WfVævRÂ&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†–çfW'6U&WfVævU66÷&Rç66÷&RÓÒæBæ÷B–çfW'6U&WfVævU66÷&Ræ6÷fW&VBÀ¢'Vç7W÷'FVB&ÆööDG&÷&öGV6W"7–ÖÖWG'’v2–çG&öGV6VB"¦Æö6Âæô&ÆööDG&÷ÒFVW6÷’‡&&—G”&6R¦æô&ÆööDG&÷æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$F÷V&ÆT&ÆööDG&÷&ööâ"Â&&—G’Ò$W–2"×Ð¦Æö6Âæô&ÆööDG&÷66÷&RÒ66÷&–ætVæv–æRç66÷&TöffW'2†æô&ÆööDG&÷Â&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†æô&ÆööDG&÷66÷&Rç66÷&RÓÒæBæ÷Bæô&ÆööDG&÷66÷&Ræ6÷fW&V@¢æBæ÷Bæô&ÆööDG&÷66÷&Rç66÷&T6ö×ÆWFRÀ¢$&ÆööDG&÷–öfbv266÷&VBv—F†÷WB&öGV6W""¦f÷"òÂFVfW'&VDæÖR–â——'2‡²$Ö—76–æt†VÇF„7&—D&ööâ"À¢$öÖVvFVÆ–VDFÖvT&ööâ"Â$&W4W„67D&ööâ"Ò’Fð¢Æö6ÂFVfW'&VBÒ&&—G•66÷&R†FVfW'&VDæÖRÂ$†W&ö–2"¢6†V6²†FVfW'&VBç66÷&RÓÒæBæ÷BFVfW'&VBæ6÷fW&VBæBæ÷BFVfW'&VBç66÷&T6ö×ÆWFRÀ¢FVfW'&VDæÖRââ"v2æòÆöævW"FVfW'&VB"¦Væ@¦f÷"òÂ‡–â——'2‡²#Â3’ÂCÂƒÒ’Fð¢Æö6ÂÆ÷t†VÇF‚ÒFVW6÷’‡&&—G”&6R¢Æ÷t†VÇF‚æ6öÖ&D6öçFW‡BÒ²†VÇF‚Ò²7W'&VçBÒ‡ÂÖ‚ÒÒÐ¢Æ÷t†VÇF‚æöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$Æ÷t†VÇF„Æ–fW7FVÄ&ööâ"Â&&—G’Ò$6öÖÖöâ"×Ð¢Æö6ÂÆ÷u&W7VÇBÒ66÷&–ætVæv–æRç66÷&TöffW'2†Æ÷t†VÇF‚Â&öGV7F–öå&öf–ÆR•³Ð¢6†V6²†Æ÷u&W7VÇBç66÷&RÓÒ"æBÆ÷u&W7VÇBæ6÷fW&VBæBÆ÷u&W7VÇBç66÷&T6ö×ÆWFP¢æBÆ÷u&W7VÇBæ6öæF—F–öâæ7W'&VçFÇ”7F—fRÓÒ†‡ÂC¢æB6Æ÷u&W7VÇBç&V6öç2ÓÒæBÆ÷u&W7VÇBç&V6öç5³Òæ6öFRÓÒ%5U%d•dÅõ5Uõ%B"À¢$Æ÷t†VÇF‚7G'V7GW&Â66÷&R÷"6öæF—F–öâÖWFFF6†ævVBB…"ââF÷7G&–ær†‡’¦Væ@¦Æö6ÂÆ÷t†VÇF„Ö—76–ærÒFVW6÷’‡&&—G”&6R¦Æ÷t†VÇF„Ö—76–æræöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$Æ÷t†VÇF„Æ–fW7FVÄ&ööâ"Â&&—G’Ò$W–2"×Ð¦Æö6ÂÆ÷tÖ—76–æu&W7VÇBÒ66÷&–ætVæv–æRç66÷&TöffW'2†Æ÷t†VÇF„Ö—76–ærÂ&öGV7F–öå&öf–ÆR•³Ð¦6†V6²†Æ÷tÖ—76–æu&W7VÇBç66÷&RÓÒBæBÆ÷tÖ—76–æu&W7VÇBæ6÷fW&VBæBÆ÷tÖ—76–æu&W7VÇBç66÷&T6ö×ÆWFP¢æBÆ÷tÖ—76–æu&W7VÇBæ6öæF—F–öâæ7W'&VçFÇ”7F—fRÓÒæ–ÂÀ¢&Ö—76–ær†VÇF‚F–Bæ÷B&W6W'fRÆ÷t†VÇF‚7G'V7GW&Â66÷&–ær"¦f÷"òÂ&&—G’–â——'2‡²$6öÖÖöâ"Â%&&R"Â$W–2"Â$†W&ö–2"Ò’Fð¢Æö6ÂÆ÷rÒFVW6÷’‡&&—G”&6R¢Æ÷ræöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$Æ÷t†VÇF„Æ–fW7FVÄ&ööâ"Â&&—G’Ò&&—G’×Ð¢Æö6Â&W7VÇBÒ66÷&–ætVæv–æRç66÷&TöffW'2†Æ÷rÂ&öGV7F–öå&öf–ÆR•³Ð¢Æö6ÂW‡V7FVBÒ‡²6öÖÖöâÒ"Â&&RÒ2ÂW–2ÒBÂ†W&ö–2ÒRÒ•·&&—G•Ð¢6†V6²‡&W7VÇBç66÷&RÓÒW‡V7FVBæB&W7VÇBç66÷&T6ö×ÆWFRæB&W7VÇBç66÷&RÓÒ†gVæ7F–öâ‚¢Æö6Â7VÒÒf÷"òÂ&V6öâ–â——'2‡&W7VÇBç&V6öç2’Fò7VÒÒ7VÒ²&V6öâæFVÇFVæB&WGW&â7VÒVæB’‚’À¢$Æ÷t†VÇF‚&&—G’66÷&Rw&öærf÷""ââ&&—G’¦Væ@§&–çB‚%53¢&æ¶–æu&VG’&WV—&W27W÷'BÂ"VÆ–v–&ÆRÂgVÆÂvÖWÆ’6÷fW&vRÂ7F—fR'VÆRÂF—7F–æ7B66÷&W2" ¢ÒÒ7F—fR–çFW&ÖVF–FRÆã¢GF6²'&æ6†W2Â¦WW27V6–ÂÂæWWG&Â67Bõ7&–çBôÖæà¦Æö6Â7F—fUÆâÒFVW6÷’‡Æä&6R¦7F—fUÆâæöffW'2Ò°¢²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$‡&öF—FUvVöä&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò"Â—FVÔæÖRÒ%¦WW57V6–Ä&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚Ò2Â—FVÔæÖRÒ$&W5vVöä&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚ÒBÂ—FVÔæÖRÒ$&W467D&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚ÒRÂ—FVÔæÖRÒ$&W57&–çD&ööâ"ÒÀ¢²÷&–v–æÄ–æFW‚ÒbÂ—FVÔæÖRÒ$&W4Öæ&ööâ"ÒÀ§Ð¦Æö6Â7F—fU66÷&W2Ò66÷&–ætVæv–æRç66÷&TöffW'2†7F—fUÆâÂ&öGV7F–öå&öf–ÆR¦6†V6²†7F—fU66÷&W5³Òç66÷&RÓÒ"æB7F—fU66÷&W5³Òæ6÷fW&VBæB7F—fU66÷&W5³Òç66÷&T6ö×ÆWFP¢æB67F—fU66÷&W5³Òç&V6öç2ÓÒ"Â$GF6²&–÷&—G’FFVBâVæ6Æ–'&FVB&öçW2"¦6†V6²†7F—fU66÷&W5³%Òç66÷&RÓÒbæB7F—fU66÷&W5³%Òæ6÷fW&VBæB7F—fU66÷&W5³%Òç66÷&T6ö×ÆWFP¢æB7F—fU66÷&W5³%Òç&V6öç5³5Òæ6öFRÓÒ$%T”ÄEô4õ$Uõ$”õ$•E’"Â%¦WW27V6–Â6÷&RÆâ6†ævVB"¦6†V6²…66÷&–ætVæv–æRævWD'V–ÆDÆ–væÖVçB‡&öGV7F–öå&öf–ÆRÂ$GF6²"Â$&W5vVöä&ööâ"’ÓÒ$ÅDU$äD•dR"À¢$&W2GF6²'&æ6‚v2G&VFVB2æöâ×F&vWB"¦6†V6²†7F—fU66÷&W5³5Òç66÷&RÓÒ"æB7F—fU66÷&W5³5Òæ6÷fW&VBæB7F—fU66÷&W5³5Òç66÷&T6ö×ÆWFP¢æB67F—fU66÷&W5³5Òç&V6öç2ÓÒ"À¢&æF—fR&W2GF6²v2–æ6ö×ÆWFR÷"v–æVBâVæ6Æ–'&FVB&öçW2"¦f÷"–æFW‚Â&öÆR–â——'2‡²$67B"Â%7&–çB"Â$Öæ"Ò’Fð¢Æö6Â6öçFW‡BÒ66÷&–ætVæv–æRævWD6÷&U6Æ÷D6öçFW‡B†7F—fUÆâÂ&öGV7F–öå&öf–ÆRÂ7F—fUÆâæöffW'5¶–æFW‚²5Ò¢6†V6²‡&öGV7F–öå&öf–ÆRç6Æ÷G5·&öÆUÒÓÒæ–ÂæB6öçFW‡BæÆ–væÖVçBÓÒ$äõõÄâ ¢æB6öçFW‡Bç6Æ÷EöÆ–7’ÓÒæ–ÂæBæ÷B6öçFW‡Bç6Æ÷D6öæfÆ–7BÀ¢&öÆRââ"v–æVBâVç7W÷'FVB'VçF–ÖRÆâ÷"6öæfÆ–7B"¢6†V6²†7F—fU66÷&W5¶–æFW‚²5Òæ6÷fW&VBæB7F—fU66÷&W5¶–æFW‚²5Òç66÷&T6ö×ÆWFP¢æB7F—fU66÷&W5¶–æFW‚²5Òç66÷&RÓÒ‡&öÆRÓÒ$67B"æB‚÷"B’À¢&öÆRââ"Æ÷7BæWWG&ÂV×G’×6Æ÷B66÷&–ær"¦Væ@¦Æö6Â&WÆ6VÖVçBÒFVW6÷’‡Æä&6R§&WÆ6VÖVçBævöEG&—G2Ò·²æÖRÒ$&W5vVöä&ööâ"Â6Æ÷BÒ$ÖVÆVR"×Ð§&WÆ6VÖVçBæöffW'2Ò·²÷&–v–æÄ–æFW‚ÒÂ—FVÔæÖRÒ$‡&öF—FUvVöä&ööâ"À¢G&—EFõ&WÆ6RÒ$&W5vVöä&ööâ"×Ð¦Æö6Â&WÆ6VÖVçE&W7VÇBÒ66÷&–ætVæv–æRç66÷&TöffW'2‡&WÆ6VÖVçBÂ&öGV7F–öå&öf–ÆR•³Ð¦6†V6²‡&WÆ6VÖVçE&W7VÇBæ6÷fW&VBæB&WÆ6VÖVçE&W7VÇBç66÷&T6ö×ÆWFP¢æB&WÆ6VÖVçE&W7VÇBç66÷&RÓÒ ¢æB&WÆ6VÖVçE&W7VÇBç&V6öç5³Òæ6öFRÓÒ$4õ$Uõ$UÄ4TÔTåEôDTÅD ¢æB&WÆ6VÖVçE&W7VÇBç&V6öç5³ÒæFVÇFÓÒÀ¢'fÆ–B&W2GF6²&WÆ6VÖVçBv2æ÷BWfÇVFVB"¦f÷"òÂ&W7VÇB–â——'2†7F—fU66÷&W2’Fð¢Æö6Â7VÒÒ ¢f÷"òÂ&V6öâ–â——'2‡&W7VÇBç&V6öç2’Fò7VÒÒ7VÒ²&V6öâæFVÇFVæ@¢6†V6²‡&W7VÇBç66÷&RÓÒ7VÒÂ'&VÂ&öf–ÆR66÷&RF–ffW'2g&öÒ&V6öâ7VÒ"¦Væ@¦Æö6Â&Vf÷&RÒFVW6÷’‡&öGV7F–öå&öf–ÆR¥66÷&–ætVæv–æRç66÷&TöffW'2†7F—fUÆâÂ&öGV7F–öå&öf–ÆR¦6†V6²†FVWWVÂ‡&öGV7F–öå&öf–ÆRÂ&Vf÷&R’Â$–çFW&ÖVF–FR&öf–ÆRv2×WFFVB"§&–çB‚%53¢7F—fR–çFW&ÖVF–FRÆâÂæWWG&Â67Bõ7&–çBôÖæÂæF—fR&W2&WÆ6VÖVçBÂæBæò×WFF–öâ"
+local function check(value, message) assert(value, message) end
+local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()
+local OfferSnapshot = assert(loadfile("src/OfferSnapshot.lua"))()
+local productionProfile = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
+local morriganProfile = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
+
+do
+    local coatProfile = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
+    check(ScoringEngine.validateProfile(coatProfile), "Black Coat generated profile invalid")
+    local snapshot = {
+        weapon = "WeaponSuit", aspect = "BaseSuitAspect", godTraits = {}, hammers = {}, activeArcana = {},
+        offers = {
+            { originalIndex = 1, ItemName = "PoseidonWeaponBoon", Rarity = "Common" },
+            { originalIndex = 2, ItemName = "AresSpecialBoon", Rarity = "Common" },
+            { originalIndex = 3, ItemName = "PoseidonSprintBoon", Rarity = "Common" },
+        },
+    }
+    local scores = ScoringEngine.scoreOffers(snapshot, coatProfile)
+    for index, role in ipairs({ "Attack", "Special", "Sprint" }) do
+        check(ScoringEngine.getBuildAlignment(coatProfile, role, snapshot.offers[index].ItemName) == "CORE",
+            "Black Coat target alignment missing for " .. role)
+        check(scores[index].supported and scores[index].covered and scores[index].scoreComplete,
+            "Black Coat target was not fully scored")
+        local hasPriority = false
+        for _, reason in ipairs(scores[index].reasons) do
+            if reason.code == "BUILD_CORE_PRIORITY" then hasPriority = true end
+            check(reason.code ~= "ORIGINATION_ENABLE" and reason.code ~= "EXISTING_HAMMER_SYNERGY"
+                and reason.code ~= "ASPECT_COMPATIBLE" and reason.code ~= "ASPECT_DIRECT_SYNERGY"
+                and reason.code ~= "ASPECT_SETUP_SYNERGY", "unverified Black Coat mechanic scored")
+        end
+        check(hasPriority, "Black Coat core priority missing")
+    end
+    check(scores[1].score == scores[2].score and scores[1].score > scores[3].score,
+        "Black Coat primary/utility scoring did not differentiate")
+    local hammerSnapshot = {
+        weapon = "WeaponSuit", aspect = "BaseSuitAspect", offerKind = "hammer",
+        godTraits = {}, hammers = {}, activeArcana = {},
+        offers = {
+            { originalIndex = 1, ItemName = "SuitDashAttackTrait", Rarity = "Heroic" },
+            { originalIndex = 2, ItemName = "SuitAttackSpeedTrait", Rarity = "Heroic" },
+            { originalIndex = 3, ItemName = "SuitSpecialAutoTrait", Rarity = "Heroic" },
+        },
+    }
+    local hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    check(hammerScores[1].score == -1 and hammerScores[1].covered and hammerScores[1].scoreComplete,
+        "Exhaust Riser Hammer priority changed")
+    check(hammerScores[2].score == -2 and hammerScores[2].covered and hammerScores[2].scoreComplete,
+        "Rapid Frame Hammer priority changed")
+    check(hammerScores[3].score == -3 and hammerScores[3].covered and not hammerScores[3].scoreComplete
+        and hammerScores[3].hammerCondition == "Special branch",
+        "conditional Launcher Frame was not kept incomplete")
+    check(hammerScores[1].reasons[1].code == "HAMMER_BUILD_PRIORITY"
+        and hammerScores[1].reasons[1].delta == hammerScores[1].score
+        and #hammerScores[1].reasons == 1,
+        "Hammer score leaked Boon rarity/core/status/aspect rules")
+    local decision = ScoringEngine.getRankingDecision(hammerScores, true)
+    local hammerRanks = ScoringEngine.rank(decision.rankEligible)
+    check(decision.mode == "partial" and #hammerRanks == 2
+        and hammerRanks[1].itemName == "SuitDashAttackTrait" and hammerRanks[1].rank == 1
+        and hammerRanks[2].itemName == "SuitAttackSpeedTrait" and hammerRanks[2].rank == 2,
+        "Black Coat Hammer partial ranking changed")
+    hammerSnapshot.offers[3].ItemName = "UnknownSuitHammerTrait"
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    check(not hammerScores[3].covered and not hammerScores[3].scoreComplete,
+        "unknown Hammer became evaluated")
+    coatProfile.hammerPlan[2].priority = 1
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    hammerRanks = ScoringEngine.rank({ hammerScores[1], hammerScores[2] })
+    check(hammerRanks[1].rank == 1 and hammerRanks[2].rank == 1,
+        "equal Hammer priorities did not tie")
+    coatProfile.hammerPlan[2].priority = 2
+    hammerSnapshot.offerKind = "boon"
+    hammerScores = ScoringEngine.scoreOffers(hammerSnapshot, coatProfile)
+    for _, reason in ipairs(hammerScores[1].reasons) do
+        check(reason.code ~= "HAMMER_BUILD_PRIORITY", "Hammer plan leaked into Boon scoring")
+    end
+    for _, role in ipairs({ "Cast", "Mana" }) do
+        local slot = coatProfile.slots[role]
+        check(slot.slotPolicy == "open" and #slot.core == 0 and #slot.alternatives == 0 and #slot.preferred == 0,
+            "Black Coat unconstrained slot gained a target")
+    end
+    snapshot.aspect = "DaggerBackstabAspect"
+    check(not ScoringEngine.scoreOffers(snapshot, coatProfile)[1].supported, "Black Coat accepted wrong aspect")
+    snapshot.aspect = "BaseSuitAspect"
+    snapshot.weapon = "WeaponDagger"
+    check(not ScoringEngine.scoreOffers(snapshot, coatProfile)[1].supported, "Black Coat accepted wrong weapon")
+end
+
+do
+    local expected = {
+        { "DaggerDashAttackTripleTrait", 1, "priority" },
+        { "DaggerFinalHitTrait", 2, "alternative" },
+        { "DaggerRapidAttackTrait", 2, "alternative" },
+        { "DaggerSpecialReturnTrait", 2, "alternative" },
+        { "DaggerAttackFinisherTrait", 3, "alternative" },
+    }
+    for _, profile in ipairs({ productionProfile }) do
+        check(ScoringEngine.validateProfile(profile), "Melinoe generated Hammer profile invalid")
+        check(#profile.hammerPlan == #expected, "Melinoe Hammer plan count mismatch")
+        for index, spec in ipairs(expected) do
+            local entry = profile.hammerPlan[index]
+            check(entry.traitId == spec[1] and entry.priority == spec[2]
+                and entry.classification == spec[3] and entry.condition == nil,
+                "Melinoe Hammer plan entry mismatch at " .. index)
+        end
+        local snapshot = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", offerKind = "hammer",
+            offers = {
+                { originalIndex = 1, ItemName = "DaggerDashAttackTripleTrait", Rarity = "Heroic" },
+                { originalIndex = 2, ItemName = "DaggerFinalHitTrait", Rarity = "Common" },
+                { originalIndex = 3, ItemName = "UnknownDaggerHammerTrait", Rarity = "Epic" },
+            } }
+        local scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(scores[1].score == -1 and scores[2].score == -2 and scores[3].score == 0
+            and scores[1].covered and scores[2].covered and not scores[3].covered
+            and scores[1].scoreComplete and scores[2].scoreComplete and not scores[3].scoreComplete,
+            "Melinoe Hammers did not preserve priorities or the unknown-Hammer fail-safe")
+        for _, result in ipairs(scores) do
+            for _, reason in ipairs(result.reasons) do
+                check(reason.code ~= "RARITY" and reason.code ~= "RARITY_DELTA",
+                    "Hammer scoring applied rarity")
+            end
+        end
+        local decision = ScoringEngine.getRankingDecision(scores, true)
+        check(decision.mode == "partial" and #decision.rankEligible == 2,
+            "two known distinct Hammers plus an unknown did not use partial ranking")
+        local ranked = ScoringEngine.rank(decision.rankEligible)
+        check(#ranked == 2 and ranked[1].rank == 1 and ranked[2].rank == 2,
+            "known Melinoe Hammers did not rank 1/2")
+        snapshot.offers[3].ItemName = "DaggerRapidAttackTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(ScoringEngine.getRankingDecision(scores, true).mode == "full",
+            "three evaluated distinct Hammers did not use full ranking")
+        snapshot.offers[1].ItemName = "DaggerFinalHitTrait"
+        snapshot.offers[2].ItemName = "DaggerRapidAttackTrait"
+        snapshot.offers[3].ItemName = "DaggerSpecialReturnTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(ScoringEngine.getRankingDecision(scores, true).mode == "none",
+            "tied evaluated Hammers produced a numerical ranking")
+        snapshot.offers[3].ItemName = "DaggerSpecialJumpTrait"
+        scores = ScoringEngine.scoreOffers(snapshot, profile)
+        check(not scores[3].covered and not scores[3].scoreComplete and scores[3].score == 0
+            and ScoringEngine.getRankingDecision(scores, true).mode == "none",
+            "Dancing Knives became evaluable or rankable")
+    end
+end
+do
+    local hammerWithoutPlan = {}
+    for key, value in pairs(productionProfile) do
+        if key ~= "hammerPlan" then hammerWithoutPlan[key] = value end
+    end
+    check(hammerWithoutPlan.hammerPlan == nil, "Sister Blades unexpectedly gained a Hammer plan")
+    local snapshot = {
+        weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", offerKind = "hammer",
+        offers = { { originalIndex = 1, ItemName = "SuitDashAttackTrait" } },
+    }
+    local results = ScoringEngine.scoreOffers(snapshot, hammerWithoutPlan)
+    check(#results == 1 and results[1].supported and results[1].eligible
+        and not results[1].covered and not results[1].scoreComplete and results[1].score == 0,
+        "Hammer offer without hammerPlan was not conservatively unresolved")
+    for _, reason in ipairs(results[1].reasons) do
+        check(reason.code ~= "HAMMER_BUILD_PRIORITY", "Hammer offer without plan gained a Hammer reason")
+    end
+    local decision = ScoringEngine.getRankingDecision(results, true)
+    check(decision.mode == "none" and #decision.rankEligible == 0
+        and #ScoringEngine.rank(decision.rankEligible) == 0,
+        "Hammer offer without hammerPlan produced a numeric rank")
+end
+
+do
+    local poseidonEx = {
+        weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+        activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+        offers = { { originalIndex = 1, ItemName = "PoseidonExCastBoon", Rarity = "Common" } },
+    }
+    local function assertPoseidonEx(profile, label)
+        local result = ScoringEngine.scoreOffers(poseidonEx, profile)[1]
+        local context = ScoringEngine.getOriginationContext(poseidonEx, profile, "PoseidonExCastBoon")
+        local forbidden = {
+            BUILD_STATUS_SYNERGY = true, BUILD_PREFERRED = true, BUILD_CORE_PRIORITY = true,
+            ASPECT_COMPATIBLE = true, ASPECT_SETUP_SYNERGY = true, ASPECT_DIRECT_SYNERGY = true,
+            EXISTING_HAMMER_SYNERGY = true, BLOOD_DROP_ENGINE_SYNERGY = true, WOMBO = true,
+            BLOOD_TRIAD = true, ORIGINATION_ENABLE = true,
+        }
+        for _, reason in ipairs(result.reasons) do
+            check(not forbidden[reason.code], label .. " produced an unrelated reason")
+        end
+        check(context.status.statusKnowledge == "known_non_status"
+            and context.status.offeredStatusFamily == nil
+            and context.offerEnablesOrigination == false
+            and result.score == 0 and not result.covered and not result.scoreComplete
+            and #result.reasons == 0,
+            label .. " status-only representation changed")
+    end
+    check(morriganProfile.knownNonStatusTraits.PoseidonExCastBoon
+        and productionProfile.knownNonStatusTraits.PoseidonExCastBoon,
+        "Poseidon Ex Cast known-non-status data missing")
+    local function countSet(set)
+        local count = 0
+        for _ in pairs(set) do count = count + 1 end
+        return count
+    end
+    check(countSet(morriganProfile.knownNonStatusTraits) == 38
+        and countSet(productionProfile.knownNonStatusTraits) == 38,
+        "known-non-status counts changed")
+    assertPoseidonEx(morriganProfile, "Morrigan Poseidon Ex Cast")
+    assertPoseidonEx(productionProfile, "Melinoe Poseidon Ex Cast")
+end
+
+do
+    local expected = { Common = 2, Rare = 3, Epic = 4, Heroic = 5 }
+    for rarity, score in pairs(expected) do
+        local result = ScoringEngine.scoreOffers({
+            weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+            activeArcana = {}, offers = {{ originalIndex = 1, ItemName = "HealthRewardBonusBoon", Rarity = rarity }},
+        }, productionProfile)[1]
+        check(result.score == score and result.covered and result.scoreComplete,
+            "HealthRewardBonusBoon " .. rarity .. " semantic score changed")
+        check(#result.reasons == (rarity == "Common" and 1 or 2),
+            "HealthRewardBonusBoon reason count changed for " .. rarity)
+        check(result.reasons[1].code == "MAX_RESOURCE_SUPPORT" and result.reasons[1].delta == 2,
+            "HealthRewardBonusBoon semantic reason missing for " .. rarity)
+        local total = 0
+        for _, reason in ipairs(result.reasons) do total = total + reason.delta end
+        check(total == result.score, "HealthRewardBonusBoon score is not reason sum")
+    end
+    check(productionProfile.traitSemantics.HealthRewardBonusBoon.kind == "max_resource_support"
+        and morriganProfile.traitSemantics.HealthRewardBonusBoon.kind == "max_resource_support",
+        "shared HealthRewardBonusBoon semantic missing")
+    local unknown = ScoringEngine.scoreOffers({
+        weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+        activeArcana = {}, offers = {{ originalIndex = 1, ItemName = "FocusRawDamageBoon", Rarity = "Common" }},
+    }, productionProfile)[1]
+    check(not unknown.covered and not unknown.scoreComplete and unknown.score == 0,
+        "FocusRawDamageBoon was unexpectedly covered")
+end
+
+do
+    local offers = {
+        { "ZeusSpecialBoon", 10, "BUILD_PREFERRED" },
+        { "AresSpecialBoon", 10, "BUILD_PREFERRED" },
+        { "HephaestusSpecialBoon", 10, "BUILD_PREFERRED" },
+        { "PoseidonSpecialBoon", 8, nil },
+        { "HeraSpecialBoon", 8, nil },
+        { "ApolloSpecialBoon", 6, "BUILD_DISCOURAGED" },
+        { "AphroditeSpecialBoon", 6, "BUILD_DISCOURAGED" },
+    }
+    local snapshot = { weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+        activeArcana = {}, offers = {} }
+    for index, entry in ipairs(offers) do
+        snapshot.offers[1] = { originalIndex = 1, ItemName = entry[1], Rarity = "Common" }
+        local result = ScoringEngine.scoreOffers(snapshot, morriganProfile)[1]
+        check(result.score == entry[2] and result.covered and result.scoreComplete,
+            "Morrigan open Special score changed for " .. entry[1])
+        check(result.reasons[1].code == "FILL_EMPTY_PRIMARY_CORE",
+            "Morrigan open Special fill reason missing for " .. entry[1])
+        if entry[3] == nil then
+            check(#result.reasons == 1, "ordinary Morrigan Special gained an extra reason")
+        else
+            check(result.reasons[2].code == entry[3], "Morrigan Special alignment reason changed")
+        end
+    end
+    local rarityOffers = { "Common", "Rare", "Epic", "Heroic" }
+    local expectedScores = { 8, 9, 10, 11 }
+    for index, rarity in ipairs(rarityOffers) do
+        snapshot.offers[1] = { originalIndex = 1, ItemName = "PoseidonSpecialBoon", Rarity = rarity }
+        local result = ScoringEngine.scoreOffers(snapshot, morriganProfile)[1]
+        check(result.score == expectedScores[index] and result.scoreComplete,
+            "Poseidon open Special rarity score changed")
+    end
+    local sprintSnapshot = { weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+        activeArcana = {}, offers = {{ originalIndex = 1, ItemName = "AresSprintBoon", Rarity = "Common" }} }
+    local ordinarySprint = ScoringEngine.scoreOffers(sprintSnapshot, morriganProfile)[1]
+    check(ordinarySprint.score == 0 and ordinarySprint.covered and ordinarySprint.scoreComplete,
+        "Morrigan preferred-policy ordinary Sprint was treated as open")
+    sprintSnapshot.offers[1].ItemName = "ApolloSprintBoon"
+    local preferredSprint = ScoringEngine.scoreOffers(sprintSnapshot, morriganProfile)[1]
+    check(preferredSprint.score == 6 and preferredSprint.reasons[1].code == "FILL_EMPTY_UTILITY_CORE"
+        and preferredSprint.reasons[2].code == "BUILD_PREFERRED",
+        "Morrigan preferred Sprint score changed")
+end
+
+do
+    local expected = { Common = 2, Rare = 3, Epic = 4, Heroic = 5 }
+    for rarity, score in pairs(expected) do
+        local result = ScoringEngine.scoreOffers({
+            weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+            activeArcana = {}, offers = {{ originalIndex = 1, ItemName = "HighHealthOffenseBoon", Rarity = rarity }},
+        }, productionProfile)[1]
+        check(result.score == score and result.covered and result.scoreComplete,
+            "HighHealthOffenseBoon " .. rarity .. " score changed")
+        check(result.reasons[1].code == "HIGH_HEALTH_OFFENSE" and result.reasons[1].delta == 2,
+            "HighHealthOffenseBoon reason missing")
+    end
+    local function healthResult(current, maximum, profile)
+        return ScoringEngine.scoreOffers({
+            weapon = "WeaponDagger", aspect = profile.aspect, godTraits = {}, hammers = {},
+            combatContext = { health = { current = current, max = maximum } }, activeArcana = {},
+            offers = {{ originalIndex = 1, ItemName = "HighHealthOffenseBoon", Rarity = "Common" }},
+        }, profile)[1]
+    end
+    check(healthResult(79, 100, productionProfile).condition.currentlyActive == false,
+        "79% high-health diagnostic changed")
+    check(healthResult(79, 100, productionProfile).score == 2, "79% changed semantic score")
+    check(healthResult(80, 100, productionProfile).condition.currentlyActive == true,
+        "80% high-health boundary is not inclusive")
+    check(healthResult(81, 100, productionProfile).condition.currentlyActive == true,
+        "81% high-health diagnostic changed")
+    local missing = healthResult(nil, nil, productionProfile)
+    check(missing.condition.currentlyActive == nil and missing.score == 2,
+        "missing health did not remain diagnostic-only")
+    local origination = healthResult(80, 100, productionProfile)
+    origination = ScoringEngine.scoreOffers({
+        weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+        combatContext = { health = { current = 80, max = 100 } },
+        activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+        offers = {{ originalIndex = 1, ItemName = "HighHealthOffenseBoon", Rarity = "Common" }},
+    }, productionProfile)[1]
+    check(origination.scoreComplete and origination.covered,
+        "HighHealth Origination completion changed")
+    for _, reason in ipairs(origination.reasons) do
+        check(reason.code ~= "ORIGINATION_UNRESOLVED", "HighHealth Origination remained unresolved")
+    end
+    local morrigan = healthResult(80, 100, morriganProfile)
+    check(morrigan.score == 2 and morrigan.covered and morrigan.scoreComplete,
+        "Morrigan HighHealth semantic changed")
+    check(morrigan.reasons[1].code == "HIGH_HEALTH_OFFENSE",
+        "Morrigan received an unintended aspect/Wombo reason")
+    check(morriganProfile.traitSemantics.HighHealthOffenseBoon.excludesIgnoreAllModifiers == true,
+        "Wombo exclusion metadata missing")
+end
+
+check(ScoringEngine.validateProfile(productionProfile), "schemaVersion=1 production profile rejected")
+
+local effectiveSnapshot = OfferSnapshot.capture({ UpgradeButtons = {
+    [1] = { Data = { Name = "AresWeaponBoon", Rarity = "Common" } },
+    [2] = { Data = { Name = "AresCastBoon", Rarity = "Common" } },
+    [3] = { Data = { Name = "AresManaBoon", Rarity = "Heroic" } },
+} }, { UpgradeOptions = {
+    [1] = { ItemName = "AresWeaponBoon", Rarity = "Rare" },
+    [2] = { ItemName = "AresCastBoon", Rarity = "Rare" },
+    [3] = { ItemName = "AresManaBoon", Rarity = "Heroic" },
+} })
+check(effectiveSnapshot[1].Rarity == "Common" and effectiveSnapshot[2].Rarity == "Common"
+    and effectiveSnapshot[3].Rarity == "Heroic"
+    and effectiveSnapshot[1].rawRarity == "Rare"
+    and effectiveSnapshot[1].raritySource == "button",
+    "effective button rarity source was not selected")
+local fallbackSnapshot = OfferSnapshot.capture({}, { UpgradeOptions = {
+    [1] = { ItemName = "AresWeaponBoon", Rarity = "Rare" },
+} })
+check(fallbackSnapshot[1].Rarity == "Rare" and fallbackSnapshot[1].raritySource == "upgrade_option",
+    "option rarity fallback was not preserved")
+local mismatchSnapshot = OfferSnapshot.capture({ UpgradeButtons = {
+    [1] = { Data = { Name = "OtherBoon", Rarity = "Heroic" } },
+} }, { UpgradeOptions = {
+    [1] = { ItemName = "AresWeaponBoon", Rarity = "Rare" },
+} })
+check(mismatchSnapshot[1].Rarity == "Rare" and mismatchSnapshot[1].raritySource == "upgrade_option",
+    "mismatched button rarity contaminated the offer")
+
+local function deepCopy(value, seen)
+    if type(value) ~= "table" then return value end
+    seen = seen or {}
+    if seen[value] then return seen[value] end
+    local copy = {}; seen[value] = copy
+    for key, child in pairs(value) do copy[deepCopy(key, seen)] = deepCopy(child, seen) end
+    return copy
+end
+
+local function deepEqual(left, right, seen)
+    if type(left) ~= type(right) then return false end
+    if type(left) ~= "table" then return left == right end
+    seen = seen or {}
+    if seen[left] == right then return true end
+    seen[left] = right
+    for key, value in pairs(left) do if not deepEqual(value, right[key], seen) then return false end end
+    for key in pairs(right) do if left[key] == nil then return false end end
+    return true
+end
+
+local unsupportedSchema = deepCopy(productionProfile); unsupportedSchema.schemaVersion = 2
+check(not ScoringEngine.validateProfile(unsupportedSchema)
+    and not ScoringEngine.isProfileSupported({ weapon = "WeaponDagger", aspect = "DaggerBackstabAspect" }, unsupportedSchema),
+    "unsupported schemaVersion was accepted")
+local missingSchema = deepCopy(productionProfile); missingSchema.schemaVersion = nil
+check(not ScoringEngine.validateProfile(missingSchema), "missing schemaVersion was accepted")
+local invalidPolicy = deepCopy(productionProfile); invalidPolicy.slots.Attack.slotPolicy = "core"
+check(not ScoringEngine.validateProfile(invalidPolicy), "invalid slotPolicy was accepted")
+local invalidRole = deepCopy(productionProfile); invalidRole.slots.Invalid = { core = {}, alternatives = {}, preferred = {}, slotPolicy = "open" }
+check(not ScoringEngine.validateProfile(invalidRole), "invalid slot role was accepted")
+local duplicateRole = deepCopy(productionProfile); duplicateRole.slots.Attack.alternatives = { "AresWeaponBoon" }
+check(not ScoringEngine.validateProfile(duplicateRole), "contradictory role definition was accepted")
+
+local supported = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect" }
+check(ScoringEngine.isProfileSupported(supported, productionProfile), "exact profile rejected")
+check(not ScoringEngine.isProfileSupported({ weapon = "WeaponStaffSwing", aspect = "DaggerBackstabAspect" }, productionProfile), "wrong weapon supported")
+check(not ScoringEngine.isProfileSupported({ weapon = "WeaponDagger" }, productionProfile), "nil aspect supported")
+check(not ScoringEngine.isProfileSupported({ weapon = "WeaponDagger", aspect = "DummyWeaponDagger" }, productionProfile), "dummy aspect supported")
+check(ScoringEngine.isProfileSupported({ weapon = "WeaponDagger", aspect = "DaggerTripleAspect" }, morriganProfile)
+    and not ScoringEngine.isProfileSupported({ weapon = "WeaponDagger", aspect = "DaggerBackstabAspect" }, morriganProfile),
+    "Morrigan profile support boundary was wrong")
+local morriganPlanScores = ScoringEngine.scoreOffers({ weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {}, activeArcana = {}, offers = {
+    { originalIndex = 1, ItemName = "HeraWeaponBoon" }, { originalIndex = 2, ItemName = "ApolloWeaponBoon" },
+    { originalIndex = 3, ItemName = "ZeusWeaponBoon" }, { originalIndex = 4, ItemName = "ZeusSpecialBoon" },
+    { originalIndex = 5, ItemName = "PoseidonCastBoon" }, { originalIndex = 6, ItemName = "ApolloSprintBoon" },
+    { originalIndex = 7, ItemName = "HeraManaBoon" }, { originalIndex = 8, ItemName = "ApolloManaBoon" },
+    { originalIndex = 9, ItemName = "WeaponUpgradeBoon" },
+} }, morriganProfile)
+check(morriganPlanScores[1].score > morriganPlanScores[2].score and morriganPlanScores[2].score > morriganPlanScores[3].score
+    and morriganPlanScores[4].score > 0 and morriganPlanScores[5].score > 0 and morriganPlanScores[6].score > 0
+    and morriganPlanScores[7].score > morriganPlanScores[8].score and morriganPlanScores[9].score == 8,
+    "Morrigan build-plan scoring changed")
+morriganSpecial = ScoringEngine.scoreOffers({ weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {}, activeArcana = {}, offers = {
+    { originalIndex = 1, ItemName = "ZeusSpecialBoon" }, { originalIndex = 2, ItemName = "AresSpecialBoon" },
+    { originalIndex = 3, ItemName = "HephaestusSpecialBoon" }, { originalIndex = 4, ItemName = "ApolloSpecialBoon" },
+    { originalIndex = 5, ItemName = "AphroditeSpecialBoon" }, { originalIndex = 6, ItemName = "HeraSpecialBoon" },
+} }, morriganProfile)
+check(morriganSpecial[1].score == morriganSpecial[2].score and morriganSpecial[2].score == morriganSpecial[3].score
+    and morriganSpecial[4].score == morriganSpecial[5].score and morriganSpecial[4].score < morriganSpecial[1].score
+    and morriganSpecial[4].covered and morriganSpecial[4].scoreComplete,
+    "Morrigan flexible Special discouraged scoring changed")
+do
+local poseidonSpecial = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    offers = {{ originalIndex = 1, ItemName = "PoseidonSpecialBoon", Rarity = "Common" }},
+}, morriganProfile)[1]
+check(poseidonSpecial.covered and poseidonSpecial.scoreComplete and poseidonSpecial.score == 8
+    and #poseidonSpecial.reasons == 1 and poseidonSpecial.reasons[1].code == "FILL_EMPTY_PRIMARY_CORE",
+    "Morrigan Poseidon Special open-slot fill score changed")
+for _, reason in ipairs(poseidonSpecial.reasons) do
+    check(reason.code ~= "ASPECT_SETUP_SYNERGY" and reason.code ~= "ASPECT_DIRECT_SYNERGY"
+        and reason.code ~= "ASPECT_COMPATIBLE" and reason.code ~= "BUILD_PREFERRED"
+        and reason.code ~= "BUILD_DISCOURAGED" and reason.code ~= "EXISTING_HAMMER_SYNERGY",
+        "Poseidon Special received an unrequested Morrigan reason")
+end
+end
+
+do
+local auditedNonStatus = {
+    "AphroditeWeaponBoon", "ApolloWeaponBoon", "ApolloSpecialBoon",
+    "AphroditeSpecialBoon", "HephaestusSpecialBoon", "HeraManaBoon",
+    "ApolloManaBoon", "WeaponUpgradeBoon", "HestiaSprintBoon",
+    "BurnExplodeBoon", "FireballManaSpecialBoon", "HephaestusCastBoon",
+    "ArmorBoon", "ManaBurstBoon", "HealthRewardBonusBoon",
+    "PoseidonSpecialBoon", "ManaRestoreDamageBoon", "BoonDecayBoon",
+    "FocusLightningBoon",
+}
+local seenAudited = {}
+for _, traitName in ipairs(auditedNonStatus) do
+    check(not seenAudited[traitName], "audited known-non-status list contains a duplicate")
+    seenAudited[traitName] = true
+    check(productionProfile.knownNonStatusTraits[traitName]
+        and morriganProfile.knownNonStatusTraits[traitName],
+        "audited known-non-status trait missing from a mechanics template: " .. traitName)
+end
+check(#auditedNonStatus == 19, "audited known-non-status inventory changed")
+local morriganCoreKnownNonStatus = { "ZeusCastBoon", "ZeusManaBoon", "ZeusSprintBoon" }
+for _, traitName in ipairs(morriganCoreKnownNonStatus) do
+    check(productionProfile.knownNonStatusTraits[traitName]
+        and morriganProfile.knownNonStatusTraits[traitName],
+        "Morrigan core known-non-status trait missing from a mechanics template: " .. traitName)
+end
+check(morriganProfile.knownNonStatusTraits.PoseidonSpecialBoon
+    and productionProfile.knownNonStatusTraits.PoseidonSpecialBoon,
+    "Poseidon Special known-non-status data missing")
+for traitName in pairs(productionProfile.knownNonStatusTraits) do
+    check(productionProfile.knownNonStatusTraits[traitName]
+        and morriganProfile.knownNonStatusTraits[traitName],
+        "shared known-non-status mechanics diverged: " .. traitName)
+end
+for traitName in pairs(morriganProfile.knownNonStatusTraits) do
+    check(productionProfile.knownNonStatusTraits[traitName],
+        "shared known-non-status mechanics diverged: " .. traitName)
+end
+
+local activeOrigination = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } }
+local function statusKnowledge(profile, traitName)
+    local context = ScoringEngine.getOriginationContext({
+        activeArcana = activeOrigination, godTraits = {},
+    }, profile, traitName)
+    check(context.status.statusKnowledge == "known_non_status"
+        and context.offerEnablesOrigination == false,
+        "audited trait did not resolve as known non-status: " .. traitName)
+end
+for _, traitName in ipairs(auditedNonStatus) do statusKnowledge(morriganProfile, traitName) end
+for _, traitName in ipairs(morriganCoreKnownNonStatus) do statusKnowledge(morriganProfile, traitName) end
+
+do
+    local focus = ScoringEngine.scoreOffers({
+        weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+        activeArcana = activeOrigination,
+        offers = { { originalIndex = 1, ItemName = "FocusLightningBoon", Rarity = "Common" } },
+    }, morriganProfile)[1]
+    local context = ScoringEngine.getOriginationContext({
+        activeArcana = activeOrigination, godTraits = {},
+    }, morriganProfile, "FocusLightningBoon")
+    local sum = 0
+    for _, reason in ipairs(focus.reasons) do sum = sum + reason.delta end
+    check(context.status.statusKnowledge == "known_non_status"
+        and context.status.offeredStatusFamily == nil
+        and context.offerEnablesOrigination == false
+        and focus.score == 0 and sum == 0
+        and not focus.covered and not focus.scoreComplete
+        and #focus.reasons == 0,
+        "Focus Lightning was not preserved as known non-status without scoring")
+end
+
+do
+    local echoOfferBase = {
+        weapon = "WeaponDagger", aspect = "DaggerTripleAspect", hammers = {},
+        activeArcana = {}, offers = {
+            { originalIndex = 1, ItemName = "EchoExpirationBoon", Rarity = "Common" },
+        },
+    }
+    local function echoScore(owned, profile)
+        local snapshot = deepCopy(echoOfferBase)
+        snapshot.godTraits = owned
+        return ScoringEngine.scoreOffers(snapshot, profile or morriganProfile)[1]
+    end
+    local function assertEchoReasons(result, expectedScore, expectedCovered, label)
+        local sum, synergyCount = 0, 0
+        for _, reason in ipairs(result.reasons) do
+            sum = sum + reason.delta
+            if reason.code == "BUILD_STATUS_SYNERGY" then synergyCount = synergyCount + 1 end
+            check(reason.code ~= "ORIGINATION_ENABLE" and reason.code ~= "ORIGINATION_UNRESOLVED"
+                and reason.code ~= "ASPECT_COMPATIBLE" and reason.code ~= "ASPECT_SETUP_SYNERGY"
+                and reason.code ~= "ASPECT_DIRECT_SYNERGY" and reason.code ~= "EXISTING_HAMMER_SYNERGY"
+                and reason.code ~= "BLOOD_DROP_ENGINE_SYNERGY" and reason.code ~= "WOMBO"
+                and reason.code ~= "BLOOD_TRIAD",
+                label .. " produced an unrelated reason")
+        end
+        check(result.score == expectedScore and result.covered == expectedCovered
+            and result.scoreComplete == expectedCovered and result.score == sum
+            and synergyCount == (expectedCovered and 1 or 0)
+            and #result.reasons == (expectedCovered and 1 or 0),
+            label .. " Echo Expiration payoff result changed")
+    end
+    local echoContext = ScoringEngine.getOriginationContext({
+        activeArcana = activeOrigination, godTraits = {},
+    }, morriganProfile, "EchoExpirationBoon")
+    check(echoContext.status.statusKnowledge == "known_non_status"
+        and echoContext.status.offeredStatusFamily == nil
+        and echoContext.offerEnablesOrigination == false,
+        "Echo Expiration status knowledge changed")
+    assertEchoReasons(echoScore({}, morriganProfile), 0, false, "no Echo producer")
+    assertEchoReasons(echoScore({ { Name = "ZeusWeaponBoon" } }), 4, true, "Zeus Weapon producer")
+    assertEchoReasons(echoScore({ { Name = "ZeusSpecialBoon" } }), 4, true, "Zeus Special producer")
+    assertEchoReasons(echoScore({ { Name = "ZeusWeaponBoon" }, { Name = "ZeusSpecialBoon" } }), 4, true, "both Echo producers")
+    assertEchoReasons(echoScore({ { Name = "ZeusCastBoon" } }), 0, false, "unrelated Zeus trait")
+    assertEchoReasons(echoScore({}, productionProfile), 0, false, "Melinoe isolation")
+    local plannedOnly = echoScore({}, morriganProfile)
+    check(plannedOnly.score == 0 and not plannedOnly.covered and not plannedOnly.scoreComplete,
+        "Morrigan Special preference incorrectly activated Echo payoff")
+end
+
+do
+local damageShareOfferBase = {
+        weapon = "WeaponDagger", aspect = "DaggerTripleAspect", hammers = {},
+        activeArcana = {}, offers = {
+            { originalIndex = 1, ItemName = "DamageSharePotencyBoon", Rarity = "Common" },
+        },
+    }
+    local producers = { "HeraWeaponBoon", "HeraSpecialBoon", "HeraCastBoon", "HeraSprintBoon" }
+    local function damageShareScore(owned)
+        local snapshot = deepCopy(damageShareOfferBase)
+        snapshot.godTraits = owned
+        return ScoringEngine.scoreOffers(snapshot, morriganProfile)[1]
+    end
+    local function assertDamageShareResult(owned, expectedScore, expectedCovered, label)
+        local result = damageShareScore(owned)
+        local sum = 0
+        local synergyCount = 0
+        for _, reason in ipairs(result.reasons) do
+            sum = sum + reason.delta
+            if reason.code == "BUILD_STATUS_SYNERGY" then synergyCount = synergyCount + 1 end
+            check(reason.code ~= "ORIGINATION_ENABLE" and reason.code ~= "ORIGINATION_UNRESOLVED"
+                and reason.code ~= "ASPECT_COMPATIBLE" and reason.code ~= "ASPECT_SETUP_SYNERGY"
+                and reason.code ~= "ASPECT_DIRECT_SYNERGY" and reason.code ~= "EXISTING_HAMMER_SYNERGY"
+                and reason.code ~= "BLOOD_DROP_ENGINE_SYNERGY",
+                label .. " produced an unrelated reason")
+        end
+        check(result.score == expectedScore and result.covered == expectedCovered
+            and result.scoreComplete == expectedCovered and result.score == sum
+            and synergyCount == (expectedCovered and 1 or 0),
+            label .. " Damage Share payoff result changed")
+    end
+    assertDamageShareResult({}, 0, false, "no producer")
+    for _, producer in ipairs(producers) do
+        assertDamageShareResult({ { Name = producer } }, 4, true, producer)
+    end
+    assertDamageShareResult({ { Name = "HeraWeaponBoon" }, { Name = "HeraSpecialBoon" } }, 4, true,
+        "two producers")
+    local allProducers = {}
+    for _, producer in ipairs(producers) do table.insert(allProducers, { Name = producer }) end
+    assertDamageShareResult(allProducers, 4, true, "all producers")
+    assertDamageShareResult({ { Name = "HeraManaBoon" } }, 0, false, "Hera Mana only")
+    assertDamageShareResult({ { Name = "HeraWeaponBoon" } }, 4, true, "profile plan versus ownership")
+    local melinoe = deepCopy(damageShareOfferBase)
+    melinoe.godTraits = { { Name = "HeraWeaponBoon" } }
+    local melinoeResult = ScoringEngine.scoreOffers(melinoe, productionProfile)[1]
+    check(melinoeResult.score == 0 and not melinoeResult.covered and not melinoeResult.scoreComplete,
+        "Damage Share Morrigan rule leaked into Melinoe")
+end
+
+local heraMana = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+    activeArcana = activeOrigination,
+    offers = { { originalIndex = 1, ItemName = "HeraManaBoon", Blocked = false } },
+}, morriganProfile)[1]
+check(heraMana.score == 8 and heraMana.covered and heraMana.scoreComplete
+    and heraMana.reasons[1].code == "FILL_EMPTY_UTILITY_CORE"
+    and heraMana.reasons[2].code == "BUILD_CORE_PRIORITY",
+    "Hera Mana known non-status completion or base score changed")
+for _, reason in ipairs(heraMana.reasons) do
+    check(reason.code ~= "ORIGINATION_UNRESOLVED", "Hera Mana remained Origination-unresolved")
+end
+
+local apolloMana = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+    activeArcana = activeOrigination,
+    offers = { { originalIndex = 1, ItemName = "ApolloManaBoon", Blocked = false } },
+}, morriganProfile)[1]
+-- Apollo Mana is currently an alternative in the Morrigan Mana plan, so the
+-- data-only change resolves Origination without inventing BUILD_PREFERRED:
+-- its current-plan score is the utility fill value 4.
+check(apolloMana.score == 4 and apolloMana.covered and apolloMana.scoreComplete,
+    "Apollo Mana known non-status score or completion changed")
+
+local hephSpecial = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {},
+    activeArcana = activeOrigination,
+    offers = { { originalIndex = 1, ItemName = "HephaestusSpecialBoon", Blocked = false } },
+}, morriganProfile)[1]
+check(hephSpecial.score == 10 and hephSpecial.covered and hephSpecial.scoreComplete,
+    "Hephaestus Special known non-status score or completion changed")
+for _, reason in ipairs(hephSpecial.reasons) do
+    check(reason.code ~= "ORIGINATION_UNRESOLVED", "Hephaestus Special remained Origination-unresolved")
+end
+local hestiaSprintContext = ScoringEngine.getOriginationContext({
+    activeArcana = activeOrigination, godTraits = {},
+}, morriganProfile, "HestiaSprintBoon")
+check(hestiaSprintContext.status.statusKnowledge == "known_non_status"
+    and hestiaSprintContext.offerEnablesOrigination == false,
+    "Hestia Sprint known non-status classification changed")
+end
+
+local profile = deepCopy(productionProfile)
+profile.weights = {
+    daggerBackstabTrait = 11,
+    apolloBlindBackstab = 7,
+    apolloBlindPrerequisite = 5,
+}
+profile.rules = {
+    DaggerBackstabTrait = {
+        { code = "TEST_BACKSTAB", weight = "daggerBackstabTrait" },
+    },
+    ApolloBlindBoon = {
+        { code = "TEST_BLIND", weight = "apolloBlindBackstab" },
+        { code = "TEST_PREREQUISITE", weight = "apolloBlindPrerequisite",
+            requiresAnyOwned = { "ApolloCastBoon" } },
+    },
+}
+local snapshot = {
+    weapon = "WeaponDagger",
+    aspect = "DaggerBackstabAspect",
+    godTraits = { { Name = "ApolloCastBoon" } },
+    offers = {
+        { originalIndex = 7, ItemName = "UnknownBoon", Rarity = "Common", StackNum = 3, Blocked = false },
+        { originalIndex = 2, ItemName = "ApolloBlindBoon", TraitToReplace = "OldCoreBoon", OldRarity = "Rare", Blocked = false },
+        { originalIndex = 4, ItemName = "DaggerBackstabTrait", Blocked = false },
+        { originalIndex = 9, ItemName = "ApolloBlindBoon", Blocked = true },
+    },
+}
+local beforeSnapshot, beforeProfile = deepCopy(snapshot), deepCopy(profile)
+local results = ScoringEngine.scoreOffers(snapshot, profile)
+check(#results == 4 and results[1].originalIndex == 7 and results[1].score == 0
+    and #results[1].reasons == 0, "unknown offer handling changed")
+check(results[2].score == 12 and #results[2].reasons == 2
+    and results[2].reasons[2].with == "ApolloCastBoon", "verified owned-boon synergy missing")
+check(results[2].traitToReplace == "OldCoreBoon" and results[2].oldRarity == "Rare",
+    "replacement metadata not preserved")
+check(results[1].stackNum == 3, "StackNum not preserved")
+check(results[4].supported == false and results[4].eligible == false
+    and results[4].reasons[1].code == "BLOCKED", "blocked offer remained recommendable")
+for _, result in ipairs(results) do
+    local sum = 0
+    for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
+    check(result.score == sum, "score differs from reason delta sum")
+end
+local withoutOwned = deepCopy(snapshot); withoutOwned.godTraits = {}
+local withoutOwnedResults = ScoringEngine.scoreOffers(withoutOwned, profile)
+check(withoutOwnedResults[2].score == 7 and #withoutOwnedResults[2].reasons == 1,
+    "absent godTraits incorrectly enabled synergy")
+local unsupportedResults = ScoringEngine.scoreOffers({
+    weapon = "WeaponStaffSwing", aspect = nil, offers = snapshot.offers, godTraits = snapshot.godTraits,
+}, profile)
+check(unsupportedResults[1].supported == false and unsupportedResults[1].score == 0,
+    "unsupported build received build score")
+check(deepEqual(snapshot, beforeSnapshot) and deepEqual(profile, beforeProfile),
+    "scoring mutated snapshot or profile")
+print("PASS: exact profile support; known/unknown offers; multiple reasons; score=sum; godTrait synergy; blocked/replacement/stack metadata; no mutation")
+
+local function makeResults(count)
+    local values = {}
+    for index = 1, count do
+        values[index] = { originalIndex = index, score = index % 2, supported = true, eligible = true }
+    end
+    return values
+end
+for count = 0, 5 do
+    local input = makeResults(count)
+    local before = deepCopy(input)
+    local ranked = ScoringEngine.rank(input)
+    check(#ranked == count and deepEqual(input, before), "ranking count/mutation failed for " .. count)
+    for index = 2, #ranked do
+        check(ranked[index - 1].score > ranked[index].score
+            or (ranked[index - 1].score == ranked[index].score
+                and ranked[index - 1].originalIndex < ranked[index].originalIndex),
+            "ranking order incorrect")
+    end
+end
+local blockedRanking = ScoringEngine.rank({
+    { originalIndex = 3, score = 100, supported = false, eligible = false },
+    { originalIndex = 2, score = 4, supported = true, eligible = true },
+    { originalIndex = 1, score = 4, supported = true, eligible = true },
+})
+check(#blockedRanking == 2 and blockedRanking[1].originalIndex == 1
+    and blockedRanking[2].originalIndex == 2, "blocked exclusion or tie-break failed")
+print("PASS: ranking 0/1/2/3/N; descending score; originalIndex tie-break; blocked excluded; input unchanged")
+
+local contextSnapshot = {
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Rare" } },
+    godTraits = { { Name = "AresWeaponBoon", Slot = "Melee" } },
+}
+local contextBefore, productionBefore = deepCopy(contextSnapshot), deepCopy(productionProfile)
+local status = ScoringEngine.getStatusContext(contextSnapshot, productionProfile, "DemeterCastBoon")
+check(status.ownedStatusFamilies.Curse and status.ownedStatusOlympians.Ares
+    and status.offeredStatusFamily == "Root" and status.offeredStatusOlympian == "Demeter",
+    "verified status context wrong")
+local origination = ScoringEngine.getOriginationContext(contextSnapshot, productionProfile,
+    "DemeterCastBoon")
+check(origination.offerEnablesOrigination == true and origination.originationRarity == "Rare",
+    "second family or Origination rarity not detected")
+check(ScoringEngine.getOriginationContext(contextSnapshot, productionProfile,
+    "AresSpecialBoon").offerEnablesOrigination == false, "same family enabled Origination")
+check(ScoringEngine.getOriginationContext({
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Common" } }, godTraits = {} },
+    productionProfile, "DemeterCastBoon").offerEnablesOrigination == false,
+    "first status incorrectly enabled Origination")
+check(ScoringEngine.getOriginationContext({ activeArcana = {}, godTraits = contextSnapshot.godTraits },
+    productionProfile, "DemeterCastBoon").offerEnablesOrigination == false,
+    "inactive Origination enabled")
+check(ScoringEngine.getOriginationContext(contextSnapshot, productionProfile,
+    "UnknownBoon").offerEnablesOrigination == nil, "unknown offer treated as false")
+local unrelatedUnknown = { activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    godTraits = { { Name = "AresWeaponBoon" }, { Name = "UnknownOwnedBoon" } } }
+check(ScoringEngine.getOriginationContext(unrelatedUnknown, productionProfile,
+    "DemeterCastBoon").offerEnablesOrigination == true,
+    "unrelated unknown boon contaminated a proven second family")
+local potentialProfile = deepCopy(productionProfile)
+potentialProfile.potentialStatusTraits.UnknownPotentialStatusBoon = true
+local unknownPotential = { activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Common" } },
+    godTraits = { { Name = "UnknownPotentialStatusBoon" } } }
+check(ScoringEngine.getOriginationContext(unknownPotential, potentialProfile,
+    "DemeterCastBoon").offerEnablesOrigination == nil,
+    "unknown potential status was treated as absent")
+local sameWithPotential = deepCopy(unknownPotential)
+sameWithPotential.godTraits[#sameWithPotential.godTraits + 1] = { Name = "AresWeaponBoon" }
+check(ScoringEngine.getOriginationContext(sameWithPotential, potentialProfile,
+    "AresSpecialBoon").offerEnablesOrigination == nil,
+    "same family with unknown potential status was treated as false")
+local twoKnown = { activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Common" } },
+    godTraits = { { Name = "AresWeaponBoon" }, { Name = "ZeusSpecialBoon" } } }
+check(ScoringEngine.getOriginationContext(twoKnown, productionProfile,
+    "DemeterCastBoon").offerEnablesOrigination == false,
+    "already-enabled Origination was attributed to the offer")
+check(ScoringEngine.getOriginationContext(twoKnown, productionProfile,
+    "UnmappedOffer").offerEnablesOrigination == false,
+    "unmapped offer hid two already-owned families")
+local threeKnown = deepCopy(twoKnown)
+threeKnown.godTraits[#threeKnown.godTraits + 1] = { Name = "AphroditeCastBoon" }
+check(ScoringEngine.getOriginationContext(threeKnown, productionProfile,
+    "FocusRawDamageBoon").offerEnablesOrigination == false,
+    "unmapped offer hid three already-owned families")
+
+local emptySlot = ScoringEngine.getCoreSlotContext({ godTraits = {} }, productionProfile,
+    { ItemName = "ZeusSpecialBoon" })
+check(emptySlot.coreRole == "Special" and emptySlot.coreSlot == "Secondary"
+    and emptySlot.fillsEmptyCoreSlot and not emptySlot.replacesCoreSlot, "empty core slot wrong")
+local replacement = ScoringEngine.getCoreSlotContext(contextSnapshot, productionProfile,
+    { ItemName = "ZeusSpecialBoon", TraitToReplace = "AresSpecialBoon" })
+check(replacement.replacesCoreSlot and not replacement.fillsEmptyCoreSlot,
+    "TraitToReplace not authoritative")
+local aphroditeReplacement = ScoringEngine.getCoreSlotContext(contextSnapshot, productionProfile,
+    { ItemName = "AphroditeWeaponBoon", TraitToReplace = "AresWeaponBoon" })
+check(aphroditeReplacement.coreRole == "Attack" and aphroditeReplacement.replacesCoreSlot
+    and ScoringEngine.getAspectInteraction(productionProfile, "AphroditeWeaponBoon")
+        == "ASPECT_COMPATIBLE", "Aphrodite Attack replacement context wrong")
+local occupied = ScoringEngine.getCoreSlotContext(contextSnapshot, productionProfile,
+    { ItemName = "ApolloWeaponBoon" })
+check(not occupied.fillsEmptyCoreSlot and not occupied.replacesCoreSlot,
+    "occupied slot incorrectly called empty or replacement")
+local reservedNonTarget = ScoringEngine.getCoreSlotContext({ godTraits = {}, slottedTraits = {} },
+    productionProfile, { ItemName = "AresSpecialBoon" })
+check(reservedNonTarget.alignment == "NON_TARGET" and reservedNonTarget.slotPolicy == "reserved"
+    and reservedNonTarget.slotConflict and reservedNonTarget.slotStateBefore == "EMPTY"
+    and reservedNonTarget.conflictIntroduced,
+    "reserved NON_TARGET did not expose a slot conflict")
+local reservedCore = ScoringEngine.getCoreSlotContext({ godTraits = {}, slottedTraits = {} },
+    productionProfile, { ItemName = "ZeusSpecialBoon" })
+check(reservedCore.alignment == "CORE" and not reservedCore.slotConflict,
+    "reserved core was marked as a slot conflict")
+local slottedOccupancy = ScoringEngine.getCoreSlotContext({ godTraits = {},
+    slottedTraits = { Secondary = "ZeusSpecialBoon" } }, productionProfile,
+    { ItemName = "AresSpecialBoon" })
+check(slottedOccupancy.currentSlotTrait == "ZeusSpecialBoon" and slottedOccupancy.slotStateBefore == "CORE",
+    "authoritative SlottedTraits occupancy was not used")
+local reservedAlternative = ScoringEngine.getCoreSlotContext({ godTraits = {}, slottedTraits = {} },
+    productionProfile, { ItemName = "AphroditeWeaponBoon" })
+check(reservedAlternative.alignment == "ALTERNATIVE" and not reservedAlternative.slotConflict,
+    "reserved alternative was marked as a slot conflict")
+local preferredNonTarget = ScoringEngine.getCoreSlotContext({ godTraits = {}, slottedTraits = {} },
+    productionProfile, { ItemName = "PoseidonSprintBoon" })
+check(preferredNonTarget.alignment == "NO_PLAN" and preferredNonTarget.slotPolicy == nil
+    and not preferredNonTarget.slotConflict,
+    "unplanned Sprint acquired a slot conflict")
+local noSlot = ScoringEngine.getCoreSlotContext({ godTraits = {} }, productionProfile,
+    { ItemName = "LowHealthLifestealBoon" })
+check(noSlot.coreRole == nil and not noSlot.slotConflict, "support boon acquired a slot conflict")
+local replacementResolution = ScoringEngine.getCoreSlotContext({ godTraits = {} }, productionProfile,
+    { ItemName = "ZeusSpecialBoon", TraitToReplace = "AresSpecialBoon" })
+check(replacementResolution.slotStateBefore == "NON_TARGET" and replacementResolution.slotStateAfter == "CORE"
+    and replacementResolution.conflictResolved and not replacementResolution.coreSacrificed,
+    "replacement conflict resolution metadata was wrong")
+local replacementSacrifice = ScoringEngine.getCoreSlotContext({ godTraits = {} }, productionProfile,
+    { ItemName = "AresSpecialBoon", TraitToReplace = "ZeusSpecialBoon" })
+check(replacementSacrifice.slotStateBefore == "CORE" and replacementSacrifice.slotStateAfter == "NON_TARGET"
+    and replacementSacrifice.slotConflict and replacementSacrifice.coreSacrificed,
+    "replacement core sacrifice metadata was wrong")
+check(ScoringEngine.getAspectInteraction(productionProfile, "AresWeaponBoon") == "ASPECT_COMPATIBLE"
+    and ScoringEngine.getAspectInteraction(productionProfile, "AphroditeWeaponBoon") == "ASPECT_COMPATIBLE"
+    and ScoringEngine.getAspectInteraction(productionProfile, "ApolloSpecialBoon") == "ASPECT_COMPATIBLE"
+    and ScoringEngine.getAspectInteraction(productionProfile, "DaggerFinalHitTrait") == "ASPECT_DIRECT_SYNERGY"
+    and ScoringEngine.getAspectInteraction(productionProfile, "DemeterCastBoon") == "BACKSTAB_SETUP"
+    and ScoringEngine.getAspectInteraction(productionProfile, "ApolloCastBoon") == nil
+    and ScoringEngine.getAspectInteraction(productionProfile, "AphroditeSprintBoon") == nil,
+    "aspect interaction categories collapsed")
+local setupProfile = deepCopy(productionProfile)
+setupProfile.aspectInteractions.ExplicitSetupTrait = "ASPECT_SETUP_SYNERGY"
+setupProfile.aspectInteractions.ExplicitBothTrait = {
+    "ASPECT_DIRECT_SYNERGY", "ASPECT_SETUP_SYNERGY", "ASPECT_SETUP_SYNERGY",
+}
+local setupBefore = deepCopy(setupProfile)
+local setupSnapshot = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = {}, offers = {
+        { originalIndex = 1, ItemName = "ExplicitSetupTrait", Blocked = false },
+        { originalIndex = 2, ItemName = "ExplicitBothTrait", Blocked = false },
+        { originalIndex = 3, ItemName = "AphroditeWeaponBoon", Blocked = false },
+        { originalIndex = 4, ItemName = "ApolloSpecialBoon", Blocked = false },
+        { originalIndex = 5, ItemName = "AresCastBoon", Blocked = false },
+    },
+}
+local setupSnapshotBefore = deepCopy(setupSnapshot)
+local setupScores = ScoringEngine.scoreOffers(setupSnapshot, setupProfile)
+local function reasonCount(result, code)
+    local count = 0
+    for _, reason in ipairs(result.reasons) do if reason.code == code then count = count + 1 end end
+    return count
+end
+check(setupScores[1].score == 4 and setupScores[1].covered and setupScores[1].scoreComplete
+    and reasonCount(setupScores[1], "ASPECT_SETUP_SYNERGY") == 1,
+    "explicit aspect setup interaction was not scored exactly once")
+check(setupScores[2].score == 12 and setupScores[2].covered and setupScores[2].scoreComplete
+    and reasonCount(setupScores[2], "ASPECT_DIRECT_SYNERGY") == 1
+    and reasonCount(setupScores[2], "ASPECT_SETUP_SYNERGY") == 1,
+    "explicit direct plus setup interactions were not kept distinct and deduplicated")
+check(reasonCount(setupScores[3], "ASPECT_COMPATIBLE") == 1
+    and reasonCount(setupScores[3], "ASPECT_SETUP_SYNERGY") == 0
+    and reasonCount(setupScores[4], "ASPECT_COMPATIBLE") == 1
+    and reasonCount(setupScores[4], "ASPECT_SETUP_SYNERGY") == 0
+    and reasonCount(setupScores[5], "ASPECT_SETUP_SYNERGY") == 0,
+    "unlisted action boons received generic aspect setup synergy")
+local setupSum = 0
+for _, reason in ipairs(setupScores[2].reasons) do setupSum = setupSum + reason.delta end
+check(setupScores[2].score == setupSum, "aspect setup score differed from its reasons")
+local bothInteractions = ScoringEngine.getAspectInteractions(setupProfile, "ExplicitBothTrait")
+check(#bothInteractions == 2 and bothInteractions[1] == "ASPECT_DIRECT_SYNERGY"
+    and bothInteractions[2] == "ASPECT_SETUP_SYNERGY"
+    and ScoringEngine.getAspectInteraction(setupProfile, "ExplicitBothTrait") == "ASPECT_DIRECT_SYNERGY",
+    "plural aspect interaction schema was not deterministic")
+check(deepEqual(setupSnapshot, setupSnapshotBefore) and deepEqual(setupProfile, setupBefore),
+    "aspect setup scoring mutated its snapshot or profile")
+local fallbackProfile = deepCopy(productionProfile)
+fallbackProfile.genericCoreAspectCompatibility = false
+fallbackProfile.aspectInteractions.ExplicitFallbackDirect = "ASPECT_DIRECT_SYNERGY"
+fallbackProfile.aspectInteractions.ExplicitFallbackSetup = "ASPECT_SETUP_SYNERGY"
+local fallbackSnapshot = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = {}, offers = {
+        { originalIndex = 1, ItemName = "AphroditeWeaponBoon", Blocked = false },
+        { originalIndex = 2, ItemName = "ApolloSpecialBoon", Blocked = false },
+        { originalIndex = 3, ItemName = "ExplicitFallbackDirect", Blocked = false },
+        { originalIndex = 4, ItemName = "ExplicitFallbackSetup", Blocked = false },
+    },
+}
+local fallbackScores = ScoringEngine.scoreOffers(fallbackSnapshot, fallbackProfile)
+check(reasonCount(fallbackScores[1], "ASPECT_COMPATIBLE") == 0
+    and reasonCount(fallbackScores[2], "ASPECT_COMPATIBLE") == 0,
+    "disabled generic core aspect compatibility still awarded Attack or Special")
+check(reasonCount(fallbackScores[3], "ASPECT_DIRECT_SYNERGY") == 1
+    and fallbackScores[3].score == 8
+    and reasonCount(fallbackScores[4], "ASPECT_SETUP_SYNERGY") == 1
+    and fallbackScores[4].score == 4,
+    "explicit aspect interactions did not override disabled generic compatibility")
+local enabledFallbackProfile = deepCopy(fallbackProfile)
+enabledFallbackProfile.genericCoreAspectCompatibility = true
+enabledFallbackProfile.aspectInteractions.ExplicitFallbackDirect = nil
+enabledFallbackProfile.aspectInteractions.ExplicitFallbackSetup = nil
+local enabledFallbackScores = ScoringEngine.scoreOffers(fallbackSnapshot, enabledFallbackProfile)
+check(reasonCount(enabledFallbackScores[1], "ASPECT_COMPATIBLE") == 1
+    and reasonCount(enabledFallbackScores[2], "ASPECT_COMPATIBLE") == 1,
+    "enabled generic core aspect compatibility did not preserve Attack/Special fallback")
+local morriganSynthetic = deepCopy(productionProfile)
+morriganSynthetic.weapon = "WeaponDagger"
+morriganSynthetic.aspect = "DaggerTripleAspect"
+morriganSynthetic.genericCoreAspectCompatibility = false
+morriganSynthetic.aspectInteractions = {
+    WeaponUpgradeBoon = "ASPECT_DIRECT_SYNERGY",
+    ExplicitMorriganSetup = "ASPECT_SETUP_SYNERGY",
+    ExplicitMorriganBoth = { "ASPECT_DIRECT_SYNERGY", "ASPECT_SETUP_SYNERGY" },
+}
+local morriganScores = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerTripleAspect", godTraits = {}, hammers = {}, activeArcana = {},
+    offers = {
+        { originalIndex = 1, ItemName = "WeaponUpgradeBoon", Blocked = false },
+        { originalIndex = 2, ItemName = "AphroditeWeaponBoon", Blocked = false },
+        { originalIndex = 3, ItemName = "ApolloSpecialBoon", Blocked = false },
+        { originalIndex = 4, ItemName = "OmegaSyntheticBoon", Blocked = false },
+        { originalIndex = 5, ItemName = "ExplicitMorriganSetup", Blocked = false },
+        { originalIndex = 6, ItemName = "ExplicitMorriganBoth", Blocked = false },
+    },
+}, morriganSynthetic)
+check(morriganScores[1].score == 8 and reasonCount(morriganScores[1], "ASPECT_DIRECT_SYNERGY") == 1
+    and reasonCount(morriganScores[1], "ASPECT_SETUP_SYNERGY") == 0,
+    "Morrigan Premium Service was not direct-only aspect amplification")
+check(reasonCount(morriganScores[2], "ASPECT_COMPATIBLE") == 0 and reasonCount(morriganScores[2], "ASPECT_SETUP_SYNERGY") == 0
+    and reasonCount(morriganScores[3], "ASPECT_COMPATIBLE") == 0 and reasonCount(morriganScores[3], "ASPECT_SETUP_SYNERGY") == 0
+    and reasonCount(morriganScores[4], "ASPECT_SETUP_SYNERGY") == 0,
+    "Morrigan contributing actions received an implicit aspect interaction")
+check(morriganScores[5].score == 4 and reasonCount(morriganScores[5], "ASPECT_SETUP_SYNERGY") == 1
+    and morriganScores[6].score == 12 and reasonCount(morriganScores[6], "ASPECT_DIRECT_SYNERGY") == 1
+    and reasonCount(morriganScores[6], "ASPECT_SETUP_SYNERGY") == 1,
+    "explicit Morrigan setup/direct interactions were not scored exactly as declared")
+check(deepEqual(contextSnapshot, contextBefore) and deepEqual(productionProfile, productionBefore),
+    "context helpers mutated snapshot or profile")
+print("PASS: Arcana/status context; known/unknown families; Origination; core slots; aspect categories; no mutation")
+
+-- Preserve the generic legacy core/alternative scoring regressions with an
+-- explicit synthetic plan; the migrated real Attack branches are tested below.
+MIGRATED_PROFILE_FOR_TEST = productionProfile
+productionProfile = deepCopy(productionProfile)
+productionProfile.slots.Attack = {
+    core = { "AresWeaponBoon" }, alternatives = { "AphroditeWeaponBoon" },
+    preferred = {}, slotPolicy = "reserved",
+}
+productionProfile.slots.Cast = {
+    core = { "DemeterCastBoon" }, alternatives = {}, preferred = {}, slotPolicy = "reserved",
+}
+productionProfile.slots.Sprint = {
+    core = {}, alternatives = {}, preferred = { "AresSprintBoon" }, slotPolicy = "preferred",
+}
+local matrixSnapshot = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
+    godTraits = {}, hammers = {}, activeArcana = {},
+    offers = {
+        { originalIndex = 1, ItemName = "AresWeaponBoon", Blocked = false },
+        { originalIndex = 2, ItemName = "ZeusSpecialBoon", Blocked = false },
+        { originalIndex = 3, ItemName = "DemeterCastBoon", Blocked = false },
+        { originalIndex = 4, ItemName = "PoseidonSprintBoon", Blocked = false },
+        { originalIndex = 5, ItemName = "ZeusManaBoon", Blocked = false },
+    },
+}
+local matrixBefore = deepCopy(matrixSnapshot)
+local matrix = ScoringEngine.scoreOffers(matrixSnapshot, productionProfile)
+check(matrix[1].score == 16 and matrix[1].covered
+    and matrix[1].reasons[1].code == "FILL_EMPTY_PRIMARY_CORE"
+    and matrix[1].reasons[2].code == "ASPECT_COMPATIBLE", "empty Attack score wrong")
+check(matrix[2].score == 16 and matrix[2].covered, "empty Special score wrong")
+check(matrix[3].score == 16 and matrix[3].covered
+    and matrix[3].reasons[2].code == "BACKSTAB_SETUP", "empty Cast score wrong")
+check(matrix[4].score == 0 and matrix[4].covered and matrix[4].scoreComplete,
+    "explicit non-target Sprint resolution wrong")
+check(matrix[5].score == 4 and matrix[5].covered, "empty Mana score wrong")
+
+local originSnapshot = deepCopy(matrixSnapshot)
+originSnapshot.activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } }
+originSnapshot.godTraits = { { Name = "AresWeaponBoon", Slot = "Melee" } }
+originSnapshot.offers = { { originalIndex = 1, ItemName = "DemeterCastBoon", Blocked = false } }
+local originScore = ScoringEngine.scoreOffers(originSnapshot, productionProfile)[1]
+check(originScore.score == 24 and originScore.reasons[4].code == "ORIGINATION_ENABLE"
+    and originScore.reasons[4].delta == 8, "Origination enable score wrong")
+originSnapshot.godTraits[#originSnapshot.godTraits + 1] = { Name = "ZeusSpecialBoon", Slot = "Secondary" }
+local alreadyScore = ScoringEngine.scoreOffers(originSnapshot, productionProfile)[1]
+check(alreadyScore.score == 16 and #alreadyScore.reasons == 3,
+    "already-satisfied Origination received a bonus")
+
+local hammerSnapshot = deepCopy(matrixSnapshot)
+hammerSnapshot.hammers = {
+    { Name = "DaggerRapidAttackTrait" }, { Name = "DaggerBackstabTrait" },
+    { Name = "DaggerFinalHitTrait" },
+}
+hammerSnapshot.offers = { { originalIndex = 1, ItemName = "AphroditeWeaponBoon", Blocked = false } }
+local hammerScore = ScoringEngine.scoreOffers(hammerSnapshot, productionProfile)[1]
+local hammerReasons = 0
+for _, reason in ipairs(hammerScore.reasons) do
+    if reason.code == "EXISTING_HAMMER_SYNERGY" then
+        hammerReasons = hammerReasons + 1
+        check(reason.with == "DaggerBackstabTrait", "Hammer attribution is not deterministic")
+    end
+end
+check(hammerScore.score == 16 and hammerReasons == 1, "Hammer synergy stacked or scored incorrectly")
+
+local replacementSnapshot = deepCopy(hammerSnapshot)
+replacementSnapshot.hammers = {}
+replacementSnapshot.offers[1].TraitToReplace = "AresWeaponBoon"
+local replacementScore = ScoringEngine.scoreOffers(replacementSnapshot, productionProfile)[1]
+check(replacementScore.score == -4 and replacementScore.covered
+    and replacementScore.scoreComplete
+    and replacementScore.reasons[#replacementScore.reasons].code == "CORE_REPLACEMENT_DELTA"
+    and replacementScore.reasons[#replacementScore.reasons].delta == -4,
+    "known equal core replacement was not resolved conservatively")
+local unknownSnapshot = deepCopy(matrixSnapshot)
+unknownSnapshot.offers = { { originalIndex = 1, ItemName = "FocusRawDamageBoon", Blocked = false } }
+local unknownScore = ScoringEngine.scoreOffers(unknownSnapshot, productionProfile)[1]
+check(unknownScore.score == 0 and not unknownScore.covered and #unknownScore.reasons == 0,
+    "unknown support boon was treated as covered")
+
+local statusOnlySnapshot = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", hammers = {},
+    activeArcana = {}, godTraits = {},
+    offers = { { originalIndex = 1, ItemName = "ApolloRetaliateBoon", Blocked = false } },
+}
+local statusOnly = ScoringEngine.scoreOffers(statusOnlySnapshot, productionProfile)[1]
+check(statusOnly.score == 0 and not statusOnly.covered and #statusOnly.reasons == 0,
+    "mapped status alone was treated as gameplay coverage")
+local statusUnknownProfile = deepCopy(productionProfile)
+statusUnknownProfile.potentialStatusTraits.UnknownPotentialStatusBoon = true
+local statusUnknownSnapshot = deepCopy(statusOnlySnapshot)
+statusUnknownSnapshot.activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Common" } }
+statusUnknownSnapshot.godTraits = { { Name = "UnknownPotentialStatusBoon" } }
+local statusUnknown = ScoringEngine.scoreOffers(statusUnknownSnapshot, statusUnknownProfile)[1]
+check(statusUnknown.score == 0 and not statusUnknown.covered and not statusUnknown.scoreComplete
+    and statusUnknown.reasons[1].code == "ORIGINATION_UNRESOLVED",
+    "unknown Origination status context was treated as gameplay coverage")
+local statusEnableSnapshot = deepCopy(statusOnlySnapshot)
+statusEnableSnapshot.activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } }
+statusEnableSnapshot.godTraits = { { Name = "AresWeaponBoon", Slot = "Melee" } }
+local statusEnable = ScoringEngine.scoreOffers(statusEnableSnapshot, productionProfile)[1]
+check(statusEnable.score == 8 and statusEnable.covered
+    and statusEnable.reasons[1].code == "ORIGINATION_ENABLE",
+    "Origination enable did not create gameplay coverage")
+local statusCoreSnapshot = deepCopy(statusOnlySnapshot)
+statusCoreSnapshot.offers[1] = { originalIndex = 1, ItemName = "DemeterCastBoon", Blocked = false }
+local statusCore = ScoringEngine.scoreOffers(statusCoreSnapshot, productionProfile)[1]
+check(statusCore.covered and statusCore.score == 16,
+    "mapped status plus core gameplay rule was not covered")
+local statusReplacementSnapshot = deepCopy(statusCoreSnapshot)
+statusReplacementSnapshot.offers[1].TraitToReplace = "OldCast"
+local statusReplacement = ScoringEngine.scoreOffers(statusReplacementSnapshot, productionProfile)[1]
+check(statusReplacement.score == 0 and not statusReplacement.covered
+    and statusReplacement.reasons[#statusReplacement.reasons].code == "REPLACEMENT_UNRESOLVED",
+    "unresolved replacement did not override gameplay coverage")
+
+local castReplacementBase = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = {}, offers = {},
+}
+local castUp = deepCopy(castReplacementBase)
+castUp.offers = {{ originalIndex = 1, ItemName = "DemeterCastBoon",
+    TraitToReplace = "AresCastBoon", Blocked = false }}
+local upResult = ScoringEngine.scoreOffers(castUp, productionProfile)[1]
+check(upResult.covered and upResult.scoreComplete and upResult.score == 12
+    and upResult.reasons[1].code == "CORE_REPLACEMENT_DELTA"
+    and upResult.reasons[1].delta == 8
+    and upResult.reasons[2].code == "BUILD_SLOT_POLICY_DELTA"
+    and upResult.reasons[2].delta == 4, "positive cast replacement delta wrong")
+local castDown = deepCopy(castReplacementBase)
+castDown.offers = {{ originalIndex = 1, ItemName = "AresCastBoon",
+    TraitToReplace = "DemeterCastBoon", Blocked = false }}
+local downResult = ScoringEngine.scoreOffers(castDown, productionProfile)[1]
+check(downResult.covered and downResult.scoreComplete and downResult.score == -12
+    and downResult.reasons[1].code == "CORE_REPLACEMENT_DELTA"
+    and downResult.reasons[1].delta == -8
+    and downResult.reasons[2].code == "BUILD_SLOT_POLICY_DELTA"
+    and downResult.reasons[2].delta == -4, "negative cast replacement delta wrong")
+local originReplace = deepCopy(castReplacementBase)
+originReplace.activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } }
+originReplace.godTraits = { { Name = "AphroditeCastBoon", Slot = "Ranged" } }
+originReplace.offers = {{ originalIndex = 1, ItemName = "DemeterCastBoon",
+    TraitToReplace = "AresCastBoon", Blocked = false }}
+local originUp = ScoringEngine.scoreOffers(originReplace, productionProfile)[1]
+check(originUp.covered and originUp.scoreComplete and originUp.score == 20,
+    "replacement Origination activation was not included")
+local originDown = deepCopy(castReplacementBase)
+originDown.activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } }
+originDown.godTraits = { { Name = "DemeterCastBoon", Slot = "Ranged" },
+    { Name = "AphroditeCastBoon", Slot = "Ranged" } }
+originDown.offers = {{ originalIndex = 1, ItemName = "AresCastBoon",
+    TraitToReplace = "DemeterCastBoon", Blocked = false }}
+local originDownResult = ScoringEngine.scoreOffers(originDown, productionProfile)[1]
+check(originDownResult.covered and originDownResult.scoreComplete and originDownResult.score == -20,
+    "replacement Origination loss was not included")
+check(not ScoringEngine.isRankingReady({ statusOnly },
+    ScoringEngine.getRankingContext({ statusOnly }, true)),
+    "mapped-status-only eligible offer became rankable")
+for _, result in ipairs(matrix) do
+    local sum = 0
+    for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
+    check(result.score == sum, "production score contains an invisible delta")
+end
+check(deepEqual(matrixSnapshot, matrixBefore), "production scoring mutated its snapshot")
+print("PASS: synthetic legacy core-plan matrix; Aspect; Origination; Hammer once; replacement unresolved; status-only uncovered; score=sum")
+
+local ready = {
+    { score = 4, eligible = true, covered = true, scoreComplete = true },
+    { score = 1, eligible = true, covered = true, scoreComplete = true },
+}
+check(ScoringEngine.isRankingReady(ready,
+    { profileSupported = true, activeDifferentiatingRuleCount = 1 }), "covered differential not ready")
+check(not ScoringEngine.isRankingReady(ready,
+    { profileSupported = false, activeDifferentiatingRuleCount = 1 }), "unsupported profile ready")
+check(not ScoringEngine.isRankingReady({ ready[1] },
+    { profileSupported = true, activeDifferentiatingRuleCount = 1 }), "single offer ready")
+check(not ScoringEngine.isRankingReady({ ready[1], { score = 1, eligible = true, covered = false } },
+    { profileSupported = true, activeDifferentiatingRuleCount = 1 }), "uncovered offer ready")
+check(not ScoringEngine.isRankingReady({
+    { score = 0, eligible = true, covered = true }, { score = 0, eligible = true, covered = true } },
+    { profileSupported = true, activeDifferentiatingRuleCount = 1 }), "equal defaults ready")
+check(not ScoringEngine.isRankingReady(ready,
+    { profileSupported = true, activeDifferentiatingRuleCount = 0 }), "no active rule ready")
+local unresolvedSnapshot = {
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    offers = {
+        { originalIndex = 1, ItemName = "AresCastBoon", Blocked = false },
+        { originalIndex = 2, ItemName = "AresManaBoon", Blocked = false },
+    },
+}
+local unresolvedScores = ScoringEngine.scoreOffers(unresolvedSnapshot, productionProfile)
+check(unresolvedScores[1].covered and unresolvedScores[1].scoreComplete
+    and unresolvedScores[1].score == -4,
+    "audited Ares Cast non-status was not complete")
+check(unresolvedScores[2].covered and unresolvedScores[2].scoreComplete
+    and unresolvedScores[2].score == 4,
+    "audited Ares Mana non-status was not complete")
+local inactiveComplete = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = {},
+    offers = { { originalIndex = 1, ItemName = "AresCastBoon", Blocked = false } },
+}, productionProfile)[1]
+check(inactiveComplete.covered and inactiveComplete.scoreComplete
+    and inactiveComplete.score == -4,
+    "explicit non-target Cast was not complete when Origination inactive")
+local knownNonStatusComplete = ScoringEngine.scoreOffers({
+    weapon = "WeaponDagger", aspect = "DaggerBackstabAspect", godTraits = {}, hammers = {},
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    offers = { { originalIndex = 1, ItemName = "AresSprintBoon", Blocked = false } },
+}, productionProfile)[1]
+check(knownNonStatusComplete.covered and knownNonStatusComplete.scoreComplete
+    and knownNonStatusComplete.score == 6,
+    "preferred Sprint did not produce a complete score")
+local equalContext = ScoringEngine.getRankingContext({ matrix[1], matrix[2], matrix[3] }, true)
+check(not ScoringEngine.isRankingReady({ matrix[1], matrix[2], matrix[3] }, equalContext),
+    "three equal production scores became rankable")
+local differentiated = ScoringEngine.scoreOffers(hammerSnapshot, productionProfile)
+differentiated[2] = { originalIndex = 2, supported = true, score = 12, eligible = true, covered = true, scoreComplete = true,
+    reasons = {{ code = "TEST_RULE_A", delta = 12 }} }
+differentiated[3] = { originalIndex = 3, supported = true, score = 8, eligible = true, covered = true, scoreComplete = true,
+    reasons = {{ code = "TEST_RULE_B", delta = 8 }} }
+local differentiatedContext = ScoringEngine.getRankingContext(differentiated, true)
+check(ScoringEngine.isRankingReady(differentiated, differentiatedContext),
+    "different fully-covered production scores not ready")
+local withUnknown = { differentiated[1], differentiated[2], unknownScore }
+check(not ScoringEngine.isRankingReady(withUnknown,
+    ScoringEngine.getRankingContext(withUnknown, true)), "uncovered eligible offer became rankable")
+local rankedProduction = ScoringEngine.rank(differentiated)
+check(rankedProduction[1].score == 16 and rankedProduction[1].originalIndex == 1
+    and rankedProduction[2].score == 12 and rankedProduction[2].originalIndex == 2
+    and rankedProduction[3].score == 8 and rankedProduction[3].originalIndex == 3,
+    "production rank or post-difference tie-break wrong")
+local tie124 = ScoringEngine.rank({
+    { originalIndex = 1, score = 12, supported = true, eligible = true },
+    { originalIndex = 2, score = 12, supported = true, eligible = true },
+    { originalIndex = 3, score = 4, supported = true, eligible = true },
+})
+check(tie124[1].rank == 1 and tie124[2].rank == 1 and tie124[3].rank == 3
+    and tie124[1].tied and tie124[2].tied and not tie124[3].tied,
+    "competition ranks did not preserve a 12/12/4 tie")
+local distinctRanks = ScoringEngine.rank({
+    { originalIndex = 1, score = 12, supported = true, eligible = true },
+    { originalIndex = 2, score = 8, supported = true, eligible = true },
+    { originalIndex = 3, score = 4, supported = true, eligible = true },
+})
+check(distinctRanks[1].rank == 1 and distinctRanks[2].rank == 2 and distinctRanks[3].rank == 3,
+    "distinct scores did not receive distinct gameplay ranks")
+check(not ScoringEngine.isRankingReady({
+    { score = 12, eligible = true, covered = true },
+    { score = 12, eligible = true, covered = true },
+    { score = 12, eligible = true, covered = true },
+}, { profileSupported = true, activeDifferentiatingRuleCount = 1 }),
+    "12/12/12 became ranking-ready")
+local lowerTie = ScoringEngine.rank({
+    { originalIndex = 1, score = 16, supported = true, eligible = true },
+    { originalIndex = 2, score = 12, supported = true, eligible = true },
+    { originalIndex = 3, score = 12, supported = true, eligible = true },
+})
+check(lowerTie[1].rank == 1 and lowerTie[2].rank == 2 and lowerTie[3].rank == 2,
+    "16/12/12 did not share the lower gameplay rank")
+local nonStatusContext = ScoringEngine.getOriginationContext({
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    godTraits = {},
+}, productionProfile, "AresSprintBoon")
+check(nonStatusContext.status.statusKnowledge == "known_non_status"
+    and nonStatusContext.offerEnablesOrigination == false,
+    "verified Ares Sprint non-status was treated as unknown")
+local unknownStatusContext = ScoringEngine.getOriginationContext({
+    activeArcana = { EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" } },
+    godTraits = {},
+}, productionProfile, "UnauditedStatusBoon")
+check(unknownStatusContext.status.statusKnowledge == "unknown"
+    and unknownStatusContext.offerEnablesOrigination == nil,
+    "unaudited status was not tri-state unknown")
+
+local planBase = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
+    godTraits = {}, hammers = {}, activeArcana = {}, offers = {} }
+local plan = deepCopy(planBase)
+plan.offers = {
+    { originalIndex = 1, ItemName = "AresWeaponBoon" },
+    { originalIndex = 2, ItemName = "AphroditeWeaponBoon" },
+    { originalIndex = 3, ItemName = "AresSpecialBoon" },
+    { originalIndex = 4, ItemName = "ZeusSpecialBoon" },
+    { originalIndex = 5, ItemName = "DemeterCastBoon" },
+    { originalIndex = 6, ItemName = "AresSprintBoon" },
+    { originalIndex = 7, ItemName = "AresManaBoon" },
+}
+local planned = ScoringEngine.scoreOffers(plan, productionProfile)
+check(planned[1].score == 16 and planned[1].reasons[3].code == "BUILD_CORE_PRIORITY",
+    "Ares Attack core priority missing")
+check(planned[2].score == 12 and #planned[2].reasons == 2,
+    "Aphrodite alternative incorrectly received core priority")
+check(planned[3].score == 0 and #planned[3].reasons == 2,
+    "Ares Special non-target incorrectly filled empty planned slot")
+check(planned[4].score == 16 and planned[5].score == 16,
+    "planned Zeus Special or Demeter Cast score wrong")
+check(planned[6].score == 6 and planned[7].score == 4,
+    "preferred Sprint or no-plan Mana score wrong")
+local regressionScreen = deepCopy(planBase)
+regressionScreen.offers = {
+    { originalIndex = 1, ItemName = "AresWeaponBoon" },
+    { originalIndex = 2, ItemName = "AresCastBoon" },
+    { originalIndex = 3, ItemName = "AresManaBoon" },
+}
+local regressionScores = ScoringEngine.scoreOffers(regressionScreen, productionProfile)
+check(regressionScores[1].score == 16 and regressionScores[1].covered
+    and regressionScores[1].scoreComplete and #regressionScores[1].reasons == 3,
+    "regression Attack coverage changed")
+check(regressionScores[2].score == -4 and regressionScores[2].covered
+    and regressionScores[2].scoreComplete and #regressionScores[2].reasons == 1
+    and regressionScores[2].reasons[1].code == "BUILD_SLOT_POLICY_DELTA",
+    "explicit NON_TARGET Cast was not resolved as zero-valued coverage")
+check(regressionScores[3].score == 4 and regressionScores[3].covered
+    and regressionScores[3].scoreComplete,
+    "no-plan Mana generic coverage changed")
+local regressionContext = ScoringEngine.getRankingContext(regressionScores, true)
+check(ScoringEngine.isRankingReady(regressionScores, regressionContext),
+    "fully resolved 16/0/4 regression screen was not rankable")
+local regressionRank = ScoringEngine.rank(regressionScores)
+check(regressionRank[1].rank == 1 and regressionRank[1].originalIndex == 1
+    and regressionRank[2].rank == 2 and regressionRank[2].originalIndex == 3
+    and regressionRank[3].rank == 3 and regressionRank[3].originalIndex == 2,
+    "16/-4/4 regression competition ranking wrong")
+local nonTargetReplacement = deepCopy(planBase)
+nonTargetReplacement.offers = {{ originalIndex = 1, ItemName = "DemeterCastBoon",
+    TraitToReplace = "AresCastBoon" }}
+local nonTargetReplacementScore = ScoringEngine.scoreOffers(nonTargetReplacement, productionProfile)[1]
+check(nonTargetReplacementScore.covered and nonTargetReplacementScore.scoreComplete
+    and nonTargetReplacementScore.score == 12
+    and nonTargetReplacementScore.reasons[2].code == "BUILD_SLOT_POLICY_DELTA"
+    and nonTargetReplacementScore.reasons[2].delta == 4,
+    "NON_TARGET old core was treated as unresolved replacement")
+local noPlan = deepCopy(productionProfile); noPlan.slots = {}
+local noPlanScores = ScoringEngine.scoreOffers(plan, noPlan)
+check(noPlanScores[3].score == 12 and noPlanScores[3].covered,
+    "profile without slot plan changed generic fill behavior")
+local syntheticProfile = deepCopy(productionProfile)
+syntheticProfile.id = "synthetic_second_profile"
+syntheticProfile.slots = {
+    Attack = { core = { "AphroditeWeaponBoon" }, alternatives = {}, preferred = {}, slotPolicy = "reserved" },
+    Special = { core = { "AresSpecialBoon" }, alternatives = {}, preferred = {}, slotPolicy = "reserved" },
+    Cast = { core = { "ApolloCastBoon" }, alternatives = {}, preferred = {}, slotPolicy = "reserved" },
+    Sprint = { core = {}, alternatives = {}, preferred = {}, slotPolicy = "open" },
+}
+check(ScoringEngine.validateProfile(syntheticProfile), "synthetic second profile rejected")
+check(ScoringEngine.getBuildAlignment(syntheticProfile, "Special", "AresSpecialBoon") == "CORE"
+    and ScoringEngine.getBuildAlignment(syntheticProfile, "Special", "ZeusSpecialBoon") == "NON_TARGET"
+    and ScoringEngine.getBuildAlignment(syntheticProfile, "Mana", "AresManaBoon") == "NO_PLAN",
+    "second profile alignment used production-profile assumptions")
+local syntheticCore = ScoringEngine.getCoreSlotContext({ godTraits = {} }, syntheticProfile,
+    { ItemName = "AresSpecialBoon" })
+local syntheticConflict = ScoringEngine.getCoreSlotContext({ godTraits = {} }, syntheticProfile,
+    { ItemName = "ZeusSpecialBoon" })
+check(not syntheticCore.slotConflict and syntheticConflict.slotConflict,
+    "second profile slot conflict was not data-driven")
+local tiePlan = { weapon = plan.weapon, aspect = plan.aspect, godTraits = {}, hammers = {},
+    activeArcana = {}, offers = {
+        { originalIndex = 1, ItemName = "AresSpecialBoon" },
+        { originalIndex = 2, ItemName = "AresSprintBoon" },
+        { originalIndex = 3, ItemName = "AresManaBoon" },
+    }}
+local tieScores = ScoringEngine.scoreOffers(tiePlan, productionProfile)
+check(tieScores[2].score == 6 and tieScores[1].score == 0 and tieScores[3].score == 4,
+    "6/4/4 build-plan calibration wrong")
+for _, rarity in ipairs({ "Common", "Rare", "Epic", "Heroic" }) do
+    local special = deepCopy(planBase)
+    special.offers = {{ originalIndex = 1, ItemName = "AresSpecialBoon", Rarity = rarity }}
+    local result = ScoringEngine.scoreOffers(special, productionProfile)[1]
+    local expected = ({ Common = 0, Rare = 1, Epic = 2, Heroic = 3 })[rarity]
+    check(result.score == expected and result.score == (function()
+        local sum = 0 for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end return sum end)(),
+        "reserved Special conflict policy score wrong for " .. rarity)
+end
+for _, rarity in ipairs({ "Common", "Rare", "Epic", "Heroic" }) do
+    local cast = deepCopy(planBase)
+    cast.offers = {{ originalIndex = 1, ItemName = "AresCastBoon", Rarity = rarity }}
+    local result = ScoringEngine.scoreOffers(cast, productionProfile)[1]
+    local expected = ({ Common = -4, Rare = -3, Epic = -2, Heroic = -1 })[rarity]
+    check(result.score == expected, "reserved Cast conflict policy score wrong for " .. rarity)
+end
+local replacementPriority = deepCopy(planBase)
+replacementPriority.offers = {{ originalIndex = 1, ItemName = "ZeusSpecialBoon",
+    TraitToReplace = "AresSpecialBoon" }}
+local replacementPriorityScore = ScoringEngine.scoreOffers(replacementPriority, productionProfile)[1]
+check(replacementPriorityScore.score == 8 and replacementPriorityScore.reasons[1].delta == 4
+    and replacementPriorityScore.reasons[2].code == "BUILD_SLOT_POLICY_DELTA"
+    and replacementPriorityScore.reasons[2].delta == 4,
+    "build priority replacement delta was not +4")
+local replacementPriorityDown = deepCopy(planBase)
+replacementPriorityDown.offers = {{ originalIndex = 1, ItemName = "AresSpecialBoon",
+    TraitToReplace = "ZeusSpecialBoon" }}
+local replacementPriorityDownScore = ScoringEngine.scoreOffers(replacementPriorityDown, productionProfile)[1]
+check(replacementPriorityDownScore.score == -8
+    and replacementPriorityDownScore.reasons[2].code == "BUILD_SLOT_POLICY_DELTA"
+    and replacementPriorityDownScore.reasons[2].delta == -4,
+    "build priority replacement delta was not -4")
+local coreToAlternative = deepCopy(planBase)
+coreToAlternative.godTraits = { { Name = "AresWeaponBoon", Slot = "Melee" } }
+coreToAlternative.offers = {{ originalIndex = 1, ItemName = "AphroditeWeaponBoon",
+    TraitToReplace = "AresWeaponBoon" }}
+local coreToAlternativeContext = ScoringEngine.getCoreSlotContext(coreToAlternative,
+    productionProfile, coreToAlternative.offers[1])
+local coreToAlternativeScore = ScoringEngine.scoreOffers(coreToAlternative, productionProfile)[1]
+check(coreToAlternativeContext.alignment == "ALTERNATIVE"
+    and coreToAlternativeContext.slotStateBefore == "CORE"
+    and coreToAlternativeContext.slotStateAfter == "ALTERNATIVE"
+    and not coreToAlternativeContext.slotConflict
+    and not coreToAlternativeContext.conflictIntroduced
+    and not coreToAlternativeContext.conflictResolved
+    and not coreToAlternativeContext.coreSacrificed,
+    "CORE to ALTERNATIVE transition metadata was wrong")
+check(coreToAlternativeScore.covered and coreToAlternativeScore.scoreComplete
+    and coreToAlternativeScore.score == -4,
+    "audited CORE to ALTERNATIVE replacement was unresolved")
+local coreToAlternativeOrigination = deepCopy(coreToAlternative)
+coreToAlternativeOrigination.activeArcana = {
+    EffectVulnerabilityMetaUpgrade = { Rarity = "Epic" },
+}
+local unresolvedAlternative = ScoringEngine.scoreOffers(coreToAlternativeOrigination,
+    productionProfile)[1]
+check(unresolvedAlternative.covered and unresolvedAlternative.scoreComplete
+    and unresolvedAlternative.reasons[1].code ~= "REPLACEMENT_UNRESOLVED",
+    "audited Aphrodite non-status replacement remained unresolved")
+local alternativeToCore = deepCopy(planBase)
+alternativeToCore.godTraits = { { Name = "AphroditeWeaponBoon", Slot = "Melee" } }
+alternativeToCore.offers = {{ originalIndex = 1, ItemName = "AresWeaponBoon",
+    TraitToReplace = "AphroditeWeaponBoon" }}
+local alternativeToCoreContext = ScoringEngine.getCoreSlotContext(alternativeToCore,
+    productionProfile, alternativeToCore.offers[1])
+check(alternativeToCoreContext.slotStateBefore == "ALTERNATIVE"
+    and alternativeToCoreContext.slotStateAfter == "CORE"
+    and not alternativeToCoreContext.conflictResolved and not alternativeToCoreContext.slotConflict,
+    "ALTERNATIVE to CORE transition metadata was wrong")
+local coreToNonTarget = deepCopy(planBase)
+coreToNonTarget.godTraits = { { Name = "AresWeaponBoon", Slot = "Melee" } }
+coreToNonTarget.offers = {{ originalIndex = 1, ItemName = "ZeusWeaponBoon",
+    TraitToReplace = "AresWeaponBoon" }}
+local coreToNonTargetContext = ScoringEngine.getCoreSlotContext(coreToNonTarget,
+    productionProfile, coreToNonTarget.offers[1])
+check(coreToNonTargetContext.slotStateBefore == "CORE"
+    and coreToNonTargetContext.slotStateAfter == "NON_TARGET"
+    and coreToNonTargetContext.slotConflict and coreToNonTargetContext.conflictIntroduced
+    and coreToNonTargetContext.coreSacrificed,
+    "CORE to NON_TARGET transition metadata was wrong")
+local nonTargetToCore = deepCopy(planBase)
+nonTargetToCore.godTraits = { { Name = "ZeusWeaponBoon", Slot = "Melee" } }
+nonTargetToCore.offers = {{ originalIndex = 1, ItemName = "AresWeaponBoon",
+    TraitToReplace = "ZeusWeaponBoon" }}
+local nonTargetToCoreContext = ScoringEngine.getCoreSlotContext(nonTargetToCore,
+    productionProfile, nonTargetToCore.offers[1])
+check(nonTargetToCoreContext.slotStateBefore == "NON_TARGET"
+    and nonTargetToCoreContext.slotStateAfter == "CORE"
+    and nonTargetToCoreContext.conflictResolved and not nonTargetToCoreContext.slotConflict,
+    "NON_TARGET to CORE transition metadata was wrong")
+local profileBeforePlan = deepCopy(productionProfile)
+ScoringEngine.scoreOffers(plan, productionProfile)
+check(deepEqual(profileBeforePlan, productionProfile), "build plan scoring mutated profile")
+productionProfile = MIGRATED_PROFILE_FOR_TEST
+MIGRATED_PROFILE_FOR_TEST = nil
+local rarityPlanProfile = deepCopy(productionProfile)
+rarityPlanProfile.slots.Cast = { core = { "DemeterCastBoon" }, alternatives = {},
+    preferred = {}, slotPolicy = "reserved" }
+local rarityBase = { weapon = "WeaponDagger", aspect = "DaggerBackstabAspect",
+    godTraits = {}, hammers = {}, activeArcana = {}, offers = {} }
+local function rarityScore(name, rarity)
+    local snapshot = deepCopy(rarityBase)
+    snapshot.offers = {{ originalIndex = 1, ItemName = name, Rarity = rarity }}
+    return ScoringEngine.scoreOffers(snapshot, rarityPlanProfile)[1]
+end
+local common = rarityScore("AresSpecialBoon", "Common")
+local rare = rarityScore("AresSpecialBoon", "Rare")
+local epic = rarityScore("AresSpecialBoon", "Epic")
+local heroic = rarityScore("AresSpecialBoon", "Heroic")
+check(common.score == 0 and #common.reasons == 2, "Common rarity/policy score changed")
+check(rare.score == 1 and epic.score == 2 and heroic.score == 3,
+    "Common/Rare/Epic/Heroic rarity policy wrong")
+local duo = rarityScore("AresSpecialBoon", "Duo")
+local legendary = rarityScore("AresSpecialBoon", "Legendary")
+check(duo.score == 0 and legendary.score == 0 and duo.scoreComplete and legendary.scoreComplete,
+    "Duo/Legendary incorrectly changed rarity score or completeness")
+local unknownRarity = rarityScore("FocusRawDamageBoon", "Heroic")
+check(not unknownRarity.covered and not unknownRarity.scoreComplete and unknownRarity.score == 0
+    and #unknownRarity.reasons == 0, "unknown Heroic support received rarity coverage")
+local nonTargetRarity = rarityScore("AresCastBoon", "Heroic")
+check(nonTargetRarity.covered and nonTargetRarity.scoreComplete and nonTargetRarity.score == -1
+    and nonTargetRarity.reasons[2].code == "RARITY", "NON_TARGET Heroic rarity was not applied")
+local replacementRarity = deepCopy(rarityBase)
+replacementRarity.godTraits = {{ Name = "AresSpecialBoon", Slot = "Secondary" }}
+replacementRarity.offers = {{ originalIndex = 1, ItemName = "ZeusSpecialBoon",
+    TraitToReplace = "AresSpecialBoon", OldRarity = "Epic", Rarity = "Heroic" }}
+local replacementRarityScore = ScoringEngine.scoreOffers(replacementRarity, productionProfile)[1]
+check(replacementRarityScore.score == 9 and replacementRarityScore.scoreComplete
+    and replacementRarityScore.reasons[3].code == "RARITY_DELTA"
+    and replacementRarityScore.reasons[3].delta == 1,
+    "Epic to Heroic replacement rarity delta wrong")
+local missingOldRarity = deepCopy(replacementRarity)
+missingOldRarity.offers[1].OldRarity = nil
+local missingOldResult = ScoringEngine.scoreOffers(missingOldRarity, productionProfile)[1]
+check(not missingOldResult.scoreComplete and missingOldResult.reasons[#missingOldResult.reasons].code == "RARITY_UNRESOLVED",
+    "missing OldRarity was not conservatively unresolved")
+local noDoubleRarity = 0
+for _, reason in ipairs(replacementRarityScore.reasons) do
+    if reason.code == "RARITY" then noDoubleRarity = noDoubleRarity + 1 end
+end
+check(noDoubleRarity == 0, "replacement received absolute RARITY and RARITY_DELTA")
+local statusSynergy = deepCopy(rarityBase)
+statusSynergy.godTraits = {{ Name = "AresWeaponBoon" }}
+statusSynergy.offers = {{ originalIndex = 1, ItemName = "AresStatusDoubleDamageBoon", Rarity = "Epic" }}
+local statusSynergyScore = ScoringEngine.scoreOffers(statusSynergy, productionProfile)[1]
+check(statusSynergyScore.score == 6 and statusSynergyScore.covered and statusSynergyScore.scoreComplete
+    and statusSynergyScore.reasons[1].code == "BUILD_STATUS_SYNERGY"
+    and statusSynergyScore.reasons[2].code == "RARITY",
+    "Curse capability synergy was not scored")
+do
+local lightningBase = { weapon = "WeaponDagger", aspect = "DaggerTripleAspect",
+    godTraits = {}, hammers = {}, activeArcana = {}, offers = {{ originalIndex = 1, ItemName = "LightningVulnerabilityBoon" }} }
+local function lightningScore(traits, profile)
+    local snapshot = deepCopy(lightningBase)
+    snapshot.godTraits = traits
+    return ScoringEngine.scoreOffers(snapshot, profile)[1]
+end
+for _, traits in ipairs({ {}, {{ Name = "PoseidonCastBoon" }}, {{ Name = "ZeusSpecialBoon" }} }) do
+    local score = lightningScore(traits, morriganProfile)
+    local context = ScoringEngine.getOriginationContext({
+        activeArcana = {}, godTraits = traits,
+    }, morriganProfile, "LightningVulnerabilityBoon")
+    check(score.score == 0 and not score.covered and not score.scoreComplete
+        and context.status.statusKnowledge == "known_non_status"
+        and context.offerEnablesOrigination == false
+        and #score.reasons == 0,
+        "Lightning Duo incorrectly covered without both owned prerequisites")
+end
+local lightningBoth = lightningScore({ { Name = "ZeusSpecialBoon" }, { Name = "PoseidonCastBoon" } }, morriganProfile)
+check(lightningBoth.score == 4 and lightningBoth.covered and lightningBoth.scoreComplete
+    and #lightningBoth.reasons == 1 and lightningBoth.reasons[1].code == "BUILD_STATUS_SYNERGY"
+    and lightningBoth.reasons[1].delta == 4,
+    "Lightning Duo owned-build synergy was not scored exactly")
+local melinoeLightningSnapshot = deepCopy(lightningBase)
+melinoeLightningSnapshot.aspect = "DaggerBackstabAspect"
+melinoeLightningSnapshot.godTraits = { { Name = "PoseidonCastBoon" }, { Name = "ZeusSpecialBoon" } }
+local melinoeLightning = ScoringEngine.scoreOffers(melinoeLightningSnapshot, productionProfile)[1]
+check(melinoeLightning.score == 0 and not melinoeLightning.covered and not melinoeLightning.scoreComplete,
+    "Lightning Duo leaked Morrigan-only rule into Melinoe")
+end
+local noStatusSynergy = deepCopy(rarityBase)
+noStatusSynergy.offers = {{ originalIndex = 1, ItemName = "AresStatusDoubleDamageBoon", Rarity = "Epic" }}
+local noStatusSynergyScore = ScoringEngine.scoreOffers(noStatusSynergy, productionProfile)[1]
+check(noStatusSynergyScore.score == 0 and not noStatusSynergyScore.covered
+    and not noStatusSynergyScore.scoreComplete and #noStatusSynergyScore.reasons == 0,
+    "Curse capability was invented without a producer")
+local bloodDropSynergy = deepCopy(rarityBase)
+bloodDropSynergy.godTraits = {{ Name = "AresManaBoon" }}
+bloodDropSynergy.offers = {{ originalIndex = 1, ItemName = "DoubleBloodDropBoon", Rarity = "Common" }}
+local bloodDropScore = ScoringEngine.scoreOffers(bloodDropSynergy, productionProfile)[1]
+check(bloodDropScore.score == 4 and bloodDropScore.covered and bloodDropScore.scoreComplete
+    and bloodDropScore.reasons[1].code == "BLOOD_DROP_ENGINE_SYNERGY",
+    "BloodDrop producer/payoff synergy was not scored")
+local revengeBloodDrop = deepCopy(rarityBase)
+revengeBloodDrop.godTraits = {{ Name = "BloodDropRevengeBoon" }}
+revengeBloodDrop.offers = {{ originalIndex = 1, ItemName = "RendBloodDropBoon", Rarity = "Common" }}
+local revengeBloodDropScore = ScoringEngine.scoreOffers(revengeBloodDrop, productionProfile)[1]
+check(revengeBloodDropScore.score == 4 and revengeBloodDropScore.covered
+    and revengeBloodDropScore.scoreComplete,
+    "BloodDropRevenge producer did not enable Rend payoff synergy")
+local inverseBloodDrop = deepCopy(rarityBase)
+inverseBloodDrop.godTraits = {{ Name = "DoubleBloodDropBoon" }}
+inverseBloodDrop.offers = {{ originalIndex = 1, ItemName = "AresManaBoon", Rarity = "Common" }}
+local inverseBloodDropScore = ScoringEngine.scoreOffers(inverseBloodDrop, productionProfile)[1]
+check(inverseBloodDropScore.score == 4 and inverseBloodDropScore.covered
+    and #inverseBloodDropScore.reasons == 1
+    and inverseBloodDropScore.reasons[1].code == "FILL_EMPTY_UTILITY_CORE",
+    "unsupported BloodDrop producer/payoff symmetry was introduced")
+local inverseRevenge = deepCopy(rarityBase)
+inverseRevenge.godTraits = {{ Name = "RendBloodDropBoon" }}
+inverseRevenge.offers = {{ originalIndex = 1, ItemName = "BloodDropRevengeBoon", Rarity = "Common" }}
+local inverseRevengeScore = ScoringEngine.scoreOffers(inverseRevenge, productionProfile)[1]
+check(inverseRevengeScore.score == 0 and not inverseRevengeScore.covered,
+    "unsupported BloodDrop producer symmetry was introduced")
+local noBloodDrop = deepCopy(rarityBase)
+noBloodDrop.offers = {{ originalIndex = 1, ItemName = "DoubleBloodDropBoon", Rarity = "Epic" }}
+local noBloodDropScore = ScoringEngine.scoreOffers(noBloodDrop, productionProfile)[1]
+check(noBloodDropScore.score == 0 and not noBloodDropScore.covered
+    and not noBloodDropScore.scoreComplete,
+    "BloodDrop payoff was scored without a producer")
+for _, deferredName in ipairs({ "MissingHealthCritBoon",
+    "OmegaDelayedDamageBoon", "AresExCastBoon" }) do
+    local deferred = rarityScore(deferredName, "Heroic")
+    check(deferred.score == 0 and not deferred.covered and not deferred.scoreComplete,
+        deferredName .. " was no longer deferred")
+end
+for _, hp in ipairs({ 20, 39, 40, 80 }) do
+    local lowHealth = deepCopy(rarityBase)
+    lowHealth.combatContext = { health = { current = hp, max = 100 } }
+    lowHealth.offers = {{ originalIndex = 1, ItemName = "LowHealthLifestealBoon", Rarity = "Common" }}
+    local lowResult = ScoringEngine.scoreOffers(lowHealth, productionProfile)[1]
+    check(lowResult.score == 2 and lowResult.covered and lowResult.scoreComplete
+        and lowResult.condition.currentlyActive == (hp < 40)
+        and #lowResult.reasons == 1 and lowResult.reasons[1].code == "SURVIVAL_SUPPORT",
+        "LowHealth structural score or condition metadata changed at HP " .. tostring(hp))
+end
+local lowHealthMissing = deepCopy(rarityBase)
+lowHealthMissing.offers = {{ originalIndex = 1, ItemName = "LowHealthLifestealBoon", Rarity = "Epic" }}
+local lowMissingResult = ScoringEngine.scoreOffers(lowHealthMissing, productionProfile)[1]
+check(lowMissingResult.score == 4 and lowMissingResult.covered and lowMissingResult.scoreComplete
+    and lowMissingResult.condition.currentlyActive == nil,
+    "missing health did not preserve LowHealth structural scoring")
+for _, rarity in ipairs({ "Common", "Rare", "Epic", "Heroic" }) do
+    local low = deepCopy(rarityBase)
+    low.offers = {{ originalIndex = 1, ItemName = "LowHealthLifestealBoon", Rarity = rarity }}
+    local result = ScoringEngine.scoreOffers(low, productionProfile)[1]
+    local expected = ({ Common = 2, Rare = 3, Epic = 4, Heroic = 5 })[rarity]
+    check(result.score == expected and result.scoreComplete and result.score == (function()
+        local sum = 0 for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end return sum end)(),
+        "LowHealth rarity score wrong for " .. rarity)
+end
+print("PASS: rankingReady requires support, 2 eligible, full gameplay coverage, active rule, distinct scores")
+
+-- Active Intermediate plan: Attack branches, Zeus Special, neutral Cast/Sprint/Mana.
+local activePlan = deepCopy(planBase)
+activePlan.offers = {
+    { originalIndex = 1, ItemName = "AphroditeWeaponBoon" },
+    { originalIndex = 2, ItemName = "ZeusSpecialBoon" },
+    { originalIndex = 3, ItemName = "AresWeaponBoon" },
+    { originalIndex = 4, ItemName = "AresCastBoon" },
+    { originalIndex = 5, ItemName = "AresSprintBoon" },
+    { originalIndex = 6, ItemName = "AresManaBoon" },
+}
+local activeScores = ScoringEngine.scoreOffers(activePlan, productionProfile)
+check(activeScores[1].score == 12 and activeScores[1].covered and activeScores[1].scoreComplete
+    and #activeScores[1].reasons == 2, "Attack priority added an uncalibrated bonus")
+check(activeScores[2].score == 16 and activeScores[2].covered and activeScores[2].scoreComplete
+    and activeScores[2].reasons[3].code == "BUILD_CORE_PRIORITY", "Zeus Special core plan changed")
+check(ScoringEngine.getBuildAlignment(productionProfile, "Attack", "AresWeaponBoon") == "ALTERNATIVE",
+    "Ares Attack branch was treated as non-target")
+check(activeScores[3].score == 12 and activeScores[3].covered and activeScores[3].scoreComplete
+    and #activeScores[3].reasons == 2,
+    "native Ares Attack was incomplete or gained an uncalibrated bonus")
+for index, role in ipairs({ "Cast", "Sprint", "Mana" }) do
+    local context = ScoringEngine.getCoreSlotContext(activePlan, productionProfile, activePlan.offers[index + 3])
+    check(productionProfile.slots[role] == nil and context.alignment == "NO_PLAN"
+        and context.slotPolicy == nil and not context.slotConflict,
+        role .. " gained an unsupported runtime plan or conflict")
+    check(activeScores[index + 3].covered and activeScores[index + 3].scoreComplete
+        and activeScores[index + 3].score == (role == "Cast" and 8 or 4),
+        role .. " lost neutral empty-slot scoring")
+end
+local replacement = deepCopy(planBase)
+replacement.godTraits = {{ Name = "AresWeaponBoon", Slot = "Melee" }}
+replacement.offers = {{ originalIndex = 1, ItemName = "AphroditeWeaponBoon",
+    TraitToReplace = "AresWeaponBoon" }}
+local replacementResult = ScoringEngine.scoreOffers(replacement, productionProfile)[1]
+check(replacementResult.covered and replacementResult.scoreComplete
+    and replacementResult.score == 0
+    and replacementResult.reasons[1].code == "CORE_REPLACEMENT_DELTA"
+    and replacementResult.reasons[1].delta == 0,
+    "valid Ares Attack replacement was not evaluated")
+for _, result in ipairs(activeScores) do
+    local sum = 0
+    for _, reason in ipairs(result.reasons) do sum = sum + reason.delta end
+    check(result.score == sum, "real profile score differs from reason sum")
+end
+local before = deepCopy(productionProfile)
+ScoringEngine.scoreOffers(activePlan, productionProfile)
+check(deepEqual(productionProfile, before), "Intermediate profile was mutated")
+print("PASS: active Intermediate plan, neutral Cast/Sprint/Mana, native Ares replacement, and no mutation")

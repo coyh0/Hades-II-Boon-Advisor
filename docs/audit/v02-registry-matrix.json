@@ -1,0 +1,2252 @@
+{
+  "baselineCommit": "dc57eabc45b967bd40bc124f8df13332744cb687",
+  "nativeTextSha256": "75ef411d23f54d0caaf94e9b58b4f80768ec0ca23d394833dc9296d4b00b4712",
+  "rows": [
+    {
+      "sheetRow": 2,
+      "recommendationId": "br2_blades_melinoe_intermediate_6879d93624658ee8",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Sword Hilt",
+      "nativeId": "ForceAresBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1124",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If owner Ares route selected",
+      "sourceFingerprint": "49f7b85695d6e729",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 3,
+      "recommendationId": "br2_blades_melinoe_intermediate_ee98ea3a2027845e",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Cloud Bangle",
+      "nativeId": "ForceZeusBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1070",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Zeus-first Mobalytics route selected",
+      "sourceFingerprint": "1ca29dcea2006ac3",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 4,
+      "recommendationId": "br2_blades_melinoe_intermediate_79c367872fa86f25",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Cloud Bangle",
+      "nativeId": "ForceZeusBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1070",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Heaven Flourish missing after Ares start",
+      "sourceFingerprint": "4f79659c4b95513d",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 5,
+      "recommendationId": "br2_blades_melinoe_intermediate_784e30cff6770b94",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Beautiful Mirror",
+      "nativeId": "ForceAphroditeBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1232",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Aphrodite Attack pivot selected",
+      "sourceFingerprint": "69ff2aaca405b27d",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 6,
+      "recommendationId": "br2_blades_melinoe_intermediate_536ab88a6673beba",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Experimental Hammer",
+      "nativeId": "TempHammerKeepsake",
+      "identityEvidence": "TraitText.en.sjson:930",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If key Hammer missing and random upgrade acceptable",
+      "sourceFingerprint": "ef462fda85682bf2",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 7,
+      "recommendationId": "br2_blades_melinoe_intermediate_996475bb0bcc7090",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Metallic Droplet",
+      "nativeId": "TimedBuffKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1374",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If core boons secured and speed desired",
+      "sourceFingerprint": "43eef8fdaa367f85",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 8,
+      "recommendationId": "br2_blades_melinoe_intermediate_66cba86eda75c5fb",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Luckier Tooth",
+      "nativeId": "ReincarnationKeepsake",
+      "identityEvidence": "TraitText.en.sjson:773",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If extra Death Defiance needed",
+      "sourceFingerprint": "e0f6df35b6078a40",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 9,
+      "recommendationId": "br2_blades_melinoe_intermediate_192669216c0c2294",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Knuckle Bones",
+      "nativeId": "BossPreDamageKeepsake",
+      "identityEvidence": "TraitText.en.sjson:705",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If survival already secure",
+      "sourceFingerprint": "463c0e2e4f0c61d3",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 10,
+      "recommendationId": "br2_blades_melinoe_intermediate_5c03796eb43c2e95",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Vicious Strike",
+      "nativeId": "AresWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:3118",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If owner Ares route selected",
+      "sourceFingerprint": "400f804637607746",
+      "mainBaseline": [
+        "Attack.branches alternative 2",
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 11,
+      "recommendationId": "br2_blades_melinoe_intermediate_426d805788abd215",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Nova Strike",
+      "nativeId": "ApolloWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2277",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If range and safer approach desired",
+      "sourceFingerprint": "71a205ec5d5f353c",
+      "mainBaseline": [
+        "Attack.branches alternative 1"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 12,
+      "recommendationId": "br2_blades_melinoe_intermediate_c5f84eb0e4c9ce5f",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Flutter Strike",
+      "nativeId": "AphroditeWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2427",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If close-range percentage route selected",
+      "sourceFingerprint": "26ca1e4489eda283",
+      "mainBaseline": [
+        "Attack.branches alternative 1"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 13,
+      "recommendationId": "br2_blades_melinoe_intermediate_6ab27648a113db90",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Flame Strike",
+      "nativeId": "HestiaWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2753",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If frequent standard hits preferred",
+      "sourceFingerprint": "3329153f93dfa0ff",
+      "mainBaseline": [
+        "Attack.branches alternative 1"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 14,
+      "recommendationId": "br2_blades_melinoe_intermediate_506c9ace94618317",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Heaven Flourish",
+      "nativeId": "ZeusSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:1782",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Zeus Special slot available",
+      "sourceFingerprint": "a8a0cbb253c5b924",
+      "mainBaseline": [
+        "Special.core",
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 15,
+      "recommendationId": "br2_blades_melinoe_intermediate_ab38abf147cfb76f",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Arctic Ring",
+      "nativeId": "DemeterCastBoon",
+      "identityEvidence": "TraitText.en.sjson:2610",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If crowd control or second Olympian Curse needed",
+      "sourceFingerprint": "de0cbe1d7c7ac313",
+      "mainBaseline": [
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 16,
+      "recommendationId": "br2_blades_melinoe_intermediate_b3ba705388227cc9",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Support",
+      "name": "Grievous Blow",
+      "nativeId": "AresStatusDoubleDamageBoon",
+      "identityEvidence": "TraitText.en.sjson:3187",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If playing Wounds branch",
+      "sourceFingerprint": "1f0baade757c3ed9",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 17,
+      "recommendationId": "br2_blades_melinoe_intermediate_eb3b2236b0ba7172",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Support",
+      "name": "Static Shock",
+      "nativeId": "FocusLightningBoon",
+      "identityEvidence": "TraitText.en.sjson:1883",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If 50 Magick can be Primed without harming planned Ω use",
+      "sourceFingerprint": "4abc43148793c35c",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 18,
+      "recommendationId": "br2_blades_melinoe_intermediate_ea72d669fcf32ed6",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Support",
+      "name": "Back Burner",
+      "nativeId": "ApolloBlindBoon",
+      "identityEvidence": "TraitText.en.sjson:2342",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If eligible Curse coverage and Hestia available",
+      "sourceFingerprint": "0140633d2933665b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 19,
+      "recommendationId": "br2_blades_melinoe_intermediate_fab8131c43237e3c",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Trick Knives",
+      "nativeId": "DaggerDashAttackTripleTrait",
+      "identityEvidence": "TraitText.en.sjson:6408",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If offered",
+      "sourceFingerprint": "1a7bc5a2c3b8aa6c",
+      "mainBaseline": [
+        "hammerPlan priority 1"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 20,
+      "recommendationId": "br2_blades_melinoe_intermediate_c76c171494a9a129",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Wicked Onslaught",
+      "nativeId": "DaggerFinalHitTrait",
+      "identityEvidence": "TraitText.en.sjson:6362",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Attack-focused branch",
+      "sourceFingerprint": "a028f9fc0dfb6a13",
+      "mainBaseline": [
+        "hammerPlan alternative 2",
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 21,
+      "recommendationId": "br2_blades_melinoe_intermediate_941f79a254978500",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Rapid Onslaught",
+      "nativeId": "DaggerRapidAttackTrait",
+      "identityEvidence": "TraitText.en.sjson:6356",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Attack-focused branch",
+      "sourceFingerprint": "a655fd7db9feff9c",
+      "mainBaseline": [
+        "hammerPlan alternative 2",
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 22,
+      "recommendationId": "br2_blades_melinoe_intermediate_c580b5ed463e9516",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Reaper Knives",
+      "nativeId": "DaggerSpecialReturnTrait",
+      "identityEvidence": "TraitText.en.sjson:6396",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Special-heavy branch",
+      "sourceFingerprint": "35afafdbed6737d6",
+      "mainBaseline": [
+        "hammerPlan alternative 2"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 23,
+      "recommendationId": "br2_blades_melinoe_intermediate_3f3497792adebd71",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Final Slice",
+      "nativeId": "DaggerAttackFinisherTrait",
+      "identityEvidence": "TraitText.en.sjson:6378",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If completing regular Attack sequence",
+      "sourceFingerprint": "ad370b9939fafd6a",
+      "mainBaseline": [
+        "hammerPlan alternative 3"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 24,
+      "recommendationId": "br2_blades_melinoe_intermediate_aa6e590b199c5c7d",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Dancing Knives",
+      "nativeId": "DaggerSpecialJumpTrait",
+      "identityEvidence": "TraitText.en.sjson:6390",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If room clear valued and return-hit loss acceptable",
+      "sourceFingerprint": "b44198e8c220915e",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 25,
+      "recommendationId": "br2_blades_melinoe_intermediate_c7aafbc515605010",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Huntress",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Magick below full",
+      "sourceFingerprint": "a5b5eaa4d8ea1767",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 26,
+      "recommendationId": "br2_blades_melinoe_intermediate_c3ac67bfbffe0fd9",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Furies",
+      "nativeId": "CastBuff",
+      "identityEvidence": "TraitText.en.sjson:339",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If foes regularly in Cast",
+      "sourceFingerprint": "f29fa4e460928c1a",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 27,
+      "recommendationId": "br2_blades_melinoe_intermediate_a5eee980d339c406",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Messenger",
+      "nativeId": "BonusDodge",
+      "identityEvidence": "TraitText.en.sjson:438",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If mobility desired",
+      "sourceFingerprint": "1ef1d6ee9df9ea64",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 28,
+      "recommendationId": "br2_blades_melinoe_intermediate_61b48c2aac2a3a4c",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Swift Runner",
+      "nativeId": "SprintShield",
+      "identityEvidence": "TraitText.en.sjson:359",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Sprint safety desired",
+      "sourceFingerprint": "b2ccd248de7f9f52",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 29,
+      "recommendationId": "br2_blades_melinoe_intermediate_1cd807844e1bb223",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "Death",
+      "nativeId": "LastStand",
+      "identityEvidence": "TraitText.en.sjson:410",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If extra Death Defiance desired",
+      "sourceFingerprint": "0cd6d37b45d351d2",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 30,
+      "recommendationId": "br2_blades_melinoe_intermediate_5728a4f1f109669b",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "Origination",
+      "nativeId": "StatusVulnerability",
+      "identityEvidence": "TraitText.en.sjson:480",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If 2 Curses from different Olympians reliably applied",
+      "sourceFingerprint": "7c161b6aabb6adac",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 31,
+      "recommendationId": "br2_blades_melinoe_intermediate_55df195cb3eede69",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Lovers",
+      "nativeId": "ChanneledBlock",
+      "identityEvidence": "TraitText.en.sjson:375",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If boss defense needed",
+      "sourceFingerprint": "e876188ab5013668",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 32,
+      "recommendationId": "br2_blades_melinoe_intermediate_88b572869f199f4b",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Wayward Son",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If sustaining Life is valuable",
+      "sourceFingerprint": "34f8576fd9420f6c",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 33,
+      "recommendationId": "br2_blades_melinoe_intermediate_39eff8fe780d7ab6",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Centaur",
+      "nativeId": "MaxHealthPerRoom",
+      "identityEvidence": "TraitText.en.sjson:462",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If activation requirements met",
+      "sourceFingerprint": "344601e5a8e43657",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 34,
+      "recommendationId": "br2_blades_melinoe_intermediate_e2ec0132c1ef4b4f",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Fates",
+      "nativeId": "TradeOff",
+      "identityEvidence": "TraitText.en.sjson:522",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If activation requirements met",
+      "sourceFingerprint": "6215a7f44a7df00d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 35,
+      "recommendationId": "br2_blades_melinoe_intermediate_848bdc52ea806b23",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "Divinity",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If activation requirements met",
+      "sourceFingerprint": "acd8d30ae6ad2142",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 36,
+      "recommendationId": "br2_blades_melinoe_intermediate_e827ecdb8f22f3f9",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Familiar",
+      "name": "Frinos",
+      "nativeId": "HealthFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5695",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If health/projectile protection desired",
+      "sourceFingerprint": "4e5115bad2c9892b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 37,
+      "recommendationId": "br2_blades_melinoe_intermediate_f4eae2bd0cce5eb9",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Familiar",
+      "name": "Toula",
+      "nativeId": "LastStandFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5753",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If extra Death Defiance desired",
+      "sourceFingerprint": "bd3ec6d78a3024ce",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 38,
+      "recommendationId": "br2_blades_melinoe_intermediate_1749d5ef5fe6136e",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Hex",
+      "name": "Lunar Ray",
+      "nativeId": "SpellLaserTrait",
+      "identityEvidence": "TraitText.en.sjson:4408",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If safe ranged damage window available",
+      "sourceFingerprint": "f8e366cddac92606",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 39,
+      "recommendationId": "br2_blades_melinoe_intermediate_76a513b4532a7c1b",
+      "profile": "sister_blades_melinoe_intermediate",
+      "category": "Gameplay",
+      "name": "Special → dash-strike → short Attack → reposition",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Zeus Special and standard-Attack route active",
+      "sourceFingerprint": "baecdb8870ec5ffa",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 40,
+      "recommendationId": "br2_coat_melinoe_intermediate_05cf1f64ff35b208",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Vivid Sea",
+      "nativeId": "ForcePoseidonBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1151",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "Always",
+      "sourceFingerprint": "97e6977ce8757006",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 41,
+      "recommendationId": "br2_coat_melinoe_intermediate_26a4d7fa4e741847",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Sword Hilt",
+      "nativeId": "ForceAresBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1124",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Ares Special or Grievous Blow missing",
+      "sourceFingerprint": "aaecc6dc8b3cb038",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 42,
+      "recommendationId": "br2_coat_melinoe_intermediate_a90140fb0ff5c9e0",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Metallic Droplet",
+      "nativeId": "TimedBuffKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1374",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If main boons secured",
+      "sourceFingerprint": "ef38fface73a5067",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 43,
+      "recommendationId": "br2_coat_melinoe_intermediate_760fb32ab047f5fe",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Experimental Hammer",
+      "nativeId": "TempHammerKeepsake",
+      "identityEvidence": "TraitText.en.sjson:930",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If key Hammer missing and random upgrade acceptable",
+      "sourceFingerprint": "18c6ff3e57a139e6",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 44,
+      "recommendationId": "br2_coat_melinoe_intermediate_ba28f813ff6d8a27",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Gorgon Amulet",
+      "nativeId": "AthenaEncounterKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1049",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Death Defiances depleted or defensive boon needed",
+      "sourceFingerprint": "0398d143a5981a89",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 45,
+      "recommendationId": "br2_coat_melinoe_intermediate_98387ade9e9341df",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Keepsake",
+      "name": "Luckier Tooth",
+      "nativeId": "ReincarnationKeepsake",
+      "identityEvidence": "TraitText.en.sjson:773",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Death Defiances remain and extra safety needed",
+      "sourceFingerprint": "55d8aa621adf20f4",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 46,
+      "recommendationId": "br2_coat_melinoe_intermediate_9142ac9935222910",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Wave Strike",
+      "nativeId": "PoseidonWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2115",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Attack slot available",
+      "sourceFingerprint": "10a81126b3620da8",
+      "mainBaseline": [
+        "Attack.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 47,
+      "recommendationId": "br2_coat_melinoe_intermediate_78929f2a975027d2",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Flame Strike",
+      "nativeId": "HestiaWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2753",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Poseidon Attack unavailable or Scorch route chosen",
+      "sourceFingerprint": "741a36b763e364d6",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "SELECTED_DELTA: Attack alternatives",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "See five-delta evidence report"
+    },
+    {
+      "sheetRow": 48,
+      "recommendationId": "br2_coat_melinoe_intermediate_ef44fbef3991267d",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Heaven Strike",
+      "nativeId": "ZeusWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:1776",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Blitz/Static Shock route chosen",
+      "sourceFingerprint": "38fd7a58cabd8b25",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "SELECTED_DELTA: Attack alternatives",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "See five-delta evidence report"
+    },
+    {
+      "sheetRow": 49,
+      "recommendationId": "br2_coat_melinoe_intermediate_f6e4bbecf35b7003",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Vicious Flourish",
+      "nativeId": "AresSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:3124",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Poseidon-Ares branch chosen",
+      "sourceFingerprint": "609866e4ecca226a",
+      "mainBaseline": [
+        "Special.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 50,
+      "recommendationId": "br2_coat_melinoe_intermediate_fe392a2e958c7784",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Heaven Flourish",
+      "nativeId": "ZeusSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:1782",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Ares unavailable or Zeus Blitz branch chosen",
+      "sourceFingerprint": "181d57c5233e354d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 51,
+      "recommendationId": "br2_coat_melinoe_intermediate_a5ed6dd080ecb3ec",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Storm Ring",
+      "nativeId": "ZeusCastBoon",
+      "identityEvidence": "TraitText.en.sjson:1794",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Zeus already present and Cast damage desired",
+      "sourceFingerprint": "627a5e813f2659e0",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 52,
+      "recommendationId": "br2_coat_melinoe_intermediate_9f08350287734786",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Boon",
+      "name": "Breaker Rush",
+      "nativeId": "PoseidonSprintBoon",
+      "identityEvidence": "TraitText.en.sjson:2168",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If available after Wave Strike",
+      "sourceFingerprint": "d568e01eb917fc0d",
+      "mainBaseline": [
+        "Sprint.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 53,
+      "recommendationId": "br2_coat_melinoe_intermediate_4f2e53243db1745f",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "Slippery Slope",
+      "nativeId": "PoseidonStatusBoon",
+      "identityEvidence": "TraitText.en.sjson:2191",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Poseidon splash secured",
+      "sourceFingerprint": "9a5004ce669dec02",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 54,
+      "recommendationId": "br2_coat_melinoe_intermediate_b1390c5e69fbf38a",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "King Tide",
+      "nativeId": "AmplifyConeBoon",
+      "identityEvidence": "TraitText.en.sjson:2259",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If all Legendary prerequisites met",
+      "sourceFingerprint": "83a19f29d8279542",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 55,
+      "recommendationId": "br2_coat_melinoe_intermediate_1afc2cc4fff9534e",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "Grievous Blow",
+      "nativeId": "AresStatusDoubleDamageBoon",
+      "identityEvidence": "TraitText.en.sjson:3187",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Wounds branch active",
+      "sourceFingerprint": "a68a573bdaf02e1e",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 56,
+      "recommendationId": "br2_coat_melinoe_intermediate_9e4e73a3d2cd6f63",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "Blood Spree",
+      "nativeId": "LowHealthLifestealBoon",
+      "identityEvidence": "TraitText.en.sjson:3247",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Ares pool and sustain needed",
+      "sourceFingerprint": "d3ab09424d0ed68b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 57,
+      "recommendationId": "br2_coat_melinoe_intermediate_feda3749ef5bbda6",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "Arterial Spray",
+      "nativeId": "DoubleSplashBoon",
+      "identityEvidence": "TraitText.en.sjson:4202",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Poseidon-Ares Duo prerequisites satisfied",
+      "sourceFingerprint": "3792bae8b1a17872",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 58,
+      "recommendationId": "br2_coat_melinoe_intermediate_f99d8b331e9f72f0",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Support",
+      "name": "Static Shock",
+      "nativeId": "FocusLightningBoon",
+      "identityEvidence": "TraitText.en.sjson:1883",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Zeus branch and 50 Magick Prime affordable",
+      "sourceFingerprint": "f7179c3d02609c3b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 59,
+      "recommendationId": "br2_coat_melinoe_intermediate_9342110b825f0d85",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Exhaust Riser",
+      "nativeId": "SuitDashAttackTrait",
+      "identityEvidence": "TraitText.en.sjson:6794",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If offered",
+      "sourceFingerprint": "754b5f7c0862b38a",
+      "mainBaseline": [
+        "hammerPlan priority 1"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 60,
+      "recommendationId": "br2_coat_melinoe_intermediate_9e33b1fe4ddc59d9",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Rapid Frame",
+      "nativeId": "SuitAttackSpeedTrait",
+      "identityEvidence": "TraitText.en.sjson:6733",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Attack-focused run",
+      "sourceFingerprint": "145ef057239b6f65",
+      "mainBaseline": [
+        "hammerPlan priority 2"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 61,
+      "recommendationId": "br2_coat_melinoe_intermediate_73b72972290fdb62",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Launcher Frame",
+      "nativeId": "SuitSpecialAutoTrait",
+      "identityEvidence": "TraitText.en.sjson:6745",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If Special/rocket-focused pivot",
+      "sourceFingerprint": "ed12e1797493793c",
+      "mainBaseline": [
+        "hammerPlan alternative 3; INCOMPLETE: Special branch"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 62,
+      "recommendationId": "br2_coat_melinoe_intermediate_093a7c1192f7eb29",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Hammer",
+      "name": "Reaper Frame",
+      "nativeId": "SuitAttackSizeTrait",
+      "identityEvidence": "TraitText.en.sjson:6739",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If offered and Attack damage desired",
+      "sourceFingerprint": "bc618b42c4730a97",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "SELECTED_DELTA: hammer alternative 3",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "See five-delta evidence report"
+    },
+    {
+      "sheetRow": 63,
+      "recommendationId": "br2_coat_melinoe_intermediate_aac6e11a00180598",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Sorceress",
+      "nativeId": "ChanneledCast",
+      "identityEvidence": "TraitText.en.sjson:284",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If channeling Ω Special regularly",
+      "sourceFingerprint": "9fa423e82b5a1518",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 64,
+      "recommendationId": "br2_coat_melinoe_intermediate_6dcbb292bdb70dd8",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Huntress",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Magick below full",
+      "sourceFingerprint": "759d69975bd58d96",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 65,
+      "recommendationId": "br2_coat_melinoe_intermediate_1eeb35a5a48a4870",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Furies",
+      "nativeId": "CastBuff",
+      "identityEvidence": "TraitText.en.sjson:339",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If foes kept in Cast",
+      "sourceFingerprint": "5853e36559e5e196",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 66,
+      "recommendationId": "br2_coat_melinoe_intermediate_633a0a7f73c7df42",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Messenger",
+      "nativeId": "BonusDodge",
+      "identityEvidence": "TraitText.en.sjson:438",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If mobility desired",
+      "sourceFingerprint": "a8ad49ba069f984f",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 67,
+      "recommendationId": "br2_coat_melinoe_intermediate_9e555a2c505ddd08",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Swift Runner",
+      "nativeId": "SprintShield",
+      "identityEvidence": "TraitText.en.sjson:359",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Sprint safety desired",
+      "sourceFingerprint": "126c6e1287f6812b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 68,
+      "recommendationId": "br2_coat_melinoe_intermediate_380f2171ea36efc6",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "Death",
+      "nativeId": "LastStand",
+      "identityEvidence": "TraitText.en.sjson:410",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Death Defiance needed",
+      "sourceFingerprint": "3c1140bc357f056a",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 69,
+      "recommendationId": "br2_coat_melinoe_intermediate_91f4c7e98b892aba",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "Origination",
+      "nativeId": "StatusVulnerability",
+      "identityEvidence": "TraitText.en.sjson:480",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If 2 Curses from different Olympians reliably applied",
+      "sourceFingerprint": "84f588b7620bc6c8",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 70,
+      "recommendationId": "br2_coat_melinoe_intermediate_84b5d6811e1024a3",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Arcana",
+      "name": "The Wayward Son",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If sustained Life needed",
+      "sourceFingerprint": "4476f844331d45f5",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 71,
+      "recommendationId": "br2_coat_melinoe_intermediate_ffdd650e69df347d",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Familiar",
+      "name": "Toula",
+      "nativeId": "LastStandFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5753",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If extra Death Defiance desired",
+      "sourceFingerprint": "ef63ab13fcdd3d4d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 72,
+      "recommendationId": "br2_coat_melinoe_intermediate_6a60b9291b0ae315",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Familiar",
+      "name": "Gale",
+      "nativeId": "DodgeFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5811",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If high-Fear Strength setup chosen",
+      "sourceFingerprint": "e5088425ac38a44d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 73,
+      "recommendationId": "br2_coat_melinoe_intermediate_1611f812d6836eb8",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Hex",
+      "name": "Wolf Howl",
+      "nativeId": "SpellLeapTrait",
+      "identityEvidence": "TraitText.en.sjson:4448",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If defensive invulnerability window needed",
+      "sourceFingerprint": "49e77b7ea2344096",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 74,
+      "recommendationId": "br2_coat_melinoe_intermediate_6c1324c7c353326e",
+      "profile": "black_coat_melinoe_intermediate",
+      "category": "Gameplay",
+      "name": "Ω Special → dash-in → dash-strike → Special → exit",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If safe opening for Ω Special",
+      "sourceFingerprint": "a14f64942da1cdb6",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 193,
+      "recommendationId": "br2_blades_morrigan_meta_eb0cc1beec69ff2a",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Iridescent Fan",
+      "nativeId": "ForceHeraBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1097",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Hera Attack / Born Gain route selected",
+      "sourceFingerprint": "a0b658a14485b92c",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 194,
+      "recommendationId": "br2_blades_morrigan_meta_0c1ab9d2d5838e52",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Harmonic Photon",
+      "nativeId": "ForceApolloBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1178",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Nova Strike / Lucid Gain route selected",
+      "sourceFingerprint": "a438a6a770637029",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 195,
+      "recommendationId": "br2_blades_morrigan_meta_9dc8940e35c783f4",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Iridescent Fan",
+      "nativeId": "ForceHeraBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1097",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Born Gain or Hera Attack missing after Apollo start",
+      "sourceFingerprint": "a80d3e96dcbca432",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 196,
+      "recommendationId": "br2_blades_morrigan_meta_045b71a5ec6ae51f",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Harmonic Photon",
+      "nativeId": "ForceApolloBoonKeepsake",
+      "identityEvidence": "TraitText.en.sjson:1178",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If safe Attack or Lucid Gain still missing",
+      "sourceFingerprint": "a5ae1a0cde81c33b",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 197,
+      "recommendationId": "br2_blades_morrigan_meta_ae16c2ee636cfc84",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Embryo",
+      "nativeId": "RandomBlessingKeepsake",
+      "identityEvidence": "Existing keepsakePlan recommendationId mapping; documentary alias",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Attack and Gain already secured",
+      "sourceFingerprint": "d980322bd798d73f",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 198,
+      "recommendationId": "br2_blades_morrigan_meta_e991eff83952900f",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Knuckle Bones",
+      "nativeId": "BossPreDamageKeepsake",
+      "identityEvidence": "TraitText.en.sjson:705",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If next Guardian needs damage/safety",
+      "sourceFingerprint": "12fff57e2a69029b",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 199,
+      "recommendationId": "br2_blades_morrigan_meta_468adabe05b33f40",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Luckier Tooth",
+      "nativeId": "ReincarnationKeepsake",
+      "identityEvidence": "TraitText.en.sjson:773",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If run survival is threatened",
+      "sourceFingerprint": "0baa5c63d52ef02d",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 200,
+      "recommendationId": "br2_blades_morrigan_meta_900dcecd675c94ad",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Knuckle Bones",
+      "nativeId": "BossPreDamageKeepsake",
+      "identityEvidence": "TraitText.en.sjson:705",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If room survival secure before final Guardian",
+      "sourceFingerprint": "8f0f41e6e1c9bd72",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 201,
+      "recommendationId": "br2_blades_morrigan_meta_b9968febb27e3b57",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Keepsake",
+      "name": "Luckier Tooth",
+      "nativeId": "ReincarnationKeepsake",
+      "identityEvidence": "TraitText.en.sjson:773",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If extra Death Defiance needed",
+      "sourceFingerprint": "279bb08d376c4d69",
+      "mainBaseline": [
+        "metadata-only keepsakePlan; no condition execution"
+      ],
+      "decision": "PRESERVE_METADATA_ONLY",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 202,
+      "recommendationId": "br2_blades_morrigan_meta_b107498fc99032fc",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Sworn Strike",
+      "nativeId": "HeraWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:1934",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Hitch room-clear route selected",
+      "sourceFingerprint": "910319df0d9c67a7",
+      "mainBaseline": [
+        "Attack.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 203,
+      "recommendationId": "br2_blades_morrigan_meta_e29c3e35a3317923",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Nova Strike",
+      "nativeId": "ApolloWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2277",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If range/AoE or high-Fear safety favored",
+      "sourceFingerprint": "35d2f80df6253d53",
+      "mainBaseline": [
+        "Attack.alternatives"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 204,
+      "recommendationId": "br2_blades_morrigan_meta_277cb5640ff0299d",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Flame Strike",
+      "nativeId": "HestiaWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2753",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If damage-over-time / standard combo route",
+      "sourceFingerprint": "0086a210d3ee0472",
+      "mainBaseline": [
+        "Attack.alternatives"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 205,
+      "recommendationId": "br2_blades_morrigan_meta_95624b0f394da167",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Ice Strike",
+      "nativeId": "DemeterWeaponBoon",
+      "identityEvidence": "TraitText.en.sjson:2598",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Freeze control needed",
+      "sourceFingerprint": "eaef53946543d069",
+      "mainBaseline": [
+        "Attack.alternatives"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 206,
+      "recommendationId": "br2_blades_morrigan_meta_90bd4f5788114fb6",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Heaven Flourish",
+      "nativeId": "ZeusSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:1782",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Blitz branch and Special slot available",
+      "sourceFingerprint": "fe4e9abc227843c9",
+      "mainBaseline": [
+        "Special.preferred"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 207,
+      "recommendationId": "br2_blades_morrigan_meta_08cb8eea702f036a",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Vicious Flourish",
+      "nativeId": "AresSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:3124",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Wounds and Grievous Blow route chosen",
+      "sourceFingerprint": "7c3ce13ffeb0f858",
+      "mainBaseline": [
+        "Special.preferred"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 208,
+      "recommendationId": "br2_blades_morrigan_meta_c34454443085c8b0",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Volcanic Flourish",
+      "nativeId": "HephaestusSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:2943",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Hephaestus burst / Premium Service route chosen",
+      "sourceFingerprint": "3675109bf2bf594b",
+      "mainBaseline": [
+        "Special.preferred"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 209,
+      "recommendationId": "br2_blades_morrigan_meta_5dbd522654011926",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Nova Flourish",
+      "nativeId": "ApolloSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:2283",
+      "documentaryClassification": "Unresolved",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If alternate Special offer; comparative value unverified",
+      "sourceFingerprint": "51104a3c529b3104",
+      "mainBaseline": [
+        "Special.discouraged"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 210,
+      "recommendationId": "br2_blades_morrigan_meta_b946a27468275be9",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Flutter Flourish",
+      "nativeId": "AphroditeSpecialBoon",
+      "identityEvidence": "TraitText.en.sjson:2439",
+      "documentaryClassification": "Unresolved",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If alternate Special offer; comparative value unverified",
+      "sourceFingerprint": "f0f7c1e3c14deb64",
+      "mainBaseline": [
+        "Special.discouraged"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 211,
+      "recommendationId": "br2_blades_morrigan_meta_555da60ead7b4ac5",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Tidal Ring",
+      "nativeId": "PoseidonCastBoon",
+      "identityEvidence": "TraitText.en.sjson:2137",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Poseidon pool available",
+      "sourceFingerprint": "3b1c710c481b05ed",
+      "mainBaseline": [
+        "Cast.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 212,
+      "recommendationId": "br2_blades_morrigan_meta_bcc5e04ce0796798",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Blinding Rush",
+      "nativeId": "ApolloSprintBoon",
+      "identityEvidence": "TraitText.en.sjson:2307",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Apollo pool available",
+      "sourceFingerprint": "bf2f0de6c40bb469",
+      "mainBaseline": [
+        "Sprint.preferred"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 213,
+      "recommendationId": "br2_blades_morrigan_meta_b143ebb45347b063",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Born Gain",
+      "nativeId": "HeraManaBoon",
+      "identityEvidence": "TraitText.en.sjson:1991",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Ω / Sweeping Magick demand is high",
+      "sourceFingerprint": "617c06e516050d3b",
+      "mainBaseline": [
+        "Mana.core"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 214,
+      "recommendationId": "br2_blades_morrigan_meta_6989346f7dd8cda7",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Boon",
+      "name": "Lucid Gain",
+      "nativeId": "ApolloManaBoon",
+      "identityEvidence": "TraitText.en.sjson:2313",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Apollo route or Born Gain unavailable",
+      "sourceFingerprint": "a3a4284c7d942cd4",
+      "mainBaseline": [
+        "Mana.alternatives"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 215,
+      "recommendationId": "br2_blades_morrigan_meta_addfc88e7d98eb3a",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Support",
+      "name": "Beach Ball",
+      "nativeId": "PoseidonSplashSprintBoon",
+      "identityEvidence": "TraitText.en.sjson:4130",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If duo prerequisites and Tidal Ring / Apollo route secured",
+      "sourceFingerprint": "152fd4ac105fe444",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 216,
+      "recommendationId": "br2_blades_morrigan_meta_e96fef44b25e9493",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Support",
+      "name": "Premium Service",
+      "nativeId": "WeaponUpgradeBoon",
+      "identityEvidence": "TraitText.en.sjson:3096",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If one boon in EACH of 3 Hephaestus prerequisite groups acquired",
+      "sourceFingerprint": "1f83fba0a9598d22",
+      "mainBaseline": [
+        "existing aspectInteractions; contextual evaluation required"
+      ],
+      "decision": "PRESERVE_BASELINE; documentary condition/classification is not a new rule",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 217,
+      "recommendationId": "br2_blades_morrigan_meta_e9ab32dc733a86a8",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Support",
+      "name": "Grievous Blow",
+      "nativeId": "AresStatusDoubleDamageBoon",
+      "identityEvidence": "TraitText.en.sjson:3187",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Vicious Flourish Wounds branch active",
+      "sourceFingerprint": "d757801e690ad8ac",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 218,
+      "recommendationId": "br2_blades_morrigan_meta_0e7999238013ae66",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Final Slice",
+      "nativeId": "DaggerAttackFinisherTrait",
+      "identityEvidence": "TraitText.en.sjson:6378",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If using regular Attack finisher",
+      "sourceFingerprint": "8e36fdeceecc402a",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "SELECTED_DELTA: hammer alternative 2",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "See five-delta evidence report"
+    },
+    {
+      "sheetRow": 219,
+      "recommendationId": "br2_blades_morrigan_meta_7ab53d6b60e37a91",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Sweeping Ambush",
+      "nativeId": "DaggerBlinkAoETrait",
+      "identityEvidence": "TraitText.en.sjson:6384",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Magick Gain reliable and Ω Attack central",
+      "sourceFingerprint": "306bd94b81ecbdc4",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 220,
+      "recommendationId": "br2_blades_morrigan_meta_d36d5b6541dd0721",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Wicked Onslaught",
+      "nativeId": "DaggerFinalHitTrait",
+      "identityEvidence": "TraitText.en.sjson:6362",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If regular Attack plan",
+      "sourceFingerprint": "04c8289f574419d0",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 221,
+      "recommendationId": "br2_blades_morrigan_meta_110a9212c7f19a00",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Rapid Onslaught",
+      "nativeId": "DaggerRapidAttackTrait",
+      "identityEvidence": "TraitText.en.sjson:6356",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If regular Attack plan",
+      "sourceFingerprint": "a9ed961fd68d565d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 222,
+      "recommendationId": "br2_blades_morrigan_meta_7d4d68a453cd5cb6",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Banshee Brand",
+      "nativeId": "DaggerTripleRepeatWomboTrait",
+      "identityEvidence": "TraitText.en.sjson:6440",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If frequent successful Blood Triads",
+      "sourceFingerprint": "f7a09e9cf4ffd517",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 223,
+      "recommendationId": "br2_blades_morrigan_meta_dbc147e065e62721",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Phantom Brand",
+      "nativeId": "DaggerTripleBuffTrait",
+      "identityEvidence": "TraitText.en.sjson:6433",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If frequent successful Blood Triads",
+      "sourceFingerprint": "6d242141f3c810fa",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "SELECTED_DELTA: hammer priority 1",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "See five-delta evidence report"
+    },
+    {
+      "sheetRow": 224,
+      "recommendationId": "br2_blades_morrigan_meta_0e761b115bb9c6e1",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hammer",
+      "name": "Dancing Knives",
+      "nativeId": "DaggerSpecialJumpTrait",
+      "identityEvidence": "TraitText.en.sjson:6390",
+      "documentaryClassification": "Avoid",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If solo-target return Special is essential to Triad loop",
+      "sourceFingerprint": "fc4e969b6fe37849",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 225,
+      "recommendationId": "br2_blades_morrigan_meta_7c525cbd1a3f8a38",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "The Sorceress",
+      "nativeId": "ChanneledCast",
+      "identityEvidence": "TraitText.en.sjson:284",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If Ω moves used for Blood Triad",
+      "sourceFingerprint": "654b3cf0849fc237",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 226,
+      "recommendationId": "br2_blades_morrigan_meta_0d8c45c5b698b387",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "The Huntress",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If standard Attack/Special used and Magick below full",
+      "sourceFingerprint": "c2bce18b5b02e351",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 227,
+      "recommendationId": "br2_blades_morrigan_meta_5f737807a0a407bd",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "The Furies",
+      "nativeId": "CastBuff",
+      "identityEvidence": "TraitText.en.sjson:339",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If foes controlled in Cast",
+      "sourceFingerprint": "1b90779a2b11e8f4",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 228,
+      "recommendationId": "br2_blades_morrigan_meta_08daa64f054acd8b",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "Origination",
+      "nativeId": "StatusVulnerability",
+      "identityEvidence": "TraitText.en.sjson:480",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If 2 Curses from different Olympians applied; for non-Triad damage",
+      "sourceFingerprint": "6d6912f3f2c64f06",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 229,
+      "recommendationId": "br2_blades_morrigan_meta_cd1ffb72222490bc",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "Death",
+      "nativeId": "LastStand",
+      "identityEvidence": "TraitText.en.sjson:410",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Death Defiance needed",
+      "sourceFingerprint": "46cc85cf1945bc6a",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 230,
+      "recommendationId": "br2_blades_morrigan_meta_4ed78edb5530aa07",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "The Lovers",
+      "nativeId": "ChanneledBlock",
+      "identityEvidence": "TraitText.en.sjson:375",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If boss defense needed",
+      "sourceFingerprint": "4bac80e4037cca97",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 231,
+      "recommendationId": "br2_blades_morrigan_meta_9c2bead895dac138",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "Night",
+      "nativeId": "MagicCrit",
+      "identityEvidence": "TraitText.en.sjson:494",
+      "documentaryClassification": "Conditional",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If Ω combos used reliably",
+      "sourceFingerprint": "654ca3d2375bbbcf",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 232,
+      "recommendationId": "br2_blades_morrigan_meta_3ca9ee5f1007bbc2",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Arcana",
+      "name": "Eternity",
+      "nativeId": "CastCount",
+      "identityEvidence": "TraitText.en.sjson:424",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "3",
+      "documentaryCondition": "If channeling risk high",
+      "sourceFingerprint": "7d2b71e6f4f89c17",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 233,
+      "recommendationId": "br2_blades_morrigan_meta_4d490c570dfb1614",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Familiar",
+      "name": "Hecuba",
+      "nativeId": "DigFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5782",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If Magick sustain still weak",
+      "sourceFingerprint": "283aff22256bfb32",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 234,
+      "recommendationId": "br2_blades_morrigan_meta_2af131b295e9e1ea",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Familiar",
+      "name": "Toula",
+      "nativeId": "LastStandFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5753",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If extra Death Defiance preferred",
+      "sourceFingerprint": "700fafeee4abb151",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 235,
+      "recommendationId": "br2_blades_morrigan_meta_98279568dcc574e2",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Familiar",
+      "name": "Frinos",
+      "nativeId": "HealthFamiliar",
+      "identityEvidence": "TraitText.en.sjson:5695",
+      "documentaryClassification": "Alternative",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If extra Life / projectiles preferred",
+      "sourceFingerprint": "7d5d8dba48798f8b",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 236,
+      "recommendationId": "br2_blades_morrigan_meta_5268dfad7adb44c9",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Hex",
+      "name": "Night Bloom",
+      "nativeId": "SpellSummonTrait",
+      "identityEvidence": "TraitText.en.sjson:4420",
+      "documentaryClassification": "Situational",
+      "documentaryPriority": "2",
+      "documentaryCondition": "If useful in this run's encounters",
+      "sourceFingerprint": "e1ca1bd25976af42",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    },
+    {
+      "sheetRow": 237,
+      "recommendationId": "br2_blades_morrigan_meta_cd1e2213c36eb02d",
+      "profile": "sister_blades_morrigan_meta",
+      "category": "Gameplay",
+      "name": "Special → dash-strike → Ω Attack on same foe",
+      "nativeId": null,
+      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "documentaryClassification": "Main",
+      "documentaryPriority": "1",
+      "documentaryCondition": "If target survives and safe Ω window exists",
+      "sourceFingerprint": "791259a8f98c079d",
+      "mainBaseline": [
+        "No explicit recommendation entry; not proof of runtime non-coverage"
+      ],
+      "decision": "DEFER_DOCUMENTARY_GUIDANCE",
+      "sourceRuntimeStatus": "documentation_only",
+      "mechanicsStatus": "Not newly attested by name matching; preserve existing evidence limits"
+    }
+  ]
+}
