@@ -2,6 +2,21 @@
 
 All notable changes to Hades II Boon Advisor are documented here.
 
+## [0.2.0] - 2026-09-25
+
+### Added
+
+- Added validated Intermediate Sister Blades Melinoë, Morrigan Meta and Black Coat Melinoë profiles.
+- Added explainable Hammer recommendations for the approved v0.2 showcase.
+- Added safe full, partial and none ranking states when offered choices are not fully covered.
+- Added metadata-only four-phase Keepsake plans for the three active profiles.
+- Added human-controlled DEV validation evidence and release-grade offline regression coverage.
+
+### Notes
+
+- The compact build-status interface, Duos, Hermes and Poms guidance remain future work.
+- This candidate does not change gameplay, RNG, offers, damage, saves or player choice.
+
 ## [0.1.2] - 2026-09-23
 
 ### Changed
