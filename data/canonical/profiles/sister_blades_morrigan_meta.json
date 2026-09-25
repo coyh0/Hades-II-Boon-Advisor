@@ -26,6 +26,10 @@
     ]
   },
   "mechanicsTemplate": "sister_blades_morrigan",
+  "hammerPlan": [
+    { "traitId": "DaggerTripleBuffTrait", "priority": 1, "classification": "priority" },
+    { "traitId": "DaggerAttackFinisherTrait", "priority": 2, "classification": "alternative" }
+  ],
   "rules": { "LightningVulnerabilityBoon": [{ "requiresAllOwned": ["PoseidonCastBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "DamageSharePotencyBoon": [{ "requiresAnyOwned": ["HeraWeaponBoon", "HeraSpecialBoon", "HeraCastBoon", "HeraSprintBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }], "EchoExpirationBoon": [{ "requiresAnyOwned": ["ZeusWeaponBoon", "ZeusSpecialBoon"], "code": "BUILD_STATUS_SYNERGY", "weight": "BUILD_STATUS_SYNERGY" }] },
   "weights": {"BUILD_DISCOURAGED":-2},
   "slots": {

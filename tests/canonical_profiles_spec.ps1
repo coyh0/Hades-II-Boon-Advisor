@@ -322,4 +322,5 @@ foreach ($profileName in @('sister_blades_melinoe_intermediate')) {
         throw "$profileName unresolved Dancing Knives entered hammerPlan."
     }
 }
+& (Join-Path $PSScriptRoot 'v02_projection_spec.ps1')
 Write-Output 'PASS: canonical validation, deterministic generation, generated Lua validation, and scoring equivalence'

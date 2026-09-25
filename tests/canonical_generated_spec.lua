@@ -24,6 +24,25 @@ local expectedMelinoeHammerPlan = {
     { traitId = "DaggerSpecialReturnTrait", priority = 2, classification = "alternative" },
     { traitId = "DaggerAttackFinisherTrait", priority = 3, classification = "alternative" },
 }
+local expectedMorriganHammerPlan = {
+    { traitId = "DaggerTripleBuffTrait", priority = 1, classification = "priority" },
+    { traitId = "DaggerAttackFinisherTrait", priority = 2, classification = "alternative" },
+}
+local expectedCoatHammerPlan = {
+    { traitId = "SuitDashAttackTrait", priority = 1, classification = "priority" },
+    { traitId = "SuitAttackSpeedTrait", priority = 2, classification = "priority" },
+    { traitId = "SuitSpecialAutoTrait", priority = 3, classification = "alternative", condition = "Special branch" },
+    { traitId = "SuitAttackSizeTrait", priority = 3, classification = "alternative" },
+}
+local function assertPlan(profile, expected, label)
+    assert(#profile.hammerPlan == #expected, label .. " Hammer plan count mismatch")
+    for index, spec in ipairs(expected) do
+        local actual = profile.hammerPlan[index]
+        assert(actual.traitId == spec.traitId and actual.priority == spec.priority
+            and actual.classification == spec.classification and actual.condition == spec.condition,
+            label .. " Hammer plan mismatch at " .. index)
+    end
+end
 local function assertMelinoeHammerPlan(profile, label)
     assert(#profile.hammerPlan == #expectedMelinoeHammerPlan, label .. " Hammer plan count mismatch")
     for index, expected in ipairs(expectedMelinoeHammerPlan) do
@@ -38,6 +57,12 @@ local function assertMelinoeHammerPlan(profile, label)
 end
 assertMelinoeHammerPlan(intermediate, "Intermediate")
 local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
+assertPlan(morrigan, expectedMorriganHammerPlan, "Morrigan")
+assertPlan(coat, expectedCoatHammerPlan, "Black Coat")
+assert(#coat.slots.Attack.alternatives == 2
+    and coat.slots.Attack.alternatives[1] == "HestiaWeaponBoon"
+    and coat.slots.Attack.alternatives[2] == "ZeusWeaponBoon",
+    "Black Coat Attack alternatives differ")
 local runtimeRegistry = assert(loadfile("data/builds/registry.lua"))()
 local ScoringEngine = assert(loadfile("src/ScoringEngine.lua"))()
 check(equal(generatedIntermediate, intermediate), "generated Intermediate semantics differ")

@@ -19,6 +19,18 @@ return {
         "MORRIGAN_BLOOD_TRIAD_HERA",
     },
     genericCoreAspectCompatibility = false,
+    hammerPlan = {
+        {
+            classification = "priority",
+            priority = 1,
+            traitId = "DaggerTripleBuffTrait",
+        },
+        {
+            classification = "alternative",
+            priority = 2,
+            traitId = "DaggerAttackFinisherTrait",
+        },
+    },
     hammerRoles = {},
     id = "sister_blades_morrigan_meta",
     keepsakePlan = {
