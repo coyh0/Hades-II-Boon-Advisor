@@ -49,6 +49,6 @@ Final machine-readable results and logs are in `dist/repair-validation/`. Packag
 
 ## Remaining gate
 
-Review the consolidated diff against clean main, then integrate the repair through the existing branch without rewriting its history. Newly executable recommendations still require fresh DEV gameplay evidence before release. Keep the compact UI after v0.2. Public updater documentation and other release-readiness work remain separate.
+The locally reviewed repair is committed on `codex/v02-mechanics-showcase`. Shared review and remote push remain pending resolution of the automatic review block; do not bypass it. Newly executable recommendations still require fresh DEV gameplay evidence before release. Keep the compact UI after v0.2. Public updater documentation and other release-readiness work remain separate.
 
-The three historical review patches and the earlier local audit directory remain untracked and outside the repair patch. No commit or push was made during this repair pass.
+The three historical review patches remain untracked and their SHA-256 values are preserved. The repair was subsequently committed locally as `47f496b48b89e01c6519ad3d509215305c3cf031`; the branch is one commit ahead of its local origin tracking ref. The push was blocked by automatic review because remote ownership/trust was not established. No remote push, merge, DEV deployment or gameplay validation was performed.
