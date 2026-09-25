@@ -27,10 +27,11 @@
   "hammerPlan": [
     { "traitId": "SuitDashAttackTrait", "priority": 1, "classification": "priority" },
     { "traitId": "SuitAttackSpeedTrait", "priority": 2, "classification": "priority" },
-    { "traitId": "SuitSpecialAutoTrait", "priority": 3, "classification": "alternative", "condition": "Special branch" }
+    { "traitId": "SuitSpecialAutoTrait", "priority": 3, "classification": "alternative", "condition": "Special branch" },
+    { "traitId": "SuitAttackSizeTrait", "priority": 3, "classification": "alternative" }
   ],
   "slots": {
-    "Attack": { "core": ["PoseidonWeaponBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
+    "Attack": { "core": ["PoseidonWeaponBoon"], "alternatives": ["HestiaWeaponBoon", "ZeusWeaponBoon"], "preferred": [], "slotPolicy": "reserved" },
     "Special": { "core": ["AresSpecialBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
     "Sprint": { "core": ["PoseidonSprintBoon"], "alternatives": [], "preferred": [], "slotPolicy": "reserved" },
     "Cast": { "core": [], "alternatives": [], "preferred": [], "slotPolicy": "open" },

@@ -30,6 +30,11 @@ return {
             priority = 3,
             traitId = "SuitSpecialAutoTrait",
         },
+        {
+            classification = "alternative",
+            priority = 3,
+            traitId = "SuitAttackSizeTrait",
+        },
     },
     hammerRoles = {},
     id = "black_coat_melinoe_intermediate",
@@ -93,7 +98,10 @@ return {
     selectionKey = "coat_melinoe_intermediate",
     slots = {
         Attack = {
-            alternatives = {},
+            alternatives = {
+                "HestiaWeaponBoon",
+                "ZeusWeaponBoon",
+            },
             core = {
                 "PoseidonWeaponBoon",
             },
