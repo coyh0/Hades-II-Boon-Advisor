@@ -5,7 +5,7 @@ schemaVersion = "0.0.1"
 namespace = "Coyh0Mods"
 name = "Hades_II_Boon_Advisor"
 versionNumber = "0.2.0"
-description = "Explains and ranks Hades II Boon choices for three human-validated builds. Community Registry guidance was matched to native game IDs and DEV logs; no gameplay, RNG, offers, damage or saves are changed."
+description = "Explains and ranks Hades II Boon choices for three human-validated builds. Community guidance is cited for reference and matched to native game IDs and DEV logs; no source text is republished, and no gameplay, RNG, offers, damage or saves are changed."
 websiteUrl = "https://github.com/coyh0/Hades-II-Boon-Advisor"
 containsNsfwContent = false
 
