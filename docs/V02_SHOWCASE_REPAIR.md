@@ -49,6 +49,6 @@ Final machine-readable results and logs are in `dist/repair-validation/`. Packag
 
 ## Remaining gate
 
-The locally reviewed repair is committed on `codex/v02-mechanics-showcase`. Shared review and remote push remain pending resolution of the automatic review block; do not bypass it. Newly executable recommendations still require fresh DEV gameplay evidence before release. Keep the compact UI after v0.2. Public updater documentation and other release-readiness work remain separate.
+The repair is pushed on `codex/v02-mechanics-showcase`; draft PR [#1](https://github.com/coyh0/Hades-II-Boon-Advisor/pull/1) is open against `main` for shared review. It is not merged. Newly executable recommendations still require fresh DEV gameplay evidence before release. Keep the compact UI after v0.2. Public updater documentation and other release-readiness work remain separate.
 
-The three historical review patches remain untracked and their SHA-256 values are preserved. The repair was subsequently committed locally as `47f496b48b89e01c6519ad3d509215305c3cf031`; the branch is one commit ahead of its local origin tracking ref. The push was blocked by automatic review because remote ownership/trust was not established. No remote push, merge, DEV deployment or gameplay validation was performed.
+The three historical review patches remain untracked and their SHA-256 values are preserved. The branch contains local commits `47f496b` and `9a8bef6`, is synchronized with its remote tracking ref, and has not been merged to `main`. No DEV deployment or gameplay validation was performed.
