@@ -3,7 +3,7 @@ local debugLog = function() end
 local errorLog = function() end
 local localization = nil
 local language = "en"
-local reasonOrder = { "conflict", "core", "utility", "build", "resources", "damage", "aspect", "setup", "positioning", "origination", "hammerPriority", "hammer", "status", "synergy", "survival", "rarity" }
+local reasonOrder = { "conflict", "core", "utility", "build", "discouraged", "resources", "damage", "aspect", "setup", "positioning", "origination", "hammerPriority", "hammer", "status", "synergy", "survival", "rarity" }
 
 local function formatRankLabel(rank)
     return localization.get(language, "rank") .. " " .. tostring(rank)

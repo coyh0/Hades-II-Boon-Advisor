@@ -101,6 +101,38 @@ for index = #textBoxes - 5, #textBoxes do
 end
 check(sawBuild and sawUtilityBuild and sawStatus,
     "Build priority labels were not rendered or deduplicated")
+local discouragedScreen = { Components = {
+    PurchaseButton1 = { Id = "discouraged1" }, PurchaseButton2 = { Id = "discouraged2" },
+    PurchaseButton3 = { Id = "discouraged3" },
+} }
+UI.renderRanks(discouragedScreen, {
+    { originalIndex = 1, rank = 1, reasons = {
+        { code = "FILL_EMPTY_PRIMARY_CORE", delta = 4 },
+        { code = "BUILD_DISCOURAGED", delta = -4 },
+    } },
+}, api)
+check(textBoxes[#textBoxes].RawText == "Core · Déconseillé",
+    "French discouraged Apollo Special label was not rendered")
+UI.clearRanks(discouragedScreen, api)
+UI.setLanguage("en")
+local discouragedEnglishScreen = { Components = {
+    PurchaseButton1 = { Id = "discouraged-en1" }, PurchaseButton2 = { Id = "discouraged-en2" },
+    PurchaseButton3 = { Id = "discouraged-en3" },
+} }
+UI.renderPartial(discouragedEnglishScreen, {
+    { originalIndex = 1, evaluated = true, rank = 1, rankTotal = 2, reasons = {
+        { code = "FILL_EMPTY_PRIMARY_CORE", delta = 4 },
+        { code = "BUILD_DISCOURAGED", delta = -4 },
+    } },
+    { originalIndex = 2, evaluated = true, rank = 2, rankTotal = 2, reasons = {
+        { code = "BUILD_CORE_PRIORITY", delta = 4 },
+    } },
+    { originalIndex = 3, evaluated = false, reasons = {} },
+}, api)
+check(textBoxes[#textBoxes - 3].RawText == "Core · Discouraged",
+    "English discouraged Apollo Special partial label was not rendered")
+UI.setLanguage("fr")
+UI.clearRanks(discouragedEnglishScreen, api)
 local setupLabelScreen = { Components = { PurchaseButton1 = { Id = "setup1" } } }
 UI.renderRanks(setupLabelScreen, {
     { originalIndex = 1, rank = 1, reasons = {

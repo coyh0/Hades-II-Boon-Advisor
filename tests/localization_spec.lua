@@ -32,6 +32,10 @@ check(Localization.reasonLabel("en", "BUILD_SLOT_POLICY_DELTA", -4) == "Conflict
     "Negative slot policy was not English Conflict")
 check(Localization.reasonLabel("fr", "BUILD_SLOT_POLICY_DELTA", -4) == "Conflit",
     "Negative slot policy was not French Conflit")
+check(Localization.reasonKey("BUILD_DISCOURAGED", -4) == "discouraged"
+    and Localization.reasonLabel("fr", "BUILD_DISCOURAGED", -4) == "Déconseillé"
+    and Localization.reasonLabel("en", "BUILD_DISCOURAGED", -4) == "Discouraged",
+    "BUILD_DISCOURAGED did not use its dedicated localized label")
 check(Localization.reasonKey("BUILD_PREFERRED", 2) == Localization.reasonKey("BUILD_CORE_PRIORITY", 4),
     "Equivalent reason codes did not share a stable category")
 check(Localization.reasonKey("HAMMER_BUILD_PRIORITY", -1) == "hammerPriority"

@@ -13,6 +13,7 @@ local strings = {
         partialRankingScope = "Ranks compare 2 evaluated choices only",
         equivalentChoices = "Choices are equivalent under the current rules",
         conflict = "Conflict", core = "Core", utility = "Utility", build = "Build",
+        discouraged = "Discouraged",
         resources = "Resources", damage = "Damage", aspect = "Aspect", setup = "Setup",
         positioning = "Positioning", origination = "Origination", hammer = "Hammer",
         hammerPriority = "Hammer plan",
@@ -30,6 +31,7 @@ local strings = {
         partialRankingScope = "Rangs limités aux 2 choix évalués",
         equivalentChoices = "Choix équivalents avec les règles actuelles",
         conflict = "Conflit", core = "Core", utility = "Utilitaire", build = "Build",
+        discouraged = "Déconseillé",
         resources = "Ressources", damage = "Dégâts", aspect = "Aspect", setup = "Setup",
         positioning = "Positionnement", origination = "Origination", hammer = "Marteau",
         hammerPriority = "Plan Marteau",
@@ -39,7 +41,7 @@ local strings = {
 
 local reasonKeys = {
     FILL_EMPTY_PRIMARY_CORE = "core", FILL_EMPTY_UTILITY_CORE = "utility",
-    BUILD_CORE_PRIORITY = "build", BUILD_PREFERRED = "build", BUILD_DISCOURAGED = "build",
+    BUILD_CORE_PRIORITY = "build", BUILD_PREFERRED = "build", BUILD_DISCOURAGED = "discouraged",
     RARITY = "rarity", RARITY_DELTA = "rarity", BUILD_STATUS_SYNERGY = "status",
     BLOOD_DROP_ENGINE_SYNERGY = "synergy", SURVIVAL_SUPPORT = "survival",
     MAX_RESOURCE_SUPPORT = "resources", HIGH_HEALTH_OFFENSE = "damage",
