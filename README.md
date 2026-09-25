@@ -47,18 +47,21 @@ updates and compatibility diagnostics for advanced users. See
 
 ## Supported builds
 
-Published `v0.1.2` supports Sister Blades — Aspect of Melinoë: Starter.
+The advisor on the `main` branch supports these three build profiles:
 
-The `main` branch contains the unreleased `v0.2` candidate with these three
-profiles:
+- **Sister Blades — Aspect of Melinoë:** Intermediate
+- **Sister Blades — Aspect of Morrigan:** Meta / Blood Triad
+- **Black Coat — Aspect of Melinoë:** Intermediate
 
-- Sister Blades — Aspect of Melinoë: Intermediate
-- Sister Blades — Aspect of Morrigan: Meta / Blood Triad
-- Black Coat — Aspect of Melinoë: Intermediate
+These profiles have passed offline checks and representative in-game testing
+by the maintainer through human-controlled DEV gameplay, with screenshots and
+DEBUG logs used for validation. This does not imply exhaustive testing of
+every Boon combination.
 
-The v0.2 candidate has passed offline gates and representative human-controlled
-DEV validation. It is not a published release yet. Compact build-status UI,
-Duos, Hermes and Poms guidance remain future work.
+These profiles are not yet available in the published release, which supports
+**Sister Blades — Aspect of Melinoë: Starter** only.
+
+Compact build-status UI, Duos, Hermes and Poms guidance remain future work.
 
 ### Build profile selection
 
@@ -69,11 +72,14 @@ uses the current run state to resolve the compatible build profile. Owned Boons
 are the primary evidence; validated pre-Boon signals may be used when needed at
 the start of a run.
 
+The advisor's displayed text follows the in-game language; English labels are
+used here by default.
+
 If multiple compatible profiles remain ambiguous, the advisor shows
-**PROFIL À CHOISIR** and does not guess or display rankings.
+**SELECT PROFILE** and does not guess or display rankings.
 
 For a weapon/Aspect with no compatible profile, it shows
-**PROFIL NON PRIS EN CHARGE**.
+**UNSUPPORTED PROFILE**.
 
 Compatible profiles can also be selected explicitly with:
 
@@ -100,7 +106,7 @@ validated by the maintainer through controlled DEV gameplay, screenshots and
 DEBUG logs. Documentary conditions and rows that could not be mechanically
 verified remain non-executable or deferred.
 
-Boons that cannot be evaluated reliably remain **NON ÉVALUÉ** rather than
+Boons that cannot be evaluated reliably remain **NOT EVALUATED** rather than
 receiving a speculative score.
 
 ## AI-assisted development
@@ -114,7 +120,8 @@ changes, and in-game validation are performed or approved by the maintainer.
 
 ## Project roadmap
 
-Current development status and planned work are tracked in [ROADMAP.md](ROADMAP.md). The roadmap is updated only after maintainer confirmation.
+The project roadmap is maintained privately and is not published.
+
 
 ## Release material
 
