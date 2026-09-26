@@ -20,7 +20,7 @@ All notable changes to Hades II Boon Advisor are documented here.
 - Added explainable slot conflicts, replacement handling, aspect interactions, Hammer priorities and conservative status/Origination coverage.
 - Added French and English labels for ranking states, incomplete analysis, conflicts, build reasons and discouraged recommendations.
 - Reconciled the 118-row v0.2 Registry audit against canonical profiles and verified runtime identifiers; documentary conditions remain non-executable.
-- Updated public documentation and runtime testing guidance to distinguish published v0.1.2 behavior from the unreleased v0.2 candidate.
+- Updated public documentation and runtime testing guidance for the finalized v0.2.0 scope.
 
 ### Fixed
 

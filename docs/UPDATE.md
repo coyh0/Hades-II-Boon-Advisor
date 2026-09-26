@@ -24,10 +24,23 @@ A manual replacement can reset configuration. Preserve `config\settings.lua` if 
 
 Advanced users can preserve `config\settings.lua` byte-for-byte and receive a rollback on failure with:
 
+Preview the operation first:
+
 ```powershell
-.\tools\Update-BoonAdvisor.ps1 `
+& .\tools\Update-BoonAdvisor.ps1 `
     -GameRoot "<Hades-II-root>" `
-    -PackagePath ".\Local-HadesIIBoonAdvisor"
+    -PackagePath ".\Local-HadesIIBoonAdvisor" `
+    -WhatIf
 ```
 
-Use `-WhatIf` to preview. The tool validates the package and requires Runtime compatibility `PASS` before writing.
+After reviewing the preview and confirming that Hades II is closed, use the
+verified Windows PowerShell 5.1 invocation:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "& .\tools\Update-BoonAdvisor.ps1 -GameRoot '<Hades-II-root>' -PackagePath '.\Local-HadesIIBoonAdvisor' -Confirm:`$false"
+```
+
+`-Confirm:$false` suppresses the interactive confirmation prompt; it does not
+bypass package validation, the compatibility gate, the stopped-game check, or
+transactional rollback. Keep a backup before updating. The tool requires
+Runtime compatibility `PASS` before writing.
