@@ -58,8 +58,7 @@ by the maintainer through human-controlled DEV gameplay, with screenshots and
 DEBUG logs used for validation. This does not imply exhaustive testing of
 every Boon combination.
 
-These profiles are not yet available in the published release, which supports
-**Sister Blades — Aspect of Melinoë: Starter** only.
+These profiles are included in the published **v0.2.0** release.
 
 Compact build-status UI, Duos, Hermes and Poms guidance remain future work.
 
@@ -87,8 +86,8 @@ Compatible profiles can also be selected explicitly with:
 - `morrigan_meta`
 - `coat_intermediate`
 
-The historical `starter` profile belongs to the published v0.1.2 line and is
-not part of the future-v0.2 runtime set.
+The historical `starter` profile belongs to the v0.1.2 line and is not part of
+the v0.2.0 runtime set.
 
 ### Community sources and validation
 
