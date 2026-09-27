@@ -8,7 +8,7 @@ This file is the project roadmap and the source of truth for planned work and va
 
 ## Current focus
 
-**v0.2.0 published; build identity is now DEV-validated across startup, lobby transitions, and a run. Arcana setup guidance is removed; future scope remains deferred.**
+**v0.2.0 published; build identity is DEV-validated, and the limited Medea Zeus/burst pilot has passed in-game QA. Arcana setup guidance is removed; all remaining Medea scope stays deferred pending a separate Curator review and maintainer approval.**
 
 **Post-v0.2 priority order:** (1) choose the next runtime profile-expansion scope with the maintainer; (2) do the consolidated UI polish pass, including the already-working build label. The Black Coat focus picker/reminder passed forced-weapon-mode human QA on 2026-09-26. Legendary/Duo, Hex/Familiar and any Keepsake setup guidance stay optional and must not block these steps. Arcana work is closed and is not a roadmap dependency.
 
@@ -625,3 +625,13 @@ These are intentionally deferred beyond published `v0.2` unless promoted into an
 - Confirmed that no native IDs were promoted and that `Premium Service` / `WeaponUpgradeBoon` was not associated with the unnamed Sprint row.
 - Added a focused import/documentation test; no runtime Lua module or registry entry was created.
 - Next steps: keep the profile documentary-only and evaluate any future runtime promotion only through a separately approved audit.
+
+### 2026-09-27 — Medea Zeus/burst pilot DEV validation
+
+- Status: live DEV validation complete for the approved limited pilot only; this does not mark the full Medea profile or either complete route as validated.
+- Runtime coverage: `ZeusSpecialBoon` is the Zeus/burst core. `HeraWeaponBoon` and `AphroditeWeaponBoon` are Attack alternatives; Aphrodite is a general-compatible alternative, not a Zeus-specific synergy. The 27 documentary DATA rows and the Ice/control branch remain intact.
+- The maintainer's run and DEBUG log confirmed `WeaponLob` + `LobCloseAttackAspect` from the lobby through two boss-region exits. Zeus Special was covered as core; Aphrodite Attack was covered as an alternative. Unknown Boons and Hammers remained uncovered and did not receive invented ranks. The observed Pom choices applied the core/alternative adjustments, and no Boon Advisor errors or warnings were found.
+- `B_Combat06` was confirmed in the native room set as an Anomaly room; it does not indicate a region change. The run ended in `G_PostBoss01` and the game was closed normally.
+- Future in-game QA should keep the installed `DEBUG = true` setting so offer details remain available in `LogOutput.log`.
+- Next step: ask the Community Curator to assess the next smallest independent Medea scope. Do not promote Static Shock, Ice/control, Hammers, Keepsakes, Familiar, or other documentary rows without a separate review and maintainer approval.
+
