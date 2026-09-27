@@ -17,6 +17,16 @@ local strings = {
         resources = "Resources", damage = "Damage", aspect = "Aspect", setup = "Setup",
         positioning = "Positioning", origination = "Origination", hammer = "Hammer",
         hammerPriority = "Hammer plan",
+        focus = "Focus", focusNone = "None", focusAttack = "Attack",
+        focusSpecial = "Special / rockets", focusRouteUnknown = "Route undecided",
+        focusAres = "Ares route", focusZeus = "Zeus route",
+        focusChooseBetween = "Choose between:",
+        buildIdentity = "Build",
+        buildBladesMelinoe = "Sister Blades · Melinoë",
+        buildBladesMorrigan = "Sister Blades · Aspect of Morrigan",
+        buildBlackCoat = "Black Coat · Melinoë",
+        pomCore = "Build core", pomAlternative = "Build alternative",
+        pomPreferred = "Build preference", pomDiscouraged = "Discouraged",
         status = "Status", synergy = "Synergy", survival = "Survival", rarity = "Rarity",
     },
     fr = {
@@ -35,6 +45,16 @@ local strings = {
         resources = "Ressources", damage = "Dégâts", aspect = "Aspect", setup = "Setup",
         positioning = "Positionnement", origination = "Origination", hammer = "Marteau",
         hammerPriority = "Plan Marteau",
+        focus = "Focus", focusNone = "Aucun", focusAttack = "Attaque",
+        focusSpecial = "Technique / roquettes", focusRouteUnknown = "Route indéterminée",
+        focusAres = "Route Arès", focusZeus = "Route Zeus",
+        focusChooseBetween = "Choisir entre :",
+        buildIdentity = "Build",
+        buildBladesMelinoe = "Lames Sœurs · Melinoë",
+        buildBladesMorrigan = "Lames Sœurs · Aspect de Morrigan",
+        buildBlackCoat = "Manteau Noir · Melinoë",
+        pomCore = "Core du build", pomAlternative = "Alternative du build",
+        pomPreferred = "Préférence du build", pomDiscouraged = "Déconseillé",
         status = "Statut", synergy = "Synergie", survival = "Survie", rarity = "Rareté",
     },
 }
@@ -50,6 +70,8 @@ local reasonKeys = {
     BACKSTAB_SETUP = "positioning", ORIGINATION_ENABLE = "origination",
     EXISTING_HAMMER_SYNERGY = "hammer",
     HAMMER_BUILD_PRIORITY = "hammerPriority",
+    POM_CORE = "pomCore", POM_ALTERNATIVE = "pomAlternative",
+    POM_PREFERRED = "pomPreferred", POM_DISCOURAGED = "pomDiscouraged",
 }
 
 function Localization.normalizeLanguage(value)
@@ -70,6 +92,16 @@ function Localization.get(language, key)
         or strings.en[key]
     if value ~= nil then return value end
     return "TEXT UNAVAILABLE"
+end
+
+function Localization.buildName(language, profileId)
+    local names = {
+        sister_blades_melinoe_intermediate = "buildBladesMelinoe",
+        sister_blades_morrigan_meta = "buildBladesMorrigan",
+        black_coat_melinoe_intermediate = "buildBlackCoat",
+    }
+    local key = names[profileId]
+    return key and Localization.get(language, key) or nil
 end
 
 function Localization.reasonKey(code, delta)

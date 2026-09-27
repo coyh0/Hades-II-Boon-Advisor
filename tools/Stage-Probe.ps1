@@ -32,7 +32,10 @@ Copy-Item -LiteralPath (Join-Path $repo 'src\main.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\Logger.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\Localization.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\GameState.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\LobbyProbe.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\OfferSnapshot.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\PomAdvisor.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\FocusState.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ScoringEngine.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\UI.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ProfileResolver.lua') -Destination $target

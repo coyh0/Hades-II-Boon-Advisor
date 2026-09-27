@@ -1,6 +1,6 @@
 # Registry v0.2: 118-row audit
 
-Baseline: `dc57eabc45b967bd40bc124f8df13332744cb687`. Source snapshot: `v02-registry-source.json`.
+Baseline: `7c6e54407456b22a0451bdd3945f34ac89833bb1`. Source snapshot: `v02-registry-source.json`.
 
 Native text matching verifies names only. Conditions and documentary priorities are never executed automatically.
 Existing generic slot evaluation is separate from an explicit build recommendation. All source rows remain documentation_only.
@@ -30,17 +30,17 @@ Existing generic slot evaluation is separate from an explicit build recommendati
 | 22 | melinoe_intermediate | Reaper Knives / DaggerSpecialReturnTrait | Alternative / 2 | hammerPlan alternative 2 | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 23 | melinoe_intermediate | Final Slice / DaggerAttackFinisherTrait | Alternative / 2 | hammerPlan alternative 3 | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 24 | melinoe_intermediate | Dancing Knives / DaggerSpecialJumpTrait | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
-| 25 | melinoe_intermediate | The Huntress / unresolved | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 25 | melinoe_intermediate | The Huntress / LowManaDamageMetaupgrade | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 26 | melinoe_intermediate | The Furies / CastBuff | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 27 | melinoe_intermediate | The Messenger / BonusDodge | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 28 | melinoe_intermediate | The Swift Runner / SprintShield | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 29 | melinoe_intermediate | Death / LastStand | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 30 | melinoe_intermediate | Origination / StatusVulnerability | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 31 | melinoe_intermediate | The Lovers / ChanneledBlock | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
-| 32 | melinoe_intermediate | The Wayward Son / unresolved | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 32 | melinoe_intermediate | The Wayward Son / DoorHealMetaUpgrade | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 33 | melinoe_intermediate | The Centaur / MaxHealthPerRoom | Situational / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 34 | melinoe_intermediate | The Fates / TradeOff | Situational / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
-| 35 | melinoe_intermediate | Divinity / unresolved | Situational / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 35 | melinoe_intermediate | Divinity / EpicRarityBoostMetaUpgrade | Situational / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 36 | melinoe_intermediate | Frinos / HealthFamiliar | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 37 | melinoe_intermediate | Toula / LastStandFamiliar | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 38 | melinoe_intermediate | Lunar Ray / SpellLaserTrait | Situational / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
@@ -52,8 +52,8 @@ Existing generic slot evaluation is separate from an explicit build recommendati
 | 44 | coat_melinoe_intermediate | Gorgon Amulet / AthenaEncounterKeepsake | Conditional / 1 | metadata-only keepsakePlan; no condition execution | PRESERVE_METADATA_ONLY |
 | 45 | coat_melinoe_intermediate | Luckier Tooth / ReincarnationKeepsake | Alternative / 1 | metadata-only keepsakePlan; no condition execution | PRESERVE_METADATA_ONLY |
 | 46 | coat_melinoe_intermediate | Wave Strike / PoseidonWeaponBoon | Main / 1 | Attack.core | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
-| 47 | coat_melinoe_intermediate | Flame Strike / HestiaWeaponBoon | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | SELECTED_DELTA: Attack alternatives |
-| 48 | coat_melinoe_intermediate | Heaven Strike / ZeusWeaponBoon | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | SELECTED_DELTA: Attack alternatives |
+| 47 | coat_melinoe_intermediate | Flame Strike / HestiaWeaponBoon | Alternative / 2 | Attack.alternatives | SELECTED_DELTA: Attack alternatives |
+| 48 | coat_melinoe_intermediate | Heaven Strike / ZeusWeaponBoon | Alternative / 2 | Attack.alternatives | SELECTED_DELTA: Attack alternatives |
 | 49 | coat_melinoe_intermediate | Vicious Flourish / AresSpecialBoon | Main / 1 | Special.core | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 50 | coat_melinoe_intermediate | Heaven Flourish / ZeusSpecialBoon | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 51 | coat_melinoe_intermediate | Storm Ring / ZeusCastBoon | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
@@ -67,15 +67,15 @@ Existing generic slot evaluation is separate from an explicit build recommendati
 | 59 | coat_melinoe_intermediate | Exhaust Riser / SuitDashAttackTrait | Main / 1 | hammerPlan priority 1 | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 60 | coat_melinoe_intermediate | Rapid Frame / SuitAttackSpeedTrait | Alternative / 2 | hammerPlan priority 2 | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 61 | coat_melinoe_intermediate | Launcher Frame / SuitSpecialAutoTrait | Conditional / 3 | hammerPlan alternative 3; INCOMPLETE: Special branch | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
-| 62 | coat_melinoe_intermediate | Reaper Frame / SuitAttackSizeTrait | Alternative / 3 | No explicit recommendation entry; not proof of runtime non-coverage | SELECTED_DELTA: hammer alternative 3 |
+| 62 | coat_melinoe_intermediate | Reaper Frame / SuitAttackSizeTrait | Alternative / 3 | hammerPlan alternative 3 | SELECTED_DELTA: hammer alternative 3 |
 | 63 | coat_melinoe_intermediate | The Sorceress / ChanneledCast | Conditional / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
-| 64 | coat_melinoe_intermediate | The Huntress / unresolved | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 64 | coat_melinoe_intermediate | The Huntress / LowManaDamageMetaupgrade | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 65 | coat_melinoe_intermediate | The Furies / CastBuff | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 66 | coat_melinoe_intermediate | The Messenger / BonusDodge | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 67 | coat_melinoe_intermediate | The Swift Runner / SprintShield | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 68 | coat_melinoe_intermediate | Death / LastStand | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 69 | coat_melinoe_intermediate | Origination / StatusVulnerability | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
-| 70 | coat_melinoe_intermediate | The Wayward Son / unresolved | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 70 | coat_melinoe_intermediate | The Wayward Son / DoorHealMetaUpgrade | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 71 | coat_melinoe_intermediate | Toula / LastStandFamiliar | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 72 | coat_melinoe_intermediate | Gale / DodgeFamiliar | Situational / 3 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 73 | coat_melinoe_intermediate | Wolf Howl / SpellLeapTrait | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
@@ -105,15 +105,15 @@ Existing generic slot evaluation is separate from an explicit build recommendati
 | 215 | morrigan_meta | Beach Ball / PoseidonSplashSprintBoon | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 216 | morrigan_meta | Premium Service / WeaponUpgradeBoon | Conditional / 2 | existing aspectInteractions; contextual evaluation required | PRESERVE_BASELINE; documentary condition/classification is not a new rule |
 | 217 | morrigan_meta | Grievous Blow / AresStatusDoubleDamageBoon | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
-| 218 | morrigan_meta | Final Slice / DaggerAttackFinisherTrait | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | SELECTED_DELTA: hammer alternative 2 |
+| 218 | morrigan_meta | Final Slice / DaggerAttackFinisherTrait | Main / 1 | hammerPlan alternative 2 | SELECTED_DELTA: hammer alternative 2 |
 | 219 | morrigan_meta | Sweeping Ambush / DaggerBlinkAoETrait | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 220 | morrigan_meta | Wicked Onslaught / DaggerFinalHitTrait | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 221 | morrigan_meta | Rapid Onslaught / DaggerRapidAttackTrait | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 222 | morrigan_meta | Banshee Brand / DaggerTripleRepeatWomboTrait | Conditional / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
-| 223 | morrigan_meta | Phantom Brand / DaggerTripleBuffTrait | Conditional / 1 | No explicit recommendation entry; not proof of runtime non-coverage | SELECTED_DELTA: hammer priority 1 |
+| 223 | morrigan_meta | Phantom Brand / DaggerTripleBuffTrait | Conditional / 1 | hammerPlan priority 1 | SELECTED_DELTA: hammer priority 1 |
 | 224 | morrigan_meta | Dancing Knives / DaggerSpecialJumpTrait | Avoid / 3 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_NEW_RECOMMENDATION; generic slot coverage may already exist |
 | 225 | morrigan_meta | The Sorceress / ChanneledCast | Main / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
-| 226 | morrigan_meta | The Huntress / unresolved | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
+| 226 | morrigan_meta | The Huntress / LowManaDamageMetaupgrade | Alternative / 1 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 227 | morrigan_meta | The Furies / CastBuff | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 228 | morrigan_meta | Origination / StatusVulnerability | Conditional / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |
 | 229 | morrigan_meta | Death / LastStand | Alternative / 2 | No explicit recommendation entry; not proof of runtime non-coverage | DEFER_DOCUMENTARY_GUIDANCE |

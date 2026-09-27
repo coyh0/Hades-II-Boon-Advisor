@@ -23,7 +23,7 @@
       "nulBytes": 5
     }
   ],
-  "showcaseScoringTestLoadError": "[string \"assert(loadfile(\"C:/Users/jejsa/Documents/Cha...\"]:1: ...I-Clean-Export/dist/audit/4a647f6/tests/scoring_spec.lua:1: syntax error near char(170)",
+  "showcaseScoringTestLoadError": "loadfile failed: tests/scoring_spec.lua:1 syntax error near char(170)",
   "scenario": "Single Common offer, empty slots, no owned traits/hammers/Arcana; not live evidence or a ranking test",
   "results": {
     "main": [
