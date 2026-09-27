@@ -383,4 +383,37 @@ UI.renderFallback(englishFallback, { code = "PARTIAL_RANKING" }, api)
 check(textBoxes[#textBoxes - 1].RawText == "PARTIAL RANKING"
     and textBoxes[#textBoxes].RawText == "Ranks compare 2 evaluated choices only",
     "English partial-ranking scope was not rendered")
-print("PASS: UI rank mapping, ties, private components, idempotent cleanup")
+local overview = { items = {}, key = nil }
+local buildData = { buildName = "Lames Sœurs · Aspect de Morrigan" }
+local overviewCreatedStart, overviewTextStart = #created, #textBoxes
+local overviewApi = { CreateScreenComponent = CreateScreenComponent, CreateTextBox = CreateTextBox,
+    Destroy = Destroy, AttachLua = function(data) attaches[#attaches + 1] = data end }
+UI.setLanguage("fr")
+UI.syncBuildOverview(overview, buildData, overviewApi)
+check(#created == overviewCreatedStart + 1 and #textBoxes == overviewTextStart + 1
+    and created[overviewCreatedStart + 1].data.Name == "BlankObstacle"
+    and textBoxes[overviewTextStart + 1].RawText == "Build : Lames Sœurs · Aspect de Morrigan",
+    "build identity was not rendered alone")
+UI.syncBuildOverview(overview, buildData, overviewApi)
+check(#created == overviewCreatedStart + 1, "unchanged overview was needlessly recreated")
+UI.syncBuildOverview(overview, buildData, overviewApi, true)
+check(#created == overviewCreatedStart + 2 and #destroyed > 0
+    and textBoxes[#textBoxes].RawText == "Build : Lames Sœurs · Aspect de Morrigan",
+    "build identity was not refreshed")
+local beforeClear = #destroyed
+UI.syncBuildOverview(overview, nil, overviewApi)
+check(overview.key == nil and #destroyed == beforeClear + 1,
+    "unknown build did not clear the persistent overview")
+local staleOverview = { items = { { id = "stale-overview-id" } }, key = "stale-key" }
+local staleApi = { Destroy = function() error("screen id already removed during room transition") end,
+    CreateScreenComponent = function(data)
+        nextId = nextId + 1
+        local component = { Id = "recovered-overview" .. nextId }
+        created[#created + 1] = { data = data, component = component }
+        return component
+    end,
+    CreateTextBox = CreateTextBox }
+UI.syncBuildOverview(staleOverview, { buildName = "Lames Sœurs · Morrigan" }, staleApi, true)
+check(staleOverview.key == "Lames Sœurs · Morrigan" and #staleOverview.items == 1,
+    "stale screen cleanup failure blocked recreation of the build reminder")
+print("PASS: UI rank mapping, ties, private components, build overview, idempotent cleanup")

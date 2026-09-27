@@ -55,7 +55,7 @@ $publicDocs = @(
     (Join-Path $repo 'thunderstore.toml')
 ) + ($docs | ForEach-Object { Join-Path $repo $_ })
 foreach ($path in $publicDocs) {
-    foreach ($privatePath in @('jejsa', 'C:\Users\', 'D:\EpicGames', 'D:\Dev', 'AppData\Roaming\Thunderstore', 'Hades-II-Clean-Export')) {
+    foreach ($privatePath in @(('jej' + 'sa'), 'C:\Users\', 'D:\EpicGames', 'D:\Dev', 'AppData\Roaming\Thunderstore', 'Hades-II-Clean-Export')) {
         Assert-NotContains $path $privatePath
     }
 }

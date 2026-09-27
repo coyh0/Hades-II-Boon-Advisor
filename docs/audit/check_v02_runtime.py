@@ -6,6 +6,7 @@ import ctypes
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import zipfile
@@ -16,7 +17,10 @@ WORK = ROOT / 'dist/audit'
 WORK.mkdir(parents=True, exist_ok=True)
 BRANCH = '4a647f607023602a34b1d705a15a39cfbb3bc19d'
 matrix = json.loads((OUT / 'v02-registry-matrix.json').read_text(encoding='utf-8'))['rows']
-dll = ctypes.CDLL('D:/Dev/Games/HadesII-Dev/Ship/lua52.dll')
+game_root = os.environ.get('HADES2_GAME_ROOT')
+if not game_root:
+    raise SystemExit('Set HADES2_GAME_ROOT to the local Hades II installation directory.')
+dll = ctypes.CDLL(str(Path(game_root) / 'Ship' / 'lua52.dll'))
 dll.luaL_newstate.restype = ctypes.c_void_p
 dll.luaL_openlibs.argtypes = [ctypes.c_void_p]
 dll.luaL_loadstring.argtypes = [ctypes.c_void_p, ctypes.c_char_p]

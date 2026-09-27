@@ -120,7 +120,7 @@ changes, and in-game validation are performed or approved by the maintainer.
 
 ## Project roadmap
 
-The project roadmap is maintained privately and is not published.
+The project roadmap is maintained in `Hades-II-Boon-Advisor-Roadmap.md` and may be published with the project.
 
 
 ## Release material

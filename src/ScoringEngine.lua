@@ -625,7 +625,20 @@ local function scoreHammerOffers(snapshot, profile, profileSupported)
                     result.covered = true
                     result.hammerPriority = entry.priority
                     result.hammerClassification = entry.classification
-                    if entry.condition ~= nil then
+                    local focus = type(snapshot.playerFocus) == "table"
+                        and snapshot.playerFocus.focus or "none"
+                    local focusResolved = nil
+                    if profile.id == "black_coat_melinoe_intermediate"
+                        and type(snapshot.playerFocus) == "table" then
+                        if offer.ItemName == "SuitAttackSpeedTrait"
+                            or offer.ItemName == "SuitAttackSizeTrait" then
+                            focusResolved = focus == "attack"
+                        elseif offer.ItemName == "SuitSpecialAutoTrait" then
+                            focusResolved = focus == "special"
+                        end
+                    end
+                    if entry.condition ~= nil and focusResolved ~= true
+                        or focusResolved == false then
                         result.hammerCondition = entry.condition
                         addReason(result, "HAMMER_CONDITION_UNRESOLVED", 0)
                     else
@@ -645,6 +658,23 @@ function ScoringEngine.scoreOffers(snapshot, profile)
     local profileSupported = ScoringEngine.isProfileSupported(snapshot, profile)
     if snapshot.offerKind == "hammer" then
         return scoreHammerOffers(snapshot, profile, profileSupported)
+    end
+    local coatRoute = nil
+    if profile.id == "black_coat_melinoe_intermediate"
+        and type(snapshot.playerFocus) == "table" then
+        local declared = type(snapshot.playerFocus) == "table" and snapshot.playerFocus or {}
+        if declared.focus == "special" then coatRoute = declared.route end
+        if coatRoute == "zeus" then
+            local projected = {}
+            for key, value in pairs(profile) do projected[key] = value end
+            projected.slots = {}
+            for key, value in pairs(profile.slots or {}) do projected.slots[key] = value end
+            projected.slots.Special = {
+                core = {}, alternatives = {}, preferred = { "ZeusSpecialBoon" },
+                slotPolicy = "reserved",
+            }
+            profile = projected
+        end
     end
     local owned = ownedGodTraits(snapshot)
     local hammers = ownedHammers(snapshot)
@@ -840,6 +870,21 @@ function ScoringEngine.scoreOffers(snapshot, profile)
                     and not originationUnresolved
                     and not attackBranchUnresolved
                     and (not core.replacesCoreSlot or replacement ~= nil)
+                if coatRoute ~= nil and (offer.ItemName == "AresSpecialBoon"
+                    or offer.ItemName == "ZeusSpecialBoon") then
+                    local selected = coatRoute == "ares" and "AresSpecialBoon"
+                        or coatRoute == "zeus" and "ZeusSpecialBoon" or nil
+                    if offer.ItemName ~= selected then
+                        addReason(result, "SPECIAL_ROUTE_UNRESOLVED", 0)
+                        result.scoreComplete = false
+                    end
+                elseif profile.id == "black_coat_melinoe_intermediate"
+                    and type(snapshot.playerFocus) == "table"
+                    and (offer.ItemName == "AresSpecialBoon"
+                        or offer.ItemName == "ZeusSpecialBoon") then
+                    addReason(result, "SPECIAL_ROUTE_UNRESOLVED", 0)
+                    result.scoreComplete = false
+                end
                 if result.scoreComplete then
                     local rarityResolved = rarityDelta(result, offer.Rarity, offer.OldRarity,
                         core.replacesCoreSlot)

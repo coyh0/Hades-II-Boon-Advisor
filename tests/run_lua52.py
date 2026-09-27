@@ -15,6 +15,8 @@ dll.lua_close.argtypes = [ctypes.c_void_p]
 test_files = [b"tests/probe_spec.lua", b"tests/phase2_spec.lua", b"tests/scoring_spec.lua", b"tests/partial_ranking_spec.lua", b"tests/ui_spec.lua", b"tests/localization_spec.lua", b"tests/attack_branches_spec.lua"]
 test_files.extend(path.encode("utf-8") for path in sys.argv[2:])
 test_files.extend([b"tests/v02_showcase_spec.lua", b"tests/profile_resolver_spec.lua"])
+test_files.append(b"tests/focus_spec.lua")
+test_files.append(b"tests/lobby_probe_spec.lua")
 for test_file in test_files:
     state = dll.luaL_newstate()
     if not state:
