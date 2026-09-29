@@ -69,11 +69,9 @@ function PomAdvisor.usesPomScoring(snapshot, profile)
     if type(snapshot) ~= "table" or snapshot.offerKind ~= "pom" then return false end
     if type(profile) == "table" and type(profile.sourceScoring) == "table"
         and type(profile.sourceScoring.poms) == "table" then return false end
-    -- This source upgrades an already-owned boon. A profile with source-based
-    -- Pom rules uses those numeric recommendations instead of role ranking.
-    return not (type(profile) == "table"
-        and profile.id == "argent_skull_medea_mobalytics"
-        and snapshot.offerSource == "StackUpgrade")
+    -- Stack upgrades use source-based numeric recommendations when the profile
+    -- declares Pom groups; other profiles retain role-based Pom ranking.
+    return true
 end
 
 function PomAdvisor.scoreOffers(snapshot, profile)
