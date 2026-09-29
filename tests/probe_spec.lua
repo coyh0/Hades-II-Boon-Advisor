@@ -378,7 +378,9 @@ print("PASS: plugin globals absent; dynamic rom.game snapshot uses internal IDs;
 
 do
     local function npcScore(source, itemName)
-        local loot = { Name = source, Traits = { itemName }, UpgradeOptions = {
+        local loot = { Name = source, Traits = { itemName },
+            PermanentTraits = source == "TrialUpgrade" and { itemName } or nil,
+            UpgradeOptions = {
             { ItemName = itemName, Rarity = "Common" },
         } }
         local screen = { Source = loot, KeepOpen = true, Components = {
@@ -397,12 +399,16 @@ do
     end
     local renewedFaith, athenaKind = npcScore("NPC_Athena_01", "DeathDefianceRefillBoon")
     local lastGasp, hadesKind = npcScore("NPC_Hades_Field_01", "HadesDeathDefianceDamageBoon")
+    local artemis, artemisKind = npcScore("NPC_Artemis_Field_01", "InsideCastCritBoon")
+    local chaos, chaosKind = npcScore("TrialUpgrade", "ChaosWeaponBlessing")
     check(athenaKind == "boon" and renewedFaith.score == 200 and renewedFaith.sourceGroup == "NPC Offerings",
         "Athena NPC Renewed Faith source was not recognized and scored 200")
     check(hadesKind == "boon" and lastGasp.score == 200 and lastGasp.sourceGroup == "NPC Offerings",
         "Hades NPC Last Gasp source was not recognized and scored 200")
+    check(artemisKind == "boon", "Artemis field source was not recognized as a boon offer")
+    check(chaosKind == "boon", "TrialUpgrade was not recognized as a non-Olympian boon offer")
 end
-print("PASS: Athena/Hades NPC reward sources recognized and Mobalytics NPC Offerings score 200")
+print("PASS: Athena/Hades/Artemis NPC and TrialUpgrade boon sources recognized")
 
 do
     local hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" }, Traits = {

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": 1,
+  "id": "moonstone_axe_melinoe_mobalytics",
+  "weapon": "WeaponAxe",
+  "aspect": "AxeRecoveryAspect",
+  "genericCoreAspectCompatibility": false,
+  "traitSemantics": {},
+  "weights": { "BUILD_PREFERRED": 2 },
+  "sourceScoring": {
+    "boons": {
+      "ApolloWeaponBoon": "Core Boons",
+      "HephaestusSpecialBoon": "Core Boons",
+      "DemeterCastBoon": "Core Boons",
+      "PoseidonSprintBoon": "Core Boons",
+      "HephaestusManaBoon": "Core Boons",
+      "DoubleStrikeChanceBoon": "Non-Core Boons",
+      "CastNovaBoon": "Non-Core Boons",
+      "EncounterStartDefenseBuffBoon": "Non-Core Boons",
+      "FocusDamageShaveBoon": "Non-Core Boons",
+      "EncounterStartOffenseBuffBoon": "Non-Core Boons",
+      "RootDurationBoon": "Non-Core Boons",
+      "InsideCastCritBoon": "Offerings",
+      "ChaosWeaponBlessing": "Offerings",
+      "ChaosHealthBlessing": "Offerings"
+    },
+    "hammers": {},
+    "poms": {
+      "ApolloWeaponBoon": "Poms of Power",
+      "HephaestusSpecialBoon": "Poms of Power",
+      "PoseidonSprintBoon": "Poms of Power"
+    },
+    "offerSources": {
+      "InsideCastCritBoon": "NPC_Artemis_Field_01",
+      "ChaosWeaponBlessing": "TrialUpgrade",
+      "ChaosHealthBlessing": "TrialUpgrade"
+    },
+    "deferred": {}
+  },
+  "godPool": [
+    { "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_apollo_01", "sourceGod": "Apollo", "offerSource": "ApolloUpgrade" },
+    { "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_demeter_01", "sourceGod": "Demeter", "offerSource": "DemeterUpgrade" },
+    { "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_hephaestus_01", "sourceGod": "Hephaestus", "offerSource": "HephaestusUpgrade" },
+    { "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_poseidon_01", "sourceGod": "Poseidon", "offerSource": "PoseidonUpgrade" }
+  ],
+  "corePlan": {
+    "ApolloWeaponBoon": { "role": "Attack", "displayName": { "en": "Nova Strike", "fr": "Frappe Éclatante" } },
+    "HephaestusSpecialBoon": { "role": "Special", "displayName": { "en": "Volcanic Flourish", "fr": "Technique Volcanique" } },
+    "DemeterCastBoon": { "role": "Cast", "displayName": { "en": "Arctic Ring", "fr": "Glyphe Polaire" } },
+    "PoseidonSprintBoon": { "role": "Sprint", "displayName": { "en": "Breaker Rush", "fr": "Ruée Torrentielle" } },
+    "HephaestusManaBoon": { "role": "Mana", "displayName": { "en": "Tough Gain", "fr": "Conscience Tenace" } }
+  },
+  "nonCoreContext": {},
+  "statusMappings": {},
+  "knownNonStatusTraits": [],
+  "potentialStatusTraits": [],
+  "statusCapabilityTraits": {},
+  "bloodDropEngine": { "producers": [], "payoffs": [] },
+  "aspectInteractions": {},
+  "hammerRoles": {},
+  "rules": {},
+  "verifiedIds": {
+    "coreAttack": ["ApolloWeaponBoon"],
+    "coreSpecial": ["HephaestusSpecialBoon"],
+    "coreCast": ["DemeterCastBoon"],
+    "coreSprint": ["PoseidonSprintBoon"],
+    "coreMana": ["HephaestusManaBoon"]
+  }
+}

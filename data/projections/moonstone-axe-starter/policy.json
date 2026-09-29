@@ -1,0 +1,28 @@
+{
+  "schemaVersion": 1,
+  "boonClassifications": {},
+  "verifiedRuntimeItemIds": [
+    "ApolloWeaponBoon", "HephaestusSpecialBoon", "DemeterCastBoon", "PoseidonSprintBoon", "HephaestusManaBoon",
+    "DoubleStrikeChanceBoon", "CastNovaBoon", "EncounterStartDefenseBuffBoon", "FocusDamageShaveBoon", "EncounterStartOffenseBuffBoon", "RootDurationBoon",
+    "InsideCastCritBoon", "ChaosWeaponBlessing", "ChaosHealthBlessing"
+  ],
+  "verifiedBoonMappings": [
+    { "runtimeItemId": "ApolloWeaponBoon", "sourceGroup": "Core Boons", "coreRole": "Attack" },
+    { "runtimeItemId": "HephaestusSpecialBoon", "sourceGroup": "Core Boons", "coreRole": "Special" },
+    { "runtimeItemId": "DemeterCastBoon", "sourceGroup": "Core Boons", "coreRole": "Cast" },
+    { "runtimeItemId": "PoseidonSprintBoon", "sourceGroup": "Core Boons", "coreRole": "Sprint" },
+    { "runtimeItemId": "HephaestusManaBoon", "sourceGroup": "Core Boons", "coreRole": "Mana" },
+    { "runtimeItemId": "DoubleStrikeChanceBoon", "sourceGroup": "Non-Core Boons" },
+    { "runtimeItemId": "CastNovaBoon", "sourceGroup": "Non-Core Boons" },
+    { "runtimeItemId": "EncounterStartDefenseBuffBoon", "sourceGroup": "Non-Core Boons" },
+    { "runtimeItemId": "FocusDamageShaveBoon", "sourceGroup": "Non-Core Boons" },
+    { "runtimeItemId": "EncounterStartOffenseBuffBoon", "sourceGroup": "Non-Core Boons" },
+    { "runtimeItemId": "RootDurationBoon", "sourceGroup": "Non-Core Boons" }
+  ],
+  "verifiedOfferingPairs": [
+    { "runtimeItemId": "InsideCastCritBoon", "offerSource": "NPC_Artemis_Field_01" },
+    { "runtimeItemId": "ChaosWeaponBlessing", "offerSource": "TrialUpgrade" },
+    { "runtimeItemId": "ChaosHealthBlessing", "offerSource": "TrialUpgrade" }
+  ],
+  "keepsakeStartAsAutoSignal": false
+}

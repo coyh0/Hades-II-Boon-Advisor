@@ -1,0 +1,526 @@
+{
+  "schemaVersion": 1,
+  "sourceBuildId": "axe_melinoe",
+  "recommendations": [
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_weapon_aspect_aspect_of_melinoe_zorephet_01",
+      "sourceGroup": "Weapon Aspect",
+      "name": "Aspect of Melinoë",
+      "sourceGod": null,
+      "sourceClassification": "Weapon Aspect",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_sorceress_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Sorceress",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_wayward_son_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Wayward Son",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_huntress_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Huntress",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_furies_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Furies",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_persistence_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "Persistence",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_swift_runner_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Swift Runner",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_death_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "Death",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_centaur_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Centaur",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_origination_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "Origination",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_messenger_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Messenger",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_lovers_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Lovers",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_artificer_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Artificer",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_the_champions_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "The Champions",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_arcana_loadout_divinity_01",
+      "sourceGroup": "Arcana Loadout",
+      "name": "Divinity",
+      "sourceGod": null,
+      "sourceClassification": "Arcana Loadout",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_keepsakes_harmonic_photon_01",
+      "sourceGroup": "Starting Keepsake",
+      "name": "Harmonic Photon",
+      "sourceGod": null,
+      "sourceClassification": "Starting Keepsake",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_keepsakes_barely_sheaf_01",
+      "sourceGroup": "Keepsakes",
+      "name": "Barely Sheaf",
+      "sourceGod": null,
+      "sourceClassification": "Keepsakes",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_keepsakes_experimental_hammer_01",
+      "sourceGroup": "Keepsakes",
+      "name": "Experimental Hammer",
+      "sourceGod": null,
+      "sourceClassification": "Keepsakes",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_keepsakes_luckier_tooth_01",
+      "sourceGroup": "Keepsakes",
+      "name": "Luckier Tooth",
+      "sourceGod": null,
+      "sourceClassification": "Keepsakes",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_animal_familiar_toula_01",
+      "sourceGroup": "Animal Familiar",
+      "name": "Toula",
+      "sourceGod": null,
+      "sourceClassification": "Animal Familiar",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_hex_moon_water_01",
+      "sourceGroup": "Hex",
+      "name": "Moon Water",
+      "sourceGod": null,
+      "sourceClassification": "Hex",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_primary_god_boons_nova_strike_01",
+      "sourceGroup": "Core Boons",
+      "name": "Nova Strike",
+      "sourceGod": null,
+      "sourceClassification": "Core",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_primary_god_boons_extra_dose_01",
+      "sourceGroup": "Primary God Boons",
+      "name": "Extra Dose",
+      "sourceGod": null,
+      "sourceClassification": "Primary God Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_primary_god_boons_dazzling_display_01",
+      "sourceGroup": "Primary God Boons",
+      "name": "Dazzling Display",
+      "sourceGod": null,
+      "sourceClassification": "Primary God Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_primary_god_boons_self_healing_01",
+      "sourceGroup": "Primary God Boons",
+      "name": "Self Healing",
+      "sourceGod": null,
+      "sourceClassification": "Primary God Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_apollo_01",
+      "sourceGroup": "God Pool",
+      "name": "Apollo",
+      "sourceGod": null,
+      "sourceClassification": "God Pool",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_demeter_01",
+      "sourceGroup": "God Pool",
+      "name": "Demeter",
+      "sourceGod": null,
+      "sourceClassification": "God Pool",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_hephaestus_01",
+      "sourceGroup": "God Pool",
+      "name": "Hephaestus",
+      "sourceGod": null,
+      "sourceClassification": "God Pool",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_god_pool_poseidon_01",
+      "sourceGroup": "God Pool",
+      "name": "Poseidon",
+      "sourceGod": null,
+      "sourceClassification": "God Pool",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_core_boons_nova_strike_01",
+      "sourceGroup": "Core Boons",
+      "name": "Nova Strike",
+      "sourceGod": "Apollo",
+      "sourceClassification": "Core",
+      "conditionText": null,
+      "tooltipEvidence": "Nova Strike | Air | Gods Apollo | Type Attack | Your Attacks deal more damage in a larger area. Attack Damage: +40%/+50%/+60%/+70%",
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_core_boons_volcanic_flourish_01",
+      "sourceGroup": "Core Boons",
+      "name": "Volcanic Flourish",
+      "sourceGod": null,
+      "sourceClassification": "Core Boons",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_core_boons_arctic_ring_01",
+      "sourceGroup": "Core Boons",
+      "name": "Arctic Ring",
+      "sourceGod": null,
+      "sourceClassification": "Core Boons",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_core_boons_breaker_rush_01",
+      "sourceGroup": "Core Boons",
+      "name": "Breaker Rush",
+      "sourceGod": null,
+      "sourceClassification": "Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_core_boons_tough_gain_01",
+      "sourceGroup": "Core Boons",
+      "name": "Tough Gain",
+      "sourceGod": null,
+      "sourceClassification": "Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_extra_dose_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "Extra Dose",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_arctic_gale_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "Arctic Gale",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_security_system_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "Security System",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_high_surf_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "High Surf",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_hydraulic_might_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "Hydraulic Might",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_non_core_boons_cold_storage_01",
+      "sourceGroup": "Non-Core Boons",
+      "name": "Cold Storage",
+      "sourceGod": null,
+      "sourceClassification": "Non-Core Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_hermes_boons_nitro_boost_01",
+      "sourceGroup": "Hermes Boons",
+      "name": "Nitro Boost",
+      "sourceGod": null,
+      "sourceClassification": "Hermes Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_hermes_boons_nimble_limbs_01",
+      "sourceGroup": "Hermes Boons",
+      "name": "Nimble Limbs",
+      "sourceGod": null,
+      "sourceClassification": "Hermes Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_legendary_duo_boons_beach_ball_01",
+      "sourceGroup": "Legendary / Duo Boons",
+      "name": "Beach Ball",
+      "sourceGod": null,
+      "sourceClassification": "Legendary / Duo Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_legendary_duo_boons_tropical_cyclone_01",
+      "sourceGroup": "Legendary / Duo Boons",
+      "name": "Tropical Cyclone",
+      "sourceGod": null,
+      "sourceClassification": "Legendary / Duo Boons",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_daedalus_hammer_upgrades_dashing_heave_01",
+      "sourceGroup": "Daedalus Hammer Upgrades",
+      "name": "Dashing Heave",
+      "sourceGod": null,
+      "sourceClassification": "Daedalus Hammer Upgrades",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_daedalus_hammer_upgrades_rapid_slash_01",
+      "sourceGroup": "Daedalus Hammer Upgrades",
+      "name": "Rapid Slash",
+      "sourceGod": null,
+      "sourceClassification": "Daedalus Hammer Upgrades",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_npc_offerings_lethal_snare_01",
+      "sourceGroup": "NPC Offerings",
+      "name": "Lethal Snare",
+      "sourceGod": null,
+      "sourceClassification": "NPC Offerings",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_npc_offerings_strike_01",
+      "sourceGroup": "NPC Offerings",
+      "name": "Strike",
+      "sourceGod": null,
+      "sourceClassification": "NPC Offerings",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_npc_offerings_soul_01",
+      "sourceGroup": "NPC Offerings",
+      "name": "Soul",
+      "sourceGod": null,
+      "sourceClassification": "NPC Offerings",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_poms_of_power_nova_strike_01",
+      "sourceGroup": "Core Boons",
+      "name": "Nova Strike",
+      "sourceGod": null,
+      "sourceClassification": "Core",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_poms_of_power_volcanic_flourish_01",
+      "sourceGroup": "Poms of Power",
+      "name": "Volcanic Flourish",
+      "sourceGod": null,
+      "sourceClassification": "Poms of Power",
+      "conditionText": "Condition explicitement donnée dans le texte (voir section source).",
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    },
+    {
+      "recommendationId": "mobalytics_axe_melinoe_fullbuild_poms_of_power_breaker_rush_01",
+      "sourceGroup": "Poms of Power",
+      "name": "Breaker Rush",
+      "sourceGod": null,
+      "sourceClassification": "Poms of Power",
+      "conditionText": null,
+      "tooltipEvidence": null,
+      "informationStatus": "sourced"
+    }
+  ]
+}

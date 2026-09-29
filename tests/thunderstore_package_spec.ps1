@@ -86,6 +86,7 @@ $runtimeExpected = @(
     'config/settings.lua',
     'data/builds/black_coat_melinoe_intermediate.lua',
     'data/builds/argent_skull_medea_mobalytics.lua',
+    'data/builds/moonstone_axe_melinoe_mobalytics.lua',
     'data/builds/registry.lua',
     'data/builds/sister_blades_melinoe_intermediate.lua',
     'data/builds/sister_blades_morrigan_meta.lua',

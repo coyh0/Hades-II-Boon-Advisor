@@ -282,7 +282,7 @@ function UI.pomBuildStatus(profile, result)
         end
         return "unknown"
     end
-    if group == "Non-Core Boons" or group == "NPC Offerings" then
+    if group == "Non-Core Boons" or group == "NPC Offerings" or group == "Offerings" then
         return "build"
     end
     if group == nil then

@@ -23,6 +23,9 @@ profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerTripleAspect
 check(profile == registry.morrigan_meta and reason == "only_candidate", "Morrigan singleton changed")
 profile, reason = Resolver.resolve(registry, "WeaponSuit", "BaseSuitAspect", nil, {}, loadedProfiles)
 check(profile == registry.coat_melinoe_intermediate and reason == "only_candidate", "Black Coat singleton changed")
+profile, reason = Resolver.resolve(registry, "WeaponAxe", "AxeRecoveryAspect", nil, {}, loadedProfiles)
+check(profile == registry.moonstone_axe_melinoe_mobalytics and reason == "only_candidate",
+    "Moonstone Axe identity did not select its own Mobalytics profile")
 for _, pair in ipairs({ { "WeaponDagger", "DaggerBlockAspect" }, { "WeaponSuit", "UnknownAspect" },
     { "UnknownWeapon", "DaggerBackstabAspect" } }) do
     profile, reason = Resolver.resolve(registry, pair[1], pair[2], nil, {}, loadedProfiles)

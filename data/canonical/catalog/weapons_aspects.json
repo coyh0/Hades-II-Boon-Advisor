@@ -16,6 +16,16 @@
       ]
     },
     {
+      "runtimeWeaponId": "WeaponAxe",
+      "label": "Moonstone Axe",
+      "aspects": [
+        {
+          "runtimeAspectId": "AxeRecoveryAspect",
+          "label": "Aspect of Melinoë"
+        }
+      ]
+    },
+    {
       "runtimeWeaponId": "WeaponLob",
       "label": "Argent Skull",
       "aspects": [

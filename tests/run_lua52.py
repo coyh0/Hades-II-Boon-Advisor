@@ -18,6 +18,7 @@ test_files.extend([b"tests/v02_showcase_spec.lua", b"tests/profile_resolver_spec
 test_files.append(b"tests/focus_spec.lua")
 test_files.append(b"tests/lobby_probe_spec.lua")
 test_files.append(b"tests/argent_skull_medea_spec.lua")
+test_files.append(b"tests/moonstone_axe_spec.lua")
 test_files.append(b"tests/core_advisory_spec.lua")
 test_files.append(b"tests/god_pool_context_spec.lua")
 for test_file in test_files:

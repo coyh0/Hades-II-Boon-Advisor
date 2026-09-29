@@ -278,21 +278,27 @@ function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtab
     if ($mechanics.ContainsKey('sourceScoring')) {
         $sourceScoring = $mechanics.sourceScoring
         if ($sourceScoring -isnot [hashtable]) { Fail 'sourceScoring must be an object' }
-        $sourceKinds = @('boons', 'hammers', 'poms', 'deferred', 'npcOfferings')
+        $sourceKinds = @('boons', 'hammers', 'poms', 'deferred', 'offerSources', 'npcOfferings')
         foreach ($key in $sourceScoring.Keys) {
             if ($key -cnotin $sourceKinds) { Fail "unknown sourceScoring section $key" }
         }
-        foreach ($kind in $sourceKinds) {
+        foreach ($kind in @('boons', 'hammers', 'poms', 'deferred')) {
             if ($sourceScoring[$kind] -isnot [hashtable]) { Fail "sourceScoring.$kind must be an object" }
         }
+        foreach ($kind in @('offerSources', 'npcOfferings')) {
+            if ($sourceScoring.ContainsKey($kind) -and $sourceScoring[$kind] -isnot [hashtable]) {
+                Fail "sourceScoring.$kind must be an object when present"
+            }
+        }
         $allowedGroups = @{
-            boons = @('Core Boons', 'Non-Core Boons', 'NPC Offerings')
+            boons = @('Core Boons', 'Non-Core Boons', 'Offerings', 'NPC Offerings')
             hammers = @('Daedalus Hammer Upgrades')
             poms = @('Poms of Power')
             deferred = @('Legendary / Duo Boons')
-            npcOfferings = @('NPC_Athena_01', 'NPC_Hades_Field_01')
+            offerSources = @('NPC_Athena_01', 'NPC_Hades_Field_01', 'NPC_Artemis_Field_01', 'TrialUpgrade')
+            npcOfferings = @('NPC_Athena_01', 'NPC_Hades_Field_01', 'NPC_Artemis_Field_01')
         }
-        foreach ($kind in $sourceKinds) {
+        foreach ($kind in @('boons', 'hammers', 'poms', 'deferred')) {
             foreach ($entry in $sourceScoring[$kind].GetEnumerator()) {
                 Assert-String $entry.Key "sourceScoring.$kind trait ID"
                 if ($entry.Value -cnotin $allowedGroups[$kind]) {
@@ -307,16 +313,33 @@ function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtab
                 Fail "deferred source recommendation $traitId cannot also have an active source score"
             }
         }
-        foreach ($entry in $sourceScoring.npcOfferings.GetEnumerator()) {
-            Assert-String $entry.Key 'sourceScoring.npcOfferings trait ID'
-            if ($entry.Value -cnotin $allowedGroups.npcOfferings -or
-                $sourceScoring.boons[$entry.Key] -cne 'NPC Offerings') {
-                Fail "invalid sourceScoring.npcOfferings mapping for $($entry.Key)"
+        if ($sourceScoring.ContainsKey('offerSources')) {
+            foreach ($entry in $sourceScoring.offerSources.GetEnumerator()) {
+                Assert-String $entry.Key 'sourceScoring.offerSources trait ID'
+                if ($entry.Value -cnotin $allowedGroups.offerSources -or
+                    $sourceScoring.boons[$entry.Key] -cne 'Offerings' -or
+                    ($sourceScoring.npcOfferings -and $sourceScoring.npcOfferings.ContainsKey($entry.Key))) {
+                    Fail "invalid sourceScoring.offerSources mapping for $($entry.Key)"
+                }
+            }
+        }
+        if ($sourceScoring.ContainsKey('npcOfferings')) {
+            foreach ($entry in $sourceScoring.npcOfferings.GetEnumerator()) {
+                Assert-String $entry.Key 'sourceScoring.npcOfferings trait ID'
+                if ($entry.Value -cnotin $allowedGroups.npcOfferings -or
+                    $sourceScoring.boons[$entry.Key] -cne 'NPC Offerings') {
+                    Fail "invalid sourceScoring.npcOfferings mapping for $($entry.Key)"
+                }
             }
         }
         foreach ($entry in $sourceScoring.boons.GetEnumerator()) {
-            if ($entry.Value -ceq 'NPC Offerings' -and -not $sourceScoring.npcOfferings.ContainsKey($entry.Key)) {
+            if ($entry.Value -ceq 'NPC Offerings' -and
+                (-not $sourceScoring.npcOfferings -or -not $sourceScoring.npcOfferings.ContainsKey($entry.Key))) {
                 Fail "NPC Offering $($entry.Key) requires an exact verified source mapping"
+            }
+            if ($entry.Value -ceq 'Offerings' -and
+                (-not $sourceScoring.offerSources -or -not $sourceScoring.offerSources.ContainsKey($entry.Key))) {
+                Fail "Offering $($entry.Key) requires an exact verified source mapping"
             }
         }
         foreach ($section in @('corePlan', 'nonCoreContext')) {

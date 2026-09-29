@@ -25,7 +25,8 @@ check(ScoringEngine.getBuildAlignment(profile, "Special", "ZeusSpecialBoon") == 
     and ScoringEngine.getBuildAlignment(profile, "Special", "PoseidonSpecialBoon") == "NON_TARGET",
     "existing role display classification changed")
 
-local function score(kind, offers, source, owned)
+local function score(kind, offers, source, owned, scoringProfile)
+    scoringProfile = scoringProfile or profile
     for _, offer in ipairs(offers) do
         if offer.Rarity ~= nil and offer.raritySource == nil then offer.raritySource = "upgrade_option" end
     end
@@ -38,14 +39,14 @@ local function score(kind, offers, source, owned)
         offerKind = kind,
         offerSource = source or (kind == "pom" and "StackUpgrade"
             or kind == "hammer" and "WeaponUpgrade" or "ZeusUpgrade"),
-        weapon = profile.weapon,
-        aspect = profile.aspect,
+        weapon = scoringProfile.weapon,
+        aspect = scoringProfile.aspect,
         godTraits = traits or {},
         hammers = {},
         slottedTraits = {},
         offers = offers,
     }
-    return { ScoringEngine.scoreOffers(snapshot, profile), snapshot }
+    return { ScoringEngine.scoreOffers(snapshot, scoringProfile), snapshot }
 end
 
 -- Core, Non-Core, and unlisted ordinary boon tiers remain strictly separated
@@ -243,6 +244,79 @@ local unlistedNpc = score("boon", {
 }, "NPC_Athena_01")[1][1]
 check(unlistedNpc.score == 2 and unlistedNpc.scoreComplete,
     "unlisted offer at a verified NPC source did not remain base zero")
+
+-- Artemis uses the same generic exact source/item contract as other field NPCs.
+local artemisProfile = copy(profile)
+artemisProfile.sourceScoring.boons.InsideCastCritBoon = "NPC Offerings"
+artemisProfile.sourceScoring.npcOfferings.InsideCastCritBoon = "NPC_Artemis_Field_01"
+check(ScoringEngine.validateProfile(artemisProfile), "verified Artemis source/item mapping failed profile validation")
+local artemisOffer = score("boon", {
+    { originalIndex = 1, ItemName = "InsideCastCritBoon", Rarity = "Rare" },
+}, "NPC_Artemis_Field_01", nil, artemisProfile)[1][1]
+check(artemisOffer.score == 201 and artemisOffer.scoreComplete and artemisOffer.sourceGroup == "NPC Offerings",
+    "verified Artemis source/item pair did not receive its listed score")
+local mismatchedArtemisOffer = score("boon", {
+    { originalIndex = 1, ItemName = "InsideCastCritBoon", Rarity = "Rare" },
+}, "NPC_Athena_01", nil, artemisProfile)[1][1]
+check(mismatchedArtemisOffer.score == 0 and not mismatchedArtemisOffer.scoreComplete,
+    "Artemis offering at a mismatched NPC source was scored as listed")
+local mismatchedArtemisProfile = copy(artemisProfile)
+mismatchedArtemisProfile.sourceScoring.npcOfferings.InsideCastCritBoon = "NPC_Athena_01"
+local wrongPairAtArtemis = score("boon", {
+    { originalIndex = 1, ItemName = "InsideCastCritBoon", Rarity = "Rare" },
+}, "NPC_Artemis_Field_01", nil, mismatchedArtemisProfile)[1][1]
+check(wrongPairAtArtemis.score == 0 and not wrongPairAtArtemis.scoreComplete,
+    "mismatched configured NPC source/item pair was scored as listed")
+
+-- Generic offerings bind each boon to an exact attested native reward source.
+local offeringProfile = copy(profile)
+offeringProfile.sourceScoring.offerSources = {
+    InsideCastCritBoon = "NPC_Artemis_Field_01",
+    ChaosWeaponBlessing = "TrialUpgrade",
+    ChaosHealthBlessing = "TrialUpgrade",
+}
+offeringProfile.sourceScoring.boons.InsideCastCritBoon = "Offerings"
+offeringProfile.sourceScoring.boons.ChaosWeaponBlessing = "Offerings"
+offeringProfile.sourceScoring.boons.ChaosHealthBlessing = "Offerings"
+check(ScoringEngine.validateProfile(offeringProfile), "verified generic offering source/item mappings failed profile validation")
+local genericArtemis = score("boon", {
+    { originalIndex = 1, ItemName = "InsideCastCritBoon" },
+}, "NPC_Artemis_Field_01", nil, offeringProfile)[1][1]
+check(genericArtemis.score == 200 and genericArtemis.scoreComplete and genericArtemis.sourceGroup == "Offerings",
+    "generic Artemis offering did not preserve its exact source mapping")
+local strike = score("boon", {
+    { originalIndex = 1, ItemName = "ChaosWeaponBlessing" },
+}, "TrialUpgrade", nil, offeringProfile)[1][1]
+check(strike.score == 200 and strike.scoreComplete and strike.sourceGroup == "Offerings",
+    "verified TrialUpgrade Strike pair did not receive its listed offering score")
+local soul = score("boon", {
+    { originalIndex = 1, ItemName = "ChaosHealthBlessing" },
+}, "TrialUpgrade", nil, offeringProfile)[1][1]
+check(soul.score == 200 and soul.scoreComplete and soul.sourceGroup == "Offerings",
+    "verified TrialUpgrade Soul pair did not receive its listed offering score")
+local mismatchedTrialSource = score("boon", {
+    { originalIndex = 1, ItemName = "ChaosWeaponBlessing" },
+}, "NPC_Artemis_Field_01", nil, offeringProfile)[1][1]
+check(mismatchedTrialSource.score == 0 and not mismatchedTrialSource.scoreComplete,
+    "TrialUpgrade boon was preferred at a mismatched source")
+local unknownTrialSource = score("boon", {
+    { originalIndex = 1, ItemName = "ChaosWeaponBlessing" },
+}, "ChaosUpgrade", nil, offeringProfile)[1][1]
+check(unknownTrialSource.score == 0 and not unknownTrialSource.scoreComplete,
+    "unattested offering source was treated as supported")
+local misconfiguredOffering = copy(offeringProfile)
+misconfiguredOffering.sourceScoring.offerSources.ChaosWeaponBlessing = "NPC_Artemis_Field_01"
+local wrongConfiguredTrialPair = score("boon", {
+    { originalIndex = 1, ItemName = "ChaosWeaponBlessing" },
+}, "TrialUpgrade", nil, misconfiguredOffering)[1][1]
+check(wrongConfiguredTrialPair.score == 0 and not wrongConfiguredTrialPair.scoreComplete,
+    "mismatched configured source/item pair was scored as listed")
+local missingOfferingPair = copy(offeringProfile)
+missingOfferingPair.sourceScoring.offerSources.ChaosHealthBlessing = nil
+check(not ScoringEngine.validateProfile(missingOfferingPair), "generic offering without a source mapping passed validation")
+local unsupportedOfferingSource = copy(offeringProfile)
+unsupportedOfferingSource.sourceScoring.offerSources.ChaosHealthBlessing = "ChaosUpgrade"
+check(not ScoringEngine.validateProfile(unsupportedOfferingSource), "unattested generic offering source passed validation")
 
 -- Replacement compares source base values and adds a rarity difference once.
 local replacedCore = score("boon", { { originalIndex = 1, ItemName = "PoseidonSpecialBoon",

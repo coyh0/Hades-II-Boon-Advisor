@@ -107,7 +107,7 @@ function ScoringEngine.validateProfile(profile)
             return false, "sourceScoring is restricted to Mobalytics profiles"
         end
         local allowed = {
-            boons = { ["Core Boons"] = true, ["Non-Core Boons"] = true, ["NPC Offerings"] = true },
+            boons = { ["Core Boons"] = true, ["Non-Core Boons"] = true, ["Offerings"] = true, ["NPC Offerings"] = true },
             hammers = { ["Daedalus Hammer Upgrades"] = true },
             poms = { ["Poms of Power"] = true },
             deferred = { ["Legendary / Duo Boons"] = true },
@@ -126,20 +126,37 @@ function ScoringEngine.validateProfile(profile)
                 return false, "deferred source recommendation also has an active score"
             end
         end
-        if type(sourceScoring.npcOfferings) ~= "table" then
-            return false, "sourceScoring.npcOfferings must be a table"
-        end
-        local verifiedNpcSources = { NPC_Athena_01 = true, NPC_Hades_Field_01 = true }
-        for traitName, sourceName in pairs(sourceScoring.npcOfferings) do
+        local verifiedNpcSources = { NPC_Athena_01 = true, NPC_Hades_Field_01 = true, NPC_Artemis_Field_01 = true }
+        local verifiedOfferingSources = {
+            NPC_Athena_01 = true, NPC_Hades_Field_01 = true, NPC_Artemis_Field_01 = true, TrialUpgrade = true,
+        }
+        local npcOfferings = sourceScoring.npcOfferings
+        if npcOfferings == nil then npcOfferings = {} end
+        if type(npcOfferings) ~= "table" then return false, "sourceScoring.npcOfferings must be a table" end
+        local offerSources = sourceScoring.offerSources
+        if offerSources == nil then offerSources = {} end
+        if type(offerSources) ~= "table" then return false, "sourceScoring.offerSources must be a table" end
+        for traitName, sourceName in pairs(npcOfferings) do
             if type(traitName) ~= "string" or traitName == ""
                 or sourceScoring.boons[traitName] ~= "NPC Offerings"
                 or not verifiedNpcSources[sourceName] then
                 return false, "invalid sourceScoring.npcOfferings entry"
             end
         end
+        for traitName, sourceName in pairs(offerSources) do
+            if type(traitName) ~= "string" or traitName == ""
+                or sourceScoring.boons[traitName] ~= "Offerings"
+                or not verifiedOfferingSources[sourceName]
+                or npcOfferings[traitName] ~= nil then
+                return false, "invalid sourceScoring.offerSources entry"
+            end
+        end
         for traitName, group in pairs(sourceScoring.boons) do
-            if group == "NPC Offerings" and sourceScoring.npcOfferings[traitName] == nil then
+            if group == "NPC Offerings" and npcOfferings[traitName] == nil then
                 return false, "NPC Offering requires a verified source/item mapping"
+            end
+            if group == "Offerings" and offerSources[traitName] == nil then
+                return false, "Offering requires a verified source/item mapping"
             end
         end
         local corePlan = profile.corePlan
@@ -345,7 +362,7 @@ end
 local function sourceScore(group)
     if group == "Core Boons" then return 200, "BUILD_CORE_PRIORITY" end
     if group == "Non-Core Boons" then return 100, "BUILD_NON_CORE" end
-    if group == "NPC Offerings" or group == "Daedalus Hammer Upgrades" then
+    if group == "Offerings" or group == "NPC Offerings" or group == "Daedalus Hammer Upgrades" then
         return 200, "BUILD_PREFERRED"
     end
     return 0, nil
@@ -763,12 +780,18 @@ function ScoringEngine.getRankingDecision(results, profileSupported)
 end
 
 local verifiedRaritySources = { button = true, upgrade_option = true }
-local verifiedNpcSources = { NPC_Athena_01 = true, NPC_Hades_Field_01 = true }
+local verifiedNpcSources = {
+    NPC_Athena_01 = true, NPC_Hades_Field_01 = true, NPC_Artemis_Field_01 = true,
+}
+local verifiedOfferingSources = {
+    NPC_Athena_01 = true, NPC_Hades_Field_01 = true, NPC_Artemis_Field_01 = true, TrialUpgrade = true,
+}
 local verifiedBoonSources = {
     AphroditeUpgrade = true, ApolloUpgrade = true, AresUpgrade = true,
     DemeterUpgrade = true, HephaestusUpgrade = true, HeraUpgrade = true,
     HestiaUpgrade = true, PoseidonUpgrade = true, ZeusUpgrade = true,
-    NPC_Athena_01 = true, NPC_Hades_Field_01 = true,
+    NPC_Athena_01 = true, NPC_Hades_Field_01 = true, NPC_Artemis_Field_01 = true,
+    TrialUpgrade = true,
 }
 
 local function sourceRarityBonus(result, offer, replacement, required)
@@ -866,9 +889,14 @@ local function scoreSourceRecommendations(snapshot, profile, profileSupported, k
                             addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
                         end
                         delta, reasonCode = sourceScore(boonGroup)
-                        if sourceResolved and boonGroup == "NPC Offerings" then
-                            local expectedSource = profile.sourceScoring.npcOfferings[offer.ItemName]
-                            if not verifiedNpcSources[snapshot.offerSource]
+                        if sourceResolved and (boonGroup == "NPC Offerings" or boonGroup == "Offerings") then
+                            local expectedSource = boonGroup == "Offerings"
+                                and profile.sourceScoring.offerSources[offer.ItemName]
+                                or profile.sourceScoring.npcOfferings[offer.ItemName]
+                            local sourceAllowed = boonGroup == "Offerings"
+                                and verifiedOfferingSources[snapshot.offerSource]
+                                or verifiedNpcSources[snapshot.offerSource]
+                            if not sourceAllowed
                                 or expectedSource ~= snapshot.offerSource then
                                 result.scoreComplete = false
                                 sourceResolved = false
@@ -895,7 +923,7 @@ local function scoreSourceRecommendations(snapshot, profile, profileSupported, k
                         end
                         if sourceResolved then
                             result.scoreComplete = sourceRarityBonus(result, offer, replacement,
-                                boonGroup ~= "NPC Offerings")
+                                boonGroup ~= "NPC Offerings" and boonGroup ~= "Offerings")
                         end
                     elseif kind == "hammers" then
                         result.sourceGroup = group

@@ -54,6 +54,50 @@ Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\mechanics') -Destination
 $isolatedOutput = Join-Path $root 'isolated-output'
 & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $isolatedProfiles -MechanicsDirectory $isolatedMechanics -OutputDirectory $isolatedOutput | Out-Null
 if ($LASTEXITCODE -ne 0) { throw 'JSON-only isolated generation failed.' }
+$artemisMechanics = Join-Path $root 'artemis-mechanics'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\mechanics') -Destination $artemisMechanics -Recurse
+$artemisMechanicsPath = Join-Path $artemisMechanics 'argent_skull_medea_mobalytics.json'
+$artemisTemplate = Get-Content -LiteralPath $artemisMechanicsPath -Raw | ConvertFrom-Json
+$artemisTemplate.sourceScoring.boons | Add-Member -NotePropertyName InsideCastCritBoon -NotePropertyValue 'NPC Offerings'
+$artemisTemplate.sourceScoring.npcOfferings | Add-Member -NotePropertyName InsideCastCritBoon -NotePropertyValue 'NPC_Artemis_Field_01'
+[IO.File]::WriteAllText($artemisMechanicsPath, ($artemisTemplate | ConvertTo-Json -Depth 100), (New-Object System.Text.UTF8Encoding($false)))
+$artemisOutput = Join-Path $root 'artemis-output'
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $isolatedProfiles -MechanicsDirectory $artemisMechanics -OutputDirectory $artemisOutput | Out-Null
+if ($LASTEXITCODE -ne 0 -or (Get-Content -LiteralPath (Join-Path $artemisOutput 'argent_skull_medea_mobalytics.lua') -Raw) -notmatch 'InsideCastCritBoon = "NPC_Artemis_Field_01"') {
+    throw 'Canonical import/generation rejected or lost a verified Artemis NPC source/item pair.'
+}
+$artemisTemplate.sourceScoring.npcOfferings.InsideCastCritBoon = 'NPC_Artemis_01'
+[IO.File]::WriteAllText($artemisMechanicsPath, ($artemisTemplate | ConvertTo-Json -Depth 100), (New-Object System.Text.UTF8Encoding($false)))
+$previousPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $isolatedProfiles -MechanicsDirectory $artemisMechanics -ValidateOnly 2>$null | Out-Null
+    $artemisMismatchExitCode = $LASTEXITCODE
+}
+finally { $ErrorActionPreference = $previousPreference }
+if ($artemisMismatchExitCode -eq 0) { throw 'Canonical import accepted an unverified Artemis NPC source/item pair.' }
+$genericOfferingMechanics = Join-Path $root 'generic-offering-mechanics'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\mechanics') -Destination $genericOfferingMechanics -Recurse
+$genericOfferingPath = Join-Path $genericOfferingMechanics 'argent_skull_medea_mobalytics.json'
+$genericOfferingTemplate = Get-Content -LiteralPath $genericOfferingPath -Raw | ConvertFrom-Json
+$genericOfferingTemplate.sourceScoring.boons | Add-Member -NotePropertyName ChaosWeaponBlessing -NotePropertyValue 'Offerings'
+$genericOfferingTemplate.sourceScoring | Add-Member -NotePropertyName offerSources -NotePropertyValue ([pscustomobject]@{ ChaosWeaponBlessing = 'TrialUpgrade' })
+[IO.File]::WriteAllText($genericOfferingPath, ($genericOfferingTemplate | ConvertTo-Json -Depth 100), (New-Object System.Text.UTF8Encoding($false)))
+$genericOfferingOutput = Join-Path $root 'generic-offering-output'
+& $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $isolatedProfiles -MechanicsDirectory $genericOfferingMechanics -OutputDirectory $genericOfferingOutput | Out-Null
+if ($LASTEXITCODE -ne 0 -or (Get-Content -LiteralPath (Join-Path $genericOfferingOutput 'argent_skull_medea_mobalytics.lua') -Raw) -notmatch 'ChaosWeaponBlessing = "TrialUpgrade"') {
+    throw 'Canonical generation rejected or lost a verified generic TrialUpgrade source/item pair.'
+}
+$genericOfferingTemplate.sourceScoring.offerSources.ChaosWeaponBlessing = 'ChaosUpgrade'
+[IO.File]::WriteAllText($genericOfferingPath, ($genericOfferingTemplate | ConvertTo-Json -Depth 100), (New-Object System.Text.UTF8Encoding($false)))
+$previousPreference = $ErrorActionPreference
+$ErrorActionPreference = 'Continue'
+try {
+    & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -CanonicalDirectory $isolatedProfiles -MechanicsDirectory $genericOfferingMechanics -ValidateOnly 2>$null | Out-Null
+    $genericOfferingMismatchExitCode = $LASTEXITCODE
+}
+finally { $ErrorActionPreference = $previousPreference }
+if ($genericOfferingMismatchExitCode -eq 0) { throw 'Canonical import accepted an unattested generic offering source.' }
 foreach ($generated in @(Get-ChildItem -LiteralPath $isolatedOutput -Filter '*.lua' -File)) {
     if ((Get-Content -LiteralPath $generated.FullName -Raw) -match 'loadfile\s*\(') {
         throw 'Generated profile retained a runtime Lua dependency.'
@@ -88,7 +132,7 @@ Assert-Mechanics-Fails 'unknown-catalog-mechanics-aspect' '"aspect": "DaggerBack
 Assert-Mechanics-Fails 'malformed-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":true'
 Assert-Mechanics-Fails 'duplicate-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":["ASPECT_SETUP_SYNERGY","ASPECT_SETUP_SYNERGY"]'
 $firstFiles = @(Get-ChildItem -LiteralPath $first -File | Sort-Object Name)
-if ($firstFiles.Count -ne 5) { throw 'Generated output must contain four profiles and one registry.' }
+if ($firstFiles.Count -ne 6) { throw 'Generated output must contain five profiles and one registry.' }
 foreach ($file in $firstFiles) {
     $other = Join-Path $second $file.Name
     if (-not (Test-Path -LiteralPath $other) -or (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $other -Algorithm SHA256).Hash) {
@@ -335,4 +379,5 @@ foreach ($profileName in @('sister_blades_melinoe_intermediate')) {
     }
 }
 & (Join-Path $PSScriptRoot 'v02_projection_spec.ps1')
+& (Join-Path $PSScriptRoot 'moonstone_projection_spec.ps1')
 Write-Output 'PASS: canonical validation, deterministic generation, generated Lua validation, and scoring equivalence'

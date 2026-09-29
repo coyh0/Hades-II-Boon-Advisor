@@ -1,0 +1,12 @@
+{
+  "schemaVersion": 1,
+  "id": "moonstone_axe_melinoe_mobalytics",
+  "weapon": "WeaponAxe",
+  "aspect": "AxeRecoveryAspect",
+  "profileMode": "starter",
+  "selectionKey": "moonstone_axe_melinoe_mobalytics",
+  "source": { "type": "mobalytics", "profile": "axe_melinoe" },
+  "mechanicsTemplate": "moonstone_axe_melinoe_mobalytics",
+  "slots": {},
+  "constraints": []
+}

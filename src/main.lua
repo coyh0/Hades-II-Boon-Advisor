@@ -284,6 +284,13 @@ local supportedSources = {
 local supportedNpcSources = {
     NPC_Athena_01 = true,
     NPC_Hades_Field_01 = true,
+    NPC_Artemis_Field_01 = true,
+}
+
+-- Non-Olympian reward sources use the same exact source/item contract, but
+-- remain separate from the God Pool and Olympian-source classification.
+local supportedOfferingSources = {
+    TrialUpgrade = true,
 }
 
 local supportedPomSources = {
@@ -303,6 +310,9 @@ local function diagnose(screen, lootData)
     elseif supportedNpcSources[lootData.Name] then
         if type(lootData.Traits) ~= "table" then return end
         offerKind = "boon"
+    elseif supportedOfferingSources[lootData.Name] then
+        if type(lootData.PermanentTraits) ~= "table" then return end
+        offerKind = "boon"
     elseif lootData.Name == "WeaponUpgrade" then
         offerKind = "hammer"
     elseif supportedPomSources[lootData.Name] then
@@ -317,7 +327,8 @@ local function diagnose(screen, lootData)
         offerKind = "boon"
     end
     local offerSourceVerified = supportedSources[lootData.Name] == true
-        or supportedNpcSources[lootData.Name] == true or lootData.Name == "WeaponUpgrade"
+        or supportedNpcSources[lootData.Name] == true or supportedOfferingSources[lootData.Name] == true
+        or lootData.Name == "WeaponUpgrade"
         or supportedPomSources[lootData.Name] == true
     state.log("CreateBoonLootButtons detected")
     state.log("Source=" .. lootData.Name)

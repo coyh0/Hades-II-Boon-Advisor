@@ -45,7 +45,19 @@ function Assert-Blocked([object[]]$rows, [string]$reason, [string]$name) {
 
 $policy = [ordered]@{ schemaVersion = 1; boonClassifications = [ordered]@{ core = 'core' };
     hammerClassifications = [ordered]@{ priority = 'priority'; alternative = 'alternative' };
-    verifiedRuntimeItemIds = @('AresWeaponBoon', 'ForceAresBoonKeepsake', 'SuitDashAttackTrait'); keepsakeStartAsAutoSignal = $true }
+    verifiedRuntimeItemIds = @('AresWeaponBoon', 'ForceAresBoonKeepsake', 'SuitDashAttackTrait', 'InsideCastCritBoon', 'ChaosWeaponBlessing', 'ChaosHealthBlessing', 'HephaestusManaBoon', 'DoubleStrikeChanceBoon', 'CastNovaBoon');
+    verifiedBoonMappings = @(
+        [ordered]@{ runtimeItemId = 'HephaestusManaBoon'; sourceGroup = 'Core Boons'; coreRole = 'Mana' },
+        [ordered]@{ runtimeItemId = 'DoubleStrikeChanceBoon'; sourceGroup = 'Non-Core Boons' },
+        [ordered]@{ runtimeItemId = 'CastNovaBoon'; sourceGroup = 'Non-Core Boons' }
+    );
+    verifiedNpcOfferingPairs = @([ordered]@{ runtimeItemId = 'InsideCastCritBoon'; offerSource = 'NPC_Artemis_Field_01' });
+    verifiedOfferingPairs = @(
+        [ordered]@{ runtimeItemId = 'InsideCastCritBoon'; offerSource = 'NPC_Artemis_Field_01' },
+        [ordered]@{ runtimeItemId = 'ChaosWeaponBlessing'; offerSource = 'TrialUpgrade' },
+        [ordered]@{ runtimeItemId = 'ChaosHealthBlessing'; offerSource = 'TrialUpgrade' }
+    );
+    keepsakeStartAsAutoSignal = $true }
 Write-Json $policyPath $policy
 $base = New-Row
 $valid = Run-Case @($base) $true 'valid ready boon'
@@ -128,6 +140,38 @@ $row = Clone-Row $base; $row.module = '../../malicious.lua'
 Assert-Blocked @($row) 'module_mismatch' 'arbitrary module path'
 $row = Clone-Row $base; $row.slot = 'gain'
 Assert-Blocked @($row) 'gain_to_mana_unverified' 'gain does not map to Mana'
+$row = Clone-Row $base; $row.runtimeItemId = 'HephaestusManaBoon'; $row.slot = ''
+$row.classification = ''; $row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Core Boons'
+$row | Add-Member -NotePropertyName coreRole -NotePropertyValue 'Mana'
+$result = Run-Case @($row) $true 'attested Core Mana boon'
+if ($result.groups[0].status -cne 'ready' -or $result.groups[0].items[0].slot -cne 'Mana' -or
+    $result.groups[0].items[0].role -cne 'core') { throw 'Attested Core Mana projection failed.' }
+$row.coreRole = 'Cast'
+Assert-Blocked @($row) 'core_role_mismatch' 'Core role mismatch'
+$row.coreRole = 'Mana'; $row.sourceGroup = 'Non-Core Boons'
+Assert-Blocked @($row) 'boon_source_group_mismatch' 'Core category mismatch'
+$row.sourceGroup = 'Core Boons'; $row.slot = 'cast'
+Assert-Blocked @($row) 'core_slot_mismatch' 'Core slot mismatch'
+$row.slot = ''; $row.classification = 'core'
+Assert-Blocked @($row) 'mixed_boon_classification' 'legacy classification cannot override source group'
+foreach ($supportId in @('DoubleStrikeChanceBoon', 'CastNovaBoon')) {
+    $row = Clone-Row $base; $row.runtimeItemId = $supportId; $row.slot = ''; $row.classification = ''
+    $row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Non-Core Boons'
+    $result = Run-Case @($row) $true "attested Non-Core support $supportId"
+    if ($result.groups[0].status -cne 'ready' -or $result.groups[0].items[0].role -cne 'nonCore' -or
+        $null -ne $result.groups[0].items[0].slot) { throw "Non-Core support projection failed: $supportId" }
+    $row.sourceGroup = 'Core Boons'
+    Assert-Blocked @($row) 'boon_source_group_mismatch' "Non-Core category mismatch $supportId"
+}
+$row = Clone-Row $base; $row.runtimeItemId = 'DoubleStrikeChanceBoon'; $row.slot = ''; $row.classification = ''
+$row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Non-Core Boons'
+$row | Add-Member -NotePropertyName coreRole -NotePropertyValue 'Mana'
+Assert-Blocked @($row) 'non_core_role_mismatch' 'Non-Core cannot claim Core role'
+$row.coreRole = ''; $row.slot = 'attack'
+Assert-Blocked @($row) 'non_core_slot_mismatch' 'Non-Core cannot claim artificial slot'
+$row = Clone-Row $base; $row.runtimeItemId = 'UnknownSupportBoon'; $row.slot = ''; $row.classification = ''
+$row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Non-Core Boons'
+Assert-Blocked @($row) 'unverified_boon_source_mapping' 'unattested boon source mapping'
 $row = Clone-Row $base; $row.slot = 'Attack'
 Assert-Blocked @($row) 'unsupported_boon_slot' 'slot key case mismatch'
 $row = Clone-Row $base; $row.itemType = 'keepsake'; $row.slot = 'start'; $row.classification = ''; $row.runtimeItemId = 'ForceAresBoonKeepsake'
@@ -136,6 +180,35 @@ if ($result.groups[0].status -ne 'ready' -or $result.groups[0].items[0].role -ne
 $policy.keepsakeStartAsAutoSignal = $false; Write-Json $policyPath $policy
 Assert-Blocked @($row) 'unsupported_keepsake_mapping' 'keepsake needs explicit policy'
 $policy.keepsakeStartAsAutoSignal = $true; Write-Json $policyPath $policy
+$artemisOffering = Clone-Row $base; $artemisOffering.itemType = 'npcOffering'; $artemisOffering.slot = ''
+$artemisOffering.classification = ''; $artemisOffering.runtimeItemId = 'InsideCastCritBoon'
+$artemisOffering | Add-Member -NotePropertyName offerSource -NotePropertyValue 'NPC_Artemis_Field_01'
+$artemisPlan = Run-Case @($artemisOffering) $true 'verified Artemis source/item pair'
+if ($artemisPlan.groups[0].status -ne 'ready' -or $artemisPlan.groups[0].items[0].role -cne 'npcOffering' -or
+    $artemisPlan.groups[0].items[0].offerSource -cne 'NPC_Artemis_Field_01') {
+    throw 'Verified Artemis source/item pair was not projected by the importer.'
+}
+$artemisOffering.offerSource = 'NPC_Athena_01'
+Assert-Blocked @($artemisOffering) 'unverified_npc_source_item_pair' 'mismatched Artemis source/item pair'
+$artemisOffering = Clone-Row $artemisOffering; $artemisOffering.runtimeItemId = 'UnknownArtemisBoon'
+Assert-Blocked @($artemisOffering) 'runtime_item_id_not_in_verified_policy' 'unverified Artemis boon ID'
+$trialOffering = Clone-Row $base; $trialOffering.itemType = 'offering'; $trialOffering.slot = ''
+$trialOffering.classification = ''; $trialOffering.runtimeItemId = 'ChaosWeaponBlessing'
+$trialOffering | Add-Member -NotePropertyName offerSource -NotePropertyValue 'TrialUpgrade'
+$trialPlan = Run-Case @($trialOffering) $true 'verified TrialUpgrade offering pair'
+if ($trialPlan.groups[0].status -ne 'ready' -or $trialPlan.groups[0].items[0].role -cne 'offering' -or
+    $trialPlan.groups[0].items[0].offerSource -cne 'TrialUpgrade') {
+    throw 'Verified TrialUpgrade source/item pair was not projected by the importer.'
+}
+$trialOffering.offerSource = 'NPC_Artemis_Field_01'
+Assert-Blocked @($trialOffering) 'unverified_offering_source_item_pair' 'mismatched TrialUpgrade source/item pair'
+$trialOffering = Clone-Row $trialOffering; $trialOffering.runtimeItemId = 'ChaosHealthBlessing'; $trialOffering.offerSource = 'TrialUpgrade'
+$soulPlan = Run-Case @($trialOffering) $true 'verified TrialUpgrade Soul pair'
+if ($soulPlan.groups[0].status -ne 'ready' -or $soulPlan.groups[0].items[0].offerSource -cne 'TrialUpgrade') {
+    throw 'Verified TrialUpgrade Soul source/item pair was not projected by the importer.'
+}
+$trialOffering.offerSource = 'ChaosUpgrade'
+Assert-Blocked @($trialOffering) 'unverified_offering_source_item_pair' 'unattested offering source'
 $row = Clone-Row $base; $row.itemType = 'hammer'; $row.slot = 'priority'; $row.classification = 'priority'
 $row.runtimeItemId = 'SuitDashAttackTrait'; $row | Add-Member -NotePropertyName priority -NotePropertyValue 1
 $result = Run-Case @($row) $true 'verified Hammer projection'

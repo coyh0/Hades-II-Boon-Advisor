@@ -15,10 +15,12 @@ local generatedIntermediate = assert(loadfile(output .. separator .. "sister_bla
 local generatedMorrigan = assert(loadfile(output .. separator .. "sister_blades_morrigan_meta.lua"))()
 local generatedCoat = assert(loadfile(output .. separator .. "black_coat_melinoe_intermediate.lua"))()
 local generatedMedea = assert(loadfile(output .. separator .. "argent_skull_medea_mobalytics.lua"))()
+local generatedMoonstone = assert(loadfile(output .. separator .. "moonstone_axe_melinoe_mobalytics.lua"))()
 local registry = assert(loadfile(output .. separator .. "registry.lua"))()
 local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
 local morrigan = assert(loadfile("data/builds/sister_blades_morrigan_meta.lua"))()
 local medea = assert(loadfile("data/builds/argent_skull_medea_mobalytics.lua"))()
+local moonstone = assert(loadfile("data/builds/moonstone_axe_melinoe_mobalytics.lua"))()
 local expectedMelinoeHammerPlan = {
     { traitId = "DaggerDashAttackTripleTrait", priority = 1, classification = "priority" },
     { traitId = "DaggerFinalHitTrait", priority = 2, classification = "alternative" },
@@ -71,6 +73,12 @@ check(equal(generatedIntermediate, intermediate), "generated Intermediate semant
 check(equal(generatedCoat, coat) and ScoringEngine.validateProfile(generatedCoat), "generated Black Coat semantics differ")
 check(equal(generatedMedea, medea) and ScoringEngine.validateProfile(generatedMedea),
     "generated Medea source-scoring semantics differ")
+check(equal(generatedMoonstone, moonstone) and ScoringEngine.validateProfile(generatedMoonstone),
+    "generated Moonstone Axe source-scoring semantics differ")
+check(registry.moonstone_axe_melinoe_mobalytics
+    and registry.moonstone_axe_melinoe_mobalytics.weapon == "WeaponAxe"
+    and registry.moonstone_axe_melinoe_mobalytics.aspect == "AxeRecoveryAspect",
+    "generated Moonstone Axe registry mapping differs")
 check(ScoringEngine.validateProfile(generatedIntermediate) and ScoringEngine.validateProfile(generatedMorrigan),
     "generated profiles fail runtime schema validation")
 check(registry.intermediate.selectionKey == "intermediate"

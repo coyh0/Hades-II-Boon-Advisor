@@ -38,6 +38,32 @@ if ($policy.schemaVersion -ne 1 -or $policy.boonClassifications -isnot [pscustom
     $policy.verifiedRuntimeItemIds -isnot [array] -or $policy.keepsakeStartAsAutoSignal -isnot [bool]) {
     Fail 'policy requires schemaVersion 1, boonClassifications, verifiedRuntimeItemIds, and keepsakeStartAsAutoSignal'
 }
+$verifiedNpcSources = @{ NPC_Athena_01 = $true; NPC_Hades_Field_01 = $true; NPC_Artemis_Field_01 = $true }
+$verifiedNpcOfferingPairs = New-Object 'System.Collections.Generic.Dictionary[string,string]' ([StringComparer]::Ordinal)
+if (Has-Property $policy 'verifiedNpcOfferingPairs') {
+    if ($policy.verifiedNpcOfferingPairs -isnot [array]) { Fail 'verifiedNpcOfferingPairs must be an array when present' }
+    foreach ($pair in $policy.verifiedNpcOfferingPairs) {
+        if ($pair -isnot [pscustomobject]) { Fail 'verifiedNpcOfferingPairs entries must be objects' }
+        Required-String $pair.runtimeItemId 'verifiedNpcOfferingPairs.runtimeItemId'
+        Required-String $pair.offerSource 'verifiedNpcOfferingPairs.offerSource'
+        if (-not $verifiedNpcSources.ContainsKey($pair.offerSource)) { Fail "unverified NPC offer source $($pair.offerSource)" }
+        if ($verifiedNpcOfferingPairs.ContainsKey($pair.runtimeItemId)) { Fail "duplicate verified NPC offering item $($pair.runtimeItemId)" }
+        $verifiedNpcOfferingPairs.Add($pair.runtimeItemId, $pair.offerSource)
+    }
+}
+$verifiedOfferingSources = @{ NPC_Athena_01 = $true; NPC_Hades_Field_01 = $true; NPC_Artemis_Field_01 = $true; TrialUpgrade = $true }
+$verifiedOfferingPairs = New-Object 'System.Collections.Generic.Dictionary[string,string]' ([StringComparer]::Ordinal)
+if (Has-Property $policy 'verifiedOfferingPairs') {
+    if ($policy.verifiedOfferingPairs -isnot [array]) { Fail 'verifiedOfferingPairs must be an array when present' }
+    foreach ($pair in $policy.verifiedOfferingPairs) {
+        if ($pair -isnot [pscustomobject]) { Fail 'verifiedOfferingPairs entries must be objects' }
+        Required-String $pair.runtimeItemId 'verifiedOfferingPairs.runtimeItemId'
+        Required-String $pair.offerSource 'verifiedOfferingPairs.offerSource'
+        if (-not $verifiedOfferingSources.ContainsKey($pair.offerSource)) { Fail "unverified offering source $($pair.offerSource)" }
+        if ($verifiedOfferingPairs.ContainsKey($pair.runtimeItemId)) { Fail "duplicate verified offering item $($pair.runtimeItemId)" }
+        $verifiedOfferingPairs.Add($pair.runtimeItemId, $pair.offerSource)
+    }
+}
 $hammerClassifications = [pscustomobject]@{}
 if (Has-Property $policy 'hammerClassifications') {
     if ($policy.hammerClassifications -isnot [pscustomobject]) { Fail 'hammerClassifications must be an object when present' }
@@ -49,6 +75,23 @@ $verifiedItems = New-Object 'System.Collections.Generic.HashSet[string]' ([Strin
 foreach ($itemId in $policy.verifiedRuntimeItemIds) {
     Required-String $itemId 'policy.verifiedRuntimeItemIds entry'
     if (-not $verifiedItems.Add($itemId)) { Fail "duplicate verified runtime item ID $itemId" }
+}
+$verifiedBoonMappings = New-Object 'System.Collections.Generic.Dictionary[string,object]' ([StringComparer]::Ordinal)
+if (Has-Property $policy 'verifiedBoonMappings') {
+    if ($policy.verifiedBoonMappings -isnot [array]) { Fail 'verifiedBoonMappings must be an array when present' }
+    foreach ($mapping in $policy.verifiedBoonMappings) {
+        if ($mapping -isnot [pscustomobject]) { Fail 'verifiedBoonMappings entries must be objects' }
+        Required-String $mapping.runtimeItemId 'verifiedBoonMappings.runtimeItemId'
+        if (-not $verifiedItems.Contains($mapping.runtimeItemId)) { Fail "unverified boon mapping item $($mapping.runtimeItemId)" }
+        if ($mapping.sourceGroup -cnotin @('Core Boons', 'Non-Core Boons')) { Fail "invalid boon source group $($mapping.sourceGroup)" }
+        if ($mapping.sourceGroup -ceq 'Core Boons') {
+            if ($mapping.coreRole -cnotin @('Attack', 'Special', 'Cast', 'Sprint', 'Mana')) { Fail "invalid core role for $($mapping.runtimeItemId)" }
+        } elseif ((Has-Property $mapping 'coreRole') -and $null -ne $mapping.coreRole) {
+            Fail "non-Core boon mapping cannot declare a core role for $($mapping.runtimeItemId)"
+        }
+        if ($verifiedBoonMappings.ContainsKey($mapping.runtimeItemId)) { Fail "duplicate verified boon mapping $($mapping.runtimeItemId)" }
+        $verifiedBoonMappings.Add($mapping.runtimeItemId, $mapping)
+    }
 }
 $roleNames = @('core', 'alternatives', 'preferred', 'discouraged')
 foreach ($entry in (Properties $policy.boonClassifications)) {
@@ -72,7 +115,7 @@ foreach ($weapon in $catalog.weapons) {
 
 $allowedImport = @('ready', 'blocked', 'excluded', 'documentation_only')
 $allowedVerification = @('verified', 'unverified', 'not_applicable')
-$allowedTypes = @('boon', 'keepsake', 'hammer', 'support', 'arcana', 'familiar', 'hex')
+$allowedTypes = @('boon', 'offering', 'npcOffering', 'keepsake', 'hammer', 'support', 'arcana', 'familiar', 'hex')
 $slotMap = New-Object 'System.Collections.Generic.Dictionary[string,string]' ([StringComparer]::Ordinal)
 $slotMap.Add('attack', 'Attack')
 $slotMap.Add('special', 'Special')
@@ -88,9 +131,10 @@ foreach ($row in $document.rows) {
     if ($row.itemType -cnotin $allowedTypes) { Fail "invalid itemType $($row.itemType)" }
     if ((Has-Property $row 'profileMode') -and $null -ne $row.profileMode -and $row.profileMode -isnot [string]) { Fail 'profileMode must be a string when present' }
     foreach ($field in @('canonicalId', 'runtimeWeaponId', 'runtimeAspectId', 'runtimeItemId', 'module',
-        'name', 'god', 'weaponLabel', 'aspectLabel', 'condition', 'classification', 'slot')) {
+        'name', 'god', 'weaponLabel', 'aspectLabel', 'condition', 'classification', 'slot', 'sourceGroup', 'coreRole')) {
         Optional-String $row.$field $field
     }
+    Optional-String $row.offerSource 'offerSource'
     if ($row.importStatus -in @('excluded', 'documentation_only')) { continue }
     if ($row.canonicalId -ceq 'registry') { Fail 'canonicalId registry is reserved for the generated registry module' }
     Required-String $row.profileKeyProposal 'profileKeyProposal for active row'
@@ -151,13 +195,48 @@ foreach ($groupKey in @($groups.Keys | Sort-Object -CaseSensitive)) {
         elseif (-not $verifiedItems.Contains($row.runtimeItemId)) { Add-Reason $reasons 'runtime_item_id_not_in_verified_policy' }
         $role = $null; $slot = $null
         if ($row.itemType -eq 'boon') {
-            if ($row.slot -ceq 'gain') { Add-Reason $reasons 'gain_to_mana_unverified' }
-            elseif ($slotMap.ContainsKey([string]$row.slot)) {
-                $slot = $slotMap[[string]$row.slot]
-                $classification = (Properties $policy.boonClassifications | Where-Object { $_.Name -ceq $row.classification } | Select-Object -First 1)
-                if ($null -eq $classification) { Add-Reason $reasons 'unsupported_boon_classification' }
-                else { $role = [string]$classification.Value }
-            } else { Add-Reason $reasons 'unsupported_boon_slot' }
+            if (Has-Property $row 'sourceGroup') {
+                if (-not $row.runtimeItemId -or -not $verifiedBoonMappings.ContainsKey([string]$row.runtimeItemId)) {
+                    Add-Reason $reasons 'unverified_boon_source_mapping'
+                } else {
+                    $mapping = $verifiedBoonMappings[[string]$row.runtimeItemId]
+                    if ($row.sourceGroup -cne $mapping.sourceGroup) { Add-Reason $reasons 'boon_source_group_mismatch' }
+                    if ($row.sourceGroup -ceq 'Core Boons') {
+                        if ($row.coreRole -cne $mapping.coreRole) { Add-Reason $reasons 'core_role_mismatch' }
+                        if ($row.slot) {
+                            if (-not $slotMap.ContainsKey([string]$row.slot) -or $slotMap[[string]$row.slot] -cne $row.coreRole) {
+                                Add-Reason $reasons 'core_slot_mismatch'
+                            }
+                        }
+                        $slot = $mapping.coreRole
+                        $role = 'core'
+                    } elseif ($row.sourceGroup -ceq 'Non-Core Boons') {
+                        if ($row.coreRole) { Add-Reason $reasons 'non_core_role_mismatch' }
+                        if ($row.slot) { Add-Reason $reasons 'non_core_slot_mismatch' }
+                        $role = 'nonCore'
+                    }
+                    if ($row.classification) { Add-Reason $reasons 'mixed_boon_classification' }
+                }
+            } else {
+                if ($row.coreRole) { Add-Reason $reasons 'core_role_requires_source_group' }
+                if ($row.slot -ceq 'gain') { Add-Reason $reasons 'gain_to_mana_unverified' }
+                elseif ($slotMap.ContainsKey([string]$row.slot)) {
+                    $slot = $slotMap[[string]$row.slot]
+                    $classification = (Properties $policy.boonClassifications | Where-Object { $_.Name -ceq $row.classification } | Select-Object -First 1)
+                    if ($null -eq $classification) { Add-Reason $reasons 'unsupported_boon_classification' }
+                    else { $role = [string]$classification.Value }
+                } else { Add-Reason $reasons 'unsupported_boon_slot' }
+            }
+        } elseif ($row.itemType -eq 'offering') {
+            if (-not $row.runtimeItemId -or -not $verifiedOfferingPairs.ContainsKey([string]$row.runtimeItemId) -or
+                [string]$row.offerSource -cne $verifiedOfferingPairs[[string]$row.runtimeItemId]) {
+                Add-Reason $reasons 'unverified_offering_source_item_pair'
+            } else { $role = 'offering' }
+        } elseif ($row.itemType -eq 'npcOffering') {
+            if (-not $row.runtimeItemId -or -not $verifiedNpcOfferingPairs.ContainsKey([string]$row.runtimeItemId) -or
+                [string]$row.offerSource -cne $verifiedNpcOfferingPairs[[string]$row.runtimeItemId]) {
+                Add-Reason $reasons 'unverified_npc_source_item_pair'
+            } else { $role = 'npcOffering' }
         } elseif ($row.itemType -eq 'keepsake') {
             if ($row.slot -cne 'start' -or -not $policy.keepsakeStartAsAutoSignal) { Add-Reason $reasons 'unsupported_keepsake_mapping' }
             else { $role = 'autoSignal' }
@@ -174,6 +253,7 @@ foreach ($groupKey in @($groups.Keys | Sort-Object -CaseSensitive)) {
         } else { Add-Reason $reasons 'unsupported_runtime_item_type' }
         if ($role -and $row.runtimeItemId) {
             $item = [ordered]@{ runtimeItemId = $row.runtimeItemId; slot = $slot; role = $role; name = $row.name }
+            if ($role -in @('offering', 'npcOffering')) { $item.offerSource = $row.offerSource }
             if ($role -eq 'hammer') {
                 $item.priority = $row.priority
                 $item.classification = $hammerClassification

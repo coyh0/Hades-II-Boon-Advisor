@@ -34,6 +34,7 @@ local strings = {
         buildBladesMorrigan = "Sister Blades · Aspect of Morrigan",
         buildBlackCoat = "Black Coat · Melinoë",
         buildMedea = "Argent Skull · Aspect of Medea",
+        buildMoonstoneAxe = "Moonstone Axe · Aspect of Melinoë",
         pomCore = "Build core", pomAlternative = "Build alternative",
         pomPreferred = "Build preference", pomDiscouraged = "Discouraged",
         pomCoreBuildStatus = "Core Boon · Build", pomBuildStatus = "Build",
@@ -72,6 +73,7 @@ local strings = {
         buildBladesMorrigan = "Lames Sœurs · Aspect de Morrigan",
         buildBlackCoat = "Manteau Noir · Melinoë",
         buildMedea = "Argent Skull · Aspect de Médée",
+        buildMoonstoneAxe = "Hache Sélénique · Aspect de Mélinoé",
         pomCore = "Core du build", pomAlternative = "Alternative du build",
         pomPreferred = "Préférence du build", pomDiscouraged = "Déconseillé",
         pomCoreBuildStatus = "Boon Core · Build", pomBuildStatus = "Build",
@@ -122,6 +124,7 @@ function Localization.buildName(language, profileId)
         sister_blades_morrigan_meta = "buildBladesMorrigan",
         black_coat_melinoe_intermediate = "buildBlackCoat",
         argent_skull_medea_mobalytics = "buildMedea",
+        moonstone_axe_melinoe_mobalytics = "buildMoonstoneAxe",
     }
     local key = names[profileId]
     return key and Localization.get(language, key) or nil
