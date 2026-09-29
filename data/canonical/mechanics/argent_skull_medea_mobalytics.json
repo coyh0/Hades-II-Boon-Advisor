@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "id": "argent_skull_medea_mobalytics",
+  "weapon": "WeaponLob",
+  "aspect": "LobCloseAttackAspect",
+  "genericCoreAspectCompatibility": false,
+  "traitSemantics": {},
+  "weights": { "BUILD_PREFERRED": 2 },
+  "sourceScoring": {
+    "boons": {
+      "ZeusSpecialBoon": "Core Boons",
+      "HeraWeaponBoon": "Core Boons",
+      "DemeterCastBoon": "Core Boons",
+      "AresManaBoon": "Core Boons",
+      "DoubleBoltBoon": "Non-Core Boons",
+      "FocusLightningBoon": "Non-Core Boons",
+      "ReserveManaHitShieldBoon": "Non-Core Boons",
+      "LinkedDeathDamageBoon": "Non-Core Boons",
+      "CastNovaBoon": "Non-Core Boons",
+      "MissingHealthCritBoon": "Non-Core Boons",
+      "DeathDefianceRefillBoon": "NPC Offerings",
+      "HadesDeathDefianceDamageBoon": "NPC Offerings"
+    },
+    "hammers": {
+      "LobPulseAmmoTrait": "Daedalus Hammer Upgrades",
+      "LobSturdySpecialTrait": "Daedalus Hammer Upgrades"
+    },
+    "poms": {
+      "ZeusSpecialBoon": "Poms of Power"
+    },
+    "npcOfferings": {
+      "DeathDefianceRefillBoon": "NPC_Athena_01",
+      "HadesDeathDefianceDamageBoon": "NPC_Hades_Field_01"
+    },
+    "deferred": {
+      "KeepsakeLevelBoon": "Legendary / Duo Boons",
+      "BloodRetentionBoon": "Legendary / Duo Boons"
+    }
+  },
+  "godPool": [
+    {
+      "recommendationId": "mobalytics_skull_medea_fullbuild_god_pool_zeus_01",
+      "sourceGod": "Zeus",
+      "offerSource": "ZeusUpgrade"
+    },
+    {
+      "recommendationId": "mobalytics_skull_medea_fullbuild_god_pool_hera_01",
+      "sourceGod": "Hera",
+      "offerSource": "HeraUpgrade"
+    },
+    {
+      "recommendationId": "mobalytics_skull_medea_fullbuild_god_pool_ares_01",
+      "sourceGod": "Ares",
+      "offerSource": "AresUpgrade"
+    },
+    {
+      "recommendationId": "mobalytics_skull_medea_fullbuild_god_pool_demeter_01",
+      "sourceGod": "Demeter",
+      "offerSource": "DemeterUpgrade"
+    }
+  ],
+  "corePlan": {
+    "ZeusSpecialBoon": { "role": "Special", "displayName": { "en": "Heaven Flourish", "fr": "Technique Céleste" } },
+    "HeraWeaponBoon": { "role": "Attack", "displayName": { "en": "Sworn Strike", "fr": "Frappe Unificatrice" } },
+    "DemeterCastBoon": { "role": "Cast", "displayName": { "en": "Arctic Ring", "fr": "Glyphe Polaire" } },
+    "AresManaBoon": { "role": "Mana", "displayName": { "en": "Grisly Gain", "fr": "Conscience Barbare" } }
+  },
+  "nonCoreContext": {
+    "ReserveManaHitShieldBoon": { "recommendedCore": ["DemeterCastBoon"] }
+  },
+  "statusMappings": {},
+  "knownNonStatusTraits": [],
+  "potentialStatusTraits": [],
+  "statusCapabilityTraits": {},
+  "bloodDropEngine": { "producers": [], "payoffs": [] },
+  "aspectInteractions": {},
+  "hammerRoles": {},
+  "rules": {},
+  "verifiedIds": {
+    "coreAttack": [],
+    "coreSpecial": ["ZeusSpecialBoon", "PoseidonSpecialBoon"],
+    "coreCast": [],
+    "coreSprint": [],
+    "coreMana": []
+  }
+}

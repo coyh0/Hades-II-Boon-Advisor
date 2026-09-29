@@ -1,0 +1,19 @@
+{
+  "schemaVersion": 1,
+  "id": "argent_skull_medea_mobalytics",
+  "weapon": "WeaponLob",
+  "aspect": "LobCloseAttackAspect",
+  "profileMode": "meta",
+  "selectionKey": "argent_skull_medea_mobalytics",
+  "source": { "type": "mobalytics", "profile": "skull_medea" },
+  "mechanicsTemplate": "argent_skull_medea_mobalytics",
+  "slots": {
+    "Special": {
+      "core": [],
+      "alternatives": [],
+      "preferred": ["ZeusSpecialBoon"],
+      "slotPolicy": "open"
+    }
+  },
+  "constraints": []
+}

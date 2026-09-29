@@ -17,6 +17,9 @@ check(Localization.resolveLanguage({ GetLanguage = function() return 1 end }) ==
 
 check(Localization.get("en", "evaluated") == "EVALUATED", "English string lookup failed")
 check(Localization.get("fr", "evaluated") == "ÉVALUÉ", "French string lookup failed")
+check(Localization.formatMissingCore("en") == "Boon Core Build Missing"
+    and Localization.formatMissingCore("fr") == "Boon Core Build Missing",
+    "missing-Core notice is not the maintainer-approved fixed English label")
 check(Localization.get("fr", "missing") == "TEXT UNAVAILABLE", "Missing key was not player-safe")
 check(Localization.reasonKey("ASPECT_COMPATIBLE", 4) == "aspect",
     "Reason key was not stable")
@@ -32,6 +35,14 @@ check(Localization.reasonLabel("en", "BUILD_SLOT_POLICY_DELTA", -4) == "Conflict
     "Negative slot policy was not English Conflict")
 check(Localization.reasonLabel("fr", "BUILD_SLOT_POLICY_DELTA", -4) == "Conflit",
     "Negative slot policy was not French Conflit")
+check(Localization.buildName("en", "argent_skull_medea_mobalytics") == "Argent Skull · Aspect of Medea"
+    and Localization.buildName("fr", "argent_skull_medea_mobalytics") == "Argent Skull · Aspect de Médée",
+    "Medea build identity localization missing")
+check(Localization.reasonLabel("fr", "SOURCE_REQUIREMENTS_UNRESOLVED", 0) == "Pré-requis non modélisés",
+    "Unresolved legendary/duo prerequisite label missing")
+check(Localization.reasonKey("SOURCE_REPLACEMENT_DELTA", -200) == "build"
+    and Localization.reasonLabel("fr", "SOURCE_REPLACEMENT_DELTA", -200) == "Build",
+    "Mobalytics source replacement reason is not localized generically")
 check(Localization.reasonKey("BUILD_DISCOURAGED", -4) == "discouraged"
     and Localization.reasonLabel("fr", "BUILD_DISCOURAGED", -4) == "Déconseillé"
     and Localization.reasonLabel("en", "BUILD_DISCOURAGED", -4) == "Discouraged",

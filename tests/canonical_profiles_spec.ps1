@@ -35,6 +35,18 @@ if ($LASTEXITCODE -ne 0) { throw 'Windows PowerShell 5.1 canonical validation fa
 if ($LASTEXITCODE -ne 0) { throw 'Windows PowerShell 5.1 first generation failed.' }
 & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $generator -OutputDirectory $second | Out-Null
 if ($LASTEXITCODE -ne 0) { throw 'Windows PowerShell 5.1 second generation failed.' }
+$strictUtf8 = New-Object System.Text.UTF8Encoding($false, $true)
+$generatedMedeaPath = Join-Path $first 'argent_skull_medea_mobalytics.lua'
+$generatedMedeaText = [IO.File]::ReadAllText($generatedMedeaPath, $strictUtf8)
+if (-not $generatedMedeaText.Contains(('Technique C' + [char]0x00E9 + 'leste'))) {
+    throw 'Generated Medea profile is missing the exact UTF-8 localized name Technique Céleste.'
+}
+foreach ($generatedLua in @(Get-ChildItem -LiteralPath $first -Filter '*.lua' -File)) {
+    $generatedText = [IO.File]::ReadAllText($generatedLua.FullName, $strictUtf8)
+    if ($generatedText -match '[\u00C3\u00C2\u00E2\uFFFD]') {
+        throw "Generated runtime profile contains likely UTF-8 mojibake: $($generatedLua.Name)"
+    }
+}
 $isolatedProfiles = Join-Path $root 'isolated-profiles'
 $isolatedMechanics = Join-Path $root 'isolated-mechanics'
 Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\profiles') -Destination $isolatedProfiles -Recurse
@@ -76,7 +88,7 @@ Assert-Mechanics-Fails 'unknown-catalog-mechanics-aspect' '"aspect": "DaggerBack
 Assert-Mechanics-Fails 'malformed-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":true'
 Assert-Mechanics-Fails 'duplicate-aspect-interaction' '"DaggerRapidAttackTrait":"ASPECT_COMPATIBLE"' '"DaggerRapidAttackTrait":["ASPECT_SETUP_SYNERGY","ASPECT_SETUP_SYNERGY"]'
 $firstFiles = @(Get-ChildItem -LiteralPath $first -File | Sort-Object Name)
-if ($firstFiles.Count -ne 4) { throw 'Generated output must contain three profiles and one registry.' }
+if ($firstFiles.Count -ne 5) { throw 'Generated output must contain four profiles and one registry.' }
 foreach ($file in $firstFiles) {
     $other = Join-Path $second $file.Name
     if (-not (Test-Path -LiteralPath $other) -or (Get-FileHash -LiteralPath $file.FullName -Algorithm SHA256).Hash -ne (Get-FileHash -LiteralPath $other -Algorithm SHA256).Hash) {

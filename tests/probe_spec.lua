@@ -55,7 +55,7 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
     }
     game.CreateScreenComponent = function(data)
         local id = "BoonAdvisorTest" .. tostring(#uiCreated + 1)
-        local component = { Id = id, X = data.X, Y = data.Y }
+        local component = { Id = id, X = data.X, Y = data.Y, Data = data }
         uiCreated[#uiCreated + 1] = component
         return component
     end
@@ -71,7 +71,10 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
     BUILD_PROFILE = buildProfile or "auto",
             }
         end
-        if path == "Logger.lua" or path == "Localization.lua" or path == "GameState.lua" or path == "OfferSnapshot.lua"
+        if path == "Logger.lua" or path == "Localization.lua" or path == "GameState.lua" or path == "LobbyProbe.lua"
+            or path == "OfferSnapshot.lua"
+            or path == "CoreAdvisory.lua"
+            or path == "PomAdvisor.lua" or path == "FocusState.lua"
             or path == "ScoringEngine.lua" or path == "UI.lua" or path == "ProfileResolver.lua" then
             path = "src/" .. path
         end
@@ -141,14 +144,19 @@ check(keys == 2 and loot.Name == "AphroditeUpgrade" and loot.GodLoot == true, "m
 for _, bad in ipairs({
     { Name = "HermesUpgrade", GodLoot = false },
     { Name = "TrialUpgrade", GodLoot = false },
-    { Name = "StackUpgrade", GodLoot = false, StackOnly = true },
     { Name = "UnknownTestSource", GodLoot = true },
     { Name = "ZeusUpgrade", GodLoot = true, DebugOnly = true },
 }) do
-    local g, l, start = fixture(function() end)
+    local g, l, start, _, private = fixture(function() end)
     start(); local n = #l
     check(pack(g.CreateBoonLootButtons({ Source = bad, KeepOpen = true }, bad)).n == 0, "zero returns lost")
-    check(#l == n, "unsupported menu logged")
+    if bad.Name == "UnknownTestSource" and bad.GodLoot == true then
+        check(#l > n and private.probeState.lastSnapshot.offerSource == bad.Name
+            and private.probeState.lastCoreAdvisory == true and private.probeState.lastRankingReady == false,
+            "unknown GodLoot source did not follow the conservative unranked advisory path")
+    else
+        check(#l == n, "unsupported non-boon menu logged")
+    end
 end
 
 local nativeError = {}
@@ -265,8 +273,21 @@ check(autoCalls == 1, "on_all_mods_loaded called auto_single again")
 check(barrierInstalls() == 0 and #bl == 0, "work occurred before game-ready barrier")
 fireGame()
 check(barrierInstalls() == 1, "hook not installed after both barriers")
-check(#bl == 2 and bl[1] == "[BoonAdvisor] Hook installed: CreateBoonLootButtons"
-    and bl[2] == "[BoonAdvisor] Probe ready; hook count=1", "initial useful logs changed")
+do
+local lobbyProbeLog = "[BoonAdvisor] LOBBY_PROBE stage=plugin_loaded hub=unknown room=unknown"
+    .. " run=false hero=false primaryCount=0 weapon=none activeAspect=unknown storedAspect=unknown"
+local hookInstalledLog = "[BoonAdvisor] Hook installed: CreateBoonLootButtons"
+local probeReadyLog = "[BoonAdvisor] Probe ready; hook count=1"
+local function countLog(message, first)
+    local count = 0
+    for index = first or 1, #bl do
+        if bl[index] == message then count = count + 1 end
+    end
+    return count
+end
+check(countLog(lobbyProbeLog) == 1, "initial LOBBY_PROBE content changed")
+check(countLog(hookInstalledLog) == 1, "initial hook-installed log changed")
+check(countLog(probeReadyLog) == 1, "initial probe-ready log changed")
 local barrierWrapper = bg.CreateBoonLootButtons
 local logCount = #bl
 loadEntry()
@@ -277,11 +298,14 @@ check(registrations == 1, "hot reload registered another all-mods callback")
 check(readyCalls == 1 and reloadCalls == 2, "hot reload called install or missed reload callback")
 check(barrierInstalls() == 1 and bg.CreateBoonLootButtons == barrierWrapper,
     "immediate hot reload installed another wrapper")
-check(#bl == logCount + 1 and bl[#bl] == "[BoonAdvisor] Probe ready; hook count=1",
-    "hot reload did not emit only probe-ready")
+check(countLog(probeReadyLog, logCount + 1) == 1
+    and countLog(hookInstalledLog, logCount + 1) == 0
+    and countLog(lobbyProbeLog, logCount + 1) == 0,
+    "hot reload duplicated installation or initial probe logs")
 barrierStart()
 check(barrierInstalls() == 1 and bg.CreateBoonLootButtons == barrierWrapper,
     "repeated load installed another wrapper")
+end
 local beforeDiagnosticLookups = select(2, metrics())
 bg.CreateBoonLootButtons(screen, loot)
 local afterDiagnosticLookups = select(2, metrics())
@@ -351,6 +375,246 @@ check(phasePrivate.probeState.lastRankingReady == false
     and phasePrivate.probeState.lastRankedScores == nil,
     "non-ready runtime screen exposed a ranking")
 print("PASS: plugin globals absent; dynamic rom.game snapshot uses internal IDs; Sister Blades weapon/aspect; hammer/god/offer counts; blocked offer")
+
+do
+    local function npcScore(source, itemName)
+        local loot = { Name = source, Traits = { itemName }, UpgradeOptions = {
+            { ItemName = itemName, Rarity = "Common" },
+        } }
+        local screen = { Source = loot, KeepOpen = true, Components = {
+            PurchaseButton1 = { Id = "npc-offer-1" },
+        } }
+        local npcGame, _, npcStart, _, npcPrivate = fixture(function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" }, Traits = {
+                { Name = "LobCloseAttackAspect", IsWeaponEnchantment = true },
+            } } },
+            GetEquippedWeapon = function() return "WeaponLob" end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "auto")
+        npcStart()
+        npcGame.CreateBoonLootButtons(screen, loot)
+        return npcPrivate.probeState.lastScores[1], npcPrivate.probeState.lastSnapshot.offerKind
+    end
+    local renewedFaith, athenaKind = npcScore("NPC_Athena_01", "DeathDefianceRefillBoon")
+    local lastGasp, hadesKind = npcScore("NPC_Hades_Field_01", "HadesDeathDefianceDamageBoon")
+    check(athenaKind == "boon" and renewedFaith.score == 200 and renewedFaith.sourceGroup == "NPC Offerings",
+        "Athena NPC Renewed Faith source was not recognized and scored 200")
+    check(hadesKind == "boon" and lastGasp.score == 200 and lastGasp.sourceGroup == "NPC Offerings",
+        "Hades NPC Last Gasp source was not recognized and scored 200")
+end
+print("PASS: Athena/Hades NPC reward sources recognized and Mobalytics NPC Offerings score 200")
+
+do
+    local hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" }, Traits = {
+        { Name = "LobCloseAttackAspect", IsWeaponEnchantment = true },
+    } }
+    local run = { Hero = hero }
+    local loot = { Name = "AphroditeUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "AphroditeWeaponBoon", Rarity = "Common" },
+        { ItemName = "AphroditeSprintBoon", Rarity = "Common" },
+        { ItemName = "AphroditeManaBoon", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "aphrodite-1" }, PurchaseButton2 = { Id = "aphrodite-2" },
+        PurchaseButton3 = { Id = "aphrodite-3" },
+    } }
+    local game, _, start, _, private, _, _, _, _, _, labels, destroyed = fixture(
+        function() end, nil, true, {
+            CurrentRun = run, GetEquippedWeapon = function() return "WeaponLob" end,
+            GetLanguage = function() return "en" end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "auto")
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    local firstId = screen.BoonAdvisorCoreAdvisory and screen.BoonAdvisorCoreAdvisory.id
+    local notices, noReliablePreference = 0, false
+    for _, label in ipairs(labels) do
+        if label.RawText == "Boon Core Build Missing" then notices = notices + 1 end
+        if label.RawText == "NO RELIABLE PREFERENCE" then noReliablePreference = true end
+    end
+    check(private.probeState.lastCoreAdvisory == true and firstId ~= nil
+        and private.probeState.lastRankingReady == false and screen.BoonAdvisorFallback ~= nil
+        and #screen.BoonAdvisorRanks == 0 and notices == 1 and noReliablePreference,
+        "unranked Aphrodite offer did not show one immediate Core notice")
+    game.CreateBoonLootButtons(screen, loot)
+    check(screen.BoonAdvisorCoreAdvisory.id ~= firstId and #destroyed > 0,
+        "reroll retained the previous Core notice component")
+    for _, name in ipairs({ "HeraWeaponBoon", "ZeusSpecialBoon", "DemeterCastBoon" }) do
+        hero.Traits[#hero.Traits + 1] = { Name = name }
+    end
+    game.CreateBoonLootButtons(screen, loot)
+    check(private.probeState.lastCoreAdvisory == false
+        and screen.BoonAdvisorCoreAdvisory == nil and screen.BoonAdvisorFallback ~= nil,
+        "three acquired slot Cores did not remove the notice while Mana remained absent")
+    local demeter = { Name = "DemeterUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "DemeterWeaponBoon", Rarity = "Rare" },
+        { ItemName = "DemeterSprintBoon", Rarity = "Common" },
+        { ItemName = "DemeterManaBoon", Rarity = "Common" },
+    } }
+    local demeterScreen = { Source = demeter, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "demeter-1" }, PurchaseButton2 = { Id = "demeter-2" },
+        PurchaseButton3 = { Id = "demeter-3" },
+    } }
+    game.CreateBoonLootButtons(demeterScreen, demeter)
+    check(private.probeState.lastCoreAdvisory == false
+        and demeterScreen.BoonAdvisorCoreAdvisory == nil,
+        "in-pool Demeter offer showed a notice after the three slot Cores were acquired")
+    table.remove(hero.Traits, 2) -- Hera Attack Core is no longer owned.
+    game.CreateBoonLootButtons(demeterScreen, demeter)
+    check(private.probeState.lastCoreAdvisory == true
+        and demeterScreen.BoonAdvisorCoreAdvisory ~= nil,
+        "Demeter reroll did not refresh the missing Attack Core notice")
+    local hephaestus = { Name = "HephaestusUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "HephaestusCastBoon", Rarity = "Common" },
+        { ItemName = "HephaestusWeaponBoon", Rarity = "Common" },
+        { ItemName = "HephaestusManaBoon", Rarity = "Common" },
+    } }
+    local nextScreen = { Source = hephaestus, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "hephaestus-1" }, PurchaseButton2 = { Id = "hephaestus-2" },
+        PurchaseButton3 = { Id = "hephaestus-3" },
+    } }
+    game.CreateBoonLootButtons(nextScreen, hephaestus)
+    check(private.probeState.lastCoreAdvisory == true
+        and nextScreen.BoonAdvisorCoreAdvisory ~= nil,
+        "Hephaestus offer did not recompute the missing Core from the run inventory")
+end
+print("PASS: Aphrodite, Demeter, and Hephaestus offers refresh the three-role Core notice independently of ranking")
+
+do
+    local owned = {
+        HeraWeaponBoon = true, ZeusSpecialBoon = true, DemeterCastBoon = true,
+        DoubleBoltBoon = true, FocusLightningBoon = true, CastNovaBoon = true,
+    }
+    local hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" }, Traits = {
+        { Name = "LobCloseAttackAspect", IsWeaponEnchantment = true },
+    } }
+    for name in pairs(owned) do hero.Traits[#hero.Traits + 1] = { Name = name } end
+    local run = { Hero = hero }
+    local loot = { Name = "StackUpgrade", StackOnly = true, UpgradeOptions = {
+        { ItemName = "HeraWeaponBoon", Rarity = "Common" },
+        { ItemName = "ZeusSpecialBoon", Rarity = "Common" },
+        { ItemName = "DemeterCastBoon", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "pom-core-1" }, PurchaseButton2 = { Id = "pom-core-2" },
+        PurchaseButton3 = { Id = "pom-core-3" },
+    } }
+    local game, _, start, _, private, _, _, _, _, _, labels, destroyed = fixture(function() end,
+        nil, true, {
+            CurrentRun = run,
+            GetEquippedWeapon = function() return "WeaponLob" end,
+            GetLanguage = function() return "en" end,
+            LootData = {}, IsGodTrait = function(name) return owned[name] == true end,
+        })
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    check(private.probeState.lastSnapshot.aspect == "LobCloseAttackAspect"
+        and private.probeState.lastSnapshot.offerKind == "pom"
+        and private.probeState.lastRankingReady == false
+        and screen.BoonAdvisorFallback ~= nil and #screen.BoonAdvisorPomStatuses == 3,
+        "complete tied Medea Pom offer did not enter the status-only UI path")
+    check(#private.probeState.lastScores == 3
+        and private.probeState.lastScores[1].score == 200
+        and private.probeState.lastScores[2].score == 200
+        and private.probeState.lastScores[3].score == 200,
+        "Pom status rendering changed the equal source scores")
+    check(labels[#labels - 2].RawText == "Core Boon · Build"
+        and labels[#labels - 1].RawText == "Core Boon · Build"
+        and labels[#labels].RawText == "Core Boon · Build"
+        and labels[#labels - 4].RawText == "NO RELIABLE PREFERENCE"
+        and screen.BoonAdvisorRanks ~= nil and #screen.BoonAdvisorRanks == 0,
+        "Medea Core Pom tie showed a false rank or incorrect source status")
+    local oldStatusIds = {}
+    for _, entry in ipairs(screen.BoonAdvisorPomStatuses) do oldStatusIds[#oldStatusIds + 1] = entry.id end
+
+    loot.UpgradeOptions = {
+        { ItemName = "DoubleBoltBoon", Rarity = "Common" },
+        { ItemName = "FocusLightningBoon", Rarity = "Common" },
+        { ItemName = "CastNovaBoon", Rarity = "Common" },
+    }
+    screen.Components.PurchaseButton1 = { Id = "pom-noncore-1" }
+    screen.Components.PurchaseButton2 = { Id = "pom-noncore-2" }
+    screen.Components.PurchaseButton3 = { Id = "pom-noncore-3" }
+    game.CreateBoonLootButtons(screen, loot)
+    local destroyedIds = {}
+    for _, batch in ipairs(destroyed) do
+        for _, id in ipairs(batch.Ids or {}) do destroyedIds[id] = true end
+    end
+    check(#screen.BoonAdvisorPomStatuses == 3
+        and destroyedIds[oldStatusIds[1]] and destroyedIds[oldStatusIds[2]]
+        and destroyedIds[oldStatusIds[3]],
+        "Pom reroll retained previous Core status components")
+    check(labels[#labels - 2].RawText == "Build" and labels[#labels - 1].RawText == "Build"
+        and labels[#labels].RawText == "Build"
+        and labels[#labels - 4].RawText == "NO RELIABLE PREFERENCE"
+        and private.probeState.lastRankingReady == false
+        and screen.BoonAdvisorFallback ~= nil and #screen.BoonAdvisorRanks == 0
+        and private.probeState.lastScores[1].score == 100
+        and private.probeState.lastScores[2].score == 100
+        and private.probeState.lastScores[3].score == 100,
+        "Pom reroll did not refresh to Build statuses while preserving scores and tie state")
+
+    loot.UpgradeOptions = {
+        { ItemName = "HeraWeaponBoon", Rarity = "Common" },
+        { ItemName = "DoubleBoltBoon", Rarity = "Rare" },
+        { ItemName = "CastNovaBoon", Rarity = "Epic" },
+    }
+    screen.Components.PurchaseButton1 = { Id = "pom-ranked-1" }
+    screen.Components.PurchaseButton2 = { Id = "pom-ranked-2" }
+    screen.Components.PurchaseButton3 = { Id = "pom-ranked-3" }
+    local beforeRankedPomLabels = #labels
+    game.CreateBoonLootButtons(screen, loot)
+    local pomRankDebug = {}
+    for _, result in ipairs(private.probeState.lastScores or {}) do
+        pomRankDebug[#pomRankDebug + 1] = tostring(result.score) .. "/" .. tostring(result.scoreComplete)
+    end
+    check(private.probeState.lastRankingReady == true
+        and screen.BoonAdvisorPomStatuses == nil
+        and labels[beforeRankedPomLabels + 1].RawText == "RANK 1"
+        and labels[beforeRankedPomLabels + 3].RawText == "RANK 2"
+        and labels[beforeRankedPomLabels + 5].RawText == "RANK 3",
+        "distinct-score Pom offer did not retain its normal rank rendering: ready="
+            .. tostring(private.probeState.lastRankingReady) .. " scores=" .. table.concat(pomRankDebug, ",")
+            .. " labels=" .. tostring(labels[beforeRankedPomLabels + 1] and labels[beforeRankedPomLabels + 1].RawText)
+            .. "," .. tostring(labels[beforeRankedPomLabels + 3] and labels[beforeRankedPomLabels + 3].RawText)
+            .. "," .. tostring(labels[beforeRankedPomLabels + 5] and labels[beforeRankedPomLabels + 5].RawText))
+end
+print("PASS: Medea Pom ties show source-derived statuses, rerolls clear them, ranked Pom offers retain ranks")
+
+do
+    local unknownLoot = { Name = "UnverifiedOlympianUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "UnknownOlympianBoon", Rarity = "Common" },
+    } }
+    local unknownScreen = { Source = unknownLoot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "unknown-god-offer" },
+    } }
+    local unknownGame, _, unknownStart, _, unknownPrivate, _, _, _, _, _, unknownLabels = fixture(
+        function() end, nil, true, {
+            CurrentRun = { Hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" }, Traits = {
+                { Name = "LobCloseAttackAspect", IsWeaponEnchantment = true },
+            } } },
+            GetEquippedWeapon = function() return "WeaponLob" end,
+            GetLanguage = function() return "en" end,
+            LootData = {}, IsGodTrait = function() return false end,
+        }, false, "auto")
+    unknownStart()
+    unknownGame.CreateBoonLootButtons(unknownScreen, unknownLoot)
+    local notices = 0
+    for _, label in ipairs(unknownLabels) do
+        if label.RawText == "Boon Core Build Missing" then notices = notices + 1 end
+    end
+    check(unknownPrivate.probeState.lastSnapshot.offerSource == "UnverifiedOlympianUpgrade"
+        and unknownPrivate.probeState.lastCoreAdvisory == true and notices == 1
+        and unknownPrivate.probeState.lastRankingReady == false
+        and #(unknownPrivate.probeState.lastScores or {}) == 0
+        and #(unknownScreen.BoonAdvisorRanks or {}) == 0,
+        "unknown GodLoot identity did not conservatively show advice without ranking it: source="
+            .. tostring(unknownPrivate.probeState.lastSnapshot.offerSource) .. " advice="
+            .. tostring(unknownPrivate.probeState.lastCoreAdvisory) .. " notices=" .. tostring(notices)
+            .. " ranking=" .. tostring(unknownPrivate.probeState.lastRankingReady) .. " ranks="
+            .. tostring(unknownScreen.BoonAdvisorRanks and #unknownScreen.BoonAdvisorRanks or "nil"))
+end
+print("PASS: unknown GodLoot source shows conservative advice and remains unrated")
 
 local rankLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
     { ItemName = "AphroditeWeaponBoon", Rarity = "Heroic" },
@@ -438,24 +702,30 @@ local tg, tl, testStart, _, testPrivate, _, _, _, _, testCreated, testText, test
 testStart(); tg.CreateBoonLootButtons(testScreen, testLoot)
 check(testPrivate.probeState.lastRankingReady == false
     and testPrivate.probeState.lastRankedScores == nil
-    and #testCreated == 6 and testText[1].RawText == "RANG 1"
+    and #testCreated == 7 and testText[1].RawText == "RANG 1"
     and testText[3].RawText == "RANG 1" and testText[5].RawText == "RANG 3"
     and testText[2].RawText == "Core · Aspect" and testText[4].RawText == "Origination"
-    and testText[6].RawText == "Utilitaire",
-    "UI_TEST_MODE did not render synthetic 1/1/3 without changing ranking state")
+    and testText[6].RawText == "Utilitaire"
+    and testText[7].RawText == "Boon Core Build Missing",
+    "UI_TEST_MODE did not render synthetic 1/1/3 without changing ranking state: ready="
+        .. tostring(testPrivate.probeState.lastRankingReady) .. " created=" .. tostring(#testCreated)
+        .. " first=" .. tostring(testText[1] and testText[1].RawText) .. " last="
+        .. tostring(testText[6] and testText[6].RawText) .. " advisory="
+        .. tostring(testPrivate.probeState.lastCoreAdvisory))
 local sawSynthetic = false
 for _, line in ipairs(tl) do if line == "[BoonAdvisor] UI TEST MODE rendering synthetic ranks 1/1/3" then sawSynthetic = true end end
 check(sawSynthetic, "synthetic UI test log missing")
 tg.CreateBoonLootButtons(testScreen, testLoot)
-check(#testDestroyed == 1 and #testDestroyed[1].Ids == 6 and #testCreated == 12,
-    "synthetic reroll did not clear and recreate ranks")
+check(#testDestroyed == 2 and #testDestroyed[1].Ids == 1 and #testDestroyed[2].Ids == 6
+    and #testCreated == 14 and testText[#testText].RawText == "Boon Core Build Missing",
+    "synthetic reroll did not clear and recreate ranks plus the single Core advisory")
 local fg, fl, falseStart, _, falsePrivate, _, _, _, _, falseCreated = fixture(
     function() end, nil, true, {
         CurrentRun = { Hero = { SlottedTraits = { Aspect = "DaggerBackstabAspect" }, Traits = {} } },
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
     }, false, "intermediate")
 falseStart(); fg.CreateBoonLootButtons(testScreen, testLoot)
-check(#falseCreated == 1 and falsePrivate.probeState.lastRankingReady == false,
+check(#falseCreated == 2 and falsePrivate.probeState.lastRankingReady == false,
     "UI_TEST_MODE=false did not render analysis fallback")
 local partialLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
     { ItemName = "AresSpecialBoon" }, { ItemName = "FocusRawDamageBoon" },
@@ -494,7 +764,8 @@ local rg2, rl2, realStart, _, realPrivate, _, _, _, _, realCreated = fixture(
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
     }, true, "intermediate")
 realStart(); rg2.CreateBoonLootButtons(realScreen, testLoot)
-check(realPrivate.probeState.lastRankingReady == true and #realCreated == 6,
+check(realPrivate.probeState.lastRankingReady == true and #realCreated == 7
+    and realScreen.BoonAdvisorCoreAdvisory ~= nil,
     "UI_TEST_MODE did not preserve real ready UI")
 for _, line in ipairs(rl2) do
     check(line ~= "[BoonAdvisor] UI TEST MODE rendering synthetic ranks 1/1/3",
@@ -662,6 +933,8 @@ do
             LootData = {}, IsGodTrait = function() return false end,
         }, false, "auto")
     start()
+    private.probeState.focusState.run = game.CurrentRun
+    private.probeState.focusState.focus = "attack"
     game.CreateBoonLootButtons(screen, loot)
     local snapshot = private.probeState.lastSnapshot
     local scores = private.probeState.lastScores
@@ -860,3 +1133,180 @@ end
 checkRetiredStarter("DaggerTripleAspect", "WeaponDagger", "sister_blades_morrigan_meta")
 checkRetiredStarter("BaseSuitAspect", "WeaponSuit", "black_coat_melinoe_intermediate")
 print("PASS: build profile resolver defaults, exact aspect selection, singleton fallback, and ambiguity safety")
+
+; (function()
+    local run = { Hero = { SlottedTraits = { Aspect = "BaseSuitAspect" }, Traits = {
+        { Name = "BaseSuitAspect", Slot = "Aspect", IsWeaponEnchantment = true },
+    } } }
+    local loot = { Name = "WeaponUpgrade", UpgradeOptions = {
+        { ItemName = "SuitDashAttackTrait", Rarity = "Common" },
+        { ItemName = "SuitSpecialAutoTrait", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "focus-hammer-1" },
+        PurchaseButton2 = { Id = "focus-hammer-2" },
+    } }
+    local game, _, start, _, private = fixture(function() end, nil, true, {
+        CurrentRun = run,
+        GetEquippedWeapon = function() return "WeaponSuit" end,
+        LootData = {}, IsGodTrait = function() return false end,
+        AttachLua = function() end,
+        StartRoom = function(currentRun, currentRoom)
+            check((currentRun == run and currentRoom.Name == "TestRoom")
+                or (currentRun ~= run and currentRoom.Name == "NextRunRoom"),
+                "room wrapper arguments changed")
+            return "native-room-result", nil, "tail"
+        end,
+    }, false, "auto")
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    check(screen.Components.BoonAdvisorFocusTile ~= nil
+        and not private.probeState.lastScores[2].scoreComplete,
+        "Black Coat focus tile was absent or undecided Launcher was evaluated")
+    game.BoonAdvisorSelectFocus(screen, screen.Components.BoonAdvisorFocusTile)
+    check(screen.Components.BoonAdvisorFocusSpecial ~= nil, "focus menu did not open")
+    game.BoonAdvisorSelectFocus(screen, screen.Components.BoonAdvisorFocusSpecial)
+    check(screen.Components.BoonAdvisorRouteZeus ~= nil
+        and private.probeState.focusState.focus == "special", "route menu did not open")
+    game.BoonAdvisorSelectFocus(screen, screen.Components.BoonAdvisorRouteZeus)
+    check(private.probeState.focusState.route == "zeus"
+        and private.probeState.focusState.locked
+        and private.probeState.lastScores[1].scoreComplete
+        and private.probeState.lastScores[2].scoreComplete,
+        "route click did not lock focus and refresh the Hammer analysis")
+    local selectedRoute = private.probeState.focusState.route
+    game.BoonAdvisorSelectFocus(screen, { BoonAdvisorChoice = "route:ares" })
+    check(private.probeState.focusState.route == selectedRoute,
+        "locked focus accepted a stale/direct callback")
+    local beforeRoomReminder = private.probeState.focusHud.id
+    local roomResult = pack(game.StartRoom(run, { Name = "TestRoom" }))
+    check(roomResult.n == 3 and roomResult[1] == "native-room-result"
+        and roomResult[2] == nil and roomResult[3] == "tail",
+        "room wrapper changed the native return values")
+    check(private.probeState.focusState.locked
+        and private.probeState.focusHud.id ~= nil
+        and private.probeState.focusHud.id ~= beforeRoomReminder,
+        "passive reminder was not recreated at the next room")
+    local nextRun = { Hero = {} }
+    game.StartRoom(nextRun, { Name = "NextRunRoom" })
+    check(not private.probeState.focusState.locked
+        and private.probeState.focusHud.id == nil,
+        "focus reminder did not reset for a new run")
+end)()
+print("PASS: focus locks route, rejects later changes, persists across rooms, resets on new runs")
+
+; (function()
+    local run = {
+        Hero = { Weapons = { WeaponDagger = true }, SlottedTraits = { Aspect = "DaggerBackstabAspect" } },
+        CurrentRoom = { Name = "Hub_Main" },
+    }
+    local hub = { Name = "Hub_Main" }
+    local game, logs, start, _, private, _, _, _, _, overviewCreated, overviewText = fixture(function() end, nil, true, {
+        CurrentRun = run,
+        CurrentHubRoom = hub,
+        AttachLua = function() end,
+        GameState = { LastWeaponUpgradeName = {
+            WeaponDagger = "DaggerBackstabAspect", WeaponSuit = "BaseSuitAspect",
+        } },
+        WeaponSets = { HeroPrimaryWeapons = { "WeaponDagger", "WeaponSuit" } },
+        UseWeaponKit = function()
+            run.Hero.Weapons = { WeaponSuit = true }
+            return "weapon-result", nil
+        end,
+        SelectWeaponUpgrade = function()
+            run.Hero.SlottedTraits.Aspect = "BaseSuitAspect"
+            return "aspect-result", nil
+        end,
+        StartNewRun = function()
+            run.CurrentRoom = { Name = "F_StartingRoom" }
+            return run
+        end,
+        StartRoom = function(currentRun, currentRoom)
+            currentRun.CurrentRoom = currentRoom
+            return "room-result", nil
+        end,
+        ShowCombatUI = function(value)
+            return value, nil, "hud-result"
+        end,
+        CreateMetaUpgradeCards = function(screen)
+            return "native-cards", nil
+        end,
+        DeathAreaRoomTransition = function() hub.Name = "Hub_Main" end,
+        HubPostBountyLoad = function() end,
+        HubPostDreamLoad = function() end,
+    }, false, "auto")
+    start()
+    check(private.probeState.hookCount == 9, "lifecycle hooks were not installed")
+    check(private.probeState.buildHud.key ~= nil and #overviewCreated == 1
+        and overviewText[1].RawText == "Build : Lames Sœurs · Melinoë",
+        "resolved lobby identity was not displayed")
+    local arcanaScreen = { Components = {}, KeepOpen = true }
+    local cardsResult = pack(game.CreateMetaUpgradeCards(arcanaScreen))
+    check(cardsResult.n == 2 and cardsResult[1] == "native-cards"
+        and cardsResult[2] == nil
+        and next(arcanaScreen.Components) == nil,
+        "native Arcana screen was unexpectedly modified")
+    local function hasProbe(stage, needle)
+        for _, line in ipairs(logs) do
+            if line:find("LOBBY_PROBE stage=" .. stage, 1, true)
+                and (needle == nil or line:find(needle, 1, true)) then return true end
+        end
+        return false
+    end
+    check(hasProbe("plugin_loaded", "hub=Hub_Main"), "initial hub snapshot not logged")
+    local weaponResult = pack(game.UseWeaponKit())
+    check(weaponResult.n == 2 and weaponResult[1] == "weapon-result" and weaponResult[2] == nil,
+        "weapon-kit wrapper changed returns")
+    check(hasProbe("UseWeaponKit", "primaryCount=1 weapon=WeaponSuit"), "weapon change not observed")
+    local aspectResult = pack(game.SelectWeaponUpgrade())
+    check(aspectResult.n == 2 and aspectResult[1] == "aspect-result" and aspectResult[2] == nil,
+        "Aspect wrapper changed returns")
+    check(hasProbe("SelectWeaponUpgrade", "activeAspect=BaseSuitAspect"), "Aspect change not observed")
+    game.DeathAreaRoomTransition()
+    check(hasProbe("HubRoomTransition", "hub=Hub_Main"), "hub transition not observed")
+    game.StartNewRun()
+    check(hasProbe("StartNewRun", "room=F_StartingRoom"), "new run not observed")
+    check(private.probeState.buildHud.key ~= nil and #private.probeState.buildHud.items == 1
+        and overviewText[#overviewText].RawText == "Build : Manteau Noir · Melinoë",
+        "build identity did not persist at run start")
+    run.Hero.Weapons = { WeaponDagger = true }
+    run.Hero.SlottedTraits.Aspect = "DaggerBackstabAspect"
+    local roomResult = pack(game.StartRoom(run, { Name = "F_FirstRoom" }))
+    check(roomResult.n == 2 and roomResult[1] == "room-result" and roomResult[2] == nil,
+        "room probe wrapper changed native returns")
+    check(hasProbe("StartRoom", "room=F_FirstRoom"), "run room not observed")
+    local beforeHudRefresh = #overviewCreated
+    local hudResult = pack(game.ShowCombatUI("combat-hud"))
+    check(hudResult.n == 3 and hudResult[1] == "combat-hud"
+        and hudResult[2] == nil and hudResult[3] == "hud-result",
+        "ShowCombatUI wrapper changed native return values")
+    check(#overviewCreated == beforeHudRefresh + 1
+        and private.probeState.buildHud.key ~= nil
+        and #private.probeState.buildHud.items == 1
+        and overviewText[#overviewText].RawText == "Build : Manteau Noir · Melinoë",
+        "run-scoped build identity changed or was not refreshed after native combat HUD setup")
+    local stableHudCount = #overviewCreated
+    game.ShowCombatUI("movement-hud")
+    game.ShowCombatUI("dash-hud")
+    check(#overviewCreated == stableHudCount,
+        "repeated combat HUD calls recreated the unchanged build label")
+    game.DeathAreaRoomTransition()
+    check(private.probeState.buildHud.run == nil and private.probeState.buildHud.runName == nil,
+        "run-scoped build identity was not cleared after returning to the hub")
+    game.HubPostBountyLoad()
+    check(overviewText[#overviewText].RawText == "Build : Lames Sœurs · Melinoë"
+        and private.probeState.buildHud.run == nil,
+        "lobby identity was not re-detected after the run-scoped lock was reset: "
+            .. tostring(overviewText[#overviewText] and overviewText[#overviewText].RawText)
+            .. " / " .. tostring(private.probeState.buildHud.key))
+    local lobbyComponentCount = #overviewCreated
+    game.HubPostDreamLoad()
+    check(#overviewCreated == lobbyComponentCount,
+        "duplicate lobby load callback recreated the unchanged build label")
+    hub.Name = "Hub_PreRun"
+    game.HubPostBountyLoad()
+    check(#overviewCreated == lobbyComponentCount + 1
+        and overviewText[#overviewText].RawText == "Build : Lames Sœurs · Melinoë",
+        "build label was not refreshed once after changing hub rooms")
+end)()
+print("PASS: read-only lifecycle hooks observe hub, weapon, Aspect and run rooms while preserving native returns")

@@ -20,13 +20,20 @@ end, state.logState)
 state.logger = logger
 state.log = logger.debug
 local GameStateSnapshot = import("GameState.lua")
+local LobbyProbe = import("LobbyProbe.lua")
 local OfferSnapshot = import("OfferSnapshot.lua")
+local CoreAdvisory = import("CoreAdvisory.lua")
+local PomAdvisor = import("PomAdvisor.lua")
+local FocusState = import("FocusState.lua")
 local ScoringEngine = import("ScoringEngine.lua")
 local UI = import("UI.lua")
 local Localization = import("Localization.lua")
 local ProfileResolver = import("ProfileResolver.lua")
 UI.setLogger({ debug = logger.debug, error = logger.error })
 UI.setLocalization(Localization)
+state.focusState = state.focusState or FocusState.new()
+state.focusHud = state.focusHud or { id = nil, label = nil }
+state.buildHud = state.buildHud or { items = {}, key = nil }
 
 local function getUIApi()
     local gameGlobals = rom and rom.game
@@ -34,9 +41,26 @@ local function getUIApi()
         CreateScreenComponent = type(gameGlobals) == "table" and gameGlobals.CreateScreenComponent or nil,
         Attach = type(gameGlobals) == "table" and gameGlobals.Attach or nil,
         CreateTextBox = type(gameGlobals) == "table" and gameGlobals.CreateTextBox or nil,
+        AttachLua = type(gameGlobals) == "table" and gameGlobals.AttachLua or nil,
         Destroy = type(gameGlobals) == "table" and gameGlobals.Destroy or nil,
     }
 end
+
+local function refreshFocusReminder(currentRun, forceNew)
+    local runChanged = state.focusHud.run ~= currentRun
+    if runChanged then
+        state.focusMenu = nil
+        state.focusHud.id, state.focusHud.label = nil, nil
+    end
+    state.focusHud.run = currentRun
+    FocusState.sync(state.focusState, currentRun)
+    local focus = currentRun and {
+        focus = state.focusState.focus, route = state.focusState.route,
+        locked = state.focusState.locked,
+    } or nil
+    UI.syncFocusReminder(state.focusHud, focus, getUIApi(), forceNew)
+end
+
 local buildProfileRegistry = import("data/builds/registry.lua")
 local configuredProfileKey = settings.BUILD_PROFILE
 local preferredProfileKey = nil
@@ -61,6 +85,165 @@ local function getLoadedProfile(descriptor)
     return loadedProfiles[descriptor.module]
 end
 
+local function selectedBuildInputs(gameGlobals)
+    local run = type(gameGlobals) == "table" and gameGlobals.CurrentRun or nil
+    local snapshot = GameStateSnapshot.capture({
+        CurrentRun = run,
+        GetEquippedWeapon = gameGlobals.GetEquippedWeapon,
+        LootData = gameGlobals.LootData,
+        IsGodTrait = gameGlobals.IsGodTrait,
+    })
+    local hero = type(run) == "table" and run.Hero or nil
+    local weapon = snapshot.weapon
+    if type(weapon) ~= "string" and type(gameGlobals.GetEquippedWeapon) == "function" then
+        local ok, equipped = pcall(gameGlobals.GetEquippedWeapon)
+        if ok and type(equipped) == "string" then weapon = equipped end
+    end
+    if type(weapon) ~= "string" and type(hero) == "table"
+        and type(hero.Weapons) == "table" and type(gameGlobals.WeaponSets) == "table"
+        and type(gameGlobals.WeaponSets.HeroPrimaryWeapons) == "table" then
+        local matches = {}
+        for _, candidate in ipairs(gameGlobals.WeaponSets.HeroPrimaryWeapons) do
+            if type(candidate) == "string" and hero.Weapons[candidate] then
+                matches[#matches + 1] = candidate
+            end
+        end
+        if #matches == 1 then weapon = matches[1] end
+    end
+    local aspect = snapshot.aspect
+    if type(aspect) ~= "string" and type(hero) == "table"
+        and type(hero.SlottedTraits) == "table" then
+        aspect = hero.SlottedTraits.Aspect
+    end
+    if type(aspect) ~= "string" and type(weapon) == "string"
+        and type(gameGlobals.GameState) == "table"
+        and type(gameGlobals.GameState.LastWeaponUpgradeName) == "table" then
+        aspect = gameGlobals.GameState.LastWeaponUpgradeName[weapon]
+    end
+    return weapon, aspect, snapshot.traits, run
+end
+
+local function resolveBuildForOverview(gameGlobals, run)
+    local weapon, aspect, traits = selectedBuildInputs(gameGlobals)
+    local descriptor = ProfileResolver.resolve(buildProfileRegistry, weapon, aspect,
+        preferredProfileKey, traits, loadedProfiles)
+    local profile = getLoadedProfile(descriptor)
+    local name = profile
+        and Localization.buildName(Localization.resolveLanguage(gameGlobals), profile.id) or nil
+    local ready = type(weapon) == "string" and type(aspect) == "string"
+    return name, profile, ready, weapon, aspect
+end
+
+local function logBuildResolution(gameGlobals, stage, name, ready, weapon, aspect)
+    local hub = type(gameGlobals.CurrentHubRoom) == "table"
+        and gameGlobals.CurrentHubRoom.Name or nil
+    local run = type(gameGlobals.CurrentRun) == "table" and gameGlobals.CurrentRun or nil
+    local room = type(run) == "table" and type(run.CurrentRoom) == "table"
+        and run.CurrentRoom.Name or nil
+    state.log("BUILD_IDENTITY stage=" .. tostring(stage)
+        .. " hub=" .. tostring(hub or "unknown")
+        .. " room=" .. tostring(room or "unknown")
+        .. " weapon=" .. tostring(weapon or "unknown")
+        .. " aspect=" .. tostring(aspect or "unknown")
+        .. " ready=" .. tostring(ready == true)
+        .. " build=" .. tostring(name or "unrecognized"))
+end
+
+local function refreshBuildOverview(forceNew, lifecycle, detectBuild)
+    local gameGlobals = rom and rom.game
+    if type(gameGlobals) ~= "table" then
+        UI.syncBuildOverview(state.buildHud, nil, getUIApi(), forceNew)
+        return false
+    end
+    UI.setLanguage(Localization.resolveLanguage(gameGlobals))
+    local runStarting = lifecycle == "run_start"
+    local runReset = lifecycle == "run_reset"
+    local run = type(gameGlobals.CurrentRun) == "table" and gameGlobals.CurrentRun or nil
+    if runReset then state.buildHud.returnedRun = run end
+    if runStarting then state.buildHud.returnedRun = nil end
+    local hub = type(gameGlobals.CurrentHubRoom) == "table" and gameGlobals.CurrentHubRoom.Name or nil
+    local hubPhase = hub == "Hub_Main" or hub == "Hub_PreRun"
+    local runRoom = type(run) == "table" and run.CurrentRoom or nil
+    local roomName = hubPhase and hub or type(runRoom) == "table" and runRoom.Name or nil
+    if type(roomName) == "string" and roomName ~= state.buildHud.roomName then
+        -- Recreate once when the actual room changes. Follow-up lifecycle
+        -- callbacks in the same room must not destroy and redraw the label.
+        forceNew = true
+        state.buildHud.roomName = roomName
+    end
+    local returnedToHub = run ~= nil and state.buildHud.returnedRun == run and hubPhase
+    -- CurrentRun can retain the previous room while the Crossroads room is
+    -- already active. CurrentHubRoom is authoritative for both hub rooms.
+    local beforeRun = hubPhase
+    -- CurrentRun.CurrentRoom can still describe the previous run while the
+    -- process is loading into the hub. Treat it as an active run only after
+    -- StartNewRun established this mod's run-scoped lock.
+    local inRun = not returnedToHub and state.buildHud.run ~= nil and state.buildHud.run == run
+        and type(runRoom) == "table" and type(runRoom.Name) == "string"
+        and runRoom.Name ~= "Hub_Main" and runRoom.Name ~= "Hub_PreRun"
+
+    local name, profile
+    if runReset then
+        -- Only a transition from a tracked run reaches this branch. A normal
+        -- Hub_Main <-> Hub_PreRun switch must retain the lobby selection.
+        state.buildHud.run, state.buildHud.runName = nil, nil
+        state.buildHud.lobbyName = nil
+        state.buildHud.needsDetection = true
+        if hubPhase and detectBuild == true then
+            local detectionReady
+            local weapon, aspect
+            name, profile, detectionReady, weapon, aspect = resolveBuildForOverview(gameGlobals, run)
+            logBuildResolution(gameGlobals, "hub_return", name, detectionReady, weapon, aspect)
+            if detectionReady then
+                state.buildHud.lobbyName = name
+                state.buildHud.needsDetection = false
+            end
+        end
+    elseif runStarting then
+        local ready, weapon, aspect
+        name, profile, ready, weapon, aspect = resolveBuildForOverview(gameGlobals, run)
+        logBuildResolution(gameGlobals, "run_start", name, ready, weapon, aspect)
+        state.buildHud.run, state.buildHud.runName = run, name
+        state.buildHud.needsDetection = false
+    elseif inRun and state.buildHud.run == run then
+        -- Keep the lobby decision stable for the lifetime of this run. Room
+        -- transitions must not re-resolve it from transient equipment state.
+        name = state.buildHud.runName
+    elseif inRun then
+        -- Supports a reload while a run is already active: capture once, then
+        -- retain the identity for subsequent rooms.
+        local ready, weapon, aspect
+        name, profile, ready, weapon, aspect = resolveBuildForOverview(gameGlobals, run)
+        logBuildResolution(gameGlobals, "active_run_reload", name, ready, weapon, aspect)
+        state.buildHud.run, state.buildHud.runName = run, name
+        state.buildHud.needsDetection = false
+    else
+        state.buildHud.run, state.buildHud.runName = nil, nil
+        local detectionReady = true
+        if beforeRun and detectBuild == true then
+            local weapon, aspect
+            name, profile, detectionReady, weapon, aspect = resolveBuildForOverview(gameGlobals, run)
+            logBuildResolution(gameGlobals, "lobby", name, detectionReady, weapon, aspect)
+            if detectionReady then
+                state.buildHud.lobbyName = name
+                state.buildHud.needsDetection = false
+            else
+                state.buildHud.needsDetection = true
+            end
+        else
+            name = state.buildHud.lobbyName
+        end
+        if not beforeRun then name = nil end
+    end
+
+    local displayContext = beforeRun or inRun
+    if not displayContext or runReset then name = nil end
+    UI.syncBuildOverview(state.buildHud, {
+        buildName = name,
+    }, getUIApi(), forceNew)
+    return state.buildHud.needsDetection ~= true
+end
+
 local function joinedKeys(values)
     local keys = {}
     for key, present in pairs(type(values) == "table" and values or {}) do
@@ -73,6 +256,13 @@ end
 local function triState(value)
     if value == nil then return "unknown" end
     return tostring(value)
+end
+
+local function logLobbyProbe(stage)
+    if settings.DEBUG ~= true then return end
+    local gameGlobals = rom and rom.game
+    logger.debug(LobbyProbe.describe(stage,
+        type(gameGlobals) == "table" and gameGlobals or {}))
 end
 
 -- IDs from the audited LootData_*.lua files, never from display names.
@@ -88,6 +278,19 @@ local supportedSources = {
     ZeusUpgrade = true,
 }
 
+-- These two NPC reward screens use the same native boon-choice callback but
+-- are not GodLoot sources. Keep the list closed to verified NPC identities.
+local supportedNpcSources = {
+    NPC_Athena_01 = true,
+    NPC_Hades_Field_01 = true,
+}
+
+local supportedPomSources = {
+    StackUpgrade = true,
+    StackUpgradeBig = true,
+    StackUpgradeTriple = true,
+}
+
 local function diagnose(screen, lootData)
     if type(screen) ~= "table" or type(lootData) ~= "table" then return end
     if screen.Source ~= lootData or screen.KeepOpen ~= true then return end
@@ -96,11 +299,25 @@ local function diagnose(screen, lootData)
         if lootData.GodLoot ~= true then return end
         if lootData.DebugOnly or lootData.StackOnly or lootData.TransformingTraits then return end
         offerKind = "boon"
+    elseif supportedNpcSources[lootData.Name] then
+        if type(lootData.Traits) ~= "table" then return end
+        offerKind = "boon"
     elseif lootData.Name == "WeaponUpgrade" then
         offerKind = "hammer"
+    elseif supportedPomSources[lootData.Name] then
+        if lootData.StackOnly ~= true then return end
+        offerKind = "pom"
     else
-        return
+        -- Future/unrecognized GodLoot identities are not rankable, but still
+        -- reach the fail-closed informational advisory path. Never infer their
+        -- God Pool membership from the offered trait.
+        if lootData.GodLoot ~= true or lootData.DebugOnly or lootData.StackOnly
+            or lootData.TransformingTraits then return end
+        offerKind = "boon"
     end
+    local offerSourceVerified = supportedSources[lootData.Name] == true
+        or supportedNpcSources[lootData.Name] == true or lootData.Name == "WeaponUpgrade"
+        or supportedPomSources[lootData.Name] == true
     state.log("CreateBoonLootButtons detected")
     state.log("Source=" .. lootData.Name)
     local gameGlobals = rom and rom.game
@@ -115,21 +332,36 @@ local function diagnose(screen, lootData)
         buildProfileRegistry, snapshot.weapon, snapshot.aspect, preferredProfileKey,
         snapshot.traits, loadedProfiles)
     local selectedProfile = getLoadedProfile(selectedDescriptor)
+    refreshFocusReminder(type(gameGlobals) == "table" and gameGlobals.CurrentRun or nil)
+    snapshot.playerFocus = FocusState.forProfile(state.focusState, selectedProfile)
     local profileSelectionWarning = selectedProfile == nil
         and ("Profile resolution=" .. tostring(selectionReason)) or nil
     snapshot.offers = OfferSnapshot.capture(screen, lootData)
     snapshot.offerKind = offerKind
     snapshot.offerSource = lootData.Name
     state.lastSnapshot = snapshot
-    local scores = selectedProfile and ScoringEngine.scoreOffers(snapshot, selectedProfile) or {}
+    local scores = {}
+    if selectedProfile ~= nil and offerSourceVerified then
+        if PomAdvisor.usesPomScoring(snapshot, selectedProfile) then
+            scores = PomAdvisor.scoreOffers(snapshot, selectedProfile)
+        else
+            scores = ScoringEngine.scoreOffers(snapshot, selectedProfile)
+        end
+    end
     state.lastScores = scores
     local profileValid, profileValidationError = false, "no compatible profile"
     if selectedProfile ~= nil then profileValid, profileValidationError = ScoringEngine.validateProfile(selectedProfile) end
-    local profileSupported = profileValid and ScoringEngine.isProfileSupported(snapshot, selectedProfile)
+    local profileSupported = offerSourceVerified and profileValid
+        and ScoringEngine.isProfileSupported(snapshot, selectedProfile)
     local rankingDecision = ScoringEngine.getRankingDecision(scores, profileSupported)
     local rankingReady = rankingDecision.mode == "full"
     state.lastRankingReady = rankingReady
     state.lastRankedScores = rankingReady and ScoringEngine.rank(rankingDecision.rankEligible) or nil
+    local partialRankedScores = rankingDecision.mode == "partial"
+        and ScoringEngine.rank(rankingDecision.rankEligible) or nil
+    local showCoreAdvisory = CoreAdvisory.shouldShow(
+        ScoringEngine.effectiveProfile(snapshot, selectedProfile), snapshot, profileSupported)
+    state.lastCoreAdvisory = showCoreAdvisory
     local function renderUI(ranks)
         UI.clearFallback(screen, getUIApi())
         state.log("UI calling renderRanks mode=" .. (rankingReady and "real" or "synthetic")
@@ -143,6 +375,7 @@ local function diagnose(screen, lootData)
         if not ok then logger.error("UI_RENDER_FALLBACK_FAILED", "UI fallback rendering failed") end
     end
     UI.clearFallback(screen, getUIApi())
+    UI.clearFocus(screen, getUIApi())
     if rankingReady then
         renderUI(state.lastRankedScores)
     elseif settings.UI_TEST_MODE
@@ -163,6 +396,9 @@ local function diagnose(screen, lootData)
                 { code = "FILL_EMPTY_UTILITY_CORE", delta = 4 },
             } },
         })
+    elseif not offerSourceVerified then
+        UI.clearRanks(screen, getUIApi())
+        renderFallback({ code = "NO_RELIABLE_PREFERENCE" })
     elseif not profileSupported then
         if selectionReason == "ambiguous" then
             renderFallback({ code = "AMBIGUOUS_PROFILE" })
@@ -189,7 +425,7 @@ local function diagnose(screen, lootData)
             end
         end
         if rankingDecision.mode == "partial" then
-            local partialRanks = ScoringEngine.rank(rankingDecision.rankEligible)
+        local partialRanks = partialRankedScores or {}
             local ranksByIndex = {}
             for _, ranked in ipairs(partialRanks) do ranksByIndex[ranked.originalIndex] = ranked.rank end
             for _, offer in ipairs(partialOffers) do
@@ -206,7 +442,28 @@ local function diagnose(screen, lootData)
             renderFallback({ code = "INCOMPLETE_ANALYSIS", incompleteCount = incomplete })
         elseif eligible > 0 then
             renderFallback({ code = "NO_RELIABLE_PREFERENCE" })
+            if offerKind == "pom" then
+                local ok, err = pcall(UI.renderPomTieStatuses,
+                    screen, scores, selectedProfile, getUIApi())
+                if not ok then
+                    logger.error("UI_POM_STATUS_FAILED", "Pom status rendering failed")
+                end
+            end
         end
+    end
+
+    -- This is a build/inventory fact about the whole boon offer, independent
+    -- of which choices are listed, evaluated, eligible, or ranked.
+    local advisoryOk, advisoryErr = pcall(UI.renderCoreAdvisory, screen, showCoreAdvisory, getUIApi())
+    if not advisoryOk then
+        logger.error("UI_CORE_ADVISORY_FAILED", "Core advisory rendering failed: " .. tostring(advisoryErr))
+    end
+
+    if snapshot.playerFocus ~= nil then
+        if state.focusMenuScreen ~= screen then
+            state.focusMenuScreen, state.focusMenu = screen, nil
+        end
+        UI.renderFocus(screen, snapshot.playerFocus, getUIApi(), state.focusMenu)
     end
 
     state.log("Weapon=" .. tostring(snapshot.weapon))
@@ -310,6 +567,37 @@ end
 -- Refresh the implementation on every reload without replacing the wrapper.
 state.diagnose = diagnose
 
+game.BoonAdvisorSelectFocus = function(screen, button)
+    if type(screen) ~= "table" or type(button) ~= "table"
+        or type(screen.BoonAdvisorFocus) ~= "table"
+        or screen.KeepOpen ~= true or state.focusState.locked then return end
+    local choice = button.BoonAdvisorChoice
+    if choice == "open" then
+        state.focusMenu = state.focusMenu == "focus" and nil or "focus"
+    elseif choice == "focus:none" then
+        if not FocusState.selectFocus(state.focusState, "none") then return end
+        FocusState.lock(state.focusState)
+        state.focusMenu = nil
+    elseif choice == "focus:attack" then
+        if not FocusState.selectFocus(state.focusState, "attack") then return end
+        FocusState.lock(state.focusState)
+        state.focusMenu = nil
+    elseif choice == "focus:special" then
+        if not FocusState.selectFocus(state.focusState, "special") then return end
+        state.focusMenu = "route"
+    elseif choice == "route:none" or choice == "route:ares" or choice == "route:zeus" then
+        if not FocusState.selectRoute(state.focusState, choice:sub(7)) then return end
+        FocusState.lock(state.focusState)
+        state.focusMenu = nil
+    else
+        return
+    end
+    local gameGlobals = rom and rom.game
+    refreshFocusReminder(type(gameGlobals) == "table" and gameGlobals.CurrentRun or nil)
+    local ok = pcall(state.diagnose, screen, screen.Source)
+    if not ok then logger.error("FOCUS_REFRESH_FAILED", "Focus refresh failed") end
+end
+
 local function install()
     if state.installed then return end
     if type(game.CreateBoonLootButtons) ~= "function"
@@ -326,6 +614,7 @@ local function install()
         local clearOk, clearErr = pcall(function()
             UI.clearRanks(targetScreen, getUIApi())
             UI.clearFallback(targetScreen, getUIApi())
+            UI.clearFocus(targetScreen, getUIApi())
         end)
         if not clearOk then logger.error("UI_CLEAR_RANKS_FAILED", "UI cleanup failed") end
         local diagnostic = state.diagnose
@@ -350,6 +639,107 @@ local function install()
             return table.unpack(results, 1, results.n)
         end)
     end
+    state.hookCount = 1
+    if type(game.StartRoom) == "function" then
+        modutil.mod.Path.Wrap("StartRoom", function(base, currentRun, currentRoom, ...)
+            -- Map loads discard screen obstacles. Recreate the locked reminder
+            -- at the beginning of each room, before the native encounter starts.
+            local ok = pcall(refreshFocusReminder, currentRun, true)
+            if not ok then logger.error("FOCUS_ROOM_REFRESH_FAILED", "Room focus reminder refresh failed") end
+            local results = table.pack(base(currentRun, currentRoom, ...))
+            -- The map load discards Combat_UI components. Defer recreation
+            -- until the native HUD is ready, then consume this flag once.
+            state.buildHud.needsRefresh = true
+            local probeOk = pcall(logLobbyProbe, "StartRoom")
+            if not probeOk then logger.error("LOBBY_PROBE_FAILED", "Read-only room probe failed") end
+            return table.unpack(results, 1, results.n)
+        end)
+        state.hookCount = state.hookCount + 1
+        state.log("Hook installed: StartRoom focus reminder")
+    end
+
+    -- StartRoom's post-call point can precede the final combat-HUD setup.
+    -- Recreate the passive reminder after the native HUD is shown so it
+    -- survives room loads that clear Combat_UI screen components.
+    if type(game.ShowCombatUI) == "function" then
+        modutil.mod.Path.Wrap("ShowCombatUI", function(base, ...)
+            local results = table.pack(base(...))
+            local forceOverviewRefresh = state.buildHud.needsRefresh == true
+            local detectBuild = state.buildHud.needsDetection == true
+            local overviewOk, detectionReady = pcall(refreshBuildOverview,
+                forceOverviewRefresh, nil, detectBuild)
+            if overviewOk then
+                state.buildHud.needsRefresh = false
+                if detectBuild and detectionReady then state.buildHud.needsDetection = false end
+            end
+            if not overviewOk then
+                logger.error("BUILD_OVERVIEW_REFRESH_FAILED", "Combat HUD build reminder refresh failed")
+            end
+            return table.unpack(results, 1, results.n)
+        end)
+        state.hookCount = state.hookCount + 1
+        state.log("Hook installed: build reminder after ShowCombatUI")
+    end
+
+    local probeHooks = {
+        { "StartNewRun", "StartNewRun" },
+        { "UseWeaponKit", "UseWeaponKit" },
+        { "SelectWeaponUpgrade", "SelectWeaponUpgrade" },
+        { "DeathAreaRoomTransition", "HubRoomTransition" },
+        { "HubPostBountyLoad", "HubPostBountyLoad" },
+        { "HubPostDreamLoad", "HubPostDreamLoad" },
+    }
+    for _, hook in ipairs(probeHooks) do
+        local functionName, stage = hook[1], hook[2]
+        if type(game[functionName]) == "function" then
+            local wrappedName, probeStage = functionName, stage
+            modutil.mod.Path.Wrap(wrappedName, function(base, ...)
+                local results = table.pack(base(...))
+                local leavingTrackedRun = wrappedName == "DeathAreaRoomTransition"
+                    and state.buildHud.run ~= nil
+                local lifecycle = wrappedName == "StartNewRun" and "run_start"
+                    or leavingTrackedRun and "run_reset" or nil
+                -- Hub load callbacks can fire more than once across the two
+                -- Crossroads rooms. Keep the existing HUD component when the
+                -- resolved build is unchanged to avoid a visible blink.
+                local forceOverviewRefresh = wrappedName == "StartNewRun"
+                    or wrappedName == "DeathAreaRoomTransition"
+                    or state.buildHud.needsRefresh == true
+                local detectBuild = wrappedName == "StartNewRun"
+                    or wrappedName == "UseWeaponKit"
+                    or wrappedName == "SelectWeaponUpgrade"
+                    or state.buildHud.needsDetection == true
+                if leavingTrackedRun then
+                    local gameGlobals = rom and rom.game
+                    local hub = type(gameGlobals) == "table"
+                        and type(gameGlobals.CurrentHubRoom) == "table"
+                        and gameGlobals.CurrentHubRoom.Name or nil
+                    if hub == "Hub_Main" or hub == "Hub_PreRun" then detectBuild = true end
+                end
+                local overviewOk, detectionReady = pcall(refreshBuildOverview,
+                    forceOverviewRefresh, lifecycle, detectBuild)
+                if overviewOk then
+                    state.buildHud.needsRefresh = false
+                    if detectBuild and detectionReady then state.buildHud.needsDetection = false end
+                end
+                if not overviewOk then logger.error("BUILD_OVERVIEW_REFRESH_FAILED", "Build overview refresh failed") end
+                local probeOk = pcall(logLobbyProbe, probeStage)
+                if not probeOk then logger.error("LOBBY_PROBE_FAILED", "Read-only event probe failed") end
+                return table.unpack(results, 1, results.n)
+            end)
+            state.hookCount = state.hookCount + 1
+            state.log("Hook installed: read-only lobby probe " .. wrappedName)
+        end
+    end
+    state.buildHud.needsDetection = true
+    local overviewOk, detectionReady = pcall(refreshBuildOverview, true, nil, true)
+    if overviewOk and detectionReady then state.buildHud.needsDetection = false end
+    if not overviewOk then logger.error("BUILD_OVERVIEW_REFRESH_FAILED", "Initial build overview refresh failed") end
+    -- Plugin initialization can precede the game's final HUD construction.
+    -- Recreate once on the first reliable HUD or hub lifecycle callback.
+    state.buildHud.needsRefresh = true
+    local probeOk = pcall(logLobbyProbe, "plugin_loaded")
+    if not probeOk then logger.error("LOBBY_PROBE_FAILED", "Initial read-only probe failed") end
     state.installed = true
     state.log("Hook installed: CreateBoonLootButtons")
 end
@@ -359,7 +749,7 @@ local function continueLoading()
     modutil.once_loaded.game(function()
         loader.load(install, function()
             if state.installed then
-                state.log("Probe ready; hook count=1")
+                state.log("Probe ready; hook count=" .. tostring(state.hookCount or 1))
             end
         end)
     end)

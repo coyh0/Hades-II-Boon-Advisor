@@ -16,6 +16,16 @@
       ]
     },
     {
+      "runtimeWeaponId": "WeaponLob",
+      "label": "Argent Skull",
+      "aspects": [
+        {
+          "runtimeAspectId": "LobCloseAttackAspect",
+          "label": "Aspect of Medea"
+        }
+      ]
+    },
+    {
       "runtimeWeaponId": "WeaponSuit",
       "label": "Black Coat",
       "aspects": [

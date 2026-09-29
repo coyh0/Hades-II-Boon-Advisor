@@ -20,6 +20,12 @@ if (-not $PSBoundParameters.ContainsKey('OutputDirectory')) {
     $OutputDirectory = Join-Path ([IO.Path]::GetTempPath()) ('boon-advisor-generated-' + [Guid]::NewGuid())
 }
 function Fail([string]$message) { throw "Canonical profile validation failed: $message" }
+$script:VerifiedGodOfferSources = @{
+    Aphrodite = 'AphroditeUpgrade'; Apollo = 'ApolloUpgrade'; Ares = 'AresUpgrade'
+    Demeter = 'DemeterUpgrade'; Hephaestus = 'HephaestusUpgrade'; Hera = 'HeraUpgrade'
+    Hestia = 'HestiaUpgrade'; Poseidon = 'PoseidonUpgrade'; Zeus = 'ZeusUpgrade'
+}
+$script:StrictUtf8 = New-Object System.Text.UTF8Encoding($false, $true)
 function ConvertTo-HashtableRecursive([object]$value) {
     if ($null -eq $value) { return $null }
     if ($value -is [System.Collections.IDictionary]) {
@@ -42,7 +48,8 @@ function ConvertTo-HashtableRecursive([object]$value) {
     return $value
 }
 function Read-Json([string]$path) {
-    $parsed = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+    $jsonText = [IO.File]::ReadAllText($path, $script:StrictUtf8)
+    $parsed = $jsonText | ConvertFrom-Json
     return ConvertTo-HashtableRecursive $parsed
 }
 function Assert-String([object]$value, [string]$name) {
@@ -230,8 +237,123 @@ function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtab
     if ($mechanics.genericCoreAspectCompatibility -isnot [bool]) {
         Fail 'genericCoreAspectCompatibility must be a boolean'
     }
+    if ($mechanics.ContainsKey('godPool')) {
+        if ($mechanics.godPool -isnot [object[]]) { Fail 'godPool must be an array when present' }
+        $seenRecommendations = @{}; $seenGods = @{}; $seenSources = @{}
+        foreach ($entry in $mechanics.godPool) {
+            if ($entry -isnot [hashtable]) { Fail 'godPool entry must be an object' }
+            foreach ($field in $entry.Keys) {
+                if ($field -cnotin @('recommendationId', 'sourceGod', 'offerSource')) {
+                    Fail "unknown godPool field $field"
+                }
+            }
+            Assert-String $entry.recommendationId 'godPool.recommendationId'
+            Assert-String $entry.sourceGod 'godPool.sourceGod'
+            Assert-String $entry.offerSource 'godPool.offerSource'
+            if ($entry.recommendationId -cnotmatch '^mobalytics_[a-z0-9_]+_fullbuild_god_pool_[a-z0-9_]+_[0-9]{2}$') {
+                Fail "invalid stable Mobalytics God Pool recommendation ID $($entry.recommendationId)"
+            }
+            if ($seenRecommendations[$entry.recommendationId] -or $seenGods[$entry.sourceGod] -or $seenSources[$entry.offerSource]) {
+                Fail 'godPool contains duplicate recommendation IDs, source gods, or runtime offer sources'
+            }
+            $knownGod = $entry.sourceGod -cin @('Aphrodite', 'Apollo', 'Ares', 'Demeter', 'Hephaestus', 'Hera', 'Hestia', 'Poseidon', 'Zeus')
+            if (-not $knownGod -or $script:VerifiedGodOfferSources[$entry.sourceGod] -cne $entry.offerSource) {
+                Fail "unknown or mismatched verified God Pool source mapping for $($entry.sourceGod)"
+            }
+            $idGod = [regex]::Match($entry.recommendationId, '_fullbuild_god_pool_([a-z]+)_[0-9]{2}$').Groups[1].Value
+            if ($idGod -cne $entry.sourceGod.ToLowerInvariant()) {
+                Fail "God Pool recommendation ID does not match sourceGod $($entry.sourceGod)"
+            }
+            $seenRecommendations[$entry.recommendationId] = $true
+            $seenGods[$entry.sourceGod] = $true
+            $seenSources[$entry.offerSource] = $true
+        }
+    }
     foreach ($value in $mechanics.weights.Values) {
         if ($value -isnot [int] -and $value -isnot [long] -and $value -isnot [double] -and $value -isnot [decimal]) { Fail 'invalid numeric weight' }
+    }
+    if ($mechanics.weights.BUILD_PREFERRED -ne 2) {
+        Fail 'mechanics templates must define the default BUILD_PREFERRED = 2'
+    }
+    if ($mechanics.ContainsKey('sourceScoring')) {
+        $sourceScoring = $mechanics.sourceScoring
+        if ($sourceScoring -isnot [hashtable]) { Fail 'sourceScoring must be an object' }
+        $sourceKinds = @('boons', 'hammers', 'poms', 'deferred', 'npcOfferings')
+        foreach ($key in $sourceScoring.Keys) {
+            if ($key -cnotin $sourceKinds) { Fail "unknown sourceScoring section $key" }
+        }
+        foreach ($kind in $sourceKinds) {
+            if ($sourceScoring[$kind] -isnot [hashtable]) { Fail "sourceScoring.$kind must be an object" }
+        }
+        $allowedGroups = @{
+            boons = @('Core Boons', 'Non-Core Boons', 'NPC Offerings')
+            hammers = @('Daedalus Hammer Upgrades')
+            poms = @('Poms of Power')
+            deferred = @('Legendary / Duo Boons')
+            npcOfferings = @('NPC_Athena_01', 'NPC_Hades_Field_01')
+        }
+        foreach ($kind in $sourceKinds) {
+            foreach ($entry in $sourceScoring[$kind].GetEnumerator()) {
+                Assert-String $entry.Key "sourceScoring.$kind trait ID"
+                if ($entry.Value -cnotin $allowedGroups[$kind]) {
+                    Fail "unsupported source group '$($entry.Value)' for sourceScoring.$kind.$($entry.Key)"
+                }
+            }
+        }
+        foreach ($traitId in $sourceScoring.deferred.Keys) {
+            if ($sourceScoring.boons.ContainsKey($traitId) -or
+                $sourceScoring.hammers.ContainsKey($traitId) -or
+                $sourceScoring.poms.ContainsKey($traitId)) {
+                Fail "deferred source recommendation $traitId cannot also have an active source score"
+            }
+        }
+        foreach ($entry in $sourceScoring.npcOfferings.GetEnumerator()) {
+            Assert-String $entry.Key 'sourceScoring.npcOfferings trait ID'
+            if ($entry.Value -cnotin $allowedGroups.npcOfferings -or
+                $sourceScoring.boons[$entry.Key] -cne 'NPC Offerings') {
+                Fail "invalid sourceScoring.npcOfferings mapping for $($entry.Key)"
+            }
+        }
+        foreach ($entry in $sourceScoring.boons.GetEnumerator()) {
+            if ($entry.Value -ceq 'NPC Offerings' -and -not $sourceScoring.npcOfferings.ContainsKey($entry.Key)) {
+                Fail "NPC Offering $($entry.Key) requires an exact verified source mapping"
+            }
+        }
+        foreach ($section in @('corePlan', 'nonCoreContext')) {
+            if ($mechanics[$section] -isnot [hashtable]) { Fail "sourceScoring requires mechanics.$section object" }
+        }
+        $coreIds = @($sourceScoring.boons.GetEnumerator() | Where-Object Value -CEQ 'Core Boons' | ForEach-Object Key)
+        if ($mechanics.corePlan.Count -ne $coreIds.Count) { Fail 'corePlan must exactly cover sourceScoring Core Boons' }
+        $roles = @('Attack', 'Special', 'Cast', 'Sprint', 'Mana')
+        foreach ($entry in $mechanics.corePlan.GetEnumerator()) {
+            Assert-String $entry.Key 'corePlan trait ID'
+            if ($sourceScoring.boons[$entry.Key] -cne 'Core Boons') { Fail "corePlan trait $($entry.Key) must be classified Core Boons" }
+            if ($entry.Value -isnot [hashtable] -or $entry.Value.role -cnotin $roles) { Fail "invalid corePlan role for $($entry.Key)" }
+            if ($entry.Value.displayName -isnot [hashtable]) { Fail "corePlan.$($entry.Key).displayName must be an object" }
+            foreach ($language in @('en', 'fr')) { Assert-String $entry.Value.displayName[$language] "corePlan.$($entry.Key).displayName.$language" }
+            foreach ($field in $entry.Value.displayName.Keys) {
+                if ($field -cnotin @('en', 'fr')) { Fail "unknown corePlan displayName language $field" }
+            }
+            foreach ($field in $entry.Value.Keys) {
+                if ($field -cnotin @('role', 'displayName')) { Fail "unknown corePlan field $field" }
+            }
+        }
+        foreach ($entry in $mechanics.nonCoreContext.GetEnumerator()) {
+            Assert-String $entry.Key 'nonCoreContext trait ID'
+            if ($sourceScoring.boons[$entry.Key] -cne 'Non-Core Boons' -or $entry.Value -isnot [hashtable]) {
+                Fail "nonCoreContext source $($entry.Key) must be classified Non-Core Boons"
+            }
+            foreach ($field in $entry.Value.Keys) { if ($field -cne 'recommendedCore') { Fail "unknown nonCoreContext field $field" } }
+            Assert-StringArray $entry.Value.recommendedCore "nonCoreContext.$($entry.Key).recommendedCore"
+            if ($entry.Value.recommendedCore.Count -eq 0) { Fail "nonCoreContext.$($entry.Key) requires at least one Core target" }
+            $seenCoreTargets = @{}
+            foreach ($coreId in $entry.Value.recommendedCore) {
+                if (-not $mechanics.corePlan.ContainsKey($coreId) -or $seenCoreTargets[$coreId]) {
+                    Fail "nonCoreContext.$($entry.Key) target must be a unique declared Core: $coreId"
+                }
+                $seenCoreTargets[$coreId] = $true
+            }
+        }
     }
     foreach ($entry in $mechanics.aspectInteractions.GetEnumerator()) {
         Assert-String $entry.Key 'aspectInteractions trait ID'
@@ -279,6 +401,14 @@ function Compose-Profile([hashtable]$profile, [hashtable]$mechanics) {
     if ($profile.ContainsKey('hammerPlan')) { $composed.hammerPlan = ConvertTo-HashtableRecursive $profile.hammerPlan }
     foreach ($field in @('statusMappings', 'aspectInteractions', 'hammerRoles', 'verifiedIds', 'genericCoreAspectCompatibility', 'traitSemantics')) {
         $composed[$field] = $mechanics[$field]
+    }
+    if ($mechanics.ContainsKey('sourceScoring')) {
+        $composed.sourceScoring = ConvertTo-HashtableRecursive $mechanics.sourceScoring
+        $composed.corePlan = ConvertTo-HashtableRecursive $mechanics.corePlan
+        $composed.nonCoreContext = ConvertTo-HashtableRecursive $mechanics.nonCoreContext
+    }
+    if ($mechanics.ContainsKey('godPool')) {
+        $composed.godPool = ConvertTo-HashtableRecursive $mechanics.godPool
     }
     # Profile overrides must never mutate the mechanics template reused by another profile.
     $composed.weights = ConvertTo-HashtableRecursive $mechanics.weights
@@ -335,6 +465,14 @@ foreach ($file in $files) {
     $profile = Read-Json $file.FullName; Validate-Profile $profile $seenIds $catalog
     $mechanics = $mechanicsById[$profile.mechanicsTemplate]
     if ($null -eq $mechanics) { Fail "unknown mechanicsTemplate $($profile.mechanicsTemplate)" }
+    if ($mechanics.ContainsKey('sourceScoring') -and
+        ($profile.source -isnot [hashtable] -or $profile.source.type -cne 'mobalytics')) {
+        Fail "sourceScoring mechanics require source.type = mobalytics for $($profile.id)"
+    }
+    if ($mechanics.ContainsKey('godPool') -and
+        ($profile.source -isnot [hashtable] -or $profile.source.type -cne 'mobalytics')) {
+        Fail "godPool mechanics require source.type = mobalytics for $($profile.id)"
+    }
     if ($profile.weapon -ne $mechanics.weapon -or $profile.aspect -ne $mechanics.aspect) { Fail "profile/template weapon or aspect mismatch for $($profile.id)" }
     $attack = $profile.slots.Attack
     if ($attack -is [hashtable] -and $attack.ContainsKey('branches')) {
@@ -357,7 +495,7 @@ foreach ($profile in $profiles) {
     $mechanics = $mechanicsById[$profile.mechanicsTemplate]
     $lua = '-- Generated runtime profile from canonical JSON only. Do not edit manually.' + $nl
     $lua += 'return ' + (ConvertTo-Lua (Compose-Profile $profile $mechanics)) + $nl
-    [IO.File]::WriteAllText((Join-Path $OutputDirectory ($profile.id + '.lua')), $lua)
+    [IO.File]::WriteAllText((Join-Path $OutputDirectory ($profile.id + '.lua')), $lua, $script:StrictUtf8)
 }
  $registry = '-- Generated static runtime registry from canonical JSON only.' + $nl + 'return {' + $nl
 foreach ($key in @($profileByKey.Keys | Sort-Object)) {
@@ -365,5 +503,5 @@ foreach ($key in @($profileByKey.Keys | Sort-Object)) {
     $registry += '    ' + $profile.selectionKey + ' = { selectionKey = "' + $profile.selectionKey + '", id = "' + $profile.id + '", profileMode = "' + $profile.profileMode + '", weapon = "' + $profile.weapon + '", aspect = "' + $profile.aspect + '", module = "data/builds/' + $profile.id + '.lua" },' + $nl
 }
 $registry += '}' + $nl
-[IO.File]::WriteAllText((Join-Path $OutputDirectory 'registry.lua'), $registry)
+[IO.File]::WriteAllText((Join-Path $OutputDirectory 'registry.lua'), $registry, $script:StrictUtf8)
 Write-Output "Generated $($profiles.Count) deterministic canonical runtime files in $OutputDirectory"

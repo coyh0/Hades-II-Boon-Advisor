@@ -9,6 +9,11 @@ local coreRoles = {
 }
 local recognizedRoles = { Attack = true, Special = true, Cast = true, Sprint = true, Mana = true }
 local slotPolicies = { reserved = true, preferred = true, open = true }
+local verifiedGodOfferSources = {
+    Aphrodite = "AphroditeUpgrade", Apollo = "ApolloUpgrade", Ares = "AresUpgrade",
+    Demeter = "DemeterUpgrade", Hephaestus = "HephaestusUpgrade", Hera = "HeraUpgrade",
+    Hestia = "HestiaUpgrade", Poseidon = "PoseidonUpgrade", Zeus = "ZeusUpgrade",
+}
 
 local function profileSlots(profile)
     return type(profile) == "table" and type(profile.slots) == "table" and profile.slots or nil
@@ -94,6 +99,147 @@ function ScoringEngine.validateProfile(profile)
                 return false, "hammerPlan entry has invalid condition metadata"
             end
         end
+    end
+    if profile.sourceScoring ~= nil then
+        local sourceScoring = profile.sourceScoring
+        if type(sourceScoring) ~= "table" then return false, "sourceScoring must be a table" end
+        if type(profile.source) ~= "table" or profile.source.type ~= "mobalytics" then
+            return false, "sourceScoring is restricted to Mobalytics profiles"
+        end
+        local allowed = {
+            boons = { ["Core Boons"] = true, ["Non-Core Boons"] = true, ["NPC Offerings"] = true },
+            hammers = { ["Daedalus Hammer Upgrades"] = true },
+            poms = { ["Poms of Power"] = true },
+            deferred = { ["Legendary / Duo Boons"] = true },
+        }
+        for kind, groups in pairs(allowed) do
+            if type(sourceScoring[kind]) ~= "table" then return false, "sourceScoring." .. kind .. " must be a table" end
+            for traitName, group in pairs(sourceScoring[kind]) do
+                if type(traitName) ~= "string" or traitName == "" or not groups[group] then
+                    return false, "invalid sourceScoring." .. kind .. " entry"
+                end
+            end
+        end
+        for traitName in pairs(sourceScoring.deferred) do
+            if sourceScoring.boons[traitName] or sourceScoring.hammers[traitName]
+                or sourceScoring.poms[traitName] then
+                return false, "deferred source recommendation also has an active score"
+            end
+        end
+        if type(sourceScoring.npcOfferings) ~= "table" then
+            return false, "sourceScoring.npcOfferings must be a table"
+        end
+        local verifiedNpcSources = { NPC_Athena_01 = true, NPC_Hades_Field_01 = true }
+        for traitName, sourceName in pairs(sourceScoring.npcOfferings) do
+            if type(traitName) ~= "string" or traitName == ""
+                or sourceScoring.boons[traitName] ~= "NPC Offerings"
+                or not verifiedNpcSources[sourceName] then
+                return false, "invalid sourceScoring.npcOfferings entry"
+            end
+        end
+        for traitName, group in pairs(sourceScoring.boons) do
+            if group == "NPC Offerings" and sourceScoring.npcOfferings[traitName] == nil then
+                return false, "NPC Offering requires a verified source/item mapping"
+            end
+        end
+        local corePlan = profile.corePlan
+        local nonCoreContext = profile.nonCoreContext
+        if type(corePlan) ~= "table" or type(nonCoreContext) ~= "table" then
+            return false, "sourceScoring profiles require corePlan and nonCoreContext tables"
+        end
+        local expectedCoreCount = 0
+        for traitId, group in pairs(sourceScoring.boons) do
+            if group == "Core Boons" then
+                expectedCoreCount = expectedCoreCount + 1
+                local entry = corePlan[traitId]
+                if type(entry) ~= "table" then return false, "Core boon missing from corePlan: " .. traitId end
+                if not recognizedRoles[entry.role] then return false, "invalid corePlan role for " .. traitId end
+                if type(entry.displayName) ~= "table"
+                    or type(entry.displayName.en) ~= "string" or entry.displayName.en == ""
+                    or type(entry.displayName.fr) ~= "string" or entry.displayName.fr == "" then
+                    return false, "corePlan requires English and French displayName for " .. traitId
+                end
+                for key in pairs(entry) do
+                    if key ~= "role" and key ~= "displayName" then
+                        return false, "unknown corePlan field for " .. traitId
+                    end
+                end
+                for language in pairs(entry.displayName) do
+                    if language ~= "en" and language ~= "fr" then
+                        return false, "unknown corePlan displayName language for " .. traitId
+                    end
+                end
+            end
+        end
+        local actualCoreCount = 0
+        for traitId in pairs(corePlan) do
+            actualCoreCount = actualCoreCount + 1
+            if sourceScoring.boons[traitId] ~= "Core Boons" then
+                return false, "corePlan trait is not classified Core Boons: " .. tostring(traitId)
+            end
+        end
+        if actualCoreCount ~= expectedCoreCount then return false, "corePlan does not match Core Boons source map" end
+        for traitId, entry in pairs(nonCoreContext) do
+            if sourceScoring.boons[traitId] ~= "Non-Core Boons" or type(entry) ~= "table"
+                or type(entry.recommendedCore) ~= "table" or #entry.recommendedCore == 0 then
+                return false, "invalid nonCoreContext entry for " .. tostring(traitId)
+            end
+            for key in pairs(entry) do
+                if key ~= "recommendedCore" then return false, "unknown nonCoreContext field for " .. traitId end
+            end
+            local seenCore = {}
+            local targetCount = 0
+            for _ in pairs(entry.recommendedCore) do targetCount = targetCount + 1 end
+            if targetCount ~= #entry.recommendedCore then
+                return false, "nonCoreContext targets must be a dense array for " .. traitId
+            end
+            for _, coreId in ipairs(entry.recommendedCore) do
+                if type(coreId) ~= "string" or corePlan[coreId] == nil or seenCore[coreId] then
+                    return false, "nonCoreContext target must be a unique declared Core: " .. tostring(coreId)
+                end
+                seenCore[coreId] = true
+            end
+        end
+    end
+    if profile.godPool ~= nil then
+        if type(profile.source) ~= "table" or profile.source.type ~= "mobalytics"
+            or type(profile.godPool) ~= "table" then
+            return false, "godPool requires a Mobalytics profile and an array"
+        end
+        local seenRecommendations, seenGods, seenSources, count = {}, {}, {}, 0
+        for index, entry in pairs(profile.godPool) do
+            if type(index) ~= "number" or index < 1 or index % 1 ~= 0 or type(entry) ~= "table" then
+                return false, "godPool must be a dense array of mappings"
+            end
+            count = count + 1
+            if type(entry.recommendationId) ~= "string" or entry.recommendationId == ""
+                or type(entry.sourceGod) ~= "string" or type(entry.offerSource) ~= "string" then
+                return false, "godPool mapping requires recommendationId, sourceGod, and offerSource"
+            end
+            if not entry.recommendationId:match("^mobalytics_[a-z0-9_]+_fullbuild_god_pool_[a-z0-9_]+_[0-9][0-9]$") then
+                return false, "godPool mapping has an invalid stable Mobalytics recommendation ID"
+            end
+            if seenRecommendations[entry.recommendationId] or seenGods[entry.sourceGod]
+                or seenSources[entry.offerSource] then
+                return false, "godPool contains a duplicate recommendation, god, or offer source"
+            end
+            if verifiedGodOfferSources[entry.sourceGod] ~= entry.offerSource then
+                return false, "godPool contains an unknown or mismatched verified god offer source"
+            end
+            local idGod = entry.recommendationId:match("_fullbuild_god_pool_([a-z]+)_[0-9][0-9]$")
+            if idGod ~= string.lower(entry.sourceGod) then
+                return false, "godPool recommendation ID does not match its source god"
+            end
+            for key in pairs(entry) do
+                if key ~= "recommendationId" and key ~= "sourceGod" and key ~= "offerSource" then
+                    return false, "unknown godPool mapping field: " .. tostring(key)
+                end
+            end
+            seenRecommendations[entry.recommendationId] = true
+            seenGods[entry.sourceGod] = true
+            seenSources[entry.offerSource] = true
+        end
+        if count ~= #profile.godPool then return false, "godPool must be dense" end
     end
     return true
 end
@@ -188,6 +334,21 @@ end
 local function weight(profile, code)
     local value = type(profile.weights) == "table" and profile.weights[code] or nil
     return type(value) == "number" and value or nil
+end
+
+local function sourceGroup(profile, kind, itemName)
+    local scoring = type(profile) == "table" and profile.sourceScoring or nil
+    local entries = type(scoring) == "table" and scoring[kind] or nil
+    return type(entries) == "table" and entries[itemName] or nil
+end
+
+local function sourceScore(group)
+    if group == "Core Boons" then return 200, "BUILD_CORE_PRIORITY" end
+    if group == "Non-Core Boons" then return 100, "BUILD_NON_CORE" end
+    if group == "NPC Offerings" or group == "Daedalus Hammer Upgrades" then
+        return 200, "BUILD_PREFERRED"
+    end
+    return 0, nil
 end
 
 local function traitSemantic(profile, itemName)
@@ -601,7 +762,177 @@ function ScoringEngine.getRankingDecision(results, profileSupported)
     return { mode = "none", rankEligible = {}, context = fullContext }
 end
 
+local verifiedRaritySources = { button = true, upgrade_option = true }
+local verifiedNpcSources = { NPC_Athena_01 = true, NPC_Hades_Field_01 = true }
+local verifiedBoonSources = {
+    AphroditeUpgrade = true, ApolloUpgrade = true, AresUpgrade = true,
+    DemeterUpgrade = true, HephaestusUpgrade = true, HeraUpgrade = true,
+    HestiaUpgrade = true, PoseidonUpgrade = true, ZeusUpgrade = true,
+    NPC_Athena_01 = true, NPC_Hades_Field_01 = true,
+}
+
+local function sourceRarityBonus(result, offer, replacement, required)
+    if offer.Rarity == nil then
+        if required then addReason(result, "RARITY_UNRESOLVED", 0) end
+        return not required
+    end
+    if not verifiedRaritySources[offer.raritySource] then
+        addReason(result, "RARITY_UNRESOLVED", 0)
+        return false
+    end
+    local newValue = rarityValue(offer.Rarity)
+    if newValue == nil then
+        addReason(result, "RARITY_UNRESOLVED", 0)
+        return false
+    end
+    if replacement then
+        local oldValue = rarityValue(offer.OldRarity)
+        if oldValue == nil then
+            addReason(result, "RARITY_UNRESOLVED", 0)
+            return false
+        end
+        local delta = newValue - oldValue
+        if delta ~= 0 then addReason(result, "RARITY_DELTA", delta) end
+    elseif newValue ~= 0 then
+        addReason(result, "RARITY", newValue)
+    end
+    return true
+end
+
+local function scoreSourceRecommendations(snapshot, profile, profileSupported, kind)
+    local results = {}
+    for _, offer in ipairs(type(snapshot.offers) == "table" and snapshot.offers or {}) do
+        if type(offer) == "table" then
+            local result = {
+                originalIndex = offer.originalIndex,
+                itemName = offer.ItemName,
+                supported = profileSupported,
+                eligible = profileSupported and offer.Blocked ~= true,
+                score = 0,
+                reasons = {},
+                covered = false,
+                scoreComplete = false,
+                rarity = offer.Rarity,
+                traitToReplace = offer.TraitToReplace,
+                oldRarity = offer.OldRarity,
+                stackNum = offer.StackNum,
+            }
+            if offer.Blocked == true then
+                result.supported = false
+                result.eligible = false
+                addReason(result, "BLOCKED", 0)
+            elseif profileSupported and type(offer.ItemName) == "string" and offer.ItemName ~= "" then
+                result.covered = true
+                local deferred = sourceGroup(profile, "deferred", offer.ItemName)
+                local boonGroup = sourceGroup(profile, "boons", offer.ItemName)
+                local group = sourceGroup(profile, kind, offer.ItemName)
+                if kind == "boons" and (offer.Rarity == "Duo" or offer.Rarity == "Legendary") then
+                    local listed = deferred ~= nil or boonGroup ~= nil
+                    local score, reasonCode = 0, nil
+                    if offer.Rarity == "Legendary" then
+                        if not verifiedRaritySources[offer.raritySource] then
+                            addReason(result, "RARITY_UNRESOLVED", 0)
+                            result.scoreComplete = false
+                        else
+                            score = listed and 203 or 0
+                            reasonCode = listed and "BUILD_PREFERRED" or nil
+                            result.scoreComplete = true
+                        end
+                    else
+                        if verifiedRaritySources[offer.raritySource] then
+                            score = listed and 200 or 0
+                            reasonCode = listed and "BUILD_PREFERRED" or nil
+                        else
+                            addReason(result, "RARITY_UNRESOLVED", 0)
+                        end
+                        addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                        result.scoreComplete = false
+                    end
+                    result.sourceGroup = deferred or boonGroup
+                    if score ~= 0 then addReason(result, reasonCode, score) end
+                elseif kind == "boons" and deferred ~= nil then
+                    result.sourceGroup = deferred
+                    addReason(result, "RARITY_UNRESOLVED", 0)
+                    addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                else
+                    local replacement = kind == "boons" and type(offer.TraitToReplace) == "string"
+                    local delta, reasonCode = 0, nil
+                    local sourceResolved = true
+                    if kind == "boons" then
+                        result.sourceGroup = boonGroup
+                        if not verifiedBoonSources[snapshot.offerSource] then
+                            result.scoreComplete = false
+                            sourceResolved = false
+                            addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                        end
+                        delta, reasonCode = sourceScore(boonGroup)
+                        if sourceResolved and boonGroup == "NPC Offerings" then
+                            local expectedSource = profile.sourceScoring.npcOfferings[offer.ItemName]
+                            if not verifiedNpcSources[snapshot.offerSource]
+                                or expectedSource ~= snapshot.offerSource then
+                                result.scoreComplete = false
+                                sourceResolved = false
+                                addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                            end
+                        end
+                        if replacement and sourceResolved then
+                            local replaced = offer.TraitToReplace
+                            local oldDeferred = sourceGroup(profile, "deferred", replaced)
+                            if oldDeferred ~= nil then
+                                result.sourceGroup = oldDeferred
+                                addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                                sourceResolved = false
+                            else
+                                local oldGroup = sourceGroup(profile, "boons", replaced)
+                                local oldScore = sourceScore(oldGroup)
+                                delta = delta - oldScore
+                                if delta ~= 0 then
+                                    addReason(result, "SOURCE_REPLACEMENT_DELTA", delta, replaced)
+                                end
+                            end
+                        elseif sourceResolved and delta ~= 0 and reasonCode ~= nil then
+                            addReason(result, reasonCode, delta)
+                        end
+                        if sourceResolved then
+                            result.scoreComplete = sourceRarityBonus(result, offer, replacement,
+                                boonGroup ~= "NPC Offerings")
+                        end
+                    elseif kind == "hammers" then
+                        result.sourceGroup = group
+                        delta, reasonCode = sourceScore(group)
+                        if delta ~= 0 then addReason(result, reasonCode, delta) end
+                        result.scoreComplete = sourceRarityBonus(result, offer, false, false)
+                    elseif kind == "poms" then
+                        local owned = ownedGodTraits(snapshot)[offer.ItemName] == true
+                        result.sourceGroup = boonGroup or group
+                        if not owned then
+                            addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                        elseif boonGroup == "Core Boons" then
+                            delta, reasonCode = 200, "BUILD_CORE_PRIORITY"
+                            addReason(result, reasonCode, delta)
+                            result.scoreComplete = true
+                        elseif boonGroup == "Non-Core Boons" then
+                            delta, reasonCode = 100, "BUILD_NON_CORE"
+                            addReason(result, reasonCode, delta)
+                            result.scoreComplete = sourceRarityBonus(result, offer, false, true)
+                        elseif group == "Poms of Power" then
+                            addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                        else
+                            addReason(result, "SOURCE_REQUIREMENTS_UNRESOLVED", 0)
+                        end
+                    end
+                end
+            end
+            results[#results + 1] = result
+        end
+    end
+    return results
+end
+
 local function scoreHammerOffers(snapshot, profile, profileSupported)
+    if type(profile.sourceScoring) == "table" and type(profile.sourceScoring.hammers) == "table" then
+        return scoreSourceRecommendations(snapshot, profile, profileSupported, "hammers")
+    end
     local plan = {}
     for _, entry in ipairs(type(profile.hammerPlan) == "table" and profile.hammerPlan or {}) do
         if type(entry) == "table" and type(entry.traitId) == "string" then plan[entry.traitId] = entry end
@@ -625,7 +956,20 @@ local function scoreHammerOffers(snapshot, profile, profileSupported)
                     result.covered = true
                     result.hammerPriority = entry.priority
                     result.hammerClassification = entry.classification
-                    if entry.condition ~= nil then
+                    local focus = type(snapshot.playerFocus) == "table"
+                        and snapshot.playerFocus.focus or "none"
+                    local focusResolved = nil
+                    if profile.id == "black_coat_melinoe_intermediate"
+                        and type(snapshot.playerFocus) == "table" then
+                        if offer.ItemName == "SuitAttackSpeedTrait"
+                            or offer.ItemName == "SuitAttackSizeTrait" then
+                            focusResolved = focus == "attack"
+                        elseif offer.ItemName == "SuitSpecialAutoTrait" then
+                            focusResolved = focus == "special"
+                        end
+                    end
+                    if entry.condition ~= nil and focusResolved ~= true
+                        or focusResolved == false then
                         result.hammerCondition = entry.condition
                         addReason(result, "HAMMER_CONDITION_UNRESOLVED", 0)
                     else
@@ -639,13 +983,45 @@ local function scoreHammerOffers(snapshot, profile, profileSupported)
     return results
 end
 
+function ScoringEngine.effectiveProfile(snapshot, profile)
+    snapshot = type(snapshot) == "table" and snapshot or {}
+    profile = type(profile) == "table" and profile or {}
+    local coatRoute = nil
+    if profile.id == "black_coat_melinoe_intermediate"
+        and type(snapshot.playerFocus) == "table" then
+        local declared = type(snapshot.playerFocus) == "table" and snapshot.playerFocus or {}
+        if declared.focus == "special" then coatRoute = declared.route end
+        if coatRoute == "zeus" then
+            local projected = {}
+            for key, value in pairs(profile) do projected[key] = value end
+            projected.slots = {}
+            for key, value in pairs(profile.slots or {}) do projected.slots[key] = value end
+            projected.slots.Special = {
+                core = {}, alternatives = {}, preferred = { "ZeusSpecialBoon" },
+                slotPolicy = "reserved",
+            }
+            return projected, coatRoute
+        end
+    end
+    return profile, coatRoute
+end
+
 function ScoringEngine.scoreOffers(snapshot, profile)
     snapshot = type(snapshot) == "table" and snapshot or {}
     profile = type(profile) == "table" and profile or {}
     local profileSupported = ScoringEngine.isProfileSupported(snapshot, profile)
+    if type(profile.sourceScoring) == "table" then
+        if snapshot.offerKind == "boon" and type(profile.sourceScoring.boons) == "table" then
+            return scoreSourceRecommendations(snapshot, profile, profileSupported, "boons")
+        elseif snapshot.offerKind == "pom" and type(profile.sourceScoring.poms) == "table" then
+            return scoreSourceRecommendations(snapshot, profile, profileSupported, "poms")
+        end
+    end
     if snapshot.offerKind == "hammer" then
         return scoreHammerOffers(snapshot, profile, profileSupported)
     end
+    local coatRoute
+    profile, coatRoute = ScoringEngine.effectiveProfile(snapshot, profile)
     local owned = ownedGodTraits(snapshot)
     local hammers = ownedHammers(snapshot)
     local results = {}
@@ -840,6 +1216,21 @@ function ScoringEngine.scoreOffers(snapshot, profile)
                     and not originationUnresolved
                     and not attackBranchUnresolved
                     and (not core.replacesCoreSlot or replacement ~= nil)
+                if coatRoute ~= nil and (offer.ItemName == "AresSpecialBoon"
+                    or offer.ItemName == "ZeusSpecialBoon") then
+                    local selected = coatRoute == "ares" and "AresSpecialBoon"
+                        or coatRoute == "zeus" and "ZeusSpecialBoon" or nil
+                    if offer.ItemName ~= selected then
+                        addReason(result, "SPECIAL_ROUTE_UNRESOLVED", 0)
+                        result.scoreComplete = false
+                    end
+                elseif profile.id == "black_coat_melinoe_intermediate"
+                    and type(snapshot.playerFocus) == "table"
+                    and (offer.ItemName == "AresSpecialBoon"
+                        or offer.ItemName == "ZeusSpecialBoon") then
+                    addReason(result, "SPECIAL_ROUTE_UNRESOLVED", 0)
+                    result.scoreComplete = false
+                end
                 if result.scoreComplete then
                     local rarityResolved = rarityDelta(result, offer.Rarity, offer.OldRarity,
                         core.replacesCoreSlot)

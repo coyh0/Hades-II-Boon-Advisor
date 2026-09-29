@@ -4,6 +4,28 @@ local errorLog = function() end
 local localization = nil
 local language = "en"
 local reasonOrder = { "conflict", "core", "utility", "build", "discouraged", "resources", "damage", "aspect", "setup", "positioning", "origination", "hammerPriority", "hammer", "status", "synergy", "survival", "rarity" }
+local offerLabelLayout = {
+    rank = { offsetX = -145, offsetY = -120, width = 210, height = 28, fontSize = 20 },
+    reasons = { offsetX = -145, offsetY = -88, width = 300, height = 24, fontSize = 14 },
+    pomStatus = { offsetX = -145, offsetY = -120, width = 230, height = 28, fontSize = 16 },
+    advisory = { offsetX = -315, offsetY = -120, width = 250, height = 28, fontSize = 15 },
+}
+
+local function buildOverviewLayout(centerX, centerY)
+    centerX = type(centerX) == "number" and centerX > 0 and centerX or 960
+    centerY = type(centerY) == "number" and centerY > 0 and centerY or 540
+    local screenWidth = centerX * 2
+    local margin = math.max(12, screenWidth * 0.01)
+    local width = math.min(420, screenWidth * 0.30)
+    return {
+        -- Right justification anchors the visible line at the component X;
+        -- do not subtract half the text box width or the label sits too far left.
+        x = screenWidth - margin,
+        y = centerY * 0.09,
+        width = width,
+        height = 32,
+    }
+end
 
 local function formatRankLabel(rank)
     return localization.get(language, "rank") .. " " .. tostring(rank)
@@ -50,13 +72,341 @@ function UI.setLanguage(value)
     language = type(value) == "string" and value or "en"
 end
 
+local function focusLabel(state, menu)
+    if state.focus == "attack" then return localization.get(language, "focusAttack") end
+    if state.focus == "special" then
+        if menu == "route" then
+            return localization.get(language, "focusSpecial") .. " · "
+                .. localization.get(language, "focusChooseBetween")
+        end
+        local route = state.route == "ares" and "focusAres"
+            or state.route == "zeus" and "focusZeus" or "focusRouteUnknown"
+        return localization.get(language, "focusSpecial") .. " · " .. localization.get(language, route)
+    end
+    return localization.get(language, "focusNone")
+end
+
+function UI.clearFocus(screen, api)
+    if type(screen) ~= "table" or type(screen.BoonAdvisorFocus) ~= "table" then return end
+    local ids = {}
+    for _, entry in ipairs(screen.BoonAdvisorFocus) do
+        if entry.id ~= nil then ids[#ids + 1] = entry.id end
+        if type(screen.Components) == "table" then screen.Components[entry.key] = nil end
+    end
+    screen.BoonAdvisorFocus = nil
+    if #ids > 0 and type(api) == "table" and type(api.Destroy) == "function" then
+        api.Destroy({ Ids = ids })
+    end
+end
+
+local function focusButton(screen, api, key, y, label, choice)
+    local x = (type(ScreenCenterX) == "number" and ScreenCenterX or 960) + 690
+    local component = api.CreateScreenComponent({
+        Name = choice ~= nil and "BlankInteractableObstacle" or "BlankObstacle", Group = "Combat_Menu_Overlay",
+        X = x, Y = y, Width = 310, Height = 30,
+    })
+    if type(component) ~= "table" or component.Id == nil then return end
+    if choice ~= nil then
+        component.Screen = screen
+        component.BoonAdvisorChoice = choice
+        component.OnPressedFunctionName = "BoonAdvisorSelectFocus"
+        api.AttachLua({ Id = component.Id, Table = component })
+    end
+    screen.Components[key] = component
+    screen.BoonAdvisorFocus[#screen.BoonAdvisorFocus + 1] = { id = component.Id, key = key }
+    api.CreateTextBox({ Id = component.Id, RawText = label, Width = 310,
+        Font = "LatoBold", FontSize = 14, Justification = "Center",
+        ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+end
+
+function UI.renderFocus(screen, focus, api, menu)
+    UI.clearFocus(screen, api)
+    if type(screen) ~= "table" or type(screen.Components) ~= "table"
+        or type(focus) ~= "table" or type(api) ~= "table"
+        or type(api.CreateScreenComponent) ~= "function"
+        or type(api.CreateTextBox) ~= "function" then return end
+    screen.BoonAdvisorFocus = {}
+    if focus.locked then menu = nil end
+    local canInteract = not focus.locked and type(api.AttachLua) == "function"
+    focusButton(screen, api, "BoonAdvisorFocusTile", 122,
+        localization.get(language, "focus") .. ": " .. focusLabel(focus, menu), canInteract and "open" or nil)
+    if canInteract and menu == "focus" then
+        focusButton(screen, api, "BoonAdvisorFocusNone", 152,
+            localization.get(language, "focusNone"), "focus:none")
+        focusButton(screen, api, "BoonAdvisorFocusAttack", 182,
+            localization.get(language, "focusAttack"), "focus:attack")
+        focusButton(screen, api, "BoonAdvisorFocusSpecial", 212,
+            localization.get(language, "focusSpecial"), "focus:special")
+    elseif canInteract and menu == "route" then
+        focusButton(screen, api, "BoonAdvisorRouteNone", 152,
+            localization.get(language, "focusRouteUnknown"), "route:none")
+        focusButton(screen, api, "BoonAdvisorRouteAres", 182,
+            localization.get(language, "focusAres"), "route:ares")
+        focusButton(screen, api, "BoonAdvisorRouteZeus", 212,
+            localization.get(language, "focusZeus"), "route:zeus")
+    end
+end
+
+function UI.syncFocusReminder(hudState, focus, api, forceNew)
+    if type(hudState) ~= "table" then return end
+    if forceNew then hudState.id, hudState.label = nil, nil end
+    local label = type(focus) == "table" and focus.locked
+        and (localization.get(language, "focus") .. ": " .. focusLabel(focus)) or nil
+    if label == nil then
+        if hudState.id ~= nil and type(api) == "table" and type(api.Destroy) == "function" then
+            api.Destroy({ Ids = { hudState.id } })
+        end
+        hudState.id, hudState.label = nil, nil
+        return
+    end
+    if hudState.id ~= nil and hudState.label == label then return end
+    if hudState.id ~= nil and type(api.Destroy) == "function" then
+        api.Destroy({ Ids = { hudState.id } })
+    end
+    hudState.id, hudState.label = nil, nil
+    if type(api) ~= "table" or type(api.CreateScreenComponent) ~= "function"
+        or type(api.CreateTextBox) ~= "function" then return end
+    local centerX = type(ScreenCenterX) == "number" and ScreenCenterX or 960
+    local width = 440
+    local offsetX = math.min(600, centerX * 0.60)
+    local component = api.CreateScreenComponent({
+        Name = "BlankObstacle", Group = "Combat_UI", X = centerX + offsetX, Y = 100,
+        Width = width, Height = 30,
+    })
+    if type(component) ~= "table" or component.Id == nil then return end
+    api.CreateTextBox({ Id = component.Id, RawText = label, Width = width,
+        Font = "LatoBold", FontSize = 16, Justification = "Center",
+        ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+    hudState.id, hudState.label = component.Id, label
+end
+
+local function clearBuildOverview(state, api)
+    if type(state) ~= "table" then return end
+    local ids = {}
+    for _, item in ipairs(state.items or {}) do
+        if item.id ~= nil then ids[#ids + 1] = item.id end
+    end
+    state.items, state.key = {}, nil
+    if #ids > 0 and type(api) == "table" and type(api.Destroy) == "function" then
+        -- Room transitions can make these screen IDs stale before the next
+        -- refresh. A failed best-effort cleanup must not block re-creation.
+        local ok = pcall(api.Destroy, { Ids = ids })
+        if not ok then
+            errorLog("UI_BUILD_OVERVIEW_DESTROY_FAILED", "Build overview cleanup failed")
+        end
+    end
+end
+
+function UI.syncBuildOverview(overviewState, data, api, forceNew)
+    if type(overviewState) ~= "table" then return end
+    data = type(data) == "table" and data or {}
+    local buildName = type(data.buildName) == "string" and data.buildName or nil
+    local key = buildName
+    if forceNew or overviewState.key ~= key then clearBuildOverview(overviewState, api) end
+    if key == nil then return end
+    if overviewState.key == key and #(overviewState.items or {}) > 0 then return end
+    local create = type(api) == "table" and api.CreateScreenComponent or nil
+    local textBox = type(api) == "table" and api.CreateTextBox or nil
+    if type(create) ~= "function" or type(textBox) ~= "function" then return end
+    local centerX = type(ScreenCenterX) == "number" and ScreenCenterX or 960
+    local centerY = type(ScreenCenterY) == "number" and ScreenCenterY or 540
+    local overviewLayout = buildOverviewLayout(centerX, centerY)
+    local items = {}
+    local function addText(rawText, y, width, height, fontSize, justification)
+        local component = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay",
+            X = overviewLayout.x, Y = y,
+            Width = width, Height = height })
+        if type(component) ~= "table" or component.Id == nil then return false end
+        textBox({ Id = component.Id, RawText = rawText, Width = width, Height = height,
+            Font = "LatoBold", FontSize = fontSize, Justification = justification,
+            ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+        items[#items + 1] = { id = component.Id }
+        return true
+    end
+    local separator = language == "fr" and " : " or ": "
+    addText(localization.get(language, "buildIdentity") .. separator .. buildName,
+        overviewLayout.y, overviewLayout.width, overviewLayout.height, 16, "Right")
+    overviewState.items = items
+    -- Leave the cache invalid if the screen component could not be created;
+    -- the next HUD refresh can then retry instead of assuming it is visible.
+    overviewState.key = #items > 0 and key or nil
+end
+
 local function rankState(screen)
     if type(screen) ~= "table" then return nil end
     screen.BoonAdvisorRanks = screen.BoonAdvisorRanks or {}
     return screen.BoonAdvisorRanks
 end
 
+function UI.clearCoreAdvisory(screen, api)
+    if type(screen) ~= "table" or type(screen.BoonAdvisorCoreAdvisory) ~= "table" then return end
+    local entry = screen.BoonAdvisorCoreAdvisory
+    screen.BoonAdvisorCoreAdvisory = nil
+    if type(screen.Components) == "table" then screen.Components.BoonAdvisorCoreAdvisory = nil end
+    if entry.id ~= nil and type(api) == "table" and type(api.Destroy) == "function" then
+        api.Destroy({ Ids = { entry.id } })
+    end
+end
+
+function UI.pomBuildStatus(profile, result)
+    if type(profile) ~= "table" or type(profile.source) ~= "table"
+        or profile.source.type ~= "mobalytics" or type(result) ~= "table"
+        or type(result.itemName) ~= "string" or result.itemName == ""
+        or type(profile.sourceScoring) ~= "table"
+        or type(profile.sourceScoring.boons) ~= "table" then
+        return "unknown"
+    end
+
+    local group = profile.sourceScoring.boons[result.itemName]
+    if group == "Core Boons" then
+        local entry = type(profile.corePlan) == "table" and profile.corePlan[result.itemName] or nil
+        local names = type(entry) == "table" and entry.displayName or nil
+        local validRoles = { Attack = true, Special = true, Cast = true, Mana = true, Sprint = true }
+        local fieldsValid = type(entry) == "table"
+        if fieldsValid then
+            for key in pairs(entry) do
+                if key ~= "role" and key ~= "displayName" then fieldsValid = false end
+            end
+        end
+        if type(names) == "table" then
+            for key in pairs(names) do
+                if key ~= "en" and key ~= "fr" then fieldsValid = false end
+            end
+        else
+            fieldsValid = false
+        end
+        if fieldsValid and validRoles[entry.role]
+            and type(names) == "table" and type(names.en) == "string" and names.en ~= ""
+            and type(names.fr) == "string" and names.fr ~= "" then
+            return "core_build"
+        end
+        return "unknown"
+    end
+    if group == "Non-Core Boons" or group == "NPC Offerings" then
+        return "build"
+    end
+    if group == nil then
+        if result.covered == true and result.scoreComplete == true then
+            return "not_in_build"
+        end
+        return "unknown"
+    end
+    return "unknown"
+end
+
+function UI.clearPomStatuses(screen, api)
+    if type(screen) ~= "table" or type(screen.BoonAdvisorPomStatuses) ~= "table" then return end
+    local ids = {}
+    for _, entry in ipairs(screen.BoonAdvisorPomStatuses) do
+        if type(entry) == "table" and entry.id ~= nil then ids[#ids + 1] = entry.id end
+        if type(entry) == "table" and type(screen.Components) == "table" and entry.key ~= nil then
+            screen.Components[entry.key] = nil
+        end
+    end
+    screen.BoonAdvisorPomStatuses = nil
+    if #ids > 0 and type(api) == "table" and type(api.Destroy) == "function" then
+        api.Destroy({ Ids = ids })
+    end
+end
+
+function UI.renderPomTieStatuses(screen, results, profile, api)
+    UI.clearPomStatuses(screen, api)
+    if type(screen) ~= "table" or type(screen.Components) ~= "table"
+        or type(results) ~= "table" or type(profile) ~= "table"
+        or type(profile.source) ~= "table" or profile.source.type ~= "mobalytics" then
+        return false
+    end
+
+    local eligible, commonScore = {}, nil
+    for _, result in ipairs(results) do
+        if type(result) == "table" and result.eligible == true then
+            if result.supported ~= true or result.covered ~= true or result.scoreComplete ~= true
+                or type(result.score) ~= "number" then
+                return false
+            end
+            for _, reason in ipairs(type(result.reasons) == "table" and result.reasons or {}) do
+                if type(reason) == "table" and reason.code == "REPLACEMENT_UNRESOLVED" then
+                    return false
+                end
+            end
+            if commonScore == nil then commonScore = result.score
+            elseif result.score ~= commonScore then return false end
+            eligible[#eligible + 1] = result
+        end
+    end
+    if #eligible < 2 then return false end
+
+    local create = type(api) == "table" and api.CreateScreenComponent or nil
+    local attach = type(api) == "table" and api.Attach or nil
+    local textBox = type(api) == "table" and api.CreateTextBox or nil
+    if type(create) ~= "function" or type(attach) ~= "function" or type(textBox) ~= "function" then
+        return false
+    end
+
+    screen.BoonAdvisorPomStatuses = {}
+    local components = screen.Components
+    for _, result in ipairs(eligible) do
+        local index = result.originalIndex
+        local button = type(index) == "number" and components["PurchaseButton" .. index] or nil
+        local status = UI.pomBuildStatus(profile, result)
+        local keyName = status == "core_build" and "pomCoreBuildStatus"
+            or status == "build" and "pomBuildStatus"
+            or status == "unknown" and "unevaluated" or nil
+        if button ~= nil and button.Id ~= nil and keyName ~= nil then
+            local component = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay" })
+            if type(component) == "table" and component.Id ~= nil then
+                local layout = offerLabelLayout.pomStatus
+                attach({ Id = component.Id, DestinationId = button.Id,
+                    OffsetX = layout.offsetX, OffsetY = layout.offsetY })
+                local key = "BoonAdvisorPomStatus" .. tostring(index)
+                components[key] = component
+                textBox({ Id = component.Id, RawText = localization.get(language, keyName),
+                    Width = layout.width, Height = layout.height, Font = "LatoBold",
+                    FontSize = layout.fontSize, Justification = "Center", ShadowBlur = 0,
+                    ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+                table.insert(screen.BoonAdvisorPomStatuses, { id = component.Id, key = key })
+            end
+        end
+    end
+    return true
+end
+
+function UI.renderCoreAdvisory(screen, show, api)
+    UI.clearCoreAdvisory(screen, api)
+    if show ~= true or type(screen) ~= "table" or type(screen.Components) ~= "table" then return end
+    local button = screen.Components.PurchaseButton1
+    if type(button) ~= "table" or button.Id == nil then
+        local firstIndex = nil
+        for key, candidate in pairs(screen.Components) do
+            local index = type(key) == "string" and tonumber(key:match("^PurchaseButton(%d+)$")) or nil
+            if index ~= nil and type(candidate) == "table" and candidate.Id ~= nil
+                and (firstIndex == nil or index < firstIndex) then
+                firstIndex, button = index, candidate
+            end
+        end
+    end
+    local create = type(api) == "table" and api.CreateScreenComponent or nil
+    local attach = type(api) == "table" and api.Attach or nil
+    local textBox = type(api) == "table" and api.CreateTextBox or nil
+    if type(button) ~= "table" or button.Id == nil
+        or type(create) ~= "function" or type(attach) ~= "function"
+        or type(textBox) ~= "function" then return end
+    local component = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay" })
+    if type(component) ~= "table" or component.Id == nil then return end
+    local layout = offerLabelLayout.advisory
+    attach({ Id = component.Id, DestinationId = button.Id,
+        OffsetX = layout.offsetX, OffsetY = layout.offsetY })
+    screen.Components.BoonAdvisorCoreAdvisory = component
+    screen.BoonAdvisorCoreAdvisory = { id = component.Id }
+    textBox({ Id = component.Id, RawText = localization.formatMissingCore(language),
+        Width = layout.width, Height = layout.height,
+        Font = "LatoBold", FontSize = layout.fontSize, Justification = "Center", ShadowBlur = 0,
+        ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+end
+
 function UI.clearRanks(screen, api)
+    UI.clearCoreAdvisory(screen, api)
+    UI.clearPomStatuses(screen, api)
     local ranks = rankState(screen)
     if ranks == nil then return end
     local ids = {}
@@ -159,14 +509,16 @@ function UI.renderPartial(screen, offers, api)
             local key = "BoonAdvisorRank" .. tostring(index)
             local component = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay" })
             if type(component) == "table" and component.Id ~= nil then
-                attach({ Id = component.Id, DestinationId = button.Id, OffsetX = -145, OffsetY = -105 })
+                local rankLayout = offerLabelLayout.rank
+                attach({ Id = component.Id, DestinationId = button.Id,
+                    OffsetX = rankLayout.offsetX, OffsetY = rankLayout.offsetY })
                 components[key] = component
                 local evaluated = offer.evaluated == true
                 local label = evaluated and type(offer.rank) == "number" and offer.rankTotal == 2
                     and (formatRankLabel(offer.rank) .. "/2")
                     or localization.get(language, evaluated and "evaluated" or "unevaluated")
-                textBox({ Id = component.Id, RawText = label,
-                    Font = "LatoBold", FontSize = 18, Justification = "Center",
+                textBox({ Id = component.Id, RawText = label, Width = rankLayout.width, Height = rankLayout.height,
+                    Font = "LatoBold", FontSize = rankLayout.fontSize, Justification = "Center",
                     ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
                 local entry = { id = component.Id, key = key, originalIndex = index }
                 table.insert(rankState(screen), entry)
@@ -175,11 +527,13 @@ function UI.renderPartial(screen, offers, api)
                     local reasonComponent = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay" })
                     if type(reasonComponent) == "table" and reasonComponent.Id ~= nil then
                         local reasonKey = "BoonAdvisorReasons" .. tostring(index)
+                        local reasonLayout = offerLabelLayout.reasons
                         attach({ Id = reasonComponent.Id, DestinationId = button.Id,
-                            OffsetX = -145, OffsetY = -86 })
+                            OffsetX = reasonLayout.offsetX, OffsetY = reasonLayout.offsetY })
                         components[reasonKey] = reasonComponent
                         textBox({ Id = reasonComponent.Id, RawText = table.concat(visibleReasons, " · "),
-                            Font = "LatoBold", FontSize = 16, Justification = "Center",
+                            Width = reasonLayout.width, Height = reasonLayout.height,
+                            Font = "LatoBold", FontSize = reasonLayout.fontSize, Justification = "Center",
                             ShadowBlur = 0, ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
                         entry.reasonId, entry.reasonKey = reasonComponent.Id, reasonKey
                     end
@@ -225,7 +579,9 @@ function UI.renderRanks(screen, rankedScores, api)
                 Group = "Combat_Menu_Overlay",
             })
             if type(component) == "table" and component.Id ~= nil then
-                attach({ Id = component.Id, DestinationId = button.Id, OffsetX = -145, OffsetY = -105 })
+                local rankLayout = offerLabelLayout.rank
+                attach({ Id = component.Id, DestinationId = button.Id,
+                    OffsetX = rankLayout.offsetX, OffsetY = rankLayout.offsetY })
                 local key = "BoonAdvisorRank" .. tostring(originalIndex)
                 components[key] = component
                 local text = formatRankLabel(rank)
@@ -233,13 +589,15 @@ function UI.renderRanks(screen, rankedScores, api)
                     Id = component.Id,
                     RawText = text,
                     Font = "LatoBold",
-                    FontSize = 24,
+                    Width = rankLayout.width, Height = rankLayout.height,
+                    FontSize = rankLayout.fontSize,
                     Justification = "Center",
                     ShadowBlur = 0,
                     ShadowColor = { 0, 0, 0, 1 },
                     ShadowOffset = { 0, 2 },
                 })
-                table.insert(rankState(screen), { id = component.Id, key = key, originalIndex = originalIndex })
+                local entry = { id = component.Id, key = key, originalIndex = originalIndex }
+                table.insert(rankState(screen), entry)
                 debugLog("UI Rank rendered originalIndex=" .. tostring(originalIndex) .. " Rank=" .. tostring(rank))
                 local labels = formatReasonLabels(type(result) == "table" and result.reasons or nil)
                 if #labels > 0 then
@@ -247,16 +605,18 @@ function UI.renderRanks(screen, rankedScores, api)
                         Name = "BlankObstacle", Group = "Combat_Menu_Overlay",
                     })
                     if type(reasonComponent) == "table" and reasonComponent.Id ~= nil then
+                        local reasonLayout = offerLabelLayout.reasons
                         attach({ Id = reasonComponent.Id, DestinationId = button.Id,
-                            OffsetX = -145, OffsetY = -86 })
+                            OffsetX = reasonLayout.offsetX, OffsetY = reasonLayout.offsetY })
                         local reasonKey = "BoonAdvisorReasons" .. tostring(originalIndex)
                         components[reasonKey] = reasonComponent
                         createTextBox({ Id = reasonComponent.Id,
                             RawText = table.concat(labels, " · "), Font = "LatoBold",
-                            FontSize = 16, Justification = "Center", ShadowBlur = 0,
+                            Width = reasonLayout.width, Height = reasonLayout.height,
+                            FontSize = reasonLayout.fontSize, Justification = "Center", ShadowBlur = 0,
                             ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 }, })
-                        rankState(screen)[#rankState(screen)].reasonId = reasonComponent.Id
-                        rankState(screen)[#rankState(screen)].reasonKey = reasonKey
+                        entry.reasonId = reasonComponent.Id
+                        entry.reasonKey = reasonKey
                         debugLog("UI Reasons rendered originalIndex=" .. tostring(originalIndex)
                             .. " Labels=" .. table.concat(labels, "|"))
                     end

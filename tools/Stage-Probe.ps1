@@ -32,13 +32,18 @@ Copy-Item -LiteralPath (Join-Path $repo 'src\main.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\Logger.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\Localization.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\GameState.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\LobbyProbe.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\OfferSnapshot.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\CoreAdvisory.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\PomAdvisor.lua') -Destination $target
+Copy-Item -LiteralPath (Join-Path $repo 'src\FocusState.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ScoringEngine.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\UI.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $repo 'src\ProfileResolver.lua') -Destination $target
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'sister_blades_morrigan_meta.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'black_coat_melinoe_intermediate.lua') -Destination (Join-Path $target 'data\builds')
+Copy-Item -LiteralPath (Join-Path $generated 'argent_skull_medea_mobalytics.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $generated 'registry.lua') -Destination (Join-Path $target 'data\builds')
 Copy-Item -LiteralPath (Join-Path $repo 'config\settings.lua') -Destination (Join-Path $target 'config')
 Copy-Item -LiteralPath (Join-Path $repo 'manifest.json') -Destination $target

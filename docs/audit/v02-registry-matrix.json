@@ -1,6 +1,8 @@
 {
-  "baselineCommit": "dc57eabc45b967bd40bc124f8df13332744cb687",
+  "baselineCommit": "7c6e54407456b22a0451bdd3945f34ac89833bb1",
   "nativeTextSha256": "75ef411d23f54d0caaf94e9b58b4f80768ec0ca23d394833dc9296d4b00b4712",
+  "nativeMetaUpgradeSha256": "9023e35c8f74e466aeba8287f618bb439000ca93e9d8a5eded7abe0f1a2882b5",
+  "nativeTraitMetaUpgradeSha256": "98e577089bcfb25d97da54f83d604bb1b14b8849080a70d35ce72e16701bc78f",
   "rows": [
     {
       "sheetRow": 2,
@@ -449,8 +451,8 @@
       "profile": "sister_blades_melinoe_intermediate",
       "category": "Arcana",
       "name": "The Huntress",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "LowManaDamageMetaupgrade",
+      "identityEvidence": "MetaUpgradeData.lua:217 + TraitData_MetaUpgrade.lua:216; TraitText.en.sjson:294",
       "documentaryClassification": "Main",
       "documentaryPriority": "1",
       "documentaryCondition": "If Magick below full",
@@ -582,8 +584,8 @@
       "profile": "sister_blades_melinoe_intermediate",
       "category": "Arcana",
       "name": "The Wayward Son",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "DoorHealMetaUpgrade",
+      "identityEvidence": "MetaUpgradeData.lua:151 + TraitData_MetaUpgrade.lua:129; TraitText.en.sjson:390",
       "documentaryClassification": "Alternative",
       "documentaryPriority": "2",
       "documentaryCondition": "If sustaining Life is valuable",
@@ -639,8 +641,8 @@
       "profile": "sister_blades_melinoe_intermediate",
       "category": "Arcana",
       "name": "Divinity",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "EpicRarityBoostMetaUpgrade",
+      "identityEvidence": "MetaUpgradeData.lua:1484 + TraitData_MetaUpgrade.lua:891; TraitText.en.sjson:564",
       "documentaryClassification": "Situational",
       "documentaryPriority": "2",
       "documentaryCondition": "If activation requirements met",
@@ -874,7 +876,7 @@
       "documentaryCondition": "If Poseidon Attack unavailable or Scorch route chosen",
       "sourceFingerprint": "741a36b763e364d6",
       "mainBaseline": [
-        "No explicit recommendation entry; not proof of runtime non-coverage"
+        "Attack.alternatives"
       ],
       "decision": "SELECTED_DELTA: Attack alternatives",
       "sourceRuntimeStatus": "documentation_only",
@@ -893,7 +895,7 @@
       "documentaryCondition": "If Blitz/Static Shock route chosen",
       "sourceFingerprint": "38fd7a58cabd8b25",
       "mainBaseline": [
-        "No explicit recommendation entry; not proof of runtime non-coverage"
+        "Attack.alternatives"
       ],
       "decision": "SELECTED_DELTA: Attack alternatives",
       "sourceRuntimeStatus": "documentation_only",
@@ -1159,7 +1161,7 @@
       "documentaryCondition": "If offered and Attack damage desired",
       "sourceFingerprint": "bc618b42c4730a97",
       "mainBaseline": [
-        "No explicit recommendation entry; not proof of runtime non-coverage"
+        "hammerPlan alternative 3"
       ],
       "decision": "SELECTED_DELTA: hammer alternative 3",
       "sourceRuntimeStatus": "documentation_only",
@@ -1190,8 +1192,8 @@
       "profile": "black_coat_melinoe_intermediate",
       "category": "Arcana",
       "name": "The Huntress",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "LowManaDamageMetaupgrade",
+      "identityEvidence": "MetaUpgradeData.lua:217 + TraitData_MetaUpgrade.lua:216; TraitText.en.sjson:294",
       "documentaryClassification": "Main",
       "documentaryPriority": "1",
       "documentaryCondition": "If Magick below full",
@@ -1304,8 +1306,8 @@
       "profile": "black_coat_melinoe_intermediate",
       "category": "Arcana",
       "name": "The Wayward Son",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "DoorHealMetaUpgrade",
+      "identityEvidence": "MetaUpgradeData.lua:151 + TraitData_MetaUpgrade.lua:129; TraitText.en.sjson:390",
       "documentaryClassification": "Alternative",
       "documentaryPriority": "2",
       "documentaryCondition": "If sustained Life needed",
@@ -1881,7 +1883,7 @@
       "documentaryCondition": "If using regular Attack finisher",
       "sourceFingerprint": "8e36fdeceecc402a",
       "mainBaseline": [
-        "No explicit recommendation entry; not proof of runtime non-coverage"
+        "hammerPlan alternative 2"
       ],
       "decision": "SELECTED_DELTA: hammer alternative 2",
       "sourceRuntimeStatus": "documentation_only",
@@ -1976,7 +1978,7 @@
       "documentaryCondition": "If frequent successful Blood Triads",
       "sourceFingerprint": "6d242141f3c810fa",
       "mainBaseline": [
-        "No explicit recommendation entry; not proof of runtime non-coverage"
+        "hammerPlan priority 1"
       ],
       "decision": "SELECTED_DELTA: hammer priority 1",
       "sourceRuntimeStatus": "documentation_only",
@@ -2026,8 +2028,8 @@
       "profile": "sister_blades_morrigan_meta",
       "category": "Arcana",
       "name": "The Huntress",
-      "nativeId": null,
-      "identityEvidence": "Unresolved exact name; no inferred ID",
+      "nativeId": "LowManaDamageMetaupgrade",
+      "identityEvidence": "MetaUpgradeData.lua:217 + TraitData_MetaUpgrade.lua:216; TraitText.en.sjson:294",
       "documentaryClassification": "Alternative",
       "documentaryPriority": "1",
       "documentaryCondition": "If standard Attack/Special used and Magick below full",

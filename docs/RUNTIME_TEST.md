@@ -1,5 +1,23 @@
 # Validation runtime et procédure d'installation
 
+## Gate obligatoire — disponibilité pour la QA en jeu
+
+Ne jamais annoncer **« prêt pour QA en jeu »** sur la seule base de tests hors jeu. Avant cette annonce, vérifier et consigner les six points suivants pour la version exacte à tester :
+
+1. **Tests hors jeu :** toutes les suites requises pour le changement passent; noter les commandes et résultats.
+2. **Déploiement DEV :** la version préparée est réellement installée dans le dossier `ReturnOfModding\plugins\Local-HadesIIBoonAdvisor` chargé par l'installation Hades II cible. Ne pas confondre ce dossier avec le staging `dist\Local-HadesIIBoonAdvisor` ni un autre profil de mod manager.
+3. **Intégrité installée :** comparer l'inventaire et les empreintes SHA-256 des fichiers critiques installés (au minimum manifeste, point d'entrée, moteur de scoring, registre et module du profil testé) au staging ou à l'artefact préparé. Vérifier et noter les différences de configuration attendues séparément.
+4. **Profil/build :** confirmer que `BUILD_PROFILE` sélectionne le profil voulu, ou que `auto` peut le résoudre sans ambiguïté depuis l'arme/aspect grâce au registre installé. Noter la clé et le couple arme/aspect attendus.
+5. **Logs :** lorsque la QA exige des logs, vérifier `DEBUG = true` dans la configuration installée, pas seulement dans le dépôt ou le staging.
+6. **Jeu fermé au déploiement :** confirmer que `Hades2.exe` n'était pas lancé pendant l'installation ou la mise à jour; redémarrer le jeu après le déploiement.
+
+Employer explicitement l'un de ces deux états :
+
+- **Code prêt pour déploiement QA** : les tests hors jeu requis réussissent, mais le déploiement DEV n'a pas été fait ou son résultat n'a pas été vérifié.
+- **Prêt pour QA en jeu** : les six vérifications ci-dessus sont réussies pour l'installation cible et la version préparée. Si un seul point reste inconnu ou échoue, conserver le premier état et résoudre l'écart avant le lancement du test.
+
+Ce gate s'applique à chaque profil et build futur, pas seulement au pilote Médée. Le statut de QA en jeu confirme la préparation de l'environnement; les résultats fonctionnels restent à établir pendant le test humain.
+
 Statut : **validation DEV représentative effectuée sous contrôle humain** pour
 les trois profils v0.2. Les captures et le journal DEBUG ont confirmé les
 profils, identifiants, scores et replis full/partial/none observés. La
@@ -10,6 +28,64 @@ pas être décrite comme un test isolé.
 La procédure d'isolation ci-dessous reste la méthode recommandée pour un
 nouveau test reproductible. Elle décrit des contrôles de sécurité et ne
 constitue pas une étape restante de la validation v0.2 déjà effectuée.
+
+## Focus Black Coat — validation DEV après v0.2
+
+Le sélecteur de focus du profil Black Coat Melinoë est réservé aux écrans
+d'offres. Après le choix définitif, le focus est verrouillé pour la run et
+affiché en rappel passif dans le HUD de combat. Le joueur contrôle le jeu et les
+sélections ; le mod ne modifie ni la sauvegarde, ni les offres, ni les commandes
+du jeu et n'ajoute aucun mapping de manette.
+
+Le premier essai humain a confirmé l'affichage après le choix, mais a observé
+la disparition du rappel après un changement de niveau. La correction, qui le
+recrée à l'entrée de chaque salle, est maintenant installée et a été confirmée
+dans trois salles consécutives ; le joueur a également confirmé que le rappel
+ne se clique pas. Après abandon puis retour à la Croisée, l'absence du rappel a
+confirmé la remise à zéro sur une nouvelle run. Le mode à arme imposée a aussi
+été testé et validé. Le placement visuel reste provisoire ; le polish est
+reporté.
+
+## Résultats du probe lecture seule — identité au lobby et en début de run
+
+Le probe `LOBBY_PROBE` est déployé dans le plugin DEV. Il ne crée aucun élément
+UI, n'intercepte aucune sélection et ne modifie aucun état du jeu. Il écrit une
+ligne DEBUG aux chargements/événements pertinents avec le nom du hub/de la room,
+la présence de `CurrentRun.Hero`, le nombre/ID d'armes primaires détectées,
+l'Aspect actif et l'Aspect conservé pour l'arme détectée. L'updater a préservé
+la configuration installée; `DEBUG` y est actif.
+
+**Résultat humain DEV (2026-09-26) :** les snapshots de sélection dans
+`Hub_PreRun` ont suivi les changements d'arme et d'Aspect, y compris le retour
+à `WeaponDagger` / `DaggerTripleAspect`. Une run ultérieure a conservé cette
+identité à `StartNewRun` (`F_Opening02`), puis dans quatre débuts de salle
+(`F_Opening02`, `F_Combat19`, `F_Combat22`, `F_Combat21`). Arme et Aspect actif
+et mémorisé concordaient à chaque relevé. Aucun `[BoonAdvisor] ERROR` ou
+`WARN` n'a été trouvé. L'absence d'UI était attendue pour ce probe.
+
+L'audit natif identifie `Hub_Main` comme la Croisée et `Hub_PreRun` comme le
+Terrain d'entraînement pré-run; le test live a observé la sélection dans
+`Hub_PreRun`. Ces captures provenaient de la version probe, sans UI. Ne pas
+automatiser les commandes de jeu ni forcer les valeurs par console.
+
+## Identité du build — comportement validé
+
+L'affichage du build est informatif. Après l'initialisation du jeu et du HUD du
+lobby, l'arme et l'Aspect sont détectés. Dans `Hub_Main` et `Hub_PreRun`, le
+nom est actualisé quand l'arme ou l'Aspect change, puis rafraîchi au retour au
+lobby. L'identité reste stable lors des changements de salle et pendant la
+run. Le début de run observé est `F_Opening01`. Le mainteneur a confirmé le
+comportement final en jeu et les journaux correspondants. Aucun affichage,
+recommandation, inventaire ou contrôle des Arcanes ne fait partie du mod ;
+l'effet de combat existant d'Origination demeure indépendant.
+
+### Résultat — sélecteur Focus Black Coat
+
+La validation fonctionnelle est terminée, y compris en mode à arme imposée.
+Le mainteneur a confirmé le choix et le verrouillage du focus, son rappel passif
+sur plusieurs salles, l'absence d'action au clic et la remise à zéro après
+abandon de la run. Aucun mapping de manette n'est ajouté. Le style et le
+placement restent provisoires et relèvent du polish ultérieur.
 
 ## 1. Préconditions de sauvegarde
 
@@ -60,7 +136,7 @@ Ce déploiement local suit le point d'entrée `main.lua` du template et l'import
 
 4. Choisir manuellement : acquisition et fermeture doivent rester normales. Aucun nouvel élément graphique ni ID de boon n'est ajouté.
 5. Si un reroll est disponible naturellement sur le profil test, l'utiliser : une seule nouvelle paire, sans seconde installation de hook. Sinon marquer ce cas **non testé**, sans modifier la sauvegarde ou forcer les ressources.
-6. Tester un Pom, un Marteau et, quand accessibles, Hermès, Chaos et un événement : aucune paire de détection attendue. Ouvrir/fermer le Codex : aucune paire attendue. Ne pas prétendre valider les cas non rencontrés.
+6. Tester un Pom, un Marteau et, quand accessibles, Hermès, Chaos et un événement. Un Pom natif (`StackUpgrade`, `StackUpgradeBig` ou `StackUpgradeTriple`) doit produire une seule paire de détection et conserver le fonctionnement normal du choix. Le conseiller ne classe que les Boons du Pom qui ont un rôle explicite dans le profil actif ; les autres restent non évalués. Marteau, Hermès, Chaos et événement suivent leur périmètre de support respectif. Ouvrir/fermer le Codex : aucune paire attendue. Ne pas prétendre valider les cas non rencontrés.
 7. Rechargement : faire une modification de commentaire dans le `main.lua` **déployé**, puis attendre une confirmation de rechargement du chargeur. Attendre un nouveau `Probe ready` sans nouveau `Hook installed`. Si le chargeur ne confirme aucun reload, le cas reste **UNVERIFIED** ; ne pas interpréter son silence comme un succès. Au choix suivant, une seule paire. Ne pas recharger ModUtil/ReLoad/ENVY pendant cet essai : le redémarrage complet est requis si une dépendance change.
 8. Mettre `DEBUG = false` dans le fichier de configuration déployé puis relancer la copie : aucune ligne BoonAdvisor. Pour un essai à chaud, le changement de configuration doit être suivi d'un rechargement confirmé du point d'entrée ; la configuration seule n'est pas surveillée par Chalk.
 9. Fermer le jeu et relever les résultats : versions, chemin du profil test, source, heure de détection avant sélection, reroll/reload, menus exclus, erreurs éventuelles. Revérifier les empreintes des sauvegardes principales.

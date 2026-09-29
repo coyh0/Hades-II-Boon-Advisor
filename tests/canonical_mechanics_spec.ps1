@@ -6,6 +6,7 @@ $expected = @{
     'sister_blades_melinoe.json' = @{ id = 'sister_blades_melinoe'; weapon = 'WeaponDagger'; aspect = 'DaggerBackstabAspect'; generic = $true }
     'sister_blades_morrigan.json' = @{ id = 'sister_blades_morrigan'; weapon = 'WeaponDagger'; aspect = 'DaggerTripleAspect'; generic = $false }
     'black_coat_melinoe.json' = @{ id = 'black_coat_melinoe'; weapon = 'WeaponSuit'; aspect = 'BaseSuitAspect'; generic = $false }
+    'argent_skull_medea_mobalytics.json' = @{ id = 'argent_skull_medea_mobalytics'; weapon = 'WeaponLob'; aspect = 'LobCloseAttackAspect'; generic = $false }
 }
 if ($mechanicsFiles.Count -ne $expected.Count) { throw 'Unexpected canonical mechanics template inventory.' }
 $sections = @('weights','statusMappings','knownNonStatusTraits','potentialStatusTraits',
@@ -20,10 +21,33 @@ foreach ($file in $mechanicsFiles) {
     foreach ($section in $sections) {
         if ($null -eq $canonical.$section) { throw "Missing canonical mechanics section: $($file.Name).$section" }
     }
+    if ($file.Name -eq 'argent_skull_medea_mobalytics.json') {
+        if ($canonical.weights.BUILD_PREFERRED -ne 2 -or
+            $canonical.weights.PSObject.Properties.Name -contains 'BUILD_NON_CORE' -or
+            $canonical.sourceScoring.boons.ZeusSpecialBoon -ne 'Core Boons' -or
+            $canonical.sourceScoring.boons.DoubleBoltBoon -ne 'Non-Core Boons' -or
+            $canonical.sourceScoring.boons.DeathDefianceRefillBoon -ne 'NPC Offerings' -or
+            $canonical.sourceScoring.npcOfferings.DeathDefianceRefillBoon -ne 'NPC_Athena_01' -or
+            $canonical.sourceScoring.npcOfferings.HadesDeathDefianceDamageBoon -ne 'NPC_Hades_Field_01' -or
+            $canonical.sourceScoring.hammers.LobPulseAmmoTrait -ne 'Daedalus Hammer Upgrades' -or
+            $canonical.sourceScoring.poms.ZeusSpecialBoon -ne 'Poms of Power' -or
+            $canonical.sourceScoring.deferred.KeepsakeLevelBoon -ne 'Legendary / Duo Boons' -or
+            $canonical.sourceScoring.boons.ReserveManaHitShieldBoon -ne 'Non-Core Boons' -or
+            $canonical.corePlan.DemeterCastBoon.role -ne 'Cast' -or
+            $canonical.corePlan.DemeterCastBoon.displayName.en -ne 'Arctic Ring' -or
+            $canonical.corePlan.DemeterCastBoon.displayName.fr -ne 'Glyphe Polaire' -or
+            $canonical.nonCoreContext.ReserveManaHitShieldBoon.recommendedCore.Count -ne 1 -or
+            $canonical.nonCoreContext.ReserveManaHitShieldBoon.recommendedCore[0] -ne 'DemeterCastBoon') {
+            throw 'Medea Mobalytics source-score projection changed.'
+        }
+    }
     foreach ($property in $canonical.weights.PSObject.Properties) {
         if ($property.Value -isnot [ValueType] -or $property.Value -is [bool]) {
             throw "Invalid canonical weight at $($file.Name).weights.$($property.Name)"
         }
+    }
+    if ($canonical.weights.BUILD_PREFERRED -ne 2) {
+        throw "Default BUILD_PREFERRED weight is not +2: $($file.Name)"
     }
     foreach ($property in $canonical.statusMappings.PSObject.Properties) {
         foreach ($field in @('effect','family','olympian')) {
@@ -80,4 +104,4 @@ foreach ($id in @('WeaponDagger','DaggerTripleAspect','WomboStrike','ComboAttack
 foreach ($profilePath in @('data\builds\sister_blades_melinoe_intermediate.lua')) {
     if (-not (Test-Path (Join-Path $repo $profilePath))) { throw "Missing runtime reference: $profilePath" }
 }
-Write-Output 'PASS: Sister Blades and conservative Black Coat canonical mechanics templates validated'
+Write-Output 'PASS: Sister Blades, Black Coat, and Medea source-scoring mechanics templates validated'

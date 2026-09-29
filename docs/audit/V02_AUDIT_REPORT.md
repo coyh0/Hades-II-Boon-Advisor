@@ -49,7 +49,7 @@ Tous les enregistrements source restent `documentation_only`, `documentary_conte
 
 ## Preuves natives des cinq deltas
 
-Racine lue : `D:/Dev/Games/HadesII-Dev/Content`. Version du fichier `Ship/Hades2.exe` relue : **139606**. Aucun lancement du jeu.
+Racine lue : `<HADES_DEV_ROOT>/Content`. Version du fichier `Ship/Hades2.exe` relue : **139606**. Aucun lancement du jeu.
 
 | Recommandation | Identité dans Game/Text/en/TraitText.en.sjson | Mécanique dans Scripts/ | Projection sélectionnée |
 | --- | --- | --- | --- |
@@ -108,3 +108,31 @@ Les SHA-256 de ces blobs sont dans `v02-runtime-comparison.json`. Les quatre fic
 5. Actualiser les documents publics et l'invocation updater avant la release ; conserver les gates de version/package/publication. Interface compacte après v0.2.
 
 Livrables de cette passe : documents, snapshots et scripts d'audit seulement. Aucun runtime canonique, scorer, UI, configuration de jeu ou Sheet modifié ; aucun commit, push, déploiement, package de publication, tag ou release.
+
+## Suivi — correspondances Arcana du guide lobby (2026-09-26)
+
+Une relecture native en lecture seule a résolu les six lignes précédemment sans ID exact dans les trois profils actifs. Le lien est vérifié dans les données du jeu : `MetaUpgradeData.lua` associe le nom/la voix de la carte à son `TraitName`, `TraitData_MetaUpgrade.lua` définit ce trait, et `TraitText.en.sjson` confirme le texte de la carte.
+
+| Nom Curator | MetaUpgradeData | ID natif (`TraitName`) | Profils concernés |
+| --- | --- | --- | --- |
+| The Huntress | `LowManaDamageBonus` | `LowManaDamageMetaupgrade` | Melinoë, Morrigan, Black Coat |
+| The Wayward Son | `HealthRegen` | `DoorHealMetaUpgrade` | Melinoë, Black Coat |
+| Divinity | `EpicRarityBoost` | `EpicRarityBoostMetaUpgrade` | Melinoë |
+
+Les preuves et empreintes des trois sources natives sont maintenant intégrées au générateur et à `v02-registry-matrix.json` / `.md`. Le générateur a été relancé : **118 lignes**, mêmes dispositions/cardinalités qu'avant (23 Keepsake, 31 existantes, 5 deltas sélectionnés, 19 différées, 40 guidance documentaire). Les trois mappings Arcana précités ne sont plus dans `unresolvedNames`.
+
+Une projection informative séparée, `arcana_lobby_projection.json`, est générée par `build_arcana_lobby_projection.py`. Elle préserve pour les 27 lignes le build, la cible, le rôle, le bénéfice, la classification, la priorité documentaire et la condition libre du Curator, ainsi que les IDs et preuves d'identité. Ses assertions vérifient les cardinalités 11/8/8, l'alignement du profil/recommendationId, l'absence d'IDs manquants, et le maintien des statuts `documentation_only`/conditions non exécutables. La projection ne fait pas partie des fichiers runtime.
+
+Cette passe atteste l'identité des IDs uniquement. Les 27 recommandations Arcana restent `documentation_only`; leurs classifications, priorités et conditions ne deviennent ni logique exécutable, ni vérification de configuration, ni assertion sur l'éveil ou l'efficacité réelle de chaque Arcana. Aucun profil canonique/runtime, scoring ou UI n'a été modifié, et rien n'a été déployé ou publié.
+
+## Faisabilité native — identité du build au lobby et guide Arcana (2026-09-26)
+
+Inspection en lecture seule des scripts natifs DEV : `DeathLoopData.lua` nomme le hub principal `Hub_Main`. Le choix d'une arme au hub passe par `PickupWeaponKit` et `EquipPlayerWeapon` sur `CurrentRun.Hero`; la sélection d'Aspect met à jour `GameState.LastWeaponUpgradeName[weaponName]` et équipe l'amélioration au héros courant. `StartNewRun` construit le héros suivant depuis l'ensemble d'armes de `prevRun.Hero`, puis appelle `EquipWeaponUpgrade`. Le snapshot du mod sait déjà lire arme et Aspect depuis `CurrentRun.Hero` lorsqu'il existe.
+
+Ces éléments rendent une détection au lobby réalisable sans se fier uniquement à un Aspect mémorisé, mais ne prouvent pas encore ce que le mod peut observer à chaque étape. Il faut un probe DEBUG sans mutation pour relever à `Hub_Main` la présence du héros, l'unicité de l'arme primaire, l'Aspect actif et les transitions de room, puis confirmer la même identité au début de la run. La phase du guide Arcana devra utiliser le hub exact comme condition d'affichage; l'identité du build devra être rafraîchie au démarrage et rester disponible après la sortie du hub. Si l'état est absent ou ambigu, l'UI devra rester neutre et ne pas réutiliser un profil précédent.
+
+Cette inspection n'a modifié aucun runtime, sauvegarde, paramètre Epic ou installation DEV. Elle ne constitue ni probe en jeu ni QA fonctionnelle/visuelle. Le guide Arcana reste une projection documentaire locale tant que le contrat d'observation et l'adaptateur de présentation ne sont pas développés et validés.
+
+**Suite du probe (2026-09-26) :** un observateur DEBUG sans interface a été ajouté dans `src/LobbyProbe.lua`, intégré aux hooks de cycle de vie et testé dans Lua 5.2. Le staging exact du runtime et son inventaire d'installation ont été étendus; les tests Lua, staging, installation et bundle release passent. La description Thunderstore a été raccourcie pour respecter sa limite de 250 caractères, et le test de définition/package passe. Le runtime local a été mis à jour transactionnellement dans DEV après vérification que Hades II était fermé et que le jeu/chargeur était compatible. La configuration installée a été préservée.
+
+**Validation humaine en jeu (2026-09-26) :** les snapshots DEBUG dans `Hub_PreRun` ont suivi la sélection d'arme et d'Aspect. Au lancement de la run, `WeaponDagger` / `DaggerTripleAspect` a été confirmé dans `F_Opening02`, puis dans quatre débuts de salle (`F_Opening02`, `F_Combat19`, `F_Combat22`, `F_Combat21`), avec correspondance entre Aspect actif et mémorisé. Aucun `[BoonAdvisor] ERROR` ou `WARN` n'a été trouvé dans le journal examiné. La sonde n'affiche volontairement aucune UI. L'audit natif distingue `Hub_Main` (Croisée) et `Hub_PreRun` (Terrain d'entraînement); le cycle entre ces salles et le point exact où le futur guide Arcana doit apparaître restent à valider avant l'implémentation UI. Aucun changement de sauvegarde ou paramètre Epic ni aucune publication n'a eu lieu durant l'audit.

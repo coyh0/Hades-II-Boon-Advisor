@@ -1,0 +1,191 @@
+{
+  "documentarySchemaVersion": 1,
+  "id": "argent_skull_medea_mobalytics_pilot",
+  "status": "pilot_active",
+  "source": {
+    "kind": "Mobalytics workbook extraction",
+    "workbook": "hades2_mobalytics_build_catalog_23_simple_priorities.xlsx",
+    "sheets": ["Builds", "Recommandations"],
+    "buildId": "skull_medea",
+    "title": "62 Fear Medea Skull Build",
+    "author": "HookieDookie",
+    "lastUpdated": "2026-05-04",
+    "sourceBadge": "Verified",
+    "sourceUrl": "https://mobalytics.gg/hades-2/builds/62-fear-medea-skull"
+  },
+  "identity": {
+    "sourceWeaponLabel": "Revaal — Argent Skull",
+    "runtimeWeaponId": "WeaponLob",
+    "sourceAspectLabel": "Médéa",
+    "runtimeAspectId": "LobCloseAttackAspect",
+    "identityEvidence": [
+      "DEV Content/Scripts/WeaponData_Lob.lua: WeaponLob",
+      "DEV Content/Game/Text/en/TraitText.en.sjson: WeaponLob = Argent Skull",
+      "DEV Content/Scripts/TraitData_Aspect.lua: LobCloseAttackAspect requires WeaponLob and uses WeaponLob_Medea_Mesh",
+      "DEV Content/Game/Text/en/TraitText.en.sjson: LobCloseAttackAspect = Aspect of Medea"
+    ]
+  },
+  "profileMode": {
+    "state": "maintainer_approved",
+    "value": "meta",
+    "note": "The maintainer selected meta for the pilot; this is a runtime configuration decision, not an inference from the 62 Fear title."
+  },
+  "focus": null,
+  "route": null,
+  "runtimeMapping": {
+    "state": "pilot_in_progress",
+    "profileId": "argent_skull_medea_mobalytics",
+    "mechanicsTemplate": "argent_skull_medea_mobalytics"
+  },
+  "executable": "Scoring candidate exists locally; final eligibility depends on offline regression and maintainer-led in-game QA.",
+  "blockingDecisions": [
+    "Legendary/Duo acquisition prerequisites remain deferred to a later patch.",
+    "The newly approved Mobalytics source-group scoring must pass offline regression and in-game QA before the pilot is complete."
+  ],
+  "approvedRuntimeIntent": {
+    "specialTarget": {
+      "traitId": "ZeusSpecialBoon",
+      "displayName": "Heaven Flourish",
+      "slot": "Special",
+      "behavior": "Score +2 when this listed Core Boon is offered for Special; score its Pom upgrade +2 when already owned.",
+      "replacementPolicy": "For a verified replacement, use the difference between the source-group scores of the new and replaced Boons; an unlisted replacement of this +2 target contributes -2.",
+      "nativeEvidence": [
+        "DEV Content/Scripts/TraitData_Zeus.lua: ZeusSpecialBoon, Slot=Secondary",
+        "DEV Content/Game/Text/en/TraitText.en.sjson: ZeusSpecialBoon = Heaven Flourish; description names Special"
+      ]
+    },
+    "startingKeepsake": {
+      "traitId": "ForceZeusBoonKeepsake",
+      "displayName": "Cloud Bangle",
+      "classification": "maintainer-approved starting priority; metadata only",
+      "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_keepsakes_cloud_bangle_01",
+      "sourcePriorityLabel": "P1 — explicit priority — conditional",
+      "scoreMapping": "Maintainer-approved starting-build intent, not an offer score.",
+      "effectBoundary": "A Zeus offering is forced/prioritized; no particular Zeus boon, including Heaven Flourish, is guaranteed.",
+      "nativeEvidence": "DEV Content/Scripts/TraitData_Keepsake.lua: ForceBoonName=ZeusUpgrade; DEV Content/Game/Text/en/TraitText.en.sjson names it Cloud Bangle"
+    }
+  },
+  "sourceGroups": [
+    {
+      "sourceLabel": "God Pool",
+      "recommendations": [
+        {
+          "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_god_pool_zeus_01",
+          "sourceName": "Zeus",
+          "category": "Dieu",
+          "section": "Full Build — God Pool",
+          "position": "God Pool — icône 1",
+          "informationState": "sourced",
+          "individualPriority": null,
+          "runtimeMapping": null
+        },
+        {
+          "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_god_pool_hera_01",
+          "sourceName": "Hera",
+          "category": "Dieu",
+          "section": "Full Build — God Pool",
+          "position": "God Pool — icône 2",
+          "informationState": "sourced",
+          "individualPriority": null,
+          "runtimeMapping": null
+        },
+        {
+          "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_god_pool_ares_01",
+          "sourceName": "Ares",
+          "category": "Dieu",
+          "section": "Full Build — God Pool",
+          "position": "God Pool — icône 3",
+          "informationState": "sourced",
+          "individualPriority": null,
+          "runtimeMapping": null
+        },
+        {
+          "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_god_pool_demeter_01",
+          "sourceName": "Demeter",
+          "category": "Dieu",
+          "section": "Full Build — God Pool",
+          "position": "God Pool — icône 4",
+          "informationState": "sourced",
+          "individualPriority": null,
+          "runtimeMapping": null
+        }
+      ]
+    },
+    {
+      "sourceLabel": "Core Boons",
+      "scoreMeaning": "+2 per listed Core Boon",
+      "recommendations": [
+        {"name": "Heaven Flourish", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_core_boons_heaven_flourish_01"},
+        {"name": "Sworn Strike", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_core_boons_sworn_strike_01"},
+        {"name": "Arctic Ring", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_core_boons_arctic_ring_01"},
+        {"name": "Grisly Gain", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_core_boons_grisly_gain_01"}
+      ]
+    },
+    {
+      "sourceLabel": "Non-Core Boons",
+      "scoreMeaning": "+1 per listed Non-Core Boon",
+      "recommendations": [
+        {"name": "Double Strike", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_double_strike_01"},
+        {"name": "Static Shock", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_static_shock_01"},
+        {"name": "Snow Queen", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_snow_queen_01"},
+        {"name": "Dying Wish", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_dying_wish_01"},
+        {"name": "Arctic Gale", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_arctic_gale_01"},
+        {"name": "Mutual Destruction", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_non_core_boons_mutual_destruction_01"}
+      ]
+    },
+    {
+      "sourceLabel": "Legendary / Duo Boons",
+      "scoreMeaning": "+2 source preference; eligibility prerequisites deferred",
+      "recommendations": [
+        {"name": "Cherished Heirloom", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_legendary_duo_boons_cherished_heirloom_01"},
+        {"name": "Universal Donor", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_legendary_duo_boons_universal_donor_01"}
+      ]
+    }
+  ],
+  "pomGroup": {
+    "sourceLabel": "Poms of Power",
+    "scoreMeaning": "+2 for the listed upgrade, independently of boon acquisition",
+    "recommendations": [
+      {"name": "Heaven Flourish", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_poms_of_power_heaven_flourish_01"}
+    ]
+  },
+  "individualPriorities": {
+    "sourceScoringPolicy": "Core Boons +2; Non-Core Boons +1; other mapped groups +2; absent from mapped sheet rows = 0 build-specific adjustment.",
+    "ordinarySameLevel": [
+      "Sworn Strike",
+      "Arctic Ring",
+      "Grisly Gain",
+      "Double Strike",
+      "Static Shock",
+      "Dying Wish",
+      "Arctic Gale",
+      "Mutual Destruction",
+      "Cherished Heirloom",
+      "Universal Donor"
+    ],
+    "snowQueen": {
+      "classification": "low-priority defensive utility",
+      "classificationSource": "maintainer interpretation",
+      "scoreMapping": "+1 from the Non-Core Boons group; retains the maintainer note that it is defensive utility.",
+      "sourceCondition": "not interpreted as route, predicate, or executable rule"
+    },
+    "hammers": {
+      "recommendations": [
+        {"name": "Volatile Array", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_daedalus_hammer_upgrades_volatile_array_01"},
+        {"name": "Colossus Driver", "sourceRecommendationId": "mobalytics_skull_medea_fullbuild_daedalus_hammer_upgrades_colossus_driver_01"}
+      ],
+      "individualPriority": null,
+      "scoreMapping": "+2 per listed Hammer upgrade"
+    }
+  },
+  "excludedFromScoring": [
+    "Toula",
+    "Arcana"
+  ],
+  "sourceLimitations": [
+    "The workbook extraction notes that Full Build icon names were read from CDN filenames and tooltips were not observed except where separate evidence exists.",
+    "The maintainer-approved Medea projection maps Core Boons to +2, Non-Core Boons to +1, and listed Hammer, NPC Offering and Pom groups to +2.",
+    "The workbook's free-text condition is not converted to a route, focus, predicate, or executable rule.",
+    "The Mobalytics Verified badge describes the source listing, not local native-ID verification or runtime validation."
+  ]
+}
