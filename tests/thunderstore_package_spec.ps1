@@ -82,7 +82,7 @@ foreach ($forbidden in './tests', './tools', './data/canonical', './dist', './do
 }
 
 $runtimeExpected = @(
-    'GameState.lua', 'LobbyProbe.lua', 'FocusState.lua', 'PomAdvisor.lua', 'Logger.lua', 'Localization.lua', 'OfferSnapshot.lua', 'CoreAdvisory.lua', 'ProfileResolver.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua',
+    'GameState.lua', 'GodPoolContext.lua', 'LobbyProbe.lua', 'FocusState.lua', 'PomAdvisor.lua', 'Logger.lua', 'Localization.lua', 'OfferSnapshot.lua', 'CoreAdvisory.lua', 'ProfileResolver.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua',
     'config/settings.lua',
     'data/builds/black_coat_melinoe_intermediate.lua',
     'data/builds/argent_skull_medea_mobalytics.lua',

@@ -404,8 +404,48 @@ function UI.renderCoreAdvisory(screen, show, api)
         ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
 end
 
+function UI.clearGodPoolContext(screen, api)
+    if type(screen) ~= "table" or type(screen.BoonAdvisorGodPoolContext) ~= "table" then return end
+    local ids = screen.BoonAdvisorGodPoolContext
+    screen.BoonAdvisorGodPoolContext = nil
+    if type(screen.Components) == "table" then
+        screen.Components.BoonAdvisorGodPoolBuild = nil
+        screen.Components.BoonAdvisorGodPoolRun = nil
+    end
+    if #ids > 0 and type(api) == "table" and type(api.Destroy) == "function" then
+        api.Destroy({ Ids = ids })
+    end
+end
+
+function UI.renderGodPoolContext(screen, context, api)
+    UI.clearGodPoolContext(screen, api)
+    if type(screen) ~= "table" or type(screen.Components) ~= "table"
+        or type(context) ~= "table" then return end
+    local create = type(api) == "table" and api.CreateScreenComponent or nil
+    local textBox = type(api) == "table" and api.CreateTextBox or nil
+    if type(create) ~= "function" or type(textBox) ~= "function" then return end
+    local layout = buildOverviewLayout(ScreenCenterX, ScreenCenterY)
+    local ids = {}
+    screen.BoonAdvisorGodPoolContext = ids
+    local function add(key, status, y, componentKey)
+        if status ~= "Yes" and status ~= "No" then status = "Unknown" end
+        local component = create({ Name = "BlankObstacle", Group = "Combat_Menu_Overlay",
+            X = layout.x, Y = y, Width = layout.width, Height = 22 })
+        if type(component) ~= "table" or component.Id == nil then return end
+        screen.Components[componentKey] = component
+        ids[#ids + 1] = component.Id
+        textBox({ Id = component.Id, RawText = localization.get(language, key .. status),
+            Width = layout.width, Height = 22, Font = "LatoBold", FontSize = 14,
+            Justification = "Right", ShadowBlur = 0,
+            ShadowColor = { 0, 0, 0, 1 }, ShadowOffset = { 0, 1 } })
+    end
+    add("godPoolBuild", context.recommendedByBuild, layout.y + 29, "BoonAdvisorGodPoolBuild")
+    add("godPoolRun", context.observedInRuntimePool, layout.y + 52, "BoonAdvisorGodPoolRun")
+end
+
 function UI.clearRanks(screen, api)
     UI.clearCoreAdvisory(screen, api)
+    UI.clearGodPoolContext(screen, api)
     UI.clearPomStatuses(screen, api)
     local ranks = rankState(screen)
     if ranks == nil then return end

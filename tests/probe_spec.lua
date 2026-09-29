@@ -73,7 +73,7 @@ local function fixture(native, sink, debugEnabled, runtime, uiTestMode, buildPro
         end
         if path == "Logger.lua" or path == "Localization.lua" or path == "GameState.lua" or path == "LobbyProbe.lua"
             or path == "OfferSnapshot.lua"
-            or path == "CoreAdvisory.lua"
+            or path == "CoreAdvisory.lua" or path == "GodPoolContext.lua"
             or path == "PomAdvisor.lua" or path == "FocusState.lua"
             or path == "ScoringEngine.lua" or path == "UI.lua" or path == "ProfileResolver.lua" then
             path = "src/" .. path
@@ -481,6 +481,47 @@ end
 print("PASS: Aphrodite, Demeter, and Hephaestus offers refresh the three-role Core notice independently of ranking")
 
 do
+    local history = { ZeusUpgrade = 1 }
+    local run = { Hero = { SlottedTraits = { Aspect = "LobCloseAttackAspect" },
+        Traits = { { Name = "LobCloseAttackAspect", IsWeaponEnchantment = true } } },
+        LootTypeHistory = history }
+    local lootData = { ZeusUpgrade = { GodLoot = true },
+        AphroditeUpgrade = { GodLoot = true } }
+    local loot = { Name = "ZeusUpgrade", GodLoot = true, UpgradeOptions = {
+        { ItemName = "ZeusSpecialBoon", Rarity = "Common" },
+        { ItemName = "ZeusSprintBoon", Rarity = "Common" },
+        { ItemName = "ZeusManaBoon", Rarity = "Common" },
+    } }
+    local screen = { Source = loot, KeepOpen = true, Components = {
+        PurchaseButton1 = { Id = "pool-1" }, PurchaseButton2 = { Id = "pool-2" },
+        PurchaseButton3 = { Id = "pool-3" },
+    } }
+    local game, _, start, _, private, _, _, _, _, _, labels = fixture(function() end, nil, true, {
+        CurrentRun = run, GetEquippedWeapon = function() return "WeaponLob" end,
+        GetLanguage = function() return "en" end, LootData = lootData,
+        HeroData = { MaxGodsPerRun = 4 }, IsGodTrait = function() return false end,
+    }, false, "auto")
+    start()
+    game.CreateBoonLootButtons(screen, loot)
+    local recommended, present = false, false
+    for _, label in ipairs(labels) do
+        if label.RawText == "Build God Pool: Recommended" then recommended = true end
+        if label.RawText == "Run God Pool: Present" then present = true end
+    end
+    check(recommended and present and screen.BoonAdvisorGodPoolContext ~= nil,
+        "runtime offer did not render independently verified God Pool facts")
+    local scores = private.probeState.lastScores
+    local core = private.probeState.lastCoreAdvisory
+    history.ZeusUpgrade = nil
+    game.CreateBoonLootButtons(screen, loot)
+    check(private.probeState.lastCoreAdvisory == core
+        and private.probeState.lastScores[1].score == scores[1].score
+        and labels[#labels].RawText == "Run God Pool: Unknown",
+        "run-history refresh altered scoring/Core or failed to refresh God Pool context")
+end
+print("PASS: God Pool runtime offer rendering and reroll refresh are informational")
+
+do
     local owned = {
         HeraWeaponBoon = true, ZeusSpecialBoon = true, DemeterCastBoon = true,
         DoubleBoltBoon = true, FocusLightningBoon = true, CastNovaBoon = true,
@@ -702,7 +743,7 @@ local tg, tl, testStart, _, testPrivate, _, _, _, _, testCreated, testText, test
 testStart(); tg.CreateBoonLootButtons(testScreen, testLoot)
 check(testPrivate.probeState.lastRankingReady == false
     and testPrivate.probeState.lastRankedScores == nil
-    and #testCreated == 7 and testText[1].RawText == "RANG 1"
+    and #testCreated == 9 and testText[1].RawText == "RANG 1"
     and testText[3].RawText == "RANG 1" and testText[5].RawText == "RANG 3"
     and testText[2].RawText == "Core · Aspect" and testText[4].RawText == "Origination"
     and testText[6].RawText == "Utilitaire"
@@ -716,8 +757,9 @@ local sawSynthetic = false
 for _, line in ipairs(tl) do if line == "[BoonAdvisor] UI TEST MODE rendering synthetic ranks 1/1/3" then sawSynthetic = true end end
 check(sawSynthetic, "synthetic UI test log missing")
 tg.CreateBoonLootButtons(testScreen, testLoot)
-check(#testDestroyed == 2 and #testDestroyed[1].Ids == 1 and #testDestroyed[2].Ids == 6
-    and #testCreated == 14 and testText[#testText].RawText == "Boon Core Build Missing",
+check(#testDestroyed == 3 and #testDestroyed[1].Ids == 1
+    and #testDestroyed[2].Ids == 2 and #testDestroyed[3].Ids == 6
+    and #testCreated == 18 and testText[#testText - 2].RawText == "Boon Core Build Missing",
     "synthetic reroll did not clear and recreate ranks plus the single Core advisory")
 local fg, fl, falseStart, _, falsePrivate, _, _, _, _, falseCreated = fixture(
     function() end, nil, true, {
@@ -725,7 +767,7 @@ local fg, fl, falseStart, _, falsePrivate, _, _, _, _, falseCreated = fixture(
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
     }, false, "intermediate")
 falseStart(); fg.CreateBoonLootButtons(testScreen, testLoot)
-check(#falseCreated == 2 and falsePrivate.probeState.lastRankingReady == false,
+check(#falseCreated == 4 and falsePrivate.probeState.lastRankingReady == false,
     "UI_TEST_MODE=false did not render analysis fallback")
 local partialLoot = { Name = "AresUpgrade", GodLoot = true, UpgradeOptions = {
     { ItemName = "AresSpecialBoon" }, { ItemName = "FocusRawDamageBoon" },
@@ -764,7 +806,7 @@ local rg2, rl2, realStart, _, realPrivate, _, _, _, _, realCreated = fixture(
         GetEquippedWeapon = function() return "WeaponDagger" end, LootData = {}, IsGodTrait = function() return false end,
     }, true, "intermediate")
 realStart(); rg2.CreateBoonLootButtons(realScreen, testLoot)
-check(realPrivate.probeState.lastRankingReady == true and #realCreated == 7
+check(realPrivate.probeState.lastRankingReady == true and #realCreated == 9
     and realScreen.BoonAdvisorCoreAdvisory ~= nil,
     "UI_TEST_MODE did not preserve real ready UI")
 for _, line in ipairs(rl2) do

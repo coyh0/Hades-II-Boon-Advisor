@@ -23,6 +23,7 @@ local GameStateSnapshot = import("GameState.lua")
 local LobbyProbe = import("LobbyProbe.lua")
 local OfferSnapshot = import("OfferSnapshot.lua")
 local CoreAdvisory = import("CoreAdvisory.lua")
+local GodPoolContext = import("GodPoolContext.lua")
 local PomAdvisor = import("PomAdvisor.lua")
 local FocusState = import("FocusState.lua")
 local ScoringEngine = import("ScoringEngine.lua")
@@ -326,6 +327,8 @@ local function diagnose(screen, lootData)
         CurrentRun = type(gameGlobals) == "table" and gameGlobals.CurrentRun or nil,
         GetEquippedWeapon = type(gameGlobals) == "table" and gameGlobals.GetEquippedWeapon or nil,
         LootData = type(gameGlobals) == "table" and gameGlobals.LootData or nil,
+        HeroData = type(gameGlobals) == "table" and gameGlobals.HeroData or nil,
+        OfferSource = lootData.Name,
         IsGodTrait = type(gameGlobals) == "table" and gameGlobals.IsGodTrait or nil,
     })
     local selectedDescriptor, selectionReason = ProfileResolver.resolve(
@@ -362,6 +365,16 @@ local function diagnose(screen, lootData)
     local showCoreAdvisory = CoreAdvisory.shouldShow(
         ScoringEngine.effectiveProfile(snapshot, selectedProfile), snapshot, profileSupported)
     state.lastCoreAdvisory = showCoreAdvisory
+    local godPoolContext = offerKind == "boon" and supportedSources[lootData.Name] == true
+        and GodPoolContext.evaluate(CoreAdvisory.godPoolMembership(selectedProfile, snapshot), snapshot)
+        or nil
+    if godPoolContext ~= nil and snapshot.nativeGodPool.offerIsGodLoot == true then
+        state.log("GodPoolContext source=" .. snapshot.offerSource
+            .. " recommended=" .. godPoolContext.recommendedByBuild
+            .. " observed=" .. godPoolContext.observedInRuntimePool
+            .. " historyComplete=" .. tostring(snapshot.nativeGodPool.historyComplete)
+            .. " max=" .. tostring(snapshot.nativeGodPool.maxGods))
+    end
     local function renderUI(ranks)
         UI.clearFallback(screen, getUIApi())
         state.log("UI calling renderRanks mode=" .. (rankingReady and "real" or "synthetic")
@@ -457,6 +470,10 @@ local function diagnose(screen, lootData)
     local advisoryOk, advisoryErr = pcall(UI.renderCoreAdvisory, screen, showCoreAdvisory, getUIApi())
     if not advisoryOk then
         logger.error("UI_CORE_ADVISORY_FAILED", "Core advisory rendering failed: " .. tostring(advisoryErr))
+    end
+    local poolOk, poolErr = pcall(UI.renderGodPoolContext, screen, godPoolContext, getUIApi())
+    if not poolOk then
+        logger.error("UI_GOD_POOL_FAILED", "God Pool context rendering failed: " .. tostring(poolErr))
     end
 
     if snapshot.playerFocus ~= nil then

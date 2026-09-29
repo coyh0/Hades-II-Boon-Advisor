@@ -20,6 +20,36 @@ function GameStateSnapshot.capture(runtime)
     local snapshot = { traits = {}, hammers = {}, godTraits = {}, activeArcana = {}, slottedTraits = {},
         combatContext = { statusFamilies = {} } }
     local run = runtime.CurrentRun
+
+    -- Copy only the native God Pool facts needed for this offer. No references
+    -- to mutable game tables or state from an earlier run are retained.
+    local nativePool = { registered = {}, historyComplete = false }
+    snapshot.nativeGodPool = nativePool
+    local history = type(run) == "table" and run.LootTypeHistory or nil
+    local lootData = runtime.LootData
+    if type(history) == "table" and type(lootData) == "table" then
+        nativePool.historyComplete = true
+        for source, count in pairs(history) do
+            if type(source) ~= "string" or type(count) ~= "number" or count < 0 then
+                nativePool.historyComplete = false
+            elseif count > 0 then
+                local loot = lootData[source]
+                if type(loot) ~= "table" then
+                    nativePool.historyComplete = false
+                elseif loot.GodLoot == true then
+                    nativePool.registered[source] = true
+                end
+            end
+        end
+        local offer = type(runtime.OfferSource) == "string" and lootData[runtime.OfferSource] or nil
+        if type(offer) == "table" then nativePool.offerIsGodLoot = offer.GodLoot == true end
+        local heroData = runtime.HeroData
+        if run.MaxGodsPerRun ~= nil then
+            nativePool.maxGods = run.MaxGodsPerRun
+        elseif type(heroData) == "table" then
+            nativePool.maxGods = heroData.MaxGodsPerRun
+        end
+    end
     local hero = type(run) == "table" and run.Hero or nil
     if type(hero) ~= "table" then return snapshot end
 
