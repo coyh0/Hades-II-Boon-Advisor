@@ -45,6 +45,25 @@ evidence-kind compatibility, allowed statuses, rejection of build-specific
 fields, proof requirements for external-name mappings, and the exact
 `TrialUpgrade` pair allowlist.
 
+## Read-only freshness report
+
+Compare the catalog's recorded native-file SHA-256 values with a local Hades II
+installation. This report does not update the catalog or any claim status:
+
+```powershell
+.\.venv\Scripts\python.exe .\tools\report_attestation_freshness.py --game-root "D:\Games\HadesII-Dev" --game-build 139606 --output .\attestation-freshness.json
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\attestation_freshness_spec.ps1
+```
+
+`--game-build` is optional and records the build observed by the operator; the
+tool does not infer a game version. Each evidence record is reported as
+`unchanged`, `modified`, `missing`, `error`, `indeterminate`, or
+`not_file_backed`. Only changed hashes request revalidation. Missing, unreadable,
+or unsafe paths are reported as unknown freshness; they do not invalidate an
+attestation. The report links each evidence record to its exact claims and
+native item/source/source-boon-pair target. Review and any catalog update remain
+separate, explicit actions.
+
 ## Direct validator invocation
 
 ```powershell
