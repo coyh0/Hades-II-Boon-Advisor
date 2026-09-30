@@ -3,6 +3,7 @@ param(
     [string]$CanonicalDirectory,
     [string]$MechanicsDirectory,
     [string]$CatalogPath,
+    [string]$AttestationCatalogPath,
     [string]$OutputDirectory,
     [switch]$ValidateOnly
 )
@@ -15,6 +16,9 @@ if ([string]::IsNullOrWhiteSpace($MechanicsDirectory)) {
 }
 if ([string]::IsNullOrWhiteSpace($CatalogPath)) {
     $CatalogPath = Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\catalog\weapons_aspects.json'
+}
+if ([string]::IsNullOrWhiteSpace($AttestationCatalogPath)) {
+    $AttestationCatalogPath = Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\catalog\runtime_attestations.json'
 }
 if (-not $PSBoundParameters.ContainsKey('OutputDirectory')) {
     $OutputDirectory = Join-Path ([IO.Path]::GetTempPath()) ('boon-advisor-generated-' + [Guid]::NewGuid())
@@ -219,7 +223,7 @@ function Validate-Profile([hashtable]$profile, [hashtable]$seenIds, [hashtable]$
     }
     Assert-StringArray $profile.constraints 'constraints'
 }
-function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtable]$catalog) {
+function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtable]$catalog, [hashtable]$attestationCatalog) {
     if ($mechanics.schemaVersion -ne 1) { Fail 'unsupported mechanics schemaVersion' }
     foreach ($field in @('id', 'weapon', 'aspect')) { Assert-String $mechanics[$field] "mechanics.$field" }
     if ($seenIds[$mechanics.id]) { Fail "duplicate mechanics template id $($mechanics.id)" }
@@ -378,6 +382,36 @@ function Validate-Mechanics([hashtable]$mechanics, [hashtable]$seenIds, [hashtab
             }
         }
     }
+    if ($mechanics.ContainsKey('attestationCatalogVersion')) {
+        if ($mechanics.attestationCatalogVersion -ne 1) { Fail "unsupported attestationCatalogVersion in $($mechanics.id)" }
+        if ($null -eq $attestationCatalog) { Fail "attestation catalog is required for mechanics template $($mechanics.id)" }
+        if (-not $mechanics.ContainsKey('sourceScoring')) { Fail "attestation catalog opt-in requires sourceScoring for $($mechanics.id)" }
+        foreach ($kind in @('boons', 'hammers', 'poms', 'deferred')) {
+            foreach ($entry in $mechanics.sourceScoring[$kind].GetEnumerator()) {
+                if (-not (Test-AttestedRuntimeItem $attestationCatalog ([string]$entry.Key))) {
+                    Fail "sourceScoring.$kind ID is absent or unusable in the attestation catalog: $($entry.Key)"
+                }
+            }
+        }
+        foreach ($section in @('offerSources', 'npcOfferings')) {
+            if ($mechanics.sourceScoring.ContainsKey($section)) {
+                foreach ($entry in $mechanics.sourceScoring[$section].GetEnumerator()) {
+                    if (-not (Test-AttestedSourceBoonPair $attestationCatalog ([string]$entry.Value) ([string]$entry.Key))) {
+                        Fail "sourceScoring.$section pair is absent or unusable in the attestation catalog: $($entry.Value) / $($entry.Key)"
+                    }
+                }
+            }
+        }
+        foreach ($verifiedRole in $mechanics.verifiedIds.Values) {
+            if ($verifiedRole -is [object[]]) {
+                foreach ($runtimeId in $verifiedRole) {
+                    if (-not (Test-AttestedRuntimeItem $attestationCatalog ([string]$runtimeId))) {
+                        Fail "verifiedIds contains an ID absent or unusable in the attestation catalog: $runtimeId"
+                    }
+                }
+            }
+        }
+    }
     foreach ($entry in $mechanics.aspectInteractions.GetEnumerator()) {
         Assert-String $entry.Key 'aspectInteractions trait ID'
         if ($entry.Value -is [string]) {
@@ -474,11 +508,22 @@ function ConvertTo-Lua([object]$value, [int]$indent = 0) {
     Fail "unsupported JSON value type $($value.GetType().FullName)"
 }
 $catalog = Read-WeaponAspectCatalog $CatalogPath
+$script:AttestationCatalog = $null
+$attestationCatalogLoaded = $false
 $mechanicsFiles = @(Get-ChildItem -LiteralPath $MechanicsDirectory -Filter '*.json' -File | Sort-Object Name)
 if ($mechanicsFiles.Count -eq 0) { Fail "no mechanics templates in $MechanicsDirectory" }
 $mechanicsIds = @{}; $mechanicsById = @{}
 foreach ($file in $mechanicsFiles) {
-    $mechanics = Read-Json $file.FullName; Validate-Mechanics $mechanics $mechanicsIds $catalog
+    $mechanics = Read-Json $file.FullName
+    if ($mechanics.ContainsKey('attestationCatalogVersion')) {
+        if (-not $attestationCatalogLoaded) {
+            . (Join-Path $PSScriptRoot 'AttestationCatalog.Common.ps1')
+            try { $script:AttestationCatalog = Read-AttestationCatalog $AttestationCatalogPath }
+            catch { Fail $_.Exception.Message }
+            $attestationCatalogLoaded = $true
+        }
+    }
+    Validate-Mechanics $mechanics $mechanicsIds $catalog $script:AttestationCatalog
     $mechanicsById[$mechanics.id] = $mechanics
 }
 $files = @(Get-ChildItem -LiteralPath $CanonicalDirectory -Filter '*.json' -File | Sort-Object Name)

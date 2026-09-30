@@ -3,9 +3,13 @@ param(
     [Parameter(Mandatory = $true)][string]$InputPath,
     [Parameter(Mandatory = $true)][string]$PolicyPath,
     [string]$CatalogPath = (Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\catalog\weapons_aspects.json'),
+    [string]$AttestationCatalogPath,
     [string]$OutputPath
 )
 $ErrorActionPreference = 'Stop'
+if ([string]::IsNullOrWhiteSpace($AttestationCatalogPath)) {
+    $AttestationCatalogPath = Join-Path (Split-Path $PSScriptRoot -Parent) 'data\canonical\catalog\runtime_attestations.json'
+}
 
 function Fail([string]$message) { throw "Build Registry import validation failed: $message" }
 function Read-Json([string]$path) {
@@ -37,6 +41,21 @@ if ($document.schemaVersion -ne 1 -or $document.rows -isnot [array]) { Fail 'inp
 if ($policy.schemaVersion -ne 1 -or $policy.boonClassifications -isnot [pscustomobject] -or
     $policy.verifiedRuntimeItemIds -isnot [array] -or $policy.keepsakeStartAsAutoSignal -isnot [bool]) {
     Fail 'policy requires schemaVersion 1, boonClassifications, verifiedRuntimeItemIds, and keepsakeStartAsAutoSignal'
+}
+$requiresAttestationCatalog = $false
+foreach ($candidateRow in $document.rows) {
+    if ($candidateRow.importStatus -eq 'ready' -and
+        (($candidateRow.itemType -eq 'boon' -and (Has-Property $candidateRow 'sourceGroup')) -or
+         $candidateRow.itemType -eq 'offering')) {
+        $requiresAttestationCatalog = $true
+        break
+    }
+}
+$attestationCatalog = $null
+if ($requiresAttestationCatalog) {
+    . (Join-Path $PSScriptRoot 'AttestationCatalog.Common.ps1')
+    try { $attestationCatalog = Read-AttestationCatalog $AttestationCatalogPath }
+    catch { Fail $_.Exception.Message }
 }
 $verifiedNpcSources = @{ NPC_Athena_01 = $true; NPC_Hades_Field_01 = $true; NPC_Artemis_Field_01 = $true }
 $verifiedNpcOfferingPairs = New-Object 'System.Collections.Generic.Dictionary[string,string]' ([StringComparer]::Ordinal)
@@ -196,6 +215,9 @@ foreach ($groupKey in @($groups.Keys | Sort-Object -CaseSensitive)) {
         $role = $null; $slot = $null
         if ($row.itemType -eq 'boon') {
             if (Has-Property $row 'sourceGroup') {
+                if (-not (Test-AttestedRuntimeItem $attestationCatalog ([string]$row.runtimeItemId))) {
+                    Add-Reason $reasons 'runtime_item_id_not_in_usable_attestation_catalog'
+                }
                 if (-not $row.runtimeItemId -or -not $verifiedBoonMappings.ContainsKey([string]$row.runtimeItemId)) {
                     Add-Reason $reasons 'unverified_boon_source_mapping'
                 } else {
@@ -231,6 +253,8 @@ foreach ($groupKey in @($groups.Keys | Sort-Object -CaseSensitive)) {
             if (-not $row.runtimeItemId -or -not $verifiedOfferingPairs.ContainsKey([string]$row.runtimeItemId) -or
                 [string]$row.offerSource -cne $verifiedOfferingPairs[[string]$row.runtimeItemId]) {
                 Add-Reason $reasons 'unverified_offering_source_item_pair'
+            } elseif (-not (Test-AttestedSourceBoonPair $attestationCatalog ([string]$row.offerSource) ([string]$row.runtimeItemId))) {
+                Add-Reason $reasons 'source_item_pair_not_in_usable_attestation_catalog'
             } else { $role = 'offering' }
         } elseif ($row.itemType -eq 'npcOffering') {
             if (-not $row.runtimeItemId -or -not $verifiedNpcOfferingPairs.ContainsKey([string]$row.runtimeItemId) -or

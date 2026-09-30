@@ -113,4 +113,33 @@ For a local fixture, run:
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\Test-BuildRegistryImport.ps1 -InputPath <rows.json> -PolicyPath <trusted-policy.json> -OutputPath <plan.json>
 ```
 
+The importer keeps the schema-1 legacy `classification`/slot path and
+`npcOffering` path compatible. Rows using the explicit `sourceGroup` boon format
+or generic `offering` format additionally require the shared
+`data/canonical/catalog/runtime_attestations.json` (override with
+`-AttestationCatalogPath` for isolated tests). The importer requires a usable,
+validated native `Trait` claim for each such boon ID and an exact validated
+catalog source/boon pair for each generic offering, with matching proof links.
+The trusted projection policy must still independently authorize the
+build-specific source group, Core role, or selected offering; catalog membership
+does not select or prioritize a recommendation. Missing IDs, wrong-case IDs,
+non-validated claims, unknown sources, mismatched pairs, or broken proof links
+block the affected import or fail closed when the catalog itself is malformed.
+
+Canonical mechanics templates can opt into the same shared attestations with
+`attestationCatalogVersion: 1`. The profile generator validates native IDs in
+the active source-scoring maps and exact source/boon pairs before emitting the
+runtime profile. The opt-in marker is validation metadata and is not copied into
+Lua. Templates without the marker, including historical Medea, retain their
+existing validation path. Build-specific scoring groups, Core/Non-Core roles,
+priority, God Pool, conditions, and Pom selections remain in the projection.
+
+Run the catalog consumer and Moonstone parity specs with:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\attestation_consumers_spec.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\moonstone_projection_spec.ps1
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tests\build_registry_import_spec.ps1
+```
+
 The `-CatalogPath` parameter can point at a fixture catalog in tests; its default is `data/canonical/catalog/weapons_aspects.json`. Keep the policy under local review, separate from any external spreadsheet export. The tool does not contain or require a spreadsheet URL or credential.

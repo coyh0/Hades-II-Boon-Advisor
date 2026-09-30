@@ -7,7 +7,9 @@ $testRoot = Join-Path ([IO.Path]::GetTempPath()) ('boon-import-contract-' + [Gui
 New-Item -ItemType Directory -Path $testRoot -Force | Out-Null
 $inputPath = Join-Path $testRoot 'rows.json'
 $policyPath = Join-Path $testRoot 'policy.json'
+$attestationCatalogPath = Join-Path $testRoot 'attestations.json'
 $outputPath = Join-Path $testRoot 'result.json'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\catalog\runtime_attestations.json') -Destination $attestationCatalogPath
 
 function Write-Json([string]$path, [object]$value) {
     [IO.File]::WriteAllText($path, (ConvertTo-Json -InputObject $value -Depth 20 -Compress), (New-Object System.Text.UTF8Encoding($false)))
@@ -26,7 +28,7 @@ function Run-Case([object[]]$rows, [bool]$expectSuccess, [string]$name) {
     Write-Json $inputPath ([ordered]@{ schemaVersion = 1; rows = @($rows) })
     if (Test-Path -LiteralPath $outputPath) { Remove-Item -LiteralPath $outputPath }
     $ErrorActionPreference = 'Continue'
-    $null = & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $tool -InputPath $inputPath -PolicyPath $policyPath -CatalogPath $catalog -OutputPath $outputPath 2>$null
+    $null = & $windowsPowerShell -NoProfile -ExecutionPolicy Bypass -File $tool -InputPath $inputPath -PolicyPath $policyPath -CatalogPath $catalog -AttestationCatalogPath $attestationCatalogPath -OutputPath $outputPath 2>$null
     $ErrorActionPreference = 'Stop'
     if (($LASTEXITCODE -eq 0) -ne $expectSuccess) { throw "Unexpected import validation result: $name (exit=$LASTEXITCODE)" }
     if (-not $expectSuccess) {
@@ -172,6 +174,35 @@ Assert-Blocked @($row) 'non_core_slot_mismatch' 'Non-Core cannot claim artificia
 $row = Clone-Row $base; $row.runtimeItemId = 'UnknownSupportBoon'; $row.slot = ''; $row.classification = ''
 $row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Non-Core Boons'
 Assert-Blocked @($row) 'unverified_boon_source_mapping' 'unattested boon source mapping'
+$row = Clone-Row $base; $row.runtimeItemId = 'AresWeaponBoon'; $row.slot = ''; $row.classification = ''
+$row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Core Boons'
+$row | Add-Member -NotePropertyName coreRole -NotePropertyValue 'Attack'
+$policy.verifiedBoonMappings += [ordered]@{ runtimeItemId = 'AresWeaponBoon'; sourceGroup = 'Core Boons'; coreRole = 'Attack' }
+Write-Json $policyPath $policy
+Assert-Blocked @($row) 'runtime_item_id_not_in_usable_attestation_catalog' 'new-format item absent from shared catalog'
+$policy.verifiedBoonMappings = @($policy.verifiedBoonMappings | Where-Object runtimeItemId -CNE 'AresWeaponBoon')
+Write-Json $policyPath $policy
+$row = Clone-Row $base; $row.runtimeItemId = 'HephaestusManaBoon'; $row.slot = ''; $row.classification = ''
+$row | Add-Member -NotePropertyName sourceGroup -NotePropertyValue 'Core Boons'
+$row | Add-Member -NotePropertyName coreRole -NotePropertyValue 'Mana'
+$savedAttestationPath = $attestationCatalogPath
+$attestationCatalogPath = Join-Path $testRoot 'missing-catalog.json'
+$legacyWithoutCatalog = Run-Case @($base) $true 'historical import format does not require the new catalog'
+if ($legacyWithoutCatalog.groups[0].status -cne 'ready') { throw 'Legacy importer path changed without catalog opt-in.' }
+$null = Run-Case @($row) $false 'new format fails when attestation catalog is missing'
+$attestationCatalogPath = $savedAttestationPath
+$savedCatalog = Get-Content -LiteralPath $attestationCatalogPath -Raw | ConvertFrom-Json
+($savedCatalog.nativeItems | Where-Object runtimeItemId -CEQ 'HephaestusManaBoon').claims[0].status = 'needs_revalidation'
+Write-Json $attestationCatalogPath $savedCatalog
+Assert-Blocked @($row) 'runtime_item_id_not_in_usable_attestation_catalog' 'unusable native claim status'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\catalog\runtime_attestations.json') -Destination $attestationCatalogPath -Force
+$brokenEvidence = Get-Content -LiteralPath $attestationCatalogPath -Raw | ConvertFrom-Json
+$nativeClaimId = 'native-item-HephaestusManaBoon-type'
+$evidenceRecord = $brokenEvidence.evidence | Where-Object { $_.attests -contains $nativeClaimId }
+$evidenceRecord.attests = @($evidenceRecord.attests | Where-Object { $_ -cne $nativeClaimId })
+Write-Json $attestationCatalogPath $brokenEvidence
+$null = Run-Case @($row) $false 'invalid catalog proof reference fails closed'
+Copy-Item -LiteralPath (Join-Path $repo 'data\canonical\catalog\runtime_attestations.json') -Destination $attestationCatalogPath -Force
 $row = Clone-Row $base; $row.slot = 'Attack'
 Assert-Blocked @($row) 'unsupported_boon_slot' 'slot key case mismatch'
 $row = Clone-Row $base; $row.itemType = 'keepsake'; $row.slot = 'start'; $row.classification = ''; $row.runtimeItemId = 'ForceAresBoonKeepsake'
@@ -209,6 +240,14 @@ if ($soulPlan.groups[0].status -ne 'ready' -or $soulPlan.groups[0].items[0].offe
 }
 $trialOffering.offerSource = 'ChaosUpgrade'
 Assert-Blocked @($trialOffering) 'unverified_offering_source_item_pair' 'unattested offering source'
+$policy.verifiedRuntimeItemIds += 'ChaosSpecialBlessing'
+$policy.verifiedOfferingPairs += [ordered]@{ runtimeItemId = 'ChaosSpecialBlessing'; offerSource = 'TrialUpgrade' }
+Write-Json $policyPath $policy
+$unattestedTrialPair = Clone-Row $trialOffering; $unattestedTrialPair.offerSource = 'TrialUpgrade'; $unattestedTrialPair.runtimeItemId = 'ChaosSpecialBlessing'
+Assert-Blocked @($unattestedTrialPair) 'source_item_pair_not_in_usable_attestation_catalog' 'TrialUpgrade cannot widen from catalog evidence'
+$policy.verifiedRuntimeItemIds = @($policy.verifiedRuntimeItemIds | Where-Object { $_ -cne 'ChaosSpecialBlessing' })
+$policy.verifiedOfferingPairs = @($policy.verifiedOfferingPairs | Where-Object { $_.runtimeItemId -cne 'ChaosSpecialBlessing' })
+Write-Json $policyPath $policy
 $row = Clone-Row $base; $row.itemType = 'hammer'; $row.slot = 'priority'; $row.classification = 'priority'
 $row.runtimeItemId = 'SuitDashAttackTrait'; $row | Add-Member -NotePropertyName priority -NotePropertyValue 1
 $result = Run-Case @($row) $true 'verified Hammer projection'

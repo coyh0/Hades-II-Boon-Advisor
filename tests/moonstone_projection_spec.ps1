@@ -35,11 +35,22 @@ New-Item -ItemType Directory -Path $temp -Force | Out-Null
 $resultPath = Join-Path $temp 'plan.json'
 $tool = Join-Path $repo 'tools\Test-BuildRegistryImport.ps1'
 $catalog = Join-Path $repo 'data\canonical\catalog\weapons_aspects.json'
-& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $tool -InputPath (Join-Path $base 'rows.json') -PolicyPath (Join-Path $base 'policy.json') -CatalogPath $catalog -OutputPath $resultPath | Out-Null
+& powershell.exe -NoProfile -ExecutionPolicy Bypass -File $tool -InputPath (Join-Path $base 'rows.json') -PolicyPath (Join-Path $base 'policy.json') -CatalogPath $catalog -AttestationCatalogPath (Join-Path $repo 'data\canonical\catalog\runtime_attestations.json') -OutputPath $resultPath | Out-Null
 if ($LASTEXITCODE -ne 0) { throw 'Moonstone importer validation failed.' }
 $plan = Get-Content -LiteralPath $resultPath -Raw | ConvertFrom-Json
 if ($plan.groups.Count -ne 1 -or $plan.groups[0].status -cne 'ready' -or $plan.groups[0].items.Count -ne 14) {
     throw 'Moonstone import did not produce one complete ready group.'
+}
+foreach ($row in $rows.rows) {
+    $matches = @($plan.groups[0].items | Where-Object runtimeItemId -CEQ $row.runtimeItemId)
+    $item = if ($matches.Count -eq 1) { $matches[0] } else { $null }
+    $expectedRole = if ($row.itemType -eq 'offering') { 'offering' } elseif ($row.sourceGroup -ceq 'Core Boons') { 'core' } else { 'nonCore' }
+    $expectedSlot = if ($row.sourceGroup -ceq 'Core Boons') { $row.coreRole } else { $null }
+    if ($null -eq $item -or $matches.Count -ne 1 -or $item.role -cne $expectedRole -or
+        $item.slot -cne $expectedSlot -or $item.name -cne $row.name -or
+        ($expectedRole -eq 'offering' -and $item.offerSource -cne $row.offerSource)) {
+        throw "Imported Build Registry candidate differs from the approved projection: $($row.runtimeItemId)"
+    }
 }
 Remove-Item -LiteralPath $temp -Recurse -Force
 Write-Output 'PASS: Moonstone source/plan/canonical parity and 14 verified runtime candidates'

@@ -7,6 +7,7 @@ $expected = @{
     'sister_blades_morrigan.json' = @{ id = 'sister_blades_morrigan'; weapon = 'WeaponDagger'; aspect = 'DaggerTripleAspect'; generic = $false }
     'black_coat_melinoe.json' = @{ id = 'black_coat_melinoe'; weapon = 'WeaponSuit'; aspect = 'BaseSuitAspect'; generic = $false }
     'argent_skull_medea_mobalytics.json' = @{ id = 'argent_skull_medea_mobalytics'; weapon = 'WeaponLob'; aspect = 'LobCloseAttackAspect'; generic = $false }
+    'moonstone_axe_melinoe_mobalytics.json' = @{ id = 'moonstone_axe_melinoe_mobalytics'; weapon = 'WeaponAxe'; aspect = 'AxeRecoveryAspect'; generic = $false }
 }
 if ($mechanicsFiles.Count -ne $expected.Count) { throw 'Unexpected canonical mechanics template inventory.' }
 $sections = @('weights','statusMappings','knownNonStatusTraits','potentialStatusTraits',
@@ -39,6 +40,19 @@ foreach ($file in $mechanicsFiles) {
             $canonical.nonCoreContext.ReserveManaHitShieldBoon.recommendedCore.Count -ne 1 -or
             $canonical.nonCoreContext.ReserveManaHitShieldBoon.recommendedCore[0] -ne 'DemeterCastBoon') {
             throw 'Medea Mobalytics source-score projection changed.'
+        }
+    }
+    if ($file.Name -eq 'moonstone_axe_melinoe_mobalytics.json') {
+        $coreCount = @($canonical.sourceScoring.boons.PSObject.Properties | Where-Object Value -CEQ 'Core Boons').Count
+        $nonCoreCount = @($canonical.sourceScoring.boons.PSObject.Properties | Where-Object Value -CEQ 'Non-Core Boons').Count
+        $offeringCount = @($canonical.sourceScoring.boons.PSObject.Properties | Where-Object Value -CEQ 'Offerings').Count
+        if ($canonical.attestationCatalogVersion -ne 1 -or $coreCount -ne 5 -or $nonCoreCount -ne 6 -or
+            $offeringCount -ne 3 -or $canonical.corePlan.PoseidonSprintBoon.role -ne 'Sprint' -or
+            $canonical.corePlan.HephaestusManaBoon.role -ne 'Mana' -or
+            $canonical.sourceScoring.offerSources.InsideCastCritBoon -ne 'NPC_Artemis_Field_01' -or
+            $canonical.sourceScoring.offerSources.ChaosWeaponBlessing -ne 'TrialUpgrade' -or
+            $canonical.sourceScoring.offerSources.ChaosHealthBlessing -ne 'TrialUpgrade') {
+            throw 'Moonstone Axe catalog opt-in, five Core, six Non-Core, or three exact offerings changed.'
         }
     }
     foreach ($property in $canonical.weights.PSObject.Properties) {
@@ -104,4 +118,4 @@ foreach ($id in @('WeaponDagger','DaggerTripleAspect','WomboStrike','ComboAttack
 foreach ($profilePath in @('data\builds\sister_blades_melinoe_intermediate.lua')) {
     if (-not (Test-Path (Join-Path $repo $profilePath))) { throw "Missing runtime reference: $profilePath" }
 }
-Write-Output 'PASS: Sister Blades, Black Coat, and Medea source-scoring mechanics templates validated'
+Write-Output 'PASS: Sister Blades, Black Coat, Medea, and Moonstone mechanics templates validated'

@@ -4,6 +4,7 @@
   "weapon": "WeaponAxe",
   "aspect": "AxeRecoveryAspect",
   "genericCoreAspectCompatibility": false,
+  "attestationCatalogVersion": 1,
   "traitSemantics": {},
   "weights": { "BUILD_PREFERRED": 2 },
   "sourceScoring": {
