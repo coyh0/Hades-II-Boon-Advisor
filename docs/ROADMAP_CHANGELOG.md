@@ -6,6 +6,17 @@ published mod releases. Entries below that predate this split retain their
 original wording as historical records; the
 [active roadmap](../Hades-II-Boon-Advisor-Roadmap.md) governs current work.
 
+## 2026-10-01 — R-00 public repository organization closed
+
+- The maintainer approved R-00 closure after the public repository audit and
+  the deletion of the three completed GitHub branches:
+  `codex/integration-origin-main`, `codex/roadmap-docs-2026-09-28`, and
+  `codex/medea-runtime-pilot-qa`.
+- `main` remains the canonical public branch;
+  `codex/v02-mechanics-showcase` remains the active work branch. Their
+  divergence was not resolved as part of R-00.
+- R-01 is the next active roadmap step. Its runtime QA has not started.
+
 ## 2026-09-30 — Active roadmap and history separated
 
 - Reduced the active roadmap to current status, work items, dependencies,

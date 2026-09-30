@@ -1,6 +1,6 @@
 # Étape A — QA runtime ciblée du cleanup Focus/Route + Black Coat
 
-Nom du fichier : `QA_Runtime_Etape-A_Cleanup-Focus-Route-Black-Coat.md`
+Nom du fichier : `QA_Runtime_Etape-A_R-01_Cleanup.md`
 
 **Jeu QA :** `<HADES_II_DEV_ROOT>`<br>
 **Mod déployé :** `Ship\ReturnOfModding\plugins\Local-HadesIIBoonAdvisor`

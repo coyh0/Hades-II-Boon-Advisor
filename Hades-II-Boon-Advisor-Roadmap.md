@@ -1,6 +1,6 @@
 # Hades II Boon Advisor — Roadmap
 
-_Last updated: 2026-09-30_
+_Last updated: 2026-10-01_
 
 This file governs current status, active work, dependencies, deferred work,
 and Human Gates. The [archive](docs/history/ROADMAP_ARCHIVE.md) preserves
@@ -21,17 +21,21 @@ Neither historical file authorizes new work.
 - **QA access:** all weapons and regular Aspects are available. Morrigan is
   the only hidden Aspect currently reported unlocked. Await maintainer
   confirmation before planning QA with another hidden Aspect.
-- **Current gate:** read-only audit and proposal for public repository
-  organization (R-00), before the maintainer's Focus/Route and Black Coat
-  cleanup runtime QA (R-01) using the already hash-verified QA installation.
-  Deployment verification is not a gameplay QA result.
+- **Current gate:** R-01 maintainer runtime QA for the Focus/Route and Black
+  Coat cleanup, using the already hash-verified QA installation. The
+  [R-01 checklist](docs/qa/QA_Runtime_Etape-A_R-01_Cleanup.md) is ready;
+  runtime QA has not started. Deployment verification is not a gameplay QA
+  result.
+- **GitHub branches:** `main` remains the canonical public branch and
+  `codex/v02-mechanics-showcase` remains the active work branch. Their
+  divergence is a separate, unresolved matter outside R-00.
 
 ## Active roadmap
 
 | ID | Work item | Status | Next action | Dependency / blocker | Human gate |
 |---|---|---|---|---|---|
-| R-00 | Public repository organization audit and proposal | Planned / Read-only review pending | Review generic and repository-relative paths versus local machine-specific references; audit tracked files and Git history/branches for sensitive or private content and redistribution concerns; propose repository structure and cleanup | Prerequisite to R-01; read-only review only | Review the findings and proposal; approval authority for any subsequent action follows `AGENTS.md` |
-| R-01 | Cleanup runtime QA | Awaiting maintainer QA | Complete the existing [Step A checklist](docs/qa/QA_Runtime_Etape-A_Cleanup-Focus-Route-Black-Coat.md) | R-00 review complete; use the already verified QA installation; redeploy only if source payload changes | Maintainer performs gameplay QA; MAIN may request read-only QA Manager analysis within approved scope |
+| R-00 | Public repository organization audit and proposal | Complete | None for R-00; the approved GitHub branch cleanup is complete | None; `codex/integration-origin-main`, `codex/roadmap-docs-2026-09-28`, and `codex/medea-runtime-pilot-qa` were deleted from GitHub. The divergence between `main` and `codex/v02-mechanics-showcase` remains unresolved outside R-00 | R-00 closure approved by the maintainer; subsequent work follows `AGENTS.md` |
+| R-01 | Cleanup runtime QA | Awaiting maintainer QA | Complete the existing [QA_Runtime_Etape-A_R-01_Cleanup.md](docs/qa/QA_Runtime_Etape-A_R-01_Cleanup.md) | R-00 complete; use the already verified QA installation; redeploy only if source payload changes | Maintainer performs gameplay QA; MAIN may request read-only QA Manager analysis within approved scope |
 | R-02 | Legacy Focus UI cleanup | Deferred until R-01 review | Review `UI.clearFocus` and its two call sites; propose their removal if R-01 confirms the old UI is absent | R-01 results; preserve generic build handling and the profile-retirement restore point | Approve the exact code change, offline validation scope, and any later DEV gate separately |
 | R-03 | Shared native boon catalog and game-update workflow | Deferred / Contract pending | Define the full native boon inventory, version and file-hash checks, rescan/diff process, and reviewed catalog-update contract | R-02 review; existing attestation catalog covers only selected native facts; Curator data exchange remains a separate interface | Approve the contract, implementation scope, and any catalog promotion at separate Human Gates |
 | R-04 | Select the first 10 Mobalytics builds and define the Excel import contract | Deferred / Contract pending | Select the first 10 builds with the maintainer; define the workbook schema, validation, and mapping to reviewed build profiles | R-03 native catalog workflow; formatted Mobalytics workbook and reviewed source evidence | Approve the 10-build selection and import contract; contract approval does not authorize implementation or advancement to the next step |
