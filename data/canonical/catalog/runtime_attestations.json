@@ -1,0 +1,668 @@
+{
+  "$schema": "./runtime_attestations.schema.json",
+  "schemaVersion": 1,
+  "nativeItems": [
+    {
+      "runtimeItemId": "ApolloWeaponBoon",
+      "claims": [
+        {
+          "claimId": "native-item-ApolloWeaponBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_apollo"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "HephaestusSpecialBoon",
+      "claims": [
+        {
+          "claimId": "native-item-HephaestusSpecialBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hephaestus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "DemeterCastBoon",
+      "claims": [
+        {
+          "claimId": "native-item-DemeterCastBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_demeter"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "PoseidonSprintBoon",
+      "claims": [
+        {
+          "claimId": "native-item-PoseidonSprintBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_poseidon"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "HephaestusManaBoon",
+      "claims": [
+        {
+          "claimId": "native-item-HephaestusManaBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hephaestus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "DoubleStrikeChanceBoon",
+      "claims": [
+        {
+          "claimId": "native-item-DoubleStrikeChanceBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_apollo"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "CastNovaBoon",
+      "claims": [
+        {
+          "claimId": "native-item-CastNovaBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_demeter"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "EncounterStartDefenseBuffBoon",
+      "claims": [
+        {
+          "claimId": "native-item-EncounterStartDefenseBuffBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hephaestus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "FocusDamageShaveBoon",
+      "claims": [
+        {
+          "claimId": "native-item-FocusDamageShaveBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_poseidon"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "EncounterStartOffenseBuffBoon",
+      "claims": [
+        {
+          "claimId": "native-item-EncounterStartOffenseBuffBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_poseidon"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "RootDurationBoon",
+      "claims": [
+        {
+          "claimId": "native-item-RootDurationBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_demeter"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "InsideCastCritBoon",
+      "claims": [
+        {
+          "claimId": "native-item-InsideCastCritBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_artemis"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "ChaosWeaponBlessing",
+      "claims": [
+        {
+          "claimId": "native-item-ChaosWeaponBlessing-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_chaos"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "ChaosHealthBlessing",
+      "claims": [
+        {
+          "claimId": "native-item-ChaosHealthBlessing-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_chaos"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "ZeusSpecialBoon",
+      "claims": [
+        {
+          "claimId": "native-item-ZeusSpecialBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_zeus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "HeraWeaponBoon",
+      "claims": [
+        {
+          "claimId": "native-item-HeraWeaponBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hera"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "AresManaBoon",
+      "claims": [
+        {
+          "claimId": "native-item-AresManaBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_ares"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "DoubleBoltBoon",
+      "claims": [
+        {
+          "claimId": "native-item-DoubleBoltBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_zeus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "FocusLightningBoon",
+      "claims": [
+        {
+          "claimId": "native-item-FocusLightningBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_zeus"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "ReserveManaHitShieldBoon",
+      "claims": [
+        {
+          "claimId": "native-item-ReserveManaHitShieldBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_demeter"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "LinkedDeathDamageBoon",
+      "claims": [
+        {
+          "claimId": "native-item-LinkedDeathDamageBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hera"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "MissingHealthCritBoon",
+      "claims": [
+        {
+          "claimId": "native-item-MissingHealthCritBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_ares"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "DeathDefianceRefillBoon",
+      "claims": [
+        {
+          "claimId": "native-item-DeathDefianceRefillBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_athena"
+          ]
+        }
+      ]
+    },
+    {
+      "runtimeItemId": "HadesDeathDefianceDamageBoon",
+      "claims": [
+        {
+          "claimId": "native-item-HadesDeathDefianceDamageBoon-type",
+          "predicate": "nativeType",
+          "value": "Trait",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-traitdata_hades"
+          ]
+        }
+      ]
+    }
+  ],
+  "offerSources": [
+    {
+      "offerSource": "NPC_Artemis_Field_01",
+      "claims": [
+        {
+          "claimId": "source-NPC_Artemis_Field_01-type",
+          "predicate": "sourceType",
+          "value": "NPCReward",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-npcdata_artemis"
+          ]
+        }
+      ]
+    },
+    {
+      "offerSource": "NPC_Athena_01",
+      "claims": [
+        {
+          "claimId": "source-NPC_Athena_01-type",
+          "predicate": "sourceType",
+          "value": "NPCReward",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-npcdata_athena"
+          ]
+        }
+      ]
+    },
+    {
+      "offerSource": "NPC_Hades_Field_01",
+      "claims": [
+        {
+          "claimId": "source-NPC_Hades_Field_01-type",
+          "predicate": "sourceType",
+          "value": "NPCReward",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-npcdata_hades"
+          ]
+        }
+      ]
+    },
+    {
+      "offerSource": "TrialUpgrade",
+      "claims": [
+        {
+          "claimId": "source-TrialUpgrade-type",
+          "predicate": "sourceType",
+          "value": "TrialReward",
+          "status": "validated",
+          "evidenceIds": [
+            "native-file-lootdata_chaos"
+          ]
+        }
+      ]
+    }
+  ],
+  "sourceBoonPairs": [
+    {
+      "pairId": "pair-NPC_Artemis_Field_01-InsideCastCritBoon",
+      "offerSource": "NPC_Artemis_Field_01",
+      "runtimeItemId": "InsideCastCritBoon",
+      "claimId": "pair-NPC_Artemis_Field_01-InsideCastCritBoon",
+      "status": "validated",
+      "evidenceIds": [
+        "native-file-npcdata_artemis"
+      ]
+    },
+    {
+      "pairId": "pair-NPC_Athena_01-DeathDefianceRefillBoon",
+      "offerSource": "NPC_Athena_01",
+      "runtimeItemId": "DeathDefianceRefillBoon",
+      "claimId": "pair-NPC_Athena_01-DeathDefianceRefillBoon",
+      "status": "validated",
+      "evidenceIds": [
+        "native-file-npcdata_athena"
+      ]
+    },
+    {
+      "pairId": "pair-NPC_Hades_Field_01-HadesDeathDefianceDamageBoon",
+      "offerSource": "NPC_Hades_Field_01",
+      "runtimeItemId": "HadesDeathDefianceDamageBoon",
+      "claimId": "pair-NPC_Hades_Field_01-HadesDeathDefianceDamageBoon",
+      "status": "validated",
+      "evidenceIds": [
+        "native-file-npcdata_hades"
+      ]
+    },
+    {
+      "pairId": "pair-TrialUpgrade-ChaosWeaponBlessing",
+      "offerSource": "TrialUpgrade",
+      "runtimeItemId": "ChaosWeaponBlessing",
+      "claimId": "pair-TrialUpgrade-ChaosWeaponBlessing",
+      "status": "validated",
+      "evidenceIds": [
+        "native-file-lootdata_chaos"
+      ]
+    },
+    {
+      "pairId": "pair-TrialUpgrade-ChaosHealthBlessing",
+      "offerSource": "TrialUpgrade",
+      "runtimeItemId": "ChaosHealthBlessing",
+      "claimId": "pair-TrialUpgrade-ChaosHealthBlessing",
+      "status": "validated",
+      "evidenceIds": [
+        "native-file-lootdata_chaos"
+      ]
+    }
+  ],
+  "externalNameMappings": [],
+  "evidence": [
+    {
+      "evidenceId": "native-file-traitdata_artemis",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-InsideCastCritBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Artemis.lua",
+      "stableReference": "InsideCastCritBoon (line 3)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "3988466A08862B84957FF141F536CA71AB6CE6105B6E0F16E0E226F1AB65B1BC"
+    },
+    {
+      "evidenceId": "native-file-traitdata_demeter",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-CastNovaBoon-type",
+        "native-item-DemeterCastBoon-type",
+        "native-item-ReserveManaHitShieldBoon-type",
+        "native-item-RootDurationBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Demeter.lua",
+      "stableReference": "DemeterCastBoon (line 1377); CastNovaBoon (line 1696); RootDurationBoon (line 2211); ReserveManaHitShieldBoon (line 1952)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "A493CB299B1A0F801014CA074642949C5DA031DD9DC3C77A7C06A10FDD3204FC"
+    },
+    {
+      "evidenceId": "native-file-traitdata_hades",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-HadesDeathDefianceDamageBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Hades.lua",
+      "stableReference": "HadesDeathDefianceDamageBoon (line 468)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "ACE7B7D44515D9F60B5DA503203F3D6B9FF707A0260ED6EC0FCD0EC082610C44"
+    },
+    {
+      "evidenceId": "native-file-npcdata_hades",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "pair-NPC_Hades_Field_01-HadesDeathDefianceDamageBoon",
+        "source-NPC_Hades_Field_01-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/NPCData_Hades.lua",
+      "stableReference": "NPC_Hades_Field_01 (line 4); .Traits -> HadesDeathDefianceDamageBoon (line 50)",
+      "method": "Exact native source definition and explicit reward trait-list membership",
+      "reviewedAt": "2026-09-30",
+      "sha256": "C9AD56DC42C5286E247E100B6E1D25B0EA75AB02ECE7EF590ACF86FB3E32BF9D"
+    },
+    {
+      "evidenceId": "native-file-traitdata_hephaestus",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-EncounterStartDefenseBuffBoon-type",
+        "native-item-HephaestusManaBoon-type",
+        "native-item-HephaestusSpecialBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Hephaestus.lua",
+      "stableReference": "HephaestusSpecialBoon (line 824); HephaestusManaBoon (line 1571); EncounterStartDefenseBuffBoon (line 1823)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "91271A44A466CC02354DF2406DDAD62F9FB5A1F1C22CADD6D1D16CF485CF1904"
+    },
+    {
+      "evidenceId": "native-file-traitdata_hera",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-HeraWeaponBoon-type",
+        "native-item-LinkedDeathDamageBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Hera.lua",
+      "stableReference": "HeraWeaponBoon (line 3); LinkedDeathDamageBoon (line 1922)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "53A6DCCBB79468797E094BDBAF6C76177967F0614B08AF2D5F67DC564BE93A0E"
+    },
+    {
+      "evidenceId": "native-file-traitdata_apollo",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-ApolloWeaponBoon-type",
+        "native-item-DoubleStrikeChanceBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Apollo.lua",
+      "stableReference": "ApolloWeaponBoon (line 3); DoubleStrikeChanceBoon (line 2288)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "CACB1AE3A14746E60E454DC07E8A4778084CE7C6B62AD87F2B46DD33178B49C8"
+    },
+    {
+      "evidenceId": "native-file-traitdata_poseidon",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-EncounterStartOffenseBuffBoon-type",
+        "native-item-FocusDamageShaveBoon-type",
+        "native-item-PoseidonSprintBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Poseidon.lua",
+      "stableReference": "PoseidonSprintBoon (line 1788); FocusDamageShaveBoon (line 2188); EncounterStartOffenseBuffBoon (line 1992)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "FE12D766E7B408A90F48C04C8E96E25A0DAA10A928A19FE6F4C368E2A21BB639"
+    },
+    {
+      "evidenceId": "native-file-lootdata_chaos",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "pair-TrialUpgrade-ChaosHealthBlessing",
+        "pair-TrialUpgrade-ChaosWeaponBlessing",
+        "source-TrialUpgrade-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/LootData_Chaos.lua",
+      "stableReference": "TrialUpgrade (line 4); .Traits -> ChaosWeaponBlessing (line 61); .Traits -> ChaosHealthBlessing (line 61)",
+      "method": "Exact native source definition and explicit reward trait-list membership",
+      "reviewedAt": "2026-09-30",
+      "sha256": "63D8EA3839D5E585ADE60ED2DD8ABA2EAE42D4C2A48743E69495906D83773FE4"
+    },
+    {
+      "evidenceId": "native-file-traitdata_ares",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-AresManaBoon-type",
+        "native-item-MissingHealthCritBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Ares.lua",
+      "stableReference": "AresManaBoon (line 1393); MissingHealthCritBoon (line 1923)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "EB6CC08C96E4A6B1CC4A589D23F445BCF5FDDC03605079F189C790B807B64BDE"
+    },
+    {
+      "evidenceId": "native-file-npcdata_artemis",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "pair-NPC_Artemis_Field_01-InsideCastCritBoon",
+        "source-NPC_Artemis_Field_01-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/NPCData_Artemis.lua",
+      "stableReference": "NPC_Artemis_Field_01 (line 1829); .Traits -> InsideCastCritBoon (line 1917)",
+      "method": "Exact native source definition and explicit reward trait-list membership",
+      "reviewedAt": "2026-09-30",
+      "sha256": "3A1CB7A56DAD875C9959244D9D73439073515DCE6884E871341BFD5C6B2793C6"
+    },
+    {
+      "evidenceId": "native-file-traitdata_zeus",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-DoubleBoltBoon-type",
+        "native-item-FocusLightningBoon-type",
+        "native-item-ZeusSpecialBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Zeus.lua",
+      "stableReference": "ZeusSpecialBoon (line 791); DoubleBoltBoon (line 1926); FocusLightningBoon (line 1828)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "6263E982E1D6BA03F8CB83D3B15C87A6A342DBC868D7C203E345CE5D59D1FAED"
+    },
+    {
+      "evidenceId": "native-file-traitdata_athena",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-DeathDefianceRefillBoon-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Athena.lua",
+      "stableReference": "DeathDefianceRefillBoon (line 282)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "64A482AD870EA033D370573DA18ACE30FEB9E650FCABFFC27701CFDA678E4EBE"
+    },
+    {
+      "evidenceId": "native-file-traitdata_chaos",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "native-item-ChaosHealthBlessing-type",
+        "native-item-ChaosWeaponBlessing-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/TraitData_Chaos.lua",
+      "stableReference": "ChaosWeaponBlessing (line 61); ChaosHealthBlessing (line 125)",
+      "method": "Exact native TraitData table key; definition presence only",
+      "reviewedAt": "2026-09-30",
+      "sha256": "6B68BAD6A7FA358E7DAD29DE911541D95CD720E25B2BBBDCC5ACF6D872BE83A5"
+    },
+    {
+      "evidenceId": "native-file-npcdata_athena",
+      "evidenceKind": "Hades2NativeFile",
+      "attests": [
+        "pair-NPC_Athena_01-DeathDefianceRefillBoon",
+        "source-NPC_Athena_01-type"
+      ],
+      "gameBuild": "139606",
+      "filePath": "Content/Scripts/NPCData_Athena.lua",
+      "stableReference": "NPC_Athena_01 (line 3); .Traits -> DeathDefianceRefillBoon (line 129)",
+      "method": "Exact native source definition and explicit reward trait-list membership",
+      "reviewedAt": "2026-09-30",
+      "sha256": "3AB70AFEA115BB62BB7F839FE5F6D4F5A5C1760B227B5AA94817DF9073FCA3F5"
+    }
+  ]
+}
