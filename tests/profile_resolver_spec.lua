@@ -5,29 +5,28 @@ for _, descriptor in pairs(registry) do loadedProfiles[descriptor.module] = asse
 local function check(value, message) assert(value, message) end
 local function owned(...) local t = {}; for i = 1, select("#", ...) do t[i] = { Name = select(i, ...) } end; return t end
 
-check(registry.starter == nil, "retired Starter remains selectable")
+for _, key in ipairs({ "intermediate", "morrigan_meta", "coat_melinoe_intermediate", "starter" }) do
+    check(registry[key] == nil, "retired profile remains selectable: " .. key)
+end
 for _, names in ipairs({ {}, { "ZeusSpecialBoon" }, { "ForceZeusBoonKeepsake" },
     { "AphroditeWeaponBoon" }, { "AresWeaponBoon" }, { "ForceAresBoonKeepsake" },
     { "AphroditeWeaponBoon", "ForceAresBoonKeepsake" } }) do
-    local profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerBackstabAspect", nil,
+    local profile, reason = Resolver.resolve(registry, "WeaponLob", "LobCloseAttackAspect", nil,
         owned(table.unpack(names)), loadedProfiles)
-    check(profile == registry.intermediate and reason == "only_candidate",
-        "Melinoe singleton depended on shared boon or keepsake evidence")
+    check(profile == registry.argent_skull_medea_mobalytics and reason == "only_candidate",
+        "Medea singleton depended on unrelated boon or keepsake evidence")
 end
-local profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerBackstabAspect", "intermediate",
+local profile, reason = Resolver.resolve(registry, "WeaponLob", "LobCloseAttackAspect", "argent_skull_medea_mobalytics",
     owned("AresWeaponBoon"), loadedProfiles)
-check(profile == registry.intermediate and reason == "preferred", "explicit Intermediate preference changed")
-profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerBackstabAspect", "starter", {}, loadedProfiles)
-check(profile == registry.intermediate and reason == "only_candidate", "retired preference blocked singleton auto")
-profile, reason = Resolver.resolve(registry, "WeaponDagger", "DaggerTripleAspect", nil, {}, loadedProfiles)
-check(profile == registry.morrigan_meta and reason == "only_candidate", "Morrigan singleton changed")
-profile, reason = Resolver.resolve(registry, "WeaponSuit", "BaseSuitAspect", nil, {}, loadedProfiles)
-check(profile == registry.coat_melinoe_intermediate and reason == "only_candidate", "Black Coat singleton changed")
+check(profile == registry.argent_skull_medea_mobalytics and reason == "preferred", "explicit Medea preference changed")
+profile, reason = Resolver.resolve(registry, "WeaponLob", "LobCloseAttackAspect", "intermediate", {}, loadedProfiles)
+check(profile == registry.argent_skull_medea_mobalytics and reason == "only_candidate",
+    "retired preference blocked singleton auto")
 profile, reason = Resolver.resolve(registry, "WeaponAxe", "AxeRecoveryAspect", nil, {}, loadedProfiles)
 check(profile == registry.moonstone_axe_melinoe_mobalytics and reason == "only_candidate",
     "Moonstone Axe identity did not select its own Mobalytics profile")
-for _, pair in ipairs({ { "WeaponDagger", "DaggerBlockAspect" }, { "WeaponSuit", "UnknownAspect" },
-    { "UnknownWeapon", "DaggerBackstabAspect" } }) do
+for _, pair in ipairs({ { "WeaponDagger", "DaggerBackstabAspect" }, { "WeaponDagger", "DaggerTripleAspect" },
+    { "WeaponSuit", "BaseSuitAspect" }, { "WeaponSuit", "UnknownAspect" }, { "UnknownWeapon", "LobCloseAttackAspect" } }) do
     profile, reason = Resolver.resolve(registry, pair[1], pair[2], nil, {}, loadedProfiles)
     check(profile == nil and reason == "unsupported", "unsupported weapon/aspect selected a profile")
 end
@@ -62,4 +61,4 @@ profile, reason = Resolver.resolve(ambiguousRegistry, "WeaponDagger", "AspectX",
 check(profile == ambiguousRegistry.two and reason == "preferred", "explicit compatible preference changed")
 profile, reason = Resolver.resolve(ambiguousRegistry, "WeaponDagger", "AspectX", "starter", {}, syntheticProfiles)
 check(profile == nil and reason == "ambiguous", "incompatible preference selected a profile")
-print("PASS: active singleton profiles, retired preference fallback, and legacy multi-candidate fail-safe")
+print("PASS: active Mobalytics singleton profiles, retired preference fallback, and generic multi-candidate fail-safe")

@@ -30,9 +30,6 @@ local strings = {
         godPoolRunYes = "Run God Pool: Present",
         godPoolRunNo = "Run God Pool: Absent",
         godPoolRunUnknown = "Run God Pool: Unknown",
-        buildBladesMelinoe = "Sister Blades · Melinoë",
-        buildBladesMorrigan = "Sister Blades · Aspect of Morrigan",
-        buildBlackCoat = "Black Coat · Melinoë",
         buildMedea = "Argent Skull · Aspect of Medea",
         buildMoonstoneAxe = "Moonstone Axe · Aspect of Melinoë",
         pomCore = "Build core", pomAlternative = "Build alternative",
@@ -69,9 +66,6 @@ local strings = {
         godPoolRunYes = "God Pool de la run : présent",
         godPoolRunNo = "God Pool de la run : absent",
         godPoolRunUnknown = "God Pool de la run : inconnu",
-        buildBladesMelinoe = "Lames Sœurs · Melinoë",
-        buildBladesMorrigan = "Lames Sœurs · Aspect de Morrigan",
-        buildBlackCoat = "Manteau Noir · Melinoë",
         buildMedea = "Argent Skull · Aspect de Médée",
         buildMoonstoneAxe = "Hache Sélénique · Aspect de Mélinoé",
         pomCore = "Core du build", pomAlternative = "Alternative du build",
@@ -120,9 +114,6 @@ end
 
 function Localization.buildName(language, profileId)
     local names = {
-        sister_blades_melinoe_intermediate = "buildBladesMelinoe",
-        sister_blades_morrigan_meta = "buildBladesMorrigan",
-        black_coat_melinoe_intermediate = "buildBlackCoat",
         argent_skull_medea_mobalytics = "buildMedea",
         moonstone_axe_melinoe_mobalytics = "buildMoonstoneAxe",
     }

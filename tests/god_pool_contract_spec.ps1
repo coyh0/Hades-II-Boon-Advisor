@@ -78,8 +78,11 @@ try {
             throw "Generated profile lost God Pool source mapping: $($item.id)"
         }
     }
-    $generatedBlackCoat = [IO.File]::ReadAllText((Join-Path $tempOutput 'black_coat_melinoe_intermediate.lua'))
-    if ($generatedBlackCoat -match 'godPool\s*=') { throw 'A profile without God Pool acquired inferred pool data.' }
+    $generatedMoonstonePath = Join-Path $tempOutput 'moonstone_axe_melinoe_mobalytics.lua'
+    if ((Get-FileHash -LiteralPath $generatedMoonstonePath -Algorithm SHA256).Hash -ne
+        (Get-FileHash -LiteralPath (Join-Path $repo 'data\builds\moonstone_axe_melinoe_mobalytics.lua') -Algorithm SHA256).Hash) {
+        throw 'Medea God Pool validation changed the independent Moonstone profile.'
+    }
 
     $mechanicsJsonPath = Join-Path $tempMechanics 'argent_skull_medea_mobalytics.json'
     $mechanicsJson = Get-Content -LiteralPath $mechanicsJsonPath -Raw

@@ -3,8 +3,8 @@
 $script:BoonAdvisorPluginDirectory = 'Local-HadesIIBoonAdvisor'
 $script:BoonAdvisorExpectedFiles = @(
     'FocusState.lua', 'GameState.lua', 'GodPoolContext.lua', 'LobbyProbe.lua', 'Logger.lua', 'Localization.lua', 'OfferSnapshot.lua', 'CoreAdvisory.lua', 'PomAdvisor.lua', 'ProfileResolver.lua', 'ScoringEngine.lua', 'UI.lua', 'main.lua', 'manifest.json',
-    'config\settings.lua', 'data\builds\argent_skull_medea_mobalytics.lua', 'data\builds\black_coat_melinoe_intermediate.lua', 'data\builds\registry.lua', 'data\builds\sister_blades_melinoe_intermediate.lua',
-    'data\builds\sister_blades_morrigan_meta.lua', 'data\builds\moonstone_axe_melinoe_mobalytics.lua'
+    'config\settings.lua', 'data\builds\argent_skull_medea_mobalytics.lua', 'data\builds\registry.lua',
+    'data\builds\moonstone_axe_melinoe_mobalytics.lua'
 ) | Sort-Object
 $script:BoonAdvisorExpectedDirectories = @('config', 'data', 'data\builds') | Sort-Object
 $script:BoonAdvisorLoaderHash = '0EC38238EEBB003740ED311FCFA4ECDFBA259F3675A9AAB446104367E4AEA94D'

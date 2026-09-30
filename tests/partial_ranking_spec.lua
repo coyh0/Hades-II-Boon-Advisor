@@ -78,18 +78,4 @@ check(decide({ result(1, 12, "BUILD_CORE_PRIORITY", true, true),
 check(decide({ result(1, 0, nil, false, false), result(2, 0, nil, false, false),
     result(3, 0, nil, false, false) }).mode == "none", "0/3 evaluated was ranked")
 
-local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
-local blackCoatScores = Engine.scoreOffers({ weapon = "WeaponSuit", aspect = "BaseSuitAspect",
-    godTraits = {}, hammers = {}, activeArcana = {}, offers = {
-        { originalIndex = 1, ItemName = "PoseidonWeaponBoon", Rarity = "Common" },
-        { originalIndex = 2, ItemName = "PoseidonManaBoon", Rarity = "Common" },
-        { originalIndex = 3, ItemName = "RoomRewardBonusBoon", Rarity = "Common" },
-    } }, coat)
-check(blackCoatScores[1].covered and blackCoatScores[1].scoreComplete
-    and blackCoatScores[2].covered and blackCoatScores[2].scoreComplete
-    and not blackCoatScores[3].covered and not blackCoatScores[3].scoreComplete,
-    "observed Black Coat offer coverage changed")
-decision = decide(blackCoatScores)
-check(decision.mode == "partial" and #decision.rankEligible == 2,
-    "observed Black Coat offer did not enter safe partial mode")
-print("PASS: full/partial/none decision, subset-only evidence, blocked/incomplete exclusions, Black Coat pilot")
+print("PASS: full/partial/none decision, subset-only evidence and blocked/incomplete exclusions")

@@ -12,15 +12,21 @@ dll.lua_pcallk.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.c_int, ctypes.c
 dll.lua_tolstring.argtypes = [ctypes.c_void_p, ctypes.c_int, ctypes.POINTER(ctypes.c_size_t)]
 dll.lua_tolstring.restype = ctypes.c_char_p
 dll.lua_close.argtypes = [ctypes.c_void_p]
-test_files = [b"tests/probe_spec.lua", b"tests/phase2_spec.lua", b"tests/scoring_spec.lua", b"tests/partial_ranking_spec.lua", b"tests/ui_spec.lua", b"tests/localization_spec.lua", b"tests/attack_branches_spec.lua"]
-test_files.extend(path.encode("utf-8") for path in sys.argv[2:])
-test_files.extend([b"tests/v02_showcase_spec.lua", b"tests/profile_resolver_spec.lua"])
-test_files.append(b"tests/focus_spec.lua")
-test_files.append(b"tests/lobby_probe_spec.lua")
-test_files.append(b"tests/argent_skull_medea_spec.lua")
-test_files.append(b"tests/moonstone_axe_spec.lua")
-test_files.append(b"tests/core_advisory_spec.lua")
-test_files.append(b"tests/god_pool_context_spec.lua")
+default_tests = [
+    "tests/probe_spec.lua", "tests/phase2_spec.lua", "tests/scoring_spec.lua",
+    "tests/partial_ranking_spec.lua", "tests/ui_spec.lua", "tests/localization_spec.lua",
+    "tests/attack_branches_spec.lua",
+    "tests/profile_resolver_spec.lua", "tests/focus_spec.lua", "tests/lobby_probe_spec.lua",
+    "tests/argent_skull_medea_spec.lua", "tests/moonstone_axe_spec.lua",
+    "tests/core_advisory_spec.lua", "tests/god_pool_context_spec.lua",
+]
+args = sys.argv[2:]
+if args and args[0] == "--only":
+    if len(args) == 1:
+        raise ValueError("--only requires at least one test file")
+    test_files = [path.encode("utf-8") for path in args[1:]]
+else:
+    test_files = [path.encode("utf-8") for path in default_tests + args]
 for test_file in test_files:
     state = dll.luaL_newstate()
     if not state:

@@ -80,7 +80,8 @@ try {
     $outputPath = Join-Path $tempDir 'plan.json'
     [IO.File]::WriteAllText($inputPath, (ConvertTo-Json -InputObject ([ordered]@{schemaVersion=1; rows=$importRows}) -Depth 15), (New-Object System.Text.UTF8Encoding($false)))
     $tool = Join-Path $repo 'tools\Test-BuildRegistryImport.ps1'
-    $policy = Join-Path $repo 'tests\fixtures\build_registry\black_coat_melinoe_intermediate_policy.json'
+    $policy = Join-Path $tempDir 'policy.json'
+    [IO.File]::WriteAllText($policy, '{"schemaVersion":1,"boonClassifications":{},"hammerClassifications":{},"verifiedRuntimeItemIds":[],"keepsakeStartAsAutoSignal":false}', (New-Object System.Text.UTF8Encoding($false)))
     & $tool -InputPath $inputPath -PolicyPath $policy -OutputPath $outputPath | Out-Null
     $plan = Get-Content -LiteralPath $outputPath -Raw | ConvertFrom-Json
     Assert ($plan.groups.Count -eq 0) 'Documentary Medea rows entered the runtime import plan.'

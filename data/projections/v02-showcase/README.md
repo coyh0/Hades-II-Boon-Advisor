@@ -20,8 +20,8 @@ WeaponSets.lua:40-48 includes WeaponSuit in HeroPrimaryWeapons. LootData.lua:285
 
 ## Validation and use
 
-`tests/v02_projection_spec.ps1` passes rows/policy and the explicit canonical catalog to `tools/Test-BuildRegistryImport.ps1`, requires exactly two ready groups/five items, checks canonical parity and retained documentary provenance, and verifies fail-closed behavior when native ID attestation is removed. The canonical profile suite invokes this gate. The importer's plan is informational and must never replace full canonical profiles with these partial groups.
+The historical `tests/historical/v02_projection_spec.ps1` passed rows/policy and the explicit canonical catalog to `tools/Test-BuildRegistryImport.ps1`, required exactly two ready groups/five items, checked canonical parity and retained documentary provenance, and verified fail-closed behavior when native ID attestation was removed. It is no longer invoked by the active canonical profile suite because its profiles were retired. The importer's plan is informational and must never replace full canonical profiles with these partial groups.
 
-`tests/v02_showcase_spec.lua` runs in the standard Lua harness. It checks Hammer full/partial/none modes, the preserved incomplete Launcher Frame, Black Coat core versus alternatives, conservative replacement handling, and unconditional base Ares scoring. Canonical generated tests check the exact Hammer plans. Keepsake metadata and autoSignals remain unchanged.
+The historical `tests/historical/v02_showcase_spec.lua` checked Hammer full/partial/none modes, the incomplete Launcher Frame, Black Coat core versus alternatives, conservative replacement handling, and unconditional base Ares scoring. It is no longer in the active Lua harness. Current generic ranking and Attack branch behavior are checked with active or synthetic inputs under `tests/`.
 
 New live DEV validation is pending. No deployment or release is performed by these files.

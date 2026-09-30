@@ -5,7 +5,7 @@ param(
 )
 $ErrorActionPreference = 'Stop'
 $repo = Split-Path $PSScriptRoot -Parent
-$json = Get-Content -LiteralPath (Join-Path $repo 'data\canonical\mechanics\sister_blades_melinoe.json') -Raw | ConvertFrom-Json
+$json = Get-Content -LiteralPath (Join-Path $repo 'data\canonical\mechanics\argent_skull_medea_mobalytics.json') -Raw | ConvertFrom-Json
 $runtimeSections = @('weights','statusMappings','knownNonStatusTraits','potentialStatusTraits',
     'statusCapabilityTraits','bloodDropEngine','aspectInteractions','hammerRoles','rules','verifiedIds',
     'genericCoreAspectCompatibility')
@@ -61,9 +61,9 @@ local function compare(expected, actual, path)
     for key, value in pairs(expected) do if actual[key] == nil then fail(path .. "." .. tostring(key), "MISSING", value, nil) end compare(value, actual[key], path .. "." .. tostring(key)) end
     for key, value in pairs(actual) do if expected[key] == nil then fail(path .. "." .. tostring(key), "EXTRA", nil, value) end end
 end
-local intermediate = assert(loadfile("data/builds/sister_blades_melinoe_intermediate.lua"))()
-for _, section in ipairs(sections) do compare(canonical[section], intermediate[section], section) end
-print("PASS: strict recursive canonical/runtime Intermediate mechanics equivalence")
+local medea = assert(loadfile("data/builds/argent_skull_medea_mobalytics.lua"))()
+for _, section in ipairs(sections) do compare(canonical[section], medea[section], section) end
+print("PASS: strict recursive canonical/runtime Medea mechanics equivalence")
 "@
 $temp = Join-Path ([IO.Path]::GetTempPath()) ('mechanics-equivalence-' + [Guid]::NewGuid() + '.lua')
 [IO.File]::WriteAllText($temp, $lua)
@@ -86,6 +86,6 @@ function Resolve-RequiredFile([string]$ExplicitPath, [string]$EnvironmentName, [
 
 $python = Resolve-RequiredFile $PythonPath 'BOON_ADVISOR_PYTHON' 'PythonPath'
 $dll = Resolve-RequiredFile $LuaDllPath 'BOON_ADVISOR_LUA_DLL' 'LuaDllPath'
-& $python (Join-Path $repo 'tests\run_lua52.py') $dll $temp
+& $python (Join-Path $repo 'tests\run_lua52.py') $dll --only $temp
 if ($LASTEXITCODE -ne 0) { throw 'Strict mechanics equivalence failed.' }
 Write-Output 'PASS: strict field-by-field mechanics equivalence'

@@ -346,7 +346,7 @@ local stackResult = ScoringEngine.scoreOffers(stackUpgrade, profile)[1]
 check(stackResult.score == 200 and stackResult.scoreComplete and stackResult.traitToReplace == nil,
     "owned StackUpgrade did not receive the one-time Core Pom score")
 check(PomAdvisor.usesPomScoring({ offerKind = "pom", offerSource = "StackUpgrade" },
-    { id = "black_coat_melinoe_intermediate" }), "Pom behavior changed for another profile")
+    { id = "synthetic_other_profile" }), "Pom behavior changed for another profile")
 
 -- Unknown NPC source mappings and missing required pair metadata fail validation.
 local invalidNpcProfile = copy(profile)

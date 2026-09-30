@@ -3,9 +3,6 @@ $repo = Split-Path $PSScriptRoot -Parent
 $mechanicsDirectory = Join-Path $repo 'data\canonical\mechanics'
 $mechanicsFiles = @(Get-ChildItem -LiteralPath $mechanicsDirectory -Filter '*.json' -File | Sort-Object Name)
 $expected = @{
-    'sister_blades_melinoe.json' = @{ id = 'sister_blades_melinoe'; weapon = 'WeaponDagger'; aspect = 'DaggerBackstabAspect'; generic = $true }
-    'sister_blades_morrigan.json' = @{ id = 'sister_blades_morrigan'; weapon = 'WeaponDagger'; aspect = 'DaggerTripleAspect'; generic = $false }
-    'black_coat_melinoe.json' = @{ id = 'black_coat_melinoe'; weapon = 'WeaponSuit'; aspect = 'BaseSuitAspect'; generic = $false }
     'argent_skull_medea_mobalytics.json' = @{ id = 'argent_skull_medea_mobalytics'; weapon = 'WeaponLob'; aspect = 'LobCloseAttackAspect'; generic = $false }
     'moonstone_axe_melinoe_mobalytics.json' = @{ id = 'moonstone_axe_melinoe_mobalytics'; weapon = 'WeaponAxe'; aspect = 'AxeRecoveryAspect'; generic = $false }
 }
@@ -81,41 +78,10 @@ foreach ($file in $mechanicsFiles) {
             $seen[[string]$id] = $true
         }
     }
-    if ($expectation.weapon -eq 'WeaponDagger' -and $canonical.weights.ASPECT_SETUP_SYNERGY -ne 4) { throw "Missing setup weight: $($file.Name)" }
 }
-$coat = Get-Content -LiteralPath (Join-Path $mechanicsDirectory 'black_coat_melinoe.json') -Raw | ConvertFrom-Json
-if (@($coat.aspectInteractions.PSObject.Properties).Count -ne 0 -or
-    @($coat.hammerRoles.PSObject.Properties).Count -ne 0 -or
-    @($coat.rules.PSObject.Properties).Count -ne 0 -or
-    @($coat.verifiedIds.PSObject.Properties).Count -ne 5) {
-    throw 'Black Coat mechanics must contain only generic core slot inventories.'
+foreach ($profileName in @('argent_skull_medea_mobalytics', 'moonstone_axe_melinoe_mobalytics')) {
+    if (-not (Test-Path -LiteralPath (Join-Path $repo "data\builds\$profileName.lua") -PathType Leaf)) {
+        throw "Missing active runtime profile: $profileName"
+    }
 }
-foreach ($group in @('coreAttack','coreSpecial','coreCast','coreSprint','coreMana')) {
-    if (-not (@($coat.verifiedIds.$group).Count -gt 0)) { throw "Black Coat missing generic $group inventory." }
-}
-$melinoe = Get-Content -LiteralPath (Join-Path $mechanicsDirectory 'sister_blades_melinoe.json') -Raw | ConvertFrom-Json
-if (($melinoe.statusCapabilityTraits.Curse.Count -ne 2) -or
-    ($melinoe.bloodDropEngine.producers.Count -ne 2) -or ($melinoe.bloodDropEngine.payoffs.Count -ne 2) -or
-    ($melinoe.aspectInteractions.DemeterCastBoon -ne 'BACKSTAB_SETUP') -or
-    ($melinoe.aspectInteractions.DaggerBackstabTrait -ne 'ASPECT_DIRECT_SYNERGY') -or
-    $melinoe.hammerRoles.Attack.Count -ne 4 -or $melinoe.hammerRoles.Special.Count -ne 5) {
-    throw 'Melinoe audited mechanics differ from the validated runtime data.'
-}
-$morrigan = Get-Content -LiteralPath (Join-Path $mechanicsDirectory 'sister_blades_morrigan.json') -Raw | ConvertFrom-Json
-if ($morrigan.aspectInteractions.WeaponUpgradeBoon -ne 'ASPECT_DIRECT_SYNERGY' -or
-    $null -ne $morrigan.aspectInteractions.AresWeaponBoon -or $null -ne $morrigan.aspectInteractions.AresSpecialBoon -or
-    $morrigan.aspectMechanics.proc.id -ne 'WomboStrike' -or $morrigan.aspectMechanics.proc.baseDamage -ne 111 -or
-    $morrigan.aspectMechanics.proc.useVulnerability -ne $false -or $morrigan.aspectMechanics.proc.ignoreAllModifiers -ne $true -or
-    $morrigan.aspectMechanics.proc.normalCrit -ne $false -or $morrigan.aspectMechanics.proc.normalGlobalModifiers -ne $false -or
-    $morrigan.aspectMechanics.origination.contributingHits -ne $true -or $morrigan.aspectMechanics.origination.womboStrike -ne $false -or
-    $morrigan.aspectMechanics.proc.rankMultipliers.Perfect -ne 9 -or
-    $morrigan.aspectMechanics.hammers.DaggerTripleBuffTrait.womboDamageBonusMultiplier -ne 2 -or
-    $morrigan.aspectMechanics.hammers.DaggerTripleRepeatWomboTrait.repeatTripleStrikeChance -ne 0.33 -or
-    @($morrigan.hammerRoles.PSObject.Properties).Count -ne 0) { throw 'Morrigan mechanics template differs from audited data.' }
-foreach ($id in @('WeaponDagger','DaggerTripleAspect','WomboStrike','ComboAttackIndicator','ComboSpecialIndicator','ComboExIndicator','WeaponUpgradeBoon','DaggerTripleBuffTrait','DaggerTripleRepeatWomboTrait','DaggerTripleHomingSpecialTrait','DaggerBlinkAoETrait')) {
-    if (-not (@($morrigan.verifiedIds.bloodTriad + $morrigan.verifiedIds.morriganHammers) -contains $id)) { throw "Missing Morrigan verified ID: $id" }
-}
-foreach ($profilePath in @('data\builds\sister_blades_melinoe_intermediate.lua')) {
-    if (-not (Test-Path (Join-Path $repo $profilePath))) { throw "Missing runtime reference: $profilePath" }
-}
-Write-Output 'PASS: Sister Blades, Black Coat, Medea, and Moonstone mechanics templates validated'
+Write-Output 'PASS: active Medea and Moonstone mechanics templates validated'

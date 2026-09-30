@@ -47,18 +47,15 @@ updates and compatibility diagnostics for advanced users. See
 
 ## Supported builds
 
-The advisor on the `main` branch supports these three build profiles:
+The current development registry supports these Mobalytics imports:
 
-- **Sister Blades — Aspect of Melinoë:** Intermediate
-- **Sister Blades — Aspect of Morrigan:** Meta / Blood Triad
-- **Black Coat — Aspect of Melinoë:** Intermediate
+- **Argent Skull — Aspect of Medea:** [Médée Mobalytics profile](data/canonical/profiles/argent_skull_medea_mobalytics.json)
+- **Moonstone Axe — Aspect of Melinoë:** [Moonstone Axe Mobalytics profile](data/canonical/profiles/moonstone_axe_melinoe_mobalytics.json)
 
-These profiles have passed offline checks and representative in-game testing
-by the maintainer through human-controlled DEV gameplay, with screenshots and
-DEBUG logs used for validation. This does not imply exhaustive testing of
-every Boon combination.
-
-These profiles are included in the published **v0.2.0** release.
+Both imports passed offline validation and maintainer-controlled runtime QA.
+The published **v0.2.0** release predates these imports and contains three
+different historical profiles; those profiles are no longer in the active
+registry.
 
 Compact build-status UI, Duos, Hermes and Poms guidance remain future work.
 
@@ -80,14 +77,9 @@ If multiple compatible profiles remain ambiguous, the advisor shows
 For a weapon/Aspect with no compatible profile, it shows
 **UNSUPPORTED PROFILE**.
 
-Compatible profiles can also be selected explicitly with:
-
-- `intermediate`
-- `morrigan_meta`
-- `coat_intermediate`
-
-The historical `starter` profile belongs to the v0.1.2 line and is not part of
-the v0.2.0 runtime set.
+The active Registry is the source of truth for explicit profile selection.
+Selection keys for retired profiles from the v0.2.0 release are not supported
+by the current development registry.
 
 ### Community sources and validation
 

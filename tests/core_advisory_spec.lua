@@ -231,16 +231,6 @@ check(Engine.validateProfile(sprint) and #CoreAdvisory.getChecklist(sprint, noPr
 check(not CoreAdvisory.hasMissingCore(sprint, allOwnedSnapshot),
     "a Sprint Core unexpectedly became required by the three-role notice")
 
-local coat = assert(loadfile("data/builds/black_coat_melinoe_intermediate.lua"))()
-local coatRun = { traits = { { Name = "PoseidonWeaponBoon" }, { Name = "PoseidonSprintBoon" } },
-    slottedTraits = { Melee = "PoseidonWeaponBoon", Rush = "PoseidonSprintBoon" },
-    playerFocus = { focus = "special", route = "zeus", locked = true } }
-check(not CoreAdvisory.hasMissingCore(Engine.effectiveProfile(coatRun, coat), coatRun),
-    "Zeus route incorrectly required the Black Coat Ares Special Core")
-coatRun.playerFocus.route = "ares"
-check(CoreAdvisory.hasMissingCore(Engine.effectiveProfile(coatRun, coat), coatRun),
-    "Ares route lost its declared Special Core")
-
 local ids, labels, attaches, destroyed = 0, {}, {}, {}
 local api = {
     CreateScreenComponent = function()
