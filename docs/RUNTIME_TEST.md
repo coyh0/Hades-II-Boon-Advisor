@@ -1,5 +1,13 @@
 # Validation runtime et procédure d'installation
 
+## Politique active de build et de sauvegarde
+
+Les Core et Non-Core Boons sont définis par le build Mobalytics examiné et importé; le mod ne choisit ni ne change dynamiquement de route pendant une run. Le futur Curator / import unifié Excel est une source envisagée après validation de son contrat, pas une dépendance actuelle.
+
+Pour la progression actuelle de la sauvegarde QA, consulter l'état le plus récent rapporté par le mainteneur dans la roadmap active. Ne jamais éditer, remplacer ou manipuler directement cette sauvegarde ni ses déblocages. Les scénarios nécessitant un Aspect caché non débloqué restent non testables jusqu'à progression naturelle signalée par le mainteneur.
+
+Les sections ci-dessous incluent des procédures et résultats historiques de versions antérieures. Ils ne remplacent pas la checklist de l'étape courante sous `docs/qa/` et ne constituent pas une autorisation de lancer le jeu, modifier la sauvegarde ou redéployer.
+
 ## Gate obligatoire — disponibilité pour la QA en jeu
 
 Ne jamais annoncer **« prêt pour QA en jeu »** sur la seule base de tests hors jeu. Avant cette annonce, vérifier et consigner les six points suivants pour la version exacte à tester :
@@ -29,7 +37,9 @@ La procédure d'isolation ci-dessous reste la méthode recommandée pour un
 nouveau test reproductible. Elle décrit des contrôles de sécurité et ne
 constitue pas une étape restante de la validation v0.2 déjà effectuée.
 
-## Focus Black Coat — validation DEV après v0.2
+## Historique — sélecteur Focus Black Coat (fonctionnalité retirée)
+
+Le texte et les résultats ci-dessous décrivent une fonctionnalité historique, retirée du code actif. Ils ne sont plus des instructions ni des critères QA actuels.
 
 Le sélecteur de focus du profil Black Coat Melinoë est réservé aux écrans
 d'offres. Après le choix définitif, le focus est verrouillé pour la run et
@@ -79,7 +89,7 @@ comportement final en jeu et les journaux correspondants. Aucun affichage,
 recommandation, inventaire ou contrôle des Arcanes ne fait partie du mod ;
 l'effet de combat existant d'Origination demeure indépendant.
 
-### Résultat — sélecteur Focus Black Coat
+### Résultat historique — sélecteur Focus Black Coat retiré
 
 La validation fonctionnelle est terminée, y compris en mode à arme imposée.
 Le mainteneur a confirmé le choix et le verrouillage du focus, son rappel passif
